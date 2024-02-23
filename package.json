@@ -1,0 +1,13 @@
+{
+  "name": "ffss-osp",
+  "version": "1.0.0",
+  "description": "Greg, Scott, Ross, Christian, Moises OSP",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+    "express": "^4.18.2",
