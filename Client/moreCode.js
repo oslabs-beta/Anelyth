@@ -15,4 +15,5 @@ class Deps2 {
   }
 }
 
-export default Deps2;
+// export default Deps2;
+module.exports = Deps2;

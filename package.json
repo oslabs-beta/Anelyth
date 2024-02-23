@@ -4,10 +4,29 @@
   "description": "Greg, Scott, Ross, Christian, Moises OSP",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server --mode development --open --hot",
+    "dev": "nodemon ./Server/server.js",
+    "both": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --color\" \"nodemon ./server/server.js\""
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oslabs-beta/FFSS-OSP.git"
+  },
+  "author": "Greg, Scott, Ross, Christian, Moises",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oslabs-beta/FFSS-OSP/issues"
+  },
+  "homepage": "https://github.com/oslabs-beta/FFSS-OSP#readme",
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "esprima": "^4.0.1",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^5.6.0",
+    "nodemon": "^3.1.0",
+    "webpack": "^5.90.3",
+    "webpack-dev-server": "^5.0.2"
+  }
 }
-    "express": "^4.18.2",

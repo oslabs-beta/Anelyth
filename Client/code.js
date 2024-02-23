@@ -1,6 +1,6 @@
-// const Deps2 = require('./moreCode');
+const Deps2 = require('./moreCode');
 
-import Deps2 from './moreCode';
+// import Deps2 from './moreCode';
 
 function a(argA) {
   return argA;
@@ -11,8 +11,8 @@ function b(argB) {
 }
 
 class Deps1 {
-  deps1Member1 = 'var1';
-  deps1Member2 = 'var2';
+  // deps1Member1 = 'var1';
+  // deps1Member2 = 'var2';
 
   constructor(value) {
     this.value = value;
