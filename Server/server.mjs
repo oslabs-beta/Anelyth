@@ -1,12 +1,16 @@
-const fs = require('fs');
-const esprima = require('esprima');
-const path = require('path');
-const express = require('express');
+// const fs = require('fs');
+// const esprima = require('esprima');
+
+import path from "path";
+import express from "express";
 
 const app = express();
 const port = 3000;
 
-const FileController = require('./Controllers/FileController');
+
+import FileController from "./Controllers/FileController.cjs";
+import DCController from "./Controllers/DCController.mjs";
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -17,6 +21,7 @@ app.get('/', (req, res) => {
 
 app.post('/api/fileupload',
     FileController.upload,
+    DCController.analyze,
     (req, res) => {
         res.status(200).send('upload complete')
     }
