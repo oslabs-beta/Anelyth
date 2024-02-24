@@ -2,13 +2,15 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './Client/index.js',
+  entry: {
+    index: './Client/index.js',
+  },
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build'),
 
   },
-  mode: process.env.NODE_ENV,
+  mode: 'development',
   module: {
     rules: [
       {
@@ -60,20 +62,21 @@ module.exports = {
     })
   ],
   devServer: {
-    static: {
-      directory: path.join(__dirname, 'build'),
-      publicPath: '/build/'
-    },
-    proxy: {
-      '/api': 'http://localhost:3000',
-      changeOrigin: true,
-      secure: false,
-      pathRewrite: {
-        '^/api': '' // Remove the '/api' prefix when forwarding the request
-      }
-    },
-    compress: true,
-    historyApiFallback: true
+    // static: [
+    //   {
+    //     directory: path.join(__dirname, './Client'),
+    //     publicPath: '/'
+    //   }
+    // ],
+    host: 'localhost',
+    historyApiFallback: true,
+    port: 8080,
+    proxy: [{
+      '/': {
+        target: 'http://localhost:3000',
+        secure: false,
+      },
+    }],
   }
 
 };

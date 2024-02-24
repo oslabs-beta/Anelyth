@@ -6,25 +6,21 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-const filePath = path.join(__dirname, '../Client/code.js');
-// const filePathTwo = './Client/moreCode.js'
+const FileController = require('./Controllers/FileController');
 
-console.log('filePath: ', filePath);
-
-const codeToParse = fs.readFileSync(filePath, 'utf-8')
-
-// console.log('logging the codeToParse' ,codeToParse);
-
-const ast = esprima.parseScript(codeToParse);
-
-console.log(ast);
-
-// console.log(codeToParse)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-    res.status(200).send(ast);
+    res.status(200).send('hello');
 })
 
+app.get('/fileupload',
+    FileController.upload,
+    (req, res) => {
+        res.status(200).send('upload complete')
+    }
+)
 
 
 app.listen(port, () => {
