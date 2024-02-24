@@ -1,23 +1,13 @@
-const Deps2 = require('./code2');
-
-function a(argA) {
-  return argA;
-}
-
-function b(argB) {
-  return a(argB) + argB;
-}
-
-class Deps1 {
-  deps1Member1 = 'var1';
-  deps1Member2 = 'var2';
+class Deps2 {
+  deps2Member1 = 3;
+  deps2Member2 = 4;
 
   constructor(value) {
     this.value = value;
   }
 
-  concat() {
-    return this.deps1Member1 + this.deps1Member2;
+  add() {
+    return this.deps2Member1 + this.deps2Member2;
   }
 
   getValue() {
@@ -25,12 +15,4 @@ class Deps1 {
   }
 }
 
-console.log('result: ', b(100)) //200
-
-const deps2 = new Deps2(1234);
-deps2.getValue();
-
-const deps1 = new Deps1('newVal')
-const result = deps1.concat();
-console.log('result:', result)
-
+module.exports = Deps2;
