@@ -11,6 +11,25 @@ module.exports = {
 
   },
   mode: 'development',
+
+  devServer: {
+    host: 'localhost',
+    historyApiFallback: true,
+    port: 8080,
+    proxy: [{
+      context: ['/api'],
+      target: 'http://localhost:3000',
+      },
+    ],
+  },
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      hash: true,
+      template: './Client/index.html' // Updated template path
+    })
+  ],
+
   module: {
     rules: [
       {
@@ -55,28 +74,7 @@ module.exports = {
     ]
   },
 
-  plugins: [
-    new HtmlWebpackPlugin({
-      hash: true,
-      template: './Client/index.html' // Updated template path
-    })
-  ],
-  devServer: {
-    // static: [
-    //   {
-    //     directory: path.join(__dirname, './Client'),
-    //     publicPath: '/'
-    //   }
-    // ],
-    host: 'localhost',
-    historyApiFallback: true,
-    port: 8080,
-    proxy: [{
-      '/': {
-        target: 'http://localhost:3000',
-        secure: false,
-      },
-    }],
-  }
+
+
 
 };

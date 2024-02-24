@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
     res.status(200).send('hello');
 })
 
-app.get('/fileupload',
+app.post('/api/fileupload',
     FileController.upload,
     (req, res) => {
         res.status(200).send('upload complete')

@@ -2,13 +2,13 @@ import React from 'react'
 
 export default function App() {
 
-  function apiCall(){
+  function apiCall (){
     console.log('hit call')
-    fetch('/fileupload', {
-      method: 'GET',
+    fetch('/api/fileupload', {
+      method: 'POST',
       headers: {
-        'Content-Type': 'application/json', 
-      },
+        'Content-Type': 'application/json'
+      }
     })
   }
 
