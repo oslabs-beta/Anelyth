@@ -73,8 +73,4 @@ module.exports = {
       },
     ]
   },
-
-
-
-
 };

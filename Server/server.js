@@ -2,6 +2,7 @@ const fs = require('fs');
 const esprima = require('esprima');
 const path = require('path');
 const express = require('express');
+const multer = require('multer');
 
 const app = express();
 const port = 3000;
@@ -15,12 +16,16 @@ app.get('/', (req, res) => {
     res.status(200).send('hello');
 })
 
-app.post('/api/fileupload',
+const upload = multer({ storage: multer.memoryStorage() });
+
+app.post('/api/fileupload', 
+    upload.single('file'),
     FileController.upload,
     (req, res) => {
-        res.status(200).send('upload complete')
+        return res.status(200).json({ message: 'upload complete' })
     }
 )
+
 
 
 app.listen(port, () => {
