@@ -37,7 +37,7 @@ export default function App() {
 
       if (response.ok) {
         const data = await response.json();
-        console.log('File uploaded to server successfully');
+        console.log('Response data received from server: ', data);
       } else {
         console.error('Upload failed');
       }
