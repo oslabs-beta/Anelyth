@@ -7,7 +7,7 @@
     "build": "webpack",
     "start": "webpack-dev-server --mode development --open --hot",
     "dev": "nodemon ./Server/server.js",
-    "both": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --color\" \"nodemon ./server/server.mjs\""
+    "both": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --color\" \"nodemon --ignore temp-file-upload/ ./server/server.mjs\""
   },
   "repository": {
     "type": "git",
