@@ -35,11 +35,13 @@ DCController.analyze = async (req, res, next) => {
   try {
     console.log('in dccontroller.analyze');
     // CRUISE PASSING IN OPTIONS
-    const depResult = await cruise(['./Server'], cruiseOptions);
+    console.log('what am i', res.locals.data[0].originalname);
+
+    const depResult = await cruise(res.locals.data[0].originalname, cruiseOptions);
     let depData = JSON.parse(depResult.output);
     
 
-    console.log(depData.modules);
+    // console.log(depData.modules);
     // LOG OUTPUT
     // console.log(JSON.stringify(JSON.parse(depResult.output), null, 2));
     // LOG TREE

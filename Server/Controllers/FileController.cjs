@@ -18,16 +18,34 @@ const upload = multer({ storage: storage });
 FileController.upload = (req, res, next) => {
   try {
     upload.any()(req, res, (err) => {
-      console.log('inside anonymous function req.files: ', req.files)
+      // console.log('inside anonymous function req.files: ', req.files)
       return next();
     });
     console.log('upload path working')
-    console.log('files outside anonymous function: ', req.files);
+    // console.log('files outside anonymous function: ', req.files);
   } catch (err) {
     console.log('err:', err)
     return next(err);
   }
 }
+
+
+
+// FileController.upload = async (req, res, next) => {
+//   try {
+//     await upload.any()(req, res, (err) => {
+//       const data = req.files;
+//       // console.log('am i here?', data);
+//       res.locals.data = data;
+//       return next();
+//     });
+//   } catch (err) {
+//     console.log('err:', err)
+//     return next(err);
+//   }
+// }
+
+
 
 
 module.exports = FileController;
