@@ -9,7 +9,7 @@ const DCController = {};
   DCController.analyze = async (req, res, next) => {
     try{
       console.log('in dccontroller.analyze');
-      const result = await cruise([])
+      const result = await cruise(["Client"])
       // console.log(result);
       console.dir(result.output, { depth: 10 });
       return next();
