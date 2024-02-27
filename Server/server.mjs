@@ -21,9 +21,9 @@ app.get('/', (req, res) => {
 
 app.post('/api/fileupload',
     FileController.upload,
-    DCController.analyze,
+    // DCController.analyze,
     (req, res) => {
-        res.status(200).send('upload complete')
+        res.status(200).json(req.files)
     }
 )
 

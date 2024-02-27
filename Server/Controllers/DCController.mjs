@@ -34,14 +34,15 @@ function printDirectoryTree(dir, level = 0) {
 }
 
 DCController.analyze = async (req, res, next) => {
+  //saving files in Server/uploads
   try {
     console.log('in dccontroller.analyze');
     // CRUISE PASSING IN OPTIONS
-    const depResult = await cruise(['./Server'], cruiseOptions);
+    const depResult = await cruise(['./Server/uploads'], cruiseOptions);
     // LOG OUTPUT
     console.log(JSON.stringify(JSON.parse(depResult.output), null, 2));
     // LOG TREE
-    const hierarchy = printDirectoryTree('./Server');
+    const hierarchy = printDirectoryTree('./Server/uploads');
     console.log('File Hierarchy:\n', hierarchy);
 
     return next();

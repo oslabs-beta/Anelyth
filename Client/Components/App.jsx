@@ -1,33 +1,30 @@
 import React, { useState } from 'react'
 
 export default function App() {
-  const [file, setFile] = useState(null);
+  const [files, setFiles] = useState(null);
 
-  function handleFile(e) {
-    setFile(e.target.files);
+  function handleFiles(e) {
+    setFiles(e.target.files);
   }
 
-  async function apiCall() {
-    console.log('hit apiCall');
-
-    if (!file) {
-      return alert('Please choose a file');
+  async function uploadFiles() {
+    if (!files) {
+      return alert('Please choose files to upload');
     }
 
     const formData = new FormData();
-    // formData.append('file', file);
     
-    for (let i = 0; i < file.length; i++) {
+    for (let i = 0; i < files.length; i++) {
+      // Append file 
       // The first parameter is the name of the form field (used by the server to retrieve the uploaded file(s))
       // The second parameter is the file object
       // The third parameter is optional and represents the filename; if omitted, the File object's name is used
-      // Loop through the FileList and append each file to the FormData object
-      formData.append('file', file[i], file[i].originalname);
+      const filePath = files[i].webkitRelativePath;
+      formData.append(`${filePath}`, files[i], files[i].originalname);
+      // Append filePath: server will receive an array of strings (filePaths)
+      // const filePath = files[i].webkitRelativePath;
+      // formData.append('filePaths', filePath);
     }
-    for (const pair of formData.entries()) {
-      console.log(pair[0], pair[1]);
-    }
-
 
     try {
       const response = await fetch('/api/fileupload', {
@@ -42,18 +39,17 @@ export default function App() {
         console.error('Upload failed');
       }
     } catch (err) {
-      console.error('Error uploading file: ', err);
+      console.error('Error uploading files: ', err);
     }
   }
-
 
   return (
     <div>
       <div className="form-example">
         <label htmlFor="name">Choose file: </label>
-        <input type="file" name="file" id="file" onChange={handleFile} webkitdirectory='true' />
+        <input type="file" name="file" id="file" onChange={handleFiles} webkitdirectory='true' />
       </div>
-      <button onClick={apiCall} id="submit-btn">Submit</button>
+      <button onClick={uploadFiles} id="submit-btn">Submit</button>
     </div>
   )
 }
