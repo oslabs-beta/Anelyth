@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
     //take the file path and remove the file name, and then use that as the directory path to save the file to in uploads folder
     const splitStr = file.fieldname.split('/');
     const dirPath = splitStr.slice(0, splitStr.length - 1).join('/');
-    const filePath = path.join(__dirname, '..', 'uploads', '/', dirPath);
+    const filePath = path.join(__dirname, '..', 'temp-file-upload', '/', dirPath);
 
     //make directory before loading files into it. need recursive option, otherwise, it throws an error when the directory already exists
     fs.mkdirSync(filePath, { recursive: true });
