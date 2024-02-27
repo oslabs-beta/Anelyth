@@ -15,18 +15,22 @@ export default function App() {
     }
 
     const formData = new FormData();
-    // formData.append('file', file);
+
     
+// -------  no heiarchy  ---------- //
+    // for (let i = 0; i < file.length; i++) {
+    //   formData.append('file', file[i], file[i].originalname);
+    // }
+    // for (const pair of formData.entries()) {
+    //   console.log(pair[0], pair[1]);
+    // }
+
+    // -------  for heiartchty -------- //
     for (let i = 0; i < file.length; i++) {
-      // The first parameter is the name of the form field (used by the server to retrieve the uploaded file(s))
-      // The second parameter is the file object
-      // The third parameter is optional and represents the filename; if omitted, the File object's name is used
-      // Loop through the FileList and append each file to the FormData object
-      formData.append('file', file[i], file[i].originalname);
+      const filePath = file[i].webkitRelativePath;
+      formData.append(`${filePath}`, file[i], file[i].originalname);
     }
-    for (const pair of formData.entries()) {
-      console.log(pair[0], pair[1]);
-    }
+
 
 
     try {

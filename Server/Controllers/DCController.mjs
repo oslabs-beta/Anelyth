@@ -33,6 +33,16 @@ function printDirectoryTree(dir, level = 0) {
   return tree;
 }
 
+DCController.getTree = (req,res, next) => {
+  try {
+    const uploadsPath = './Server/temp-file-upload';
+    const hierarchy = printDirectoryTree(uploadsPath);
+    console.log('File Hierarchy:\n', hierarchy);
+  } catch (err) {
+    return next(err)
+  }
+}
+
 DCController.analyze = async (req, res, next) => {
   try {
     console.log('in dccontroller.analyze');
@@ -40,11 +50,10 @@ DCController.analyze = async (req, res, next) => {
     const uploadsPath = './Server/temp-file-upload';
     const depResult = await cruise([uploadsPath], cruiseOptions);
     // LOG OUTPUT
-    // console.log(JSON.stringify(JSON.parse(depResult.output), null, 2));
+    console.log(JSON.stringify(JSON.parse(depResult.output), null, 2));
     // LOG TREE
     const hierarchy = printDirectoryTree(uploadsPath);
     console.log('File Hierarchy:\n', hierarchy);
-
     return next();
   } catch (err) {
     return next(err);
