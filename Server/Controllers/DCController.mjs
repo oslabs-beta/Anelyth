@@ -10,6 +10,8 @@ const cruiseOptions = {
   doNotFollow: "node_modules",
 };
 
+// --------------- WORKING CODE FOR LOCAL STORAGE OF UPLOADED FILES --------------- //
+
 function printDirectoryTree(dir, level = 0) {
   // EMPTY STRING FOR TREE BUILD
   let tree = "";
@@ -37,11 +39,12 @@ DCController.analyze = async (req, res, next) => {
   try {
     console.log('in dccontroller.analyze');
     // CRUISE PASSING IN OPTIONS
-    const depResult = await cruise(['./Server'], cruiseOptions);
+    const uploadsPath = './Server/temp-file-upload';
+    const depResult = await cruise([uploadsPath], cruiseOptions);
     // LOG OUTPUT
     console.log(JSON.stringify(JSON.parse(depResult.output), null, 2));
     // LOG TREE
-    const hierarchy = printDirectoryTree('./Server');
+    const hierarchy = printDirectoryTree(uploadsPath);
     console.log('File Hierarchy:\n', hierarchy);
 
     return next();
@@ -49,5 +52,10 @@ DCController.analyze = async (req, res, next) => {
     return next(err);
   }
 };
+
+
+
+
+
 
 export default DCController;

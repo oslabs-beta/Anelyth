@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
 app.post('/api/fileupload',
     FileController.upload,
     DCController.analyze,
+    FileController.deleteDir,
     (req, res) => {
         res.status(200).send('upload complete')
     }
