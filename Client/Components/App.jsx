@@ -16,14 +16,6 @@ export default function App() {
 
     const formData = new FormData();
 
-    
-// -------  no heiarchy  ---------- //
-    // for (let i = 0; i < file.length; i++) {
-    //   formData.append('file', file[i], file[i].originalname);
-    // }
-    // for (const pair of formData.entries()) {
-    //   console.log(pair[0], pair[1]);
-    // }
 
     // -------  for heiartchty -------- //
     for (let i = 0; i < file.length; i++) {

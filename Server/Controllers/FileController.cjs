@@ -127,8 +127,10 @@ FileController.upload = (req, res, next) => {
     console.log('upload path working')
     // console.log('files outside anonymous function: ', req.files);
   } catch (err) {
-    console.log('err:', err)
-    return next(err);
+    return next({
+      log: 'error in FileController.upload',
+      message: err
+    });
   }
 }
 
@@ -138,7 +140,10 @@ FileController.deleteDir = (req, res, next) => {
   deleteFolderRecursive(folderPath, (err) => {
     if (err) {
       console.error('Error deleting folder:', folderPath, err);
-      next(err);
+      next({
+        log: 'error in FileController.deleteDir',
+        message: err
+      });
     }
   });
   console.log('Directory Deleted Succsessfully')

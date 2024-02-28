@@ -12,6 +12,7 @@ const cruiseOptions = {
 
 // --------------- WORKING CODE FOR LOCAL STORAGE OF UPLOADED FILES --------------- //
 
+// ------ HELPER FUNC TO GET FILE HEIARCHY ----- //
 function printDirectoryTree(dir, level = 0) {
   // EMPTY STRING FOR TREE BUILD
   let tree = "";
@@ -33,16 +34,21 @@ function printDirectoryTree(dir, level = 0) {
   return tree;
 }
 
+// ------ MIDDLEWARE FOR GETTING FILE HEIARCHY ------- //
 DCController.getTree = (req,res, next) => {
   try {
     const uploadsPath = './Server/temp-file-upload';
     const hierarchy = printDirectoryTree(uploadsPath);
     console.log('File Hierarchy:\n', hierarchy);
   } catch (err) {
-    return next(err)
+    return next({
+      log: 'error in DCController.getTree',
+      message: err
+    })
   }
 }
 
+// ------- MIDDLEWARE TO INVOKE DEPENDENCY CRUISER --------- //
 DCController.analyze = async (req, res, next) => {
   try {
     console.log('in dccontroller.analyze');
@@ -56,7 +62,10 @@ DCController.analyze = async (req, res, next) => {
     console.log('File Hierarchy:\n', hierarchy);
     return next();
   } catch (err) {
-    return next(err);
+    return next({
+      log: 'error in DCController.analyze',
+      message: err
+    });
   }
 };
 
