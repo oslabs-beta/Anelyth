@@ -10,12 +10,14 @@ const cruiseOptions = {
   doNotFollow: "node_modules",
 };
 
+// --------------- WORKING CODE FOR LOCAL STORAGE OF UPLOADED FILES --------------- //
+
+// ------ HELPER FUNC TO GET FILE HEIARCHY ----- //
 function printDirectoryTree(dir, level = 0) {
   // EMPTY STRING FOR TREE BUILD
   let tree = "";
   // GET FILES IN CURRENT DIRECTORY
   const files = fs.readdirSync(dir);
-
   // LOOP DA DOOP
   files.forEach(file => {
     // GET FILE PATH BY COMBINING CURRENT DIRECTORY AND FILE
@@ -29,25 +31,47 @@ function printDirectoryTree(dir, level = 0) {
       tree += printDirectoryTree(filePath, level + 1);
     }
   });
-
   return tree;
 }
 
+// ------ MIDDLEWARE FOR GETTING FILE HEIARCHY ------- //
+DCController.getTree = (req,res, next) => {
+  try {
+    const uploadsPath = './Server/temp-file-upload';
+    const hierarchy = printDirectoryTree(uploadsPath);
+    console.log('File Hierarchy:\n', hierarchy);
+  } catch (err) {
+    return next({
+      log: 'error in DCController.getTree',
+      message: err
+    })
+  }
+}
+
+// ------- MIDDLEWARE TO INVOKE DEPENDENCY CRUISER --------- //
 DCController.analyze = async (req, res, next) => {
   try {
     console.log('in dccontroller.analyze');
     // CRUISE PASSING IN OPTIONS
-    const depResult = await cruise(['./Server'], cruiseOptions);
+    const uploadsPath = './Server/temp-file-upload';
+    const depResult = await cruise([uploadsPath], cruiseOptions);
     // LOG OUTPUT
     console.log(JSON.stringify(JSON.parse(depResult.output), null, 2));
     // LOG TREE
-    const hierarchy = printDirectoryTree('./Server');
+    const hierarchy = printDirectoryTree(uploadsPath);
     console.log('File Hierarchy:\n', hierarchy);
-
     return next();
   } catch (err) {
-    return next(err);
+    return next({
+      log: 'error in DCController.analyze',
+      message: err
+    });
   }
 };
+
+
+
+
+
 
 export default DCController;
