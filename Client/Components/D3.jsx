@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 
 const PackChart = ({ data, options }) => {
@@ -121,43 +121,72 @@ const Pack = (data, options) => {
   return svg.node();
 };
 
-const D3 = () => {
-  const data = {
-    name: "Root",
-    children: [
-      {
-        name: "Node 1",
-        children: [
-          { name: "Node 1.1", value: 10 },
-          { name: "Node 1.2", value: 15 },
-          { name: "Node 1.3", value: 20 }
-        ]
-      },
-      {
-        name: "Node 2",
-        children: [
-          {
-            name: "Node 2.1",
-            children: [
-              { name: "Node 2.1.1", value: 5 },
-              { name: "Node 2.1.2", value: 8 }
-            ]
-          },
-          { name: "Node 2.2", value: 12 }
-        ]
-      },
-      {
-        name: "Node 3",
-        children: [
-          { name: "Node 3.1", value: 18 },
-          { name: "Node 3.2", value: 25 },
-          { name: "Node 3.3", value: 30 }
-        ]
-      }
-    ]
-  };
+// const D3 = () => {
+//   const data = {
+//     name: "Root",
+//     children: [
+//       {
+//         name: "Node 1",
+//         children: [
+//           { name: "Node 1.1", value: 10 },
+//           { name: "Node 1.2", value: 15 },
+//           { name: "Node 1.3", value: 20 }
+//         ]
+//       },
+//       {
+//         name: "Node 2",
+//         children: [
+//           {
+//             name: "Node 2.1",
+//             children: [
+//               { name: "Node 2.1.1", value: 5 },
+//               { name: "Node 2.1.2", value: 8 }
+//             ]
+//           },
+//           { name: "Node 2.2", value: 12 }
+//         ]
+//       },
+//       {
+//         name: "Node 3",
+//         children: [
+//           { name: "Node 3.1", value: 18 },
+//           { name: "Node 3.2", value: 25 },
+//           { name: "Node 3.3", value: 30 }
+//         ]
+//       }
+//     ]
+//   };
   
 
+//   const options = {
+//     width: 500,
+//     height: 500,
+//     fill: "#ddd",
+//     stroke: "#bbb"
+//   };
+
+//   return (
+//     <div className='d3'>
+//       <h1>Pack Chart</h1>
+//       <PackChart data={data} options={options} />
+//     </div>
+//   );
+// };
+
+// export default D3;
+const D3 = ({ hierarchyData }) => {
+  // State to manage the data
+  const [data, setData] = useState(null);
+
+  // Update the data state when hierarchyData prop changes
+  useEffect(() => {
+    if (hierarchyData) {
+      // Assuming hierarchyData has the correct structure for D3 visualization
+      setData(hierarchyData);
+    }
+  }, [hierarchyData]);
+
+  // Your D3 options
   const options = {
     width: 500,
     height: 500,
@@ -168,7 +197,7 @@ const D3 = () => {
   return (
     <div className='d3'>
       <h1>Pack Chart</h1>
-      <PackChart data={data} options={options} />
+      {data && <PackChart data={data} options={options} />}
     </div>
   );
 };

@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import D3 from './D3.jsx';
 
 export default function App() {
+  const [hierarchyData, setHierarchyData] = useState(null);
+
   async function apiCall(event) {
     event.preventDefault();
     const files = event.target.elements.file.files;
-    console.log(files)
+    console.log(files);
     console.log('hit apiCall');
 
     if (!files || !files.length) {
@@ -14,20 +16,14 @@ export default function App() {
 
     const formData = new FormData();
 
-    let count = 0;
-
     // -------  for hierarchy -------- //
     for (let i = 0; i < files.length; i++) {
-      // LOGIC FOR FILTERING OUT NOT NEEDED FILES //
       const filePath = files[i].webkitRelativePath;
       if (!filePath.includes('node_modules') && !filePath.includes('.git') && !filePath.includes('.DS_Store')) {
         formData.append(filePath, files[i], files[i].name);
         console.log('array: ', filePath.split('/'));
-        count++;
       }
     }
-
-    console.log('total files sent: ', count);
 
     try {
       const response = await fetch('/api/fileupload', {
@@ -36,9 +32,9 @@ export default function App() {
       });
 
       if (response.ok) {
-        console.log('upload complete')
-        // const data = await response.json();
-        // console.log('Response data received from server: ', data);
+        console.log('upload complete');
+        const data = await response.json();
+        setHierarchyData(data); // Update state with the received data
       } else {
         console.error('Upload failed');
       }
@@ -55,14 +51,8 @@ export default function App() {
           <input type="file" name="file" id="file" multiple webkitdirectory="true" />
           <button type="submit" id="submit-btn">Submit</button>
         </form>
+        <D3 hierarchyData={hierarchyData} />
       </div>
-      </div>
-    
+    </div>
   );
 }
-
-
-
-
-
-

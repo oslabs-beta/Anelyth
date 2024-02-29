@@ -86,7 +86,7 @@ DCController.analyze = async (req, res, next) => {
     console.log(JSON.stringify(JSON.parse(depResult.output), null, 2));
     // LOG TREE
     const hierarchy = printDirectoryTree(uploadsPath);
-    console.log('File Hierarchy:\n', hierarchy);
+    console.log('File Hierarchy:\n', hierarchy.children[0]);
     console.log('depResult:', depResult)
     res.locals.depResult = depResult
     res.locals.hierarchy = hierarchy
