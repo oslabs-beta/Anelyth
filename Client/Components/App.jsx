@@ -1,4 +1,5 @@
 import React from 'react';
+import D3 from './D3.jsx';
 
 export default function App() {
   async function apiCall(event) {

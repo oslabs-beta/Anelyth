@@ -13,26 +13,53 @@ const cruiseOptions = {
 // --------------- WORKING CODE FOR LOCAL STORAGE OF UPLOADED FILES --------------- //
 
 // ------ HELPER FUNC TO GET FILE HEIARCHY ----- //
-function printDirectoryTree(dir, level = 0) {
-  // EMPTY STRING FOR TREE BUILD
-  let tree = "";
-  // GET FILES IN CURRENT DIRECTORY
-  const files = fs.readdirSync(dir);
-  // LOOP DA DOOP
-  files.forEach(file => {
-    // GET FILE PATH BY COMBINING CURRENT DIRECTORY AND FILE
-    const filePath = path.join(dir, file);
-    // GET FILE STAT - IS IT A DIRECTORY OR A FILE?
-    const stat = fs.statSync(filePath);
-    // EACH LEVEL OF DEPTH GETS TWO SPACES
-    tree += ' '.repeat(level * 2) + file + '\n';
-    // RECURSIVE CALL TO PRINT DIRECTORY TREE IF IT IS A DIRECTORY
-    if (stat.isDirectory()) {
-      tree += printDirectoryTree(filePath, level + 1);
-    }
-  });
-  return tree;
+// function printDirectoryTree(dir, level = 0) {
+//   // EMPTY STRING FOR TREE BUILD
+//   let tree = "";
+//   // GET FILES IN CURRENT DIRECTORY
+//   const files = fs.readdirSync(dir);
+//   console.log('files in printDirectoryTree',files)
+//   // LOOP DA DOOP
+//   files.forEach(file => {
+//     // GET FILE PATH BY COMBINING CURRENT DIRECTORY AND FILE
+//     const filePath = path.join(dir, file);
+//     // GET FILE STAT - IS IT A DIRECTORY OR A FILE?
+//     const stat = fs.statSync(filePath);
+//     // EACH LEVEL OF DEPTH GETS TWO SPACES
+//     tree += ' '.repeat(level * 2) + file + '\n';
+//     // RECURSIVE CALL TO PRINT DIRECTORY TREE IF IT IS A DIRECTORY
+//     if (stat.isDirectory()) {
+//       tree += printDirectoryTree(filePath, level + 1);
+//     }
+//   });
+//   return tree;
+// }
+
+function buildHierarchy(filePath, level = 0) {
+  const stat = fs.statSync(filePath);
+
+  if (stat.isDirectory()) {
+    const files = fs.readdirSync(filePath);
+
+    return {
+      name: path.basename(filePath),
+      children: files.map(file => buildHierarchy(path.join(filePath, file), level + 1))
+    };
+  } else {
+    return {
+      name: path.basename(filePath),
+      value: 1 // assign any meaningful value based on your requirements
+    };
+  }
 }
+
+function printDirectoryTree(dir) {
+  const hierarchy = buildHierarchy(dir);
+  return hierarchy;
+}
+
+
+
 
 // ------ MIDDLEWARE FOR GETTING FILE HEIARCHY ------- //
 DCController.getTree = (req,res, next) => {
@@ -60,6 +87,9 @@ DCController.analyze = async (req, res, next) => {
     // LOG TREE
     const hierarchy = printDirectoryTree(uploadsPath);
     console.log('File Hierarchy:\n', hierarchy);
+    console.log('depResult:', depResult)
+    res.locals.depResult = depResult
+    res.locals.hierarchy = hierarchy
     return next();
   } catch (err) {
     return next({

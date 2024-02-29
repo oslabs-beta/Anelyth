@@ -121,7 +121,7 @@ const Pack = (data, options) => {
   return svg.node();
 };
 
-const YourComponent = () => {
+const D3 = () => {
   const data = {
     name: "Root",
     children: [
@@ -173,4 +173,4 @@ const YourComponent = () => {
   );
 };
 
-export default YourComponent;
+export default D3;
