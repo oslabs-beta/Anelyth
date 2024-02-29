@@ -17,7 +17,6 @@ const PackChart = ({ data, options }) => {
 
   }, [data, options]);
 
-  /*This use effect hook is dependent on  */
 
   return (
     <svg ref={svgRef}></svg>
@@ -174,19 +173,17 @@ const Pack = (data, options) => {
 // };
 
 // export default D3;
+
 const D3 = ({ hierarchyData }) => {
-  // State to manage the data
+
   const [data, setData] = useState(null);
 
-  // Update the data state when hierarchyData prop changes
   useEffect(() => {
     if (hierarchyData) {
-      // Assuming hierarchyData has the correct structure for D3 visualization
       setData(hierarchyData);
     }
   }, [hierarchyData]);
 
-  // Your D3 options
   const options = {
     width: 500,
     height: 500,
