@@ -25,7 +25,7 @@ app.post('/api/fileupload',
     DCController.analyze,
     FileController.deleteDir,
     (req, res) => {
-        res.status(200).send('upload complete')
+        res.status(200).send(res.locals.hierarchy)
     }
 )
 
