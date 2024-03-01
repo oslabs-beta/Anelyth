@@ -4,6 +4,7 @@
 import path from "path";
 import express from "express";
 
+
 const app = express();
 const port = 3000;
 
@@ -24,9 +25,19 @@ app.post('/api/fileupload',
     DCController.analyze,
     FileController.deleteDir,
     (req, res) => {
-        res.status(200).send('upload complete')
+        res.status(200).send(res.locals.hierarchy)
     }
 )
+
+app.use((err, req, res, next) => {
+  const defaultErr = {
+    log: 'Express error handler caught unknown middleware error',
+    status: 500,
+    message: { err: 'An error occurred' },
+  };
+  const errorObj = Object.assign({}, defaultErr, err);
+  return res.status(errorObj.status).json(errorObj.message);
+});
 
 
 app.listen(port, () => {
