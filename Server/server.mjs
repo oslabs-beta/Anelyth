@@ -1,6 +1,7 @@
 // const fs = require('fs');
 // const esprima = require('esprima');
 
+
 import path from "path";
 import express from "express";
 
@@ -8,9 +9,10 @@ import express from "express";
 const app = express();
 const port = 3000;
 
-
+// --- Importing Controllers --- //
 import FileController from "./Controllers/FileController.cjs";
 import DCController from "./Controllers/DCController.mjs";
+import S3Controller from "./Controllers/S3Controller.mjs";
 
 
 app.use(express.json());
@@ -24,8 +26,9 @@ app.post('/api/fileupload',
     FileController.upload,
     DCController.analyze,
     FileController.deleteDir,
+    S3Controller.upload,
     (req, res) => {
-        res.status(200).send(res.locals.hierarchy)
+        res.status(200).send(res.locals.hierarchy);
     }
 )
 
