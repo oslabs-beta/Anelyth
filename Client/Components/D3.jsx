@@ -9,7 +9,7 @@ const PackChart = ({ data, options }) => {
   useEffect(() => {
     const svg = d3.create("svg"); // Create SVG element
 
-    const pack = Pack(data, options); // Pass location
+    const pack = Pack(data, { ...options, value: (d) => d.size }); 
 
     svg.selectAll("*").remove(); // Clear existing SVG content
     svg.node().appendChild(pack); // Append the generated SVG to the component's SVG
@@ -57,13 +57,9 @@ const Pack = (data, options) => { //data and options are props passed down from 
    on the presence of the value property in the options object. In our case we are not setting a value to the value variable so 
    it is null */
 
-   value == null ? root.count() : root.sum(d => Math.max(0, value(d)));
+  //  value == null ? root.count() : root.sum(d => Math.max(0, value(d)));
+  root.sum((d) => d.value || 0); // Sum the file sizes
 
-  /*root.count() is a method provided by D3.js for hierarchical data structures. When called on a root node of a hierarchical 
-  structure (such as the one we created using d3.hierarchy()), it traverses the entire hierarchy and counts the number of nodes 
-  in the tree. The result of root.count() is not explicitly stored in a variable in this code. Instead, it directly modifies 
-  the hierarchy's nodes by adding a count property to each node, representing the count of descendant nodes for that particular 
-  node. */
   
   /*This method, provided by D3.js, returns an array containing all descendant nodes of the root node. It traverses the hierarchical 
   structure and collects all nodes into an array, including the root node itself. */
@@ -96,6 +92,12 @@ const Pack = (data, options) => { //data and options are props passed down from 
 
   if (sort != null) root.sort(sort);
 
+  const links = data.children.flatMap(parent => {
+    return parent.dependencies.map(dependency => {
+      const target = descendants.find(d => d.data.name === dependency.module);
+      return { source: parent, target };
+    });
+  });
 
   d3.pack()
     .size([width - marginLeft - marginRight, height - marginTop - marginBottom])
@@ -120,13 +122,13 @@ and options. */
     .join("a")
     .attr("xlink:href", link == null ? null : (d, i) => link(d.data, d))
     .attr("target", link == null ? null : linkTarget)
-    .attr("transform", d => `translate(${d.x},${d.y})`);
+    .attr("transform", d => `translate(${d.x},${d.y})`)
 
     /*responsible for appending circle elements (<circle>) to the anchor elements (<a>) created earlier, and then setting 
     various attributes (such as fill color, stroke color, etc.) of these circle elements based on the data associated with
      each node (d). */
   node.append("circle")
-    .attr("fill", d => d.children ? "#fff" : (d.data.color || fill)) //this is changing the color based on the color being passed in on the node data
+    .attr("fill", d => d.children ? "#FF0000" : (d.data.color || fill)) //this is changing the color based on the color being passed in on the node data
     .attr("fill-opacity", d => d.children ? null : fillOpacity)
     .attr("stroke", d => d.children ? stroke : null)
     .attr("stroke-width", d => d.children ? strokeWidth : null)
@@ -162,47 +164,54 @@ and options. */
       .text(d => d);
   }
 
+  svg.selectAll(".link")
+    .data(links)
+    .enter().append("line")
+    .attr("class", "link")
+    .attr("x1", d => d.source.x)
+    .attr("y1", d => d.source.y)
+    .attr("x2", d => d.target.x)
+    .attr("y2", d => d.target.y)
+    .attr("stroke", "#ccc")
+    .attr("stroke-width", 1);
+
   return svg.node();
 };
 
 
 
 // //Uncomment this if you want to use test data. 
-// const D3 = () => {
-//   // const data = {
-//   //   name: "Root",
-//   //   children: [
-//   //     {
-//   //       name: "Node 1",
-//   //       children: [
-//   //         { name: "Node 1.1", value: 10 },
-//   //         { name: "Node 1.2", value: 15 },
-//   //         { name: "Node 1.3", value: 20 }
-//   //       ]
-//   //     },
-//   //     {
-//   //       name: "Node 2",
-//   //       children: [
-//   //         {
-//   //           name: "Node 2.1",
-//   //           children: [
-//   //             { name: "Node 2.1.1", value: 5 },
-//   //             { name: "Node 2.1.2", value: 8 }
-//   //           ]
-//   //         },
-//   //         { name: "Node 2.2", value: 12 }
-//   //       ]
-//   //     },
-//   //     {
-//   //       name: "Node 3",
-//   //       children: [
-//   //         { name: "Node 3.1", value: 18 },
-//   //         { name: "Node 3.2", value: 25 },
-//   //         { name: "Node 3.3", value: 30 }
-//   //       ]
-//   //     }
-//   //   ]
-//   // };
+const D3 = () => {
+  const data = {
+    name: "main-folder",
+    children: [
+          {
+            name: "index1.js",
+            value: 10,
+            color: "#FF4433",
+            dependencies: [
+              {
+                module: "./main-folder/index2.js",
+                resolved: "Server/main-folder/index2.js",
+                dependencyTypes: ["local", "import"]
+              }
+            ]
+          },
+          {
+            name: "index2.js",
+            value: 10,
+            color: "#FF4433",
+            dependencies: [
+              {
+                module: "./main-folder/index1.js",
+                resolved: "Server/main-folder/index1.js",
+                dependencyTypes: ["local", "import"]
+              }
+            ]
+          }
+      ]
+  };
+
 
 // //   const data = {
 // //     name: "Root",
@@ -232,33 +241,6 @@ and options. */
 
   
 
-//   const options = {
-//     width: 500,
-//     height: 500,
-//     fill: "#ddd",
-//     stroke: "#bbb"
-//   };
-
-//   return (
-//     <div className='d3'>
-//       <h1>Pack Chart</h1>
-//       <PackChart data={data} options={options} />
-//     </div>
-//   );
-// };
-
-// export default D3;
-
-const D3 = ({ hierarchyData }) => {
-
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    if (hierarchyData) {
-      setData(hierarchyData);
-    }
-  }, [hierarchyData]);
-
   const options = {
     width: 500,
     height: 500,
@@ -269,11 +251,38 @@ const D3 = ({ hierarchyData }) => {
   return (
     <div className='d3'>
       <h1>Pack Chart</h1>
-      {data && <PackChart data={data} 
-      options={options} 
-      />}
+      <PackChart data={data} options={options} />
     </div>
   );
 };
 
 export default D3;
+
+// const D3 = ({ hierarchyData }) => {
+
+//   const [data, setData] = useState(null);
+
+//   useEffect(() => {
+//     if (hierarchyData) {
+//       setData(hierarchyData);
+//     }
+//   }, [hierarchyData]);
+
+//   const options = {
+//     width: 500,
+//     height: 500,
+//     fill: "#ddd",
+//     stroke: "#bbb"
+//   };
+
+//   return (
+//     <div className='d3'>
+//       <h1>Pack Chart</h1>
+//       {data && <PackChart data={data} 
+//       options={options} 
+//       />}
+//     </div>
+//   );
+// };
+
+// export default D3;
