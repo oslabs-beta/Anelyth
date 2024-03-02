@@ -27,7 +27,8 @@ function buildHierarchy(filePath, level = 0) {
   } else {
     return {
       name: path.basename(filePath),
-      value: 1 
+      value: stat.size,
+      color:"#4169E1",
     };
   }
 }

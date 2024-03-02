@@ -28,8 +28,8 @@ const Pack = (data, options) => { //data and options are props passed down from 
   const { 
     value,
     sort = (a, b) => d3.descending(a.value, b.value),
-    label = (nodeData, node) => nodeData.label,
-    title = (nodeData, node) => nodeData.title,
+    label = (nodeData, node) => nodeData.name,
+    title = (nodeData, node) => nodeData.name,
     link,
     linkTarget = "_blank",
     width,
@@ -75,7 +75,8 @@ const Pack = (data, options) => { //data and options are props passed down from 
   !d.children evaluates to true if d.children is falsy or an empty array */
 
   const leaves = descendants.filter(d => !d.children);
-
+  
+  console.log ('Loggin the leaves', leaves);
   /* iterates through each leaf node in the leaves array and assigns an index to each leaf node. */
   leaves.forEach((d, i) => d.index = i);
 
@@ -83,7 +84,8 @@ const Pack = (data, options) => { //data and options are props passed down from 
   label function. If no label function is provided (i.e., label is null or undefined), L is assigned the value null. In this case
   the value of label is null so L is null */
 
-  const L = label == null ? null : leaves.map(d => label(d.data, d));
+  const L = label == null ? null : leaves.map(l => label(l.data, l));
+
 
   /* T is an array containing titles generated for each descendant node in the descendants array based on the provided title function. 
   sIf no title function is provided (i.e., title is null or undefined), T is assigned the value null.*/
@@ -124,7 +126,7 @@ and options. */
     various attributes (such as fill color, stroke color, etc.) of these circle elements based on the data associated with
      each node (d). */
   node.append("circle")
-    .attr("fill", d => d.children ? "#fff" : fill)
+    .attr("fill", d => d.children ? "#fff" : (d.data.color || fill)) //this is changing the color based on the color being passed in on the node data
     .attr("fill-opacity", d => d.children ? null : fillOpacity)
     .attr("stroke", d => d.children ? stroke : null)
     .attr("stroke-width", d => d.children ? strokeWidth : null)
@@ -165,103 +167,70 @@ and options. */
 
 
 
+// //Uncomment this if you want to use test data. 
+// const D3 = () => {
+//   // const data = {
+//   //   name: "Root",
+//   //   children: [
+//   //     {
+//   //       name: "Node 1",
+//   //       children: [
+//   //         { name: "Node 1.1", value: 10 },
+//   //         { name: "Node 1.2", value: 15 },
+//   //         { name: "Node 1.3", value: 20 }
+//   //       ]
+//   //     },
+//   //     {
+//   //       name: "Node 2",
+//   //       children: [
+//   //         {
+//   //           name: "Node 2.1",
+//   //           children: [
+//   //             { name: "Node 2.1.1", value: 5 },
+//   //             { name: "Node 2.1.2", value: 8 }
+//   //           ]
+//   //         },
+//   //         { name: "Node 2.2", value: 12 }
+//   //       ]
+//   //     },
+//   //     {
+//   //       name: "Node 3",
+//   //       children: [
+//   //         { name: "Node 3.1", value: 18 },
+//   //         { name: "Node 3.2", value: 25 },
+//   //         { name: "Node 3.3", value: 30 }
+//   //       ]
+//   //     }
+//   //   ]
+//   // };
 
-
-
-
-
-
-//Uncomment this if you want to use test data. 
-const D3 = () => {
-  // const data = {
-  //   name: "Root",
-  //   children: [
-  //     {
-  //       name: "Node 1",
-  //       children: [
-  //         { name: "Node 1.1", value: 10 },
-  //         { name: "Node 1.2", value: 15 },
-  //         { name: "Node 1.3", value: 20 }
-  //       ]
-  //     },
-  //     {
-  //       name: "Node 2",
-  //       children: [
-  //         {
-  //           name: "Node 2.1",
-  //           children: [
-  //             { name: "Node 2.1.1", value: 5 },
-  //             { name: "Node 2.1.2", value: 8 }
-  //           ]
-  //         },
-  //         { name: "Node 2.2", value: 12 }
-  //       ]
-  //     },
-  //     {
-  //       name: "Node 3",
-  //       children: [
-  //         { name: "Node 3.1", value: 18 },
-  //         { name: "Node 3.2", value: 25 },
-  //         { name: "Node 3.3", value: 30 }
-  //       ]
-  //     }
-  //   ]
-  // };
-
-  const data = {
-    name: "Root",
-    title: "Root Title",
-    label: "Root Label",
-    children: [
-        {
-            name: "Node 1",
-            title: "Node 1 Title",
-            label: "Node 1 Label",
-            children: [
-                { name: "Leaf 1.1", value: 10, title: "Leaf 1.1 Title", label: "Leaf 1.1 Label" },
-                { name: "Leaf 1.2", value: 15, title: "Leaf 1.2 Title", label: "Leaf 1.2 Label" }
-            ]
-        },
-        {
-            name: "Node 2",
-            title: "Node 2 Title",
-            label: "Node 2 Label",
-            children: [
-                { name: "Leaf 2.1", value: 12, title: "Leaf 2.1 Title", label: "Leaf 2.1 Label" }
-            ]
-        }
-    ]
-};
+// //   const data = {
+// //     name: "Root",
+// //     title: "Root Title",
+// //     label: "Root Label",
+// //     children: [
+// //         {
+// //             name: "Node 1",
+// //             title: "Node 1 Title",
+// //             label: "Node 1 Label",
+// //             children: [
+// //                 { name: "Leaf 1.1", value: 10, title: "Leaf 1.1 Title", label: "Leaf 1.1 Label" },
+// //                 { name: "Leaf 1.2", value: 15, title: "Leaf 1.2 Title", label: "Leaf 1.2 Label" }
+// //             ]
+// //         },
+// //         {
+// //             name: "Node 2",
+// //             title: "Node 2 Title",
+// //             label: "Node 2 Label",
+// //             children: [
+// //                 { name: "Leaf 2.1", value: 12, title: "Leaf 2.1 Title", label: "Leaf 2.1 Label" }
+// //             ]
+// //         }
+// //     ]
+// // };
 
 
   
-
-  const options = {
-    width: 500,
-    height: 500,
-    fill: "#ddd",
-    stroke: "#bbb"
-  };
-
-  return (
-    <div className='d3'>
-      <h1>Pack Chart</h1>
-      <PackChart data={data} options={options} />
-    </div>
-  );
-};
-
-export default D3;
-
-// const D3 = ({ hierarchyData }) => {
-
-//   const [data, setData] = useState(null);
-
-//   useEffect(() => {
-//     if (hierarchyData) {
-//       setData(hierarchyData);
-//     }
-//   }, [hierarchyData]);
 
 //   const options = {
 //     width: 500,
@@ -273,11 +242,38 @@ export default D3;
 //   return (
 //     <div className='d3'>
 //       <h1>Pack Chart</h1>
-//       {data && <PackChart data={data} 
-//       options={options} 
-//       />}
+//       <PackChart data={data} options={options} />
 //     </div>
 //   );
 // };
 
 // export default D3;
+
+const D3 = ({ hierarchyData }) => {
+
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    if (hierarchyData) {
+      setData(hierarchyData);
+    }
+  }, [hierarchyData]);
+
+  const options = {
+    width: 500,
+    height: 500,
+    fill: "#ddd",
+    stroke: "#bbb"
+  };
+
+  return (
+    <div className='d3'>
+      <h1>Pack Chart</h1>
+      {data && <PackChart data={data} 
+      options={options} 
+      />}
+    </div>
+  );
+};
+
+export default D3;
