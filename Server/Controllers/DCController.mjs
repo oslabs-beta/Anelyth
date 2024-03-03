@@ -16,35 +16,44 @@ const cruiseOptions = {
 
 function buildHierarchy(filePath, level = 0) {
   const stat = fs.statSync(filePath);
+  console.log('stat in buildHierarchy:', stat)
+
+  let count = 1;
 
   if (stat.isDirectory()) {
     const files = fs.readdirSync(filePath);
+    console.log('readdirSync output in buildHierarchy:', files)
 
     return {
       name: path.basename(filePath),
       children: files.map(file => buildHierarchy(path.join(filePath, file), level + 1))
     };
   } else {
-    return {
+    // return {
+    //   name: path.basename(filePath),
+    //   value: 1 
+    // };
+    const fileObject =  {
       name: path.basename(filePath),
-      value: 1 
+      value: count
     };
+    count++;
+    return fileObject;
   }
 }
 
-function printDirectoryTree(dir) {
-  const hierarchy = buildHierarchy(dir);
-  return hierarchy;
-}
-
-
+//unnecessary level of abstraction
+// function printDirectoryTree(dir) {
+//   const hierarchy = buildHierarchy(dir);
+//   return hierarchy;
+// }
 
 
 // ------ MIDDLEWARE FOR GETTING FILE HEIARCHY ------- //
 DCController.getTree = (req,res, next) => {
   try {
     const uploadsPath = './Server/temp-file-upload';
-    const hierarchy = printDirectoryTree(uploadsPath);
+    const hierarchy = buildHierarchy(uploadsPath);
     console.log('File Hierarchy:\n', hierarchy);
   } catch (err) {
     return next({
@@ -62,11 +71,23 @@ DCController.analyze = async (req, res, next) => {
     const uploadsPath = './Server/temp-file-upload';
     const depResult = await cruise([uploadsPath], cruiseOptions);
     // LOG OUTPUT
-    console.log(JSON.stringify(JSON.parse(depResult.output), null, 2));
+    const outputObject = JSON.parse(depResult.output);
+    // console.log('before filter: ', JSON.stringify(JSON.parse(depResult.output), null, 2));
+    console.log('before filter: ', outputObject.modules);
+
+
+    const options = {
+      coreModule: false,
+      dynamic: true
+    };
+    console.log('after filter: ', filterModulesRecursively(outputObject.modules, options));
+
+
     // LOG TREE
-    const hierarchy = printDirectoryTree(uploadsPath);
+    const hierarchy = buildHierarchy(uploadsPath);
     console.log('File Hierarchy:\n', hierarchy.children);
     console.log('depResult:', depResult)
+
     res.locals.depResult = depResult
     res.locals.hierarchy = hierarchy
     return next();
@@ -77,6 +98,30 @@ DCController.analyze = async (req, res, next) => {
     });
   }
 };
+
+
+
+function filterModulesRecursively(modules, options) {
+  return modules.filter(module => {
+    let keep = true; 
+
+    for (let key in module) {
+      if (Array.isArray(module[key])) {
+        module[key] = filterModulesRecursively(module[key], options);
+      } else {
+        if (module.hasOwnProperty(key) && options.hasOwnProperty(key)) {
+          if (options[key] !== module[key]) {
+            keep = false; 
+            break; 
+          }
+        }
+      }
+    }
+    return keep;
+  });
+}
+
+
 
 
 
