@@ -93,11 +93,17 @@ const Pack = (data, options) => { //data and options are props passed down from 
   if (sort != null) root.sort(sort);
 
   const links = data.children.flatMap(parent => {
-    return parent.dependencies.map(dependency => {
-      const target = descendants.find(d => d.data.name === dependency.module);
-      return { source: parent, target };
+    return parent.dependencies.flatMap(dependency => {
+      const source = descendants.find(d => d.data.name === parent.name);
+      const target = descendants.find(d => d.data.name === dependency.source);
+        console.log('source', source, 'target', target)
+      if (source && target) {
+          return { source, target };
+        }
+        return null;
+      return null
     });
-  });
+  }).filter(link => link !== null);
 
   d3.pack()
     .size([width - marginLeft - marginRight, height - marginTop - marginBottom])
@@ -114,6 +120,18 @@ const Pack = (data, options) => { //data and options are props passed down from 
     .attr("text-anchor", "middle"); //more styling 
 
 
+
+  svg.append("defs").append("marker")
+    .attr("id", "arrowhead")
+    .attr("viewBox", "-10 -10 25 25")
+    .attr("refX", 0)
+    .attr("refY", 0)
+    .attr("orient", "auto")
+    .attr("markerWidth", 5)
+    .attr("markerHeight", 5)
+    .append("path")
+    .attr("d", "M0,-5L10,0L0,5")
+    .attr("fill", "#ccc");
 /*this block of code dynamically creates and configures anchor elements within the SVG to represent each node in the 
 hierarchical structure. It sets the href, target, and transform attributes of each anchor element based on the provided data 
 and options. */
@@ -163,11 +181,15 @@ and options. */
       .attr("fill-opacity", (d, i, D) => i === D.length - 1 ? 0.7 : null)
       .text(d => d);
   }
+  
 
   svg.selectAll(".link")
     .data(links)
     .enter().append("line")
     .attr("class", "link")
+    .style("stroke", "lightgreen")
+    .style("stroke-width", 5)
+    .attr("marker-end", "url(#arrowhead)") // Add this line to add the arrowhead
     .attr("x1", d => d.source.x)
     .attr("y1", d => d.source.y)
     .attr("x2", d => d.target.x)
@@ -185,31 +207,71 @@ const D3 = () => {
   const data = {
     name: "main-folder",
     children: [
+      {
+        name: "index1.js",
+        value: 10,
+        color: "#FF4433",
+        dependencies: [
           {
-            name: "index1.js",
-            value: 10,
-            color: "#FF4433",
-            dependencies: [
-              {
-                module: "./main-folder/index2.js",
-                resolved: "Server/main-folder/index2.js",
-                dependencyTypes: ["local", "import"]
-              }
-            ]
+            module: "./main-folder/index2.js",
+            resolved: "Server/main-folder/index2.js",
+            dependencyTypes: ["local", "import"],
+            source: "index2.js" // Add source property
+          }
+        ]
+      },
+      {
+        name: "index2.js",
+        value: 15,
+        color: "#FF4433",
+        dependencies: [
+          {
+            module: "./main-folder/index1.js",
+            resolved: "Server/main-folder/index1.js",
+            dependencyTypes: ["local", "import"],
+            source: "index1.js" // Add source property
+          }
+        ]
+      },
+      {
+        name: "index3.js",
+        value: 10,
+        color: "#FF4433",
+        dependencies: [
+          {
+            module: "./main-folder/index2.js",
+            resolved: "Server/main-folder/index2.js",
+            dependencyTypes: ["local", "import"],
+            source: "index2.js" // Add source property
+          }
+        ]
+      },
+      {
+        name: "index4.js",
+        value: 29,
+        color: "#FF4433",
+        dependencies: [
+          {
+            module: "./main-folder/index2.js",
+            resolved: "Server/main-folder/index2.js",
+            dependencyTypes: ["local", "import"],
+            source: "index3.js" // Add source property
           },
           {
-            name: "index2.js",
-            value: 10,
-            color: "#FF4433",
-            dependencies: [
-              {
-                module: "./main-folder/index1.js",
-                resolved: "Server/main-folder/index1.js",
-                dependencyTypes: ["local", "import"]
-              }
-            ]
+            module: "./main-folder/index2.js",
+            resolved: "Server/main-folder/index2.js",
+            dependencyTypes: ["local", "import"],
+            source: "index1.js" // Add source property
+          },
+          {
+            module: "./main-folder/index2.js",
+            resolved: "Server/main-folder/index2.js",
+            dependencyTypes: ["local", "import"],
+            source: "index2.js" // Add source property
           }
-      ]
+        ]
+      }
+    ]
   };
 
 
