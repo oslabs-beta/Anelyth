@@ -1,14 +1,16 @@
-const { Client } = require('pg');
+const { Pool } = require('pg');
+const dotenv = require('dotenv');
 
-process.env.PGHOST = 'wrongly-cute-badger-iad.a1.pgedge.io';
-process.env.PGUSER = 'admin';
-process.env.PGDATABASE = 'ffssosp';
-process.env.PGSSLMODE = 'require';
-process.env.PGPASSWORD = '****************';
 
-async function main() {
-    const client = new Client();
-    await client.connect();
-}
+dotenv.config();
 
-main().catch(console.error);
+const pool= new Pool({
+    connectionString: process.env.DB_ENDPOINT
+});
+
+  module.exports = {
+    query: (text, params, callback) => {
+      console.log('executed query', text);
+      return pool.query(text, params, callback);
+    }
+  };

@@ -13,6 +13,7 @@ const port = 3000;
 import FileController from "./Controllers/FileController.cjs";
 import DCController from "./Controllers/DCController.mjs";
 import S3Controller from "./Controllers/S3Controller.mjs";
+import DBController from "./Controllers/DBController.cjs";
 
 
 app.use(express.json());
@@ -29,6 +30,13 @@ app.post('/api/fileupload',
     S3Controller.upload,
     (req, res) => {
         res.status(200).send(res.locals.hierarchy);
+    }
+)
+
+app.post('/api/signup',
+    DBController.addUser,
+    (req, res) => {
+        res.status(200).send('User added');
     }
 )
 
