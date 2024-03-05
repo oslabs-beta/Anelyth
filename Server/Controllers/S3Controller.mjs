@@ -1,5 +1,6 @@
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import dotenv from 'dotenv';
+import fs from 'fs';
 
 
 dotenv.config();
@@ -20,10 +21,6 @@ const s3 = new S3Client({
 });
 
 
-// test
-  import fs from 'fs';
-  const file = fs.readFileSync('Server/Controllers/DCController.mjs');
-// end test
 
 const S3Controller = {};
 
@@ -35,9 +32,12 @@ S3Controller.upload = async (req, res, next) => {
       // need to configure the key to be the name of the file
       Key: res.locals.repoName + '.json',
       // need to configure the body to be the data from the file
-      Body: {'HI': 'THERE'},
+      Body: file,
       ContentType: 'application/json'
     };
+    
+    // GET FILE FROM LOCAL STORAGE // 
+    const file = fs.readFileSync('Server/Controllers/DCController.mjs');
 
     const command = new PutObjectCommand(params);
     await s3.send(command);
@@ -50,6 +50,11 @@ S3Controller.upload = async (req, res, next) => {
     })
   }
 }
+
+
+
+
+
 
 
 export default S3Controller;
