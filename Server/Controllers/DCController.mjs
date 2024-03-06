@@ -60,17 +60,6 @@ DCController.analyze = async (req, res, next) => {
 
     // CRUISE PASSING IN OPTIONS
     const uploadsPath = './Server/temp-file-upload';
-    const depResult = await cruise([uploadsPath], cruiseOptions);
-
-    const hierarchy = printDirectoryTree(uploadsPath);
-    console.log('File Hierarchy:\n', hierarchy.children);
-  
-    // ----- ASSIGN REPO NAME TO LOCALS ----- //
-    res.locals.repoName = hierarchy.children[0].name;
-    // ----- ASSIGN DEP AND HIERARCHY RESULT TO LOCALS ----- //
-    res.locals.depResult = JSON.stringify(JSON.parse(depResult.output), null, 2)
-    res.locals.hierarchy = hierarchy
-    
     let depResult = await cruise([uploadsPath], cruiseOptions);
     const output = JSON.parse(depResult.output);
 
