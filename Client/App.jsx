@@ -24,7 +24,6 @@ export default function App() {
           <Route path="/projects" Component={ProjectsPage} />
           
           <Route path="/" Component={LandingPage} />
-         
         </Routes>
     
   );

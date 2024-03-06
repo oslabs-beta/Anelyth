@@ -27,7 +27,7 @@ app.post('/api/fileupload',
     FileController.upload,
     DCController.analyze,
     FileController.deleteDir,
-    S3Controller.upload,
+    // S3Controller.upload,
     (req, res) => {
         res.status(200).send(res.locals.hierarchy);
     }

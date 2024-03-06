@@ -8,7 +8,6 @@ function UserMainPage() {
   <>
     <div>UserMainPage</div>
     <RepoUpload />
-    <D3 />
   </>
   )
 }
