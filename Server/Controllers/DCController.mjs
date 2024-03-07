@@ -27,7 +27,7 @@ function buildHierarchy(filePath, level = 0) {
   } else {
     return {
       name: path.basename(filePath),
-      value: 1 
+      value: 1
     };
   }
 }
@@ -77,9 +77,6 @@ DCController.analyze = async (req, res, next) => {
     });
   }
 };
-
-
-
 
 
 
