@@ -32,19 +32,12 @@ function buildHierarchy(filePath, level = 0) {
   }
 }
 
-function printDirectoryTree(dir) {
-  const hierarchy = buildHierarchy(dir);
-  return hierarchy;
-}
-
-
-
 
 // ------ MIDDLEWARE FOR GETTING FILE HEIARCHY ------- //
 DCController.getTree = (req,res, next) => {
   try {
     const uploadsPath = './Server/temp-file-upload';
-    const hierarchy = printDirectoryTree(uploadsPath);
+    const hierarchy = buildHierarchy(uploadsPath);
     console.log('File Hierarchy:\n', hierarchy);
   } catch (err) {
     return next({
@@ -58,17 +51,52 @@ DCController.getTree = (req,res, next) => {
 DCController.analyze = async (req, res, next) => {
   try {
     console.log('in dccontroller.analyze');
+
+    // LOG STREAM
+    const logStream = fs.createWriteStream('./DC-parsing.log', { flags: 'a' });
+
+
     // CRUISE PASSING IN OPTIONS
     const uploadsPath = './Server/temp-file-upload';
-    const depResult = await cruise([uploadsPath], cruiseOptions);
-    // LOG OUTPUT
-    console.log(JSON.stringify(JSON.parse(depResult.output), null, 2));
+    let depResult = await cruise([uploadsPath], cruiseOptions);
+    const output = JSON.parse(depResult.output);
+
+    // LOG OUTPUT TO LOG FILE
+    logStream.write('Dependency Cruiser Output:\n');
+    logStream.write(`${JSON.stringify(output, null, 2)}\n`);
+
+    //DECLARE OPTIONS FOR FILTERING
+    const options = {
+      coreModule: false
+    };
+
+    const propsToKeep = [
+      "source",
+      "dependencies",
+      "dependents",
+      "orphan",
+      "module",
+      "dependencyTypes",
+      "resolved",
+      "circular"
+    ];
+
+    // LOG OUTPUT BEFORE AND AFTER FILTER
+    console.log('before filter: ', JSON.stringify(output, null, 2));
+    depResult = filterRecursively(output, options, propsToKeep);
+    console.log('after filter: ', JSON.stringify(depResult, null, 2));
+
     // LOG TREE
-    const hierarchy = printDirectoryTree(uploadsPath);
-    console.log('File Hierarchy:\n', hierarchy.children);
-    console.log('depResult:', depResult)
-    res.locals.depResult = depResult
-    res.locals.hierarchy = hierarchy
+    const hierarchy = buildHierarchy(uploadsPath);
+    // console.log('File Hierarchy:\n', hierarchy.children);
+    // console.log('depResult:', depResult)
+
+    // CLOSE LOG STREAM
+    logStream.end();
+
+    res.locals.depResult = depResult;
+    res.locals.hierarchy = hierarchy;
+    
     return next();
   } catch (err) {
     return next({
@@ -79,8 +107,64 @@ DCController.analyze = async (req, res, next) => {
 };
 
 
+//options lets you filter based on key value pairs
+//props lets you choose which properties to keep
+//input: DC object, object of options, array of properties to keep
+//output: filtered object
+function filterRecursively(depCruiserObj, options, props) {
+  const modules = depCruiserObj.modules;
+  const summary = depCruiserObj.summary;
 
+  const filteredModules = filterOptions(modules, options);
+  const modulesPropsRemoved = removeProperties(filteredModules, props);
 
+  return (
+    {
+      "modules": modulesPropsRemoved,
+      "summary": summary
+    }
+  );
 
+  //modules is an array, props is an array
+  function removeProperties(modules, props) {
+    return modules.map(module => {
+      if (typeof module === 'string') return module;
+
+      const obj = {};
+      for (let i = 0; i < props.length; i++){
+        const prop = props[i];
+        if (module.hasOwnProperty(prop)) {
+          if (Array.isArray(module[prop])) {
+            obj[prop] = removeProperties(module[prop], props);
+          } else {
+            obj[prop] = module[prop];
+          }
+        }
+      }
+      return obj;
+    });
+  }
+
+  //modules is an array, options is an object
+  function filterOptions(modules, options) {
+    return modules.filter(module => {
+      let keep = true; 
+
+      for (let key in module) {
+        if (Array.isArray(module[key])) {
+          module[key] = filterOptions(module[key], options);
+        } else {
+          if (module.hasOwnProperty(key) && options.hasOwnProperty(key)) {
+            if (options[key] !== module[key]) {
+              keep = false; 
+              break; 
+            }
+          }
+        }
+      }
+      return keep;
+    });
+  }
+}
 
 export default DCController;
