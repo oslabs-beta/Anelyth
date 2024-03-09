@@ -37,7 +37,7 @@ function RepoUpload() {
       if (response.ok) {
         console.log('upload complete');
         const data = await response.json();
-        console.log('response from after upload: ',data);
+        console.log('Data that was sent from the backend to feed into the D3 component ',data);
         // send the data to s3 bucket here // 
         // add here // 
 
