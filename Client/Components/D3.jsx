@@ -93,17 +93,38 @@ const Pack = (data, options) => { //data and options are props passed down from 
 
   if (sort != null) root.sort(sort);
 
-  const links = data.children.flatMap(parent => {
-    return parent.dependencies.flatMap(dependency => {
-      const source = descendants.find(d => d.data.name === parent.name);
-      const target = descendants.find(d => d.data.name === dependency.source);
-        console.log('source', source, 'target', target)
-      if (source && target) {
-          return { source, target };
+  // const links = data.children.flatMap(parent => {
+  //   return parent.dependencies.flatMap(dependency => {
+  //     const source = descendants.find(d => d.data.name === parent.name);
+  //     const target = descendants.find(d => d.data.name === dependency.source);
+  //       console.log('source', source, 'target', target)
+  //     if (source && target) {
+  //         return { source, target };
+  //       }
+  //       return null;
+  //   });
+  // }).filter(link => link !== null);
+
+  const links = generateLinks(data);
+
+  function generateLinks(node) {
+    const links = [];
+    if (node.children) {
+      node.children.forEach(child => {
+        if (child.dependencies) {
+          child.dependencies.forEach(dependency => {
+            const sourceNode = descendants.find(d => d.data.name === child.name);
+            const targetNode = descendants.find(d => d.data.name === dependency.source);
+            if (sourceNode && targetNode) {
+              links.push({ source: sourceNode, target: targetNode });
+            }
+          });
         }
-        return null;
-    });
-  }).filter(link => link !== null);
+        links.push(...generateLinks(child));
+      });
+    }
+    return links;
+  }
 
   d3.pack()
     .size([width - marginLeft - marginRight, height - marginTop - marginBottom])
