@@ -40,18 +40,18 @@ function buildHierarchy(filePath, level = 0) {
 
 
 // ------ MIDDLEWARE FOR GETTING FILE HEIARCHY ------- //
-DCController.getTree = (req,res, next) => {
-  try {
-    const uploadsPath = './Server/temp-file-upload';
-    const hierarchy = buildHierarchy(uploadsPath);
-    console.log('File Hierarchy:\n', hierarchy);
-  } catch (err) {
-    return next({
-      log: 'error in DCController.getTree',
-      message: err
-    })
-  }
-}
+// DCController.getTree = (req,res, next) => {
+//   try {
+//     const uploadsPath = './Server/temp-file-upload';
+//     const hierarchy = buildHierarchy(uploadsPath);
+//     console.log('File Hierarchy:\n', hierarchy);
+//   } catch (err) {
+//     return next({
+//       log: 'error in DCController.getTree',
+//       message: err
+//     })
+//   }
+// }
 
 // ------- MIDDLEWARE TO INVOKE DEPENDENCY CRUISER --------- //
 DCController.analyze = async (req, res, next) => {
@@ -64,25 +64,25 @@ DCController.analyze = async (req, res, next) => {
     const output = JSON.parse(depResult.output);
 
     //DECLARE OPTIONS FOR FILTERING
-    const options = {
-      coreModule: false
-    };
+    // const options = {
+    //   coreModule: false
+    // };
 
-    const propsToKeep = [
-      "source",
-      "dependencies",
-      "dependents",
-      "orphan",
-      "module",
-      "dependencyTypes",
-      "resolved",
-      "circular"
-    ];
+    // const propsToKeep = [
+    //   "source",
+    //   "dependencies",
+    //   "dependents",
+    //   "orphan",
+    //   "module",
+    //   "dependencyTypes",
+    //   "resolved",
+    //   "circular"
+    // ];
 
     // LOG OUTPUT BEFORE AND AFTER FILTER
-    console.log('before filter: ', JSON.stringify(output, null, 2));
-    depResult = filterRecursively(output, options, propsToKeep);
-    console.log('after filter: ', JSON.stringify(depResult, null, 2));
+    // console.log('before filter: ', JSON.stringify(output, null, 2));
+    // depResult = filterRecursively(output, options, propsToKeep);
+    // console.log('after filter: ', JSON.stringify(depResult, null, 2));
 
     // LOG TREE
     const hierarchy = buildHierarchy(uploadsPath);
@@ -91,6 +91,9 @@ DCController.analyze = async (req, res, next) => {
 
     res.locals.depResult = depResult;
     res.locals.hierarchy = hierarchy;
+    console.log ('This is the depResult', output);
+    console.log ("This is the hierarchy result", hierarchy);
+    console.log ("Example dependency object", output.modules[20]);
     
     return next();
   } catch (err) {
@@ -106,60 +109,61 @@ DCController.analyze = async (req, res, next) => {
 //props lets you choose which properties to keep
 //input: DC object, object of options, array of properties to keep
 //output: filtered object
-function filterRecursively(depCruiserObj, options, props) {
-  const modules = depCruiserObj.modules;
-  const summary = depCruiserObj.summary;
+// function filterRecursively(depCruiserObj, options, props) {
+//   const modules = depCruiserObj.modules;
+//   const summary = depCruiserObj.summary;
 
-  const filteredModules = filterOptions(modules, options);
-  const modulesPropsRemoved = removeProperties(filteredModules, props);
+//   const filteredModules = filterOptions(modules, options);
+//   const modulesPropsRemoved = removeProperties(filteredModules, props);
 
-  return (
-    {
-      "modules": modulesPropsRemoved,
-      "summary": summary
-    }
-  );
+//   return (
+//     {
+//       "modules": modulesPropsRemoved,
+//       "summary": summary
+//     }
+//   );
 
-  //modules is an array, props is an array
-  function removeProperties(modules, props) {
-    return modules.map(module => {
-      if (typeof module === 'string') return module;
+//   //modules is an array, props is an array
+//   function removeProperties(modules, props) {
+//     return modules.map(module => {
+//       if (typeof module === 'string') return module;
 
-      const obj = {};
-      for (let i = 0; i < props.length; i++){
-        const prop = props[i];
-        if (module.hasOwnProperty(prop)) {
-          if (Array.isArray(module[prop])) {
-            obj[prop] = removeProperties(module[prop], props);
-          } else {
-            obj[prop] = module[prop];
-          }
-        }
-      }
-      return obj;
-    });
-  }
+//       const obj = {};
+//       for (let i = 0; i < props.length; i++){
+//         const prop = props[i];
+//         if (module.hasOwnProperty(prop)) {
+//           if (Array.isArray(module[prop])) {
+//             obj[prop] = removeProperties(module[prop], props);
+//           } else {
+//             obj[prop] = module[prop];
+//           }
+//         }
+//       }
+//       return obj;
+//     });
+//   }
 
-  //modules is an array, options is an object
-  function filterOptions(modules, options) {
-    return modules.filter(module => {
-      let keep = true; 
+//   //modules is an array, options is an object
+//   function filterOptions(modules, options) {
+//     return modules.filter(module => {
+//       let keep = true; 
 
-      for (let key in module) {
-        if (Array.isArray(module[key])) {
-          module[key] = filterOptions(module[key], options);
-        } else {
-          if (module.hasOwnProperty(key) && options.hasOwnProperty(key)) {
-            if (options[key] !== module[key]) {
-              keep = false; 
-              break; 
-            }
-          }
-        }
-      }
-      return keep;
-    });
-  }
-}
+//       for (let key in module) {
+//         if (Array.isArray(module[key])) {
+//           module[key] = filterOptions(module[key], options);
+//         } else {
+//           if (module.hasOwnProperty(key) && options.hasOwnProperty(key)) {
+//             if (options[key] !== module[key]) {
+//               keep = false; 
+//               break; 
+//             }
+//           }
+//         }
+//       }
+//       return keep;
+//     });
+//   }
+// }
 
 export default DCController;
+
