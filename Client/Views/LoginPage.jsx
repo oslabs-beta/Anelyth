@@ -1,24 +1,18 @@
 import React, { useState } from 'react'
 
 function LoginPage() {
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({});
 
   function handleChange(e) {
     const { name, value } = e.target;
-
-    if (name === 'userName') setUserName(value);
-    else if (name === 'password') setPassword(value);
+    setFormData((prevFormData) => ({...prevFormData, [name]: value}));
   }
 
   async function handleSubmit() {
     try {
       let response = await fetch('/api/login', {
         method: 'POST',
-        body: JSON.stringify({
-          userName: userName,
-          password: password
-        }),
+        body: JSON.stringify(formData),
         headers: {'Content-Type': 'application/json'}
       });
       response = await response.json();
@@ -32,17 +26,17 @@ function LoginPage() {
 
   return (
     <>
-      <div className='enter-name'>
+      <div className='enter-userName'>
         <label>Username:
-          <input type="text" name='userName' value={userName} onChange={handleChange}/>
+          <input type="text" name='userName' value={formData.userName} onChange={handleChange}/>
         </label>
       </div>
-      <div className='enter-pw'>
+      <div className='enter-password'>
         <label>Password:
-          <input type="text" name='password' value={password} onChange={handleChange}/>
+          <input type="text" name='password' value={formData.password} onChange={handleChange}/>
         </label>
       </div>
-      <input type="button" value='Submit' onClick={handleSubmit}/>
+      <input className='login-button' type="button" value='Submit' onClick={handleSubmit}/>
       <br />
       <a href="/signup">Signup</a>
     </>

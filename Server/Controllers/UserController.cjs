@@ -1,4 +1,4 @@
-const UserController = {}
+const UserController = {};
 
 UserController.checkCredentials = (req, res, next) => {
   const { userName, password } = req.body;

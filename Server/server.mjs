@@ -1,10 +1,7 @@
 // const fs = require('fs');
 // const esprima = require('esprima');
-
-
 import path from "path";
 import express from "express";
-
 
 const app = express();
 const port = 3000;
@@ -16,13 +13,8 @@ import S3Controller from "./Controllers/S3Controller.mjs";
 import DBController from "./Controllers/DBController.cjs";
 import UserController from "./Controllers/UserController.cjs";
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-app.get('/', (req, res) => {
-    res.status(200).send('hello');
-})
 
 app.post('/api/login', 
     UserController.checkCredentials,
@@ -42,14 +34,18 @@ app.post('/api/fileupload',
     (req, res) => {
         res.status(200).send(res.locals.hierarchy);
     }
-)
+);
 
 app.post('/api/signup',
     DBController.addUser,
     (req, res) => {
         res.status(200).send('User added');
     }
-)
+);
+
+app.get('/', (req, res) => {
+    res.status(200).send('hello');
+});
 
 app.use((err, req, res, next) => {
   const defaultErr = {

@@ -1,24 +1,18 @@
 import React, { useState } from 'react'
 
 function SignupPage() {
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({});
 
   function handleChange(e) {
     const { name, value } = e.target;
-
-    if (name === 'userName') setUserName(value);
-    else if (name === 'password') setPassword(value);
+    setFormData((prevFormData) => ({...prevFormData, [name]: value}));
   }
 
   async function handleSubmit() {
     try {
       let response = await fetch('/api/signup', {
         method: 'POST',
-        body: JSON.stringify({
-          userName: userName,
-          password: password
-        }),
+        body: JSON.stringify(formData),
         headers: {'Content-Type': 'application/json'}
       });
       response = await response.json();
@@ -31,29 +25,29 @@ function SignupPage() {
 
   return (
     <>
-      <div className='enter-name'>
+      <div className='enter-userName'>
         <label>Username:
-          <input type="text" name='userName' value={userName} onChange={handleChange}/>
+          <input type="text" name='userName' value={formData.userName} onChange={handleChange}/>
         </label>
       </div>
       <div className='enter-firstName'>
-        <label>Username:
-          <input type="text" name='firstname' value={userName} onChange={handleChange}/>
+        <label>First name:
+          <input type="text" name='firstName' value={formData.firstName} onChange={handleChange}/>
         </label>
       </div>
       <div className='enter-lastName'>
-        <label>Username:
-          <input type="text" name='lastName' value={userName} onChange={handleChange}/>
+        <label>Last name:
+          <input type="text" name='lastName' value={formData.lastName} onChange={handleChange}/>
         </label>
       </div>
       <div className='enter-email'>
-        <label>Username:
-          <input type="text" name='email' value={userName} onChange={handleChange}/>
+        <label>Email:
+          <input type="text" name='email' value={formData.email} onChange={handleChange}/>
         </label>
       </div>
-      <div className='enter-pw'>
+      <div className='enter-password'>
         <label>Password:
-          <input type="text" name='password' value={password} onChange={handleChange}/>
+          <input type="password" name='password' value={formData.password} onChange={handleChange} />
         </label>
       </div>
       <input type="button" value='Submit' onClick={handleSubmit}/>
