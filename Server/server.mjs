@@ -12,18 +12,24 @@ import DCController from "./Controllers/DCController.mjs";
 import S3Controller from "./Controllers/S3Controller.mjs";
 import DBController from "./Controllers/DBController.cjs";
 import UserController from "./Controllers/UserController.cjs";
+import SessionController from "./Controllers/SessionController.cjs";
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.post('/api/login', 
     UserController.checkCredentials,
-    (req, res) => res.status(200).json(req.body)
+    (req, res) => {
+        res.sendStatus(200);
+    }
 );
 
 app.post('/api/signup', 
-    UserController.checkCredentials,
-    (req, res) => res.status(200).json(req.body)
+    DBController.initDB,
+    DBController.addUser,
+    (req, res) => {
+        res.sendStatus(200);
+    }
 );
 
 app.post('/api/fileupload',

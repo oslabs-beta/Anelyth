@@ -4,20 +4,21 @@ const db = require('../Database.js');
 const DBController = {};
 
 DBController.addUser = async (req, res, next) => {
-  try{
+  const { username, email, firstName, lastName } = req.body;
+  const values = [username, email, firstName, lastName];
+
+  try {
     const querySTR = `
-    INSERT INTO users (email, username, firstName, lastName, accountType)
-    VALUES ('test1@email.com', 'test_username', 'John', 'Doe', 'standard');
+    INSERT INTO users (username, email, first_name, last_name, account_type)
+    VALUES ($1, $2, $3, $4, 'standard');
     `;
 
-    const result = await db.query(querySTR)
-
-    console.log(result);
+    const result = await db.query(querySTR, values)
 
     return next();
   } catch (err) {
     return next({
-      log: `Error in DBController.addUser`,
+      log: `Error in DBController.addUser: ${err}`,
       message: err,
     });
   }
@@ -25,35 +26,38 @@ DBController.addUser = async (req, res, next) => {
 
 DBController.initDB = async (req, res, next) => {
   try {
-    const createTableQuery = `
+    const createUsersTableQuery = `
       CREATE TABLE IF NOT EXISTS users (
-        userID SERIAL PRIMARY KEY,
+        user_id SERIAL PRIMARY KEY,
         email VARCHAR(50) UNIQUE NOT NULL,
         username VARCHAR(50) UNIQUE NOT NULL,
-        firstName VARCHAR(30) NOT NULL,
-        lastName VARCHAR(30) NOT NULL,
-        accountType VARCHAR(30),
+        first_name VARCHAR(30) NOT NULL,
+        last_name VARCHAR(30) NOT NULL,
+        account_type VARCHAR(30) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
+    `;
 
+    const createUserReposTableQuery = `
       CREATE TABLE IF NOT EXISTS user_repos (
-        user_id SERIAL REFERENCES users(userID),
-        repo_id SERIAL,
+        user_id INT NOT NULL,
+        repo_id SERIAL PRIMARY KEY,
         repo_link VARCHAR(255),
         favorite BOOLEAN,
-        PRIMARY KEY (user_id, repo_id)
+        FOREIGN KEY (user_id) REFERENCES users(user_id)
       );
     `;
 
     // Execute the SQL query to create the tables
-    await db.query(createTableQuery);
+    await db.query(createUsersTableQuery);
+    await db.query(createUserReposTableQuery);
 
     console.log('Tables "users" and "user_repos" created successfully');
 
     return next();
   } catch (err) {
     return next({
-      log: 'Error in DBController.initDB',
+      log: `Error in DBController.initDB: ${err}`,
       message: err,
     });
   }

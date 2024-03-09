@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router';
 
 function SignupPage() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({});
 
   function handleChange(e) {
@@ -15,9 +17,14 @@ function SignupPage() {
         body: JSON.stringify(formData),
         headers: {'Content-Type': 'application/json'}
       });
-      response = await response.json();
-      console.log('response:', response)
-      //TODO: handle response
+
+      if (response.status === 200) {
+        alert('Signup Successful!');
+        navigate('/login');
+      } else {
+        alert('Error occured during signup');
+      }
+
     } catch (error) {
       console.log(`The following error occured during login attempt: ${error}`);
     }
@@ -25,9 +32,9 @@ function SignupPage() {
 
   return (
     <>
-      <div className='enter-userName'>
+      <div className='enter-username'>
         <label>Username:
-          <input type="text" name='userName' value={formData.userName} onChange={handleChange}/>
+          <input type="text" name='username' value={formData.username} onChange={handleChange}/>
         </label>
       </div>
       <div className='enter-firstName'>

@@ -15,6 +15,7 @@ function LoginPage() {
         body: JSON.stringify(formData),
         headers: {'Content-Type': 'application/json'}
       });
+      
       response = await response.json();
       console.log('response:', response)
       //TODO: handle response
@@ -26,9 +27,9 @@ function LoginPage() {
 
   return (
     <>
-      <div className='enter-userName'>
+      <div className='enter-username'>
         <label>Username:
-          <input type="text" name='userName' value={formData.userName} onChange={handleChange}/>
+          <input type="text" name='username' value={formData.username} onChange={handleChange}/>
         </label>
       </div>
       <div className='enter-password'>
