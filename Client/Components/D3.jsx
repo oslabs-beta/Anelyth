@@ -62,6 +62,22 @@ const Pack = (data, options) => { //data and options are props passed down from 
   //  value == null ? root.count() : root.sum(d => Math.max(0, value(d)));
   root.sum((d) => d.value || 0); // Sum the file sizes
 
+  const maxDepth = getMaxDepth(root); // Calculate the maximum depth of the hierarchy
+
+  const calculateOpacity = (depth) => {
+    const maxOpacity = 1; // Maximum opacity
+  const minOpacity = 0.025; // Minimum opacity (increased from 0.2)
+  const opacityIncrement = 0.1; // Increment value for opacity
+  // Calculate the opacity based on a linear scale with an increment
+  return Math.min(minOpacity + opacityIncrement * depth, maxOpacity);
+  };
+
+  // Function to calculate the maximum depth of the hierarchy
+  function getMaxDepth(node) {
+    if (!node.children) return 0;
+    return 1 + Math.max(...node.children.map(getMaxDepth));
+  }
+
   
   /*This method, provided by D3.js, returns an array containing all descendant nodes of the root node. It traverses the hierarchical 
   structure and collects all nodes into an array, including the root node itself. */
@@ -206,8 +222,8 @@ and options. */
     various attributes (such as fill color, stroke color, etc.) of these circle elements based on the data associated with
      each node (d). */
   node.append("circle")
-    .attr("fill", d => d.children ? "#ADD8E6" : (d.data.color || fill)) //this is changing the color based on the color being passed in on the node data
-    .attr("fill-opacity", fillOpacity)
+    .attr("fill", d => d.children ? "#016e91" : (d.data.color || fill)) //this is changing the color based on the color being passed in on the node data
+    .attr("fill-opacity", d => calculateOpacity(d.depth)) // Calculate opacity based on depth
     .attr("stroke", stroke)
     .attr("stroke-width", strokeWidth)
     .attr("stroke-opacity", strokeOpacity)
