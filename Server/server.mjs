@@ -14,6 +14,7 @@ import FileController from "./Controllers/FileController.cjs";
 import DCController from "./Controllers/DCController.mjs";
 import S3Controller from "./Controllers/S3Controller.mjs";
 import DBController from "./Controllers/DBController.cjs";
+import UserController from "./Controllers/UserController.cjs";
 
 
 app.use(express.json());
@@ -22,6 +23,16 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
     res.status(200).send('hello');
 })
+
+app.post('/api/login', 
+    UserController.checkCredentials,
+    (req, res) => res.status(200).json(req.body)
+);
+
+app.post('/api/signup', 
+    UserController.checkCredentials,
+    (req, res) => res.status(200).json(req.body)
+);
 
 app.post('/api/fileupload',
     FileController.upload,
