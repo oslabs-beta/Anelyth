@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Legend from './Legend.jsx';
 import * as d3 from 'd3';
 
 
@@ -171,7 +172,7 @@ const Pack = (data, options) => { //data and options are props passed down from 
     .data(filteredLinks) //instead of rendering all of the links we will only pass in the links of the current node being hovered. 
     .enter().append("line")
     .attr("class", "link")
-    .style("stroke", "lightgreen")
+    .style("stroke", "black")
     .style("stroke-width", 5)
     .attr("marker-start", "url(#arrowhead)") // Add this line to add the arrowhead
     .attr("x1", d => d.source.x)
@@ -205,7 +206,7 @@ and options. */
     various attributes (such as fill color, stroke color, etc.) of these circle elements based on the data associated with
      each node (d). */
   node.append("circle")
-    .attr("fill", d => d.children ? "#FF0000" : (d.data.color || fill)) //this is changing the color based on the color being passed in on the node data
+    .attr("fill", d => d.children ? "#ADD8E6" : (d.data.color || fill)) //this is changing the color based on the color being passed in on the node data
     .attr("fill-opacity", fillOpacity)
     .attr("stroke", stroke)
     .attr("stroke-width", strokeWidth)
@@ -353,7 +354,6 @@ and options. */
 // export default D3;
 
 const D3 = ({ hierarchyData }) => {
-
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -372,9 +372,8 @@ const D3 = ({ hierarchyData }) => {
   return (
     <div className='d3'>
       <h1>Pack Chart</h1>
-      {data && <PackChart data={data} 
-      options={options} 
-      />}
+      <Legend /> {/* Include the Legend component */}
+      {data && <PackChart data={data} options={options} />}
     </div>
   );
 };

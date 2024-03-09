@@ -12,6 +12,10 @@ const cruiseOptions = {
 
 // ------ HELPER FUNC TO GET FILE HIERARCHY WITH DEPENDENCIES ----- //
 
+function isFrontendFile(filePath) {
+  return filePath.toLowerCase().includes("client") || filePath.toLowerCase().includes("frontend") || filePath.toLowerCase().includes("public") || filePath.toLowerCase().includes("src") || filePath.toLowerCase().includes("app") || filePath.toLowerCase().includes("ui") || filePath.toLowerCase().includes("view") || filePath.toLowerCase().includes("views") || filePath.toLowerCase().includes("assets") || filePath.toLowerCase().includes("components") || filePath.toLowerCase().includes("pages") || filePath.toLowerCase().includes("features");
+}
+
 function buildHierarchy(filePath, depResult, level = 0) {
   const stat = fs.statSync(filePath);
 
@@ -42,15 +46,16 @@ function buildHierarchy(filePath, depResult, level = 0) {
       return null; // Skip files with no dependencies
     }
 
+    const isFrontend = isFrontendFile(filePath);
+
     return {
       name: path.basename(filePath),
       value: stat.size,
-      color: "#4169E1",
+      color: isFrontend ? "lightgreen" : "#4169E1", // Purple for frontend, Green for backend
       dependencies: dependencies
     };
   }
 }
-
 
 function printDirectoryTree(dir, depResult) {
   const hierarchy = buildHierarchy(dir, depResult);
@@ -95,6 +100,5 @@ DCController.analyze = async (req, res, next) => {
     });
   }
 };
-
 
 export default DCController;
