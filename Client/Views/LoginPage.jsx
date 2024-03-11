@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router';
 
 function LoginPage() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({});
 
   function handleChange(e) {
@@ -16,6 +18,12 @@ function LoginPage() {
         headers: {'Content-Type': 'application/json'}
       });
       
+      if (response.status === 404) {
+        alert('Username or password incorrect!');
+      } else if (response.status === 200) {
+        alert('Login successful!')
+        navigate('/usermain');
+      }
       response = await response.json();
       console.log('response:', response)
       //TODO: handle response
