@@ -10,7 +10,6 @@ const ProtectedRoute = ({ component: ProtectedComponent }) => {
       try {
         let response = await fetch('/api/checkSession');
         response = await response.json();
-        console.log('response in ProtectedRoute:', response)
         return setIsAuthenticated(response.authenticated);
 
       } catch (err) {
