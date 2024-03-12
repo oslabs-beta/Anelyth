@@ -82,9 +82,9 @@ DCController.analyze = async (req, res, next) => {
     ];
 
     // LOG OUTPUT BEFORE AND AFTER FILTER
-    console.log('before filter: ', JSON.stringify(output, null, 2));
+    // console.log('before filter: ', JSON.stringify(output, null, 2));
     depResult = filterRecursively(output, options, propsToKeep);
-    console.log('after filter: ', JSON.stringify(depResult, null, 2));
+    // console.log('after filter: ', JSON.stringify(depResult, null, 2));
 
     // LOG TREE
     const hierarchy = buildHierarchy(uploadsPath);

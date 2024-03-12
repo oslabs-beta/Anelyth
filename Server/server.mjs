@@ -27,10 +27,15 @@ app.get('/', (req, res) => {
 app.post('/api/fileupload',
     FileController.upload,
     DCController.analyze,
-    ASTController.analyze,
+    ASTController.parse,
+    ASTController.query,
     FileController.deleteDir,
     // S3Controller.upload,
     (req, res) => {
+        // console.log(res.locals.parsedFiles);
+        // const firstObject = res.locals.parsedFiles[3];
+        // const astOfFirsObject = firstObject.ast;
+        // console.log(astOfFirsObject);
         res.status(200).send(res.locals.hierarchy);
     }
 )
