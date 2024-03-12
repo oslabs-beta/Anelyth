@@ -121,6 +121,7 @@ const deleteFolderRecursive = (folderPath, callback) => {
 FileController.upload = (req, res, next) => {
   try {
     console.log('step 1 hit, filecontroller.upload')
+    console.log('req.body: ', req.body)
     upload.any()(req, res, (err) => {
       return next();
     });
