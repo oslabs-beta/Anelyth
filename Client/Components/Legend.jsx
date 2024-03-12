@@ -1,4 +1,5 @@
 import React from 'react';
+import '../Styles/D3.css';
 
 const Legend = () => {
   return (
