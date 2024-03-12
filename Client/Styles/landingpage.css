@@ -1,5 +1,5 @@
 * {
-  margin: 1;
+  margin: 0px;
   padding: 0;
 }
 
@@ -9,6 +9,7 @@ body {
   /* font-family: "Sora", sanss-serif; */
   font-family: "Roboto", sans-serif;
 }
+
 
 .main-top-container {
   /* border: 1px solid white; */
@@ -74,6 +75,7 @@ body {
   justify-content: center;
   align-items: center;
   /* width: 80%; */
+  margin-bottom: 100px;
 }
 
 .main-s-inner {
@@ -86,7 +88,7 @@ body {
 .app-img1 {
   height: 550px;
   filter: invert();
-  /* margin-right: 200px; */
+  margin-left: 100px;
 }
 
 .ms-r-container {
@@ -95,7 +97,24 @@ body {
 }
 
 .ms-r-text {
-  width: 60%;
-  font-size: 30px;
+  width: 50%;
+  font-size: 27px;
   text-align: center;
+  font-family: "PT Sans", sans-serif;
+  text-align: center;
+  color: white;
+}
+
+.hz-rule {
+  /* border: 2px solid #86868b; */
+  border: 2px solid white;
+}
+
+.main-third-container {
+  width: 100vw;
+}
+
+
+.blocksimg {
+  object-fit: contain;
 }
