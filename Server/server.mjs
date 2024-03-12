@@ -19,8 +19,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.get('/api/checkSession', (req, res) => {
-    console.log('check:', req.cookies('temp-id'))
-    if (req.cookies('temp-id')) return res.status(200).json({ authenticated: true }); 
+    console.log('check:', req.cookies['temp-id'])
+    if (req.cookies['temp-id']) return res.status(200).json({ authenticated: true }); 
     else return res.status(200).json({ authenticated: false });
 });
 
