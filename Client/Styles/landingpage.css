@@ -10,6 +10,11 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+.landingMasterDiv {
+  display: flex;
+  flex-direction: column;
+}
+
 
 .main-top-container {
   /* border: 1px solid white; */
@@ -69,13 +74,22 @@ body {
   border: 1px solid white;
 }
 
+.shatter {
+  position: absolute;
+  z-index: -1;
+  /* margin-top: 100px; */
+}
+
 .main-second-container {
-  margin-top: 100px;
+  background-color: black;
+  margin-top: 340px;
   display: flex;
   justify-content: center;
   align-items: center;
   /* width: 80%; */
-  margin-bottom: 100px;
+  /* margin-bottom: 100px; */
+  border-top: 1px solid white;
+  padding: 60px 0 60px 0;
 }
 
 .main-s-inner {
@@ -107,14 +121,90 @@ body {
 
 .hz-rule {
   /* border: 2px solid #86868b; */
-  border: 2px solid white;
+  border: 1px solid white;
 }
 
 .main-third-container {
-  width: 100vw;
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: 80%; */
+  margin-bottom: 100px;
+}
+
+.tc-inner-container {
+  /* width: 100vw; */
+  display: flex;
+  justify-content: space-between;
+  margin: 0 80px 0 80px;
+  align-items: center;
 }
 
 
 .blocksimg {
-  object-fit: contain;
+  height: 400px;
+  
+}
+
+.mt-l-container {
+  display: flex;
+  justify-content: center;
+}
+
+.mt-l-text {
+  width: 50%;
+  font-size: 27px;
+  text-align: center;
+  font-family: "PT Sans", sans-serif;
+  text-align: center;
+  color: white;
+}
+
+.fourth-container-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.meet-header {
+  margin-top: 30px;
+  margin-bottom: 60px;
+  font-size: 50px;
+  text-align: center;
+  font-family: "PT Sans", sans-serif;
+}
+
+.team-container {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+}
+
+.person-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 300px;
+  width: 250px;
+  border: 1px solid white;
+  border-radius: 10px;
+  margin-bottom: 40px;
+  overflow: hidden;
+  box-shadow: -3px 3px 10px 1px #4343435e;
+}
+
+.person-name {
+  font-size: 20px;
+  margin: 10px 0 10px 0;
+
+}
+
+.person-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+
 }
