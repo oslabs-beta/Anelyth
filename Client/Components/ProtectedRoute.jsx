@@ -3,6 +3,7 @@ import { Navigate } from 'react-router';
 
 const ProtectedRoute = ({ component: ProtectedComponent }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
+  console.log('isAuthenticated:', isAuthenticated)
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -24,7 +25,7 @@ const ProtectedRoute = ({ component: ProtectedComponent }) => {
   if (isAuthenticated === null) return <div>Loading...</div>
   
   if (isAuthenticated === true) {
-    return <ProtectedComponent/>
+    return ProtectedComponent;
   } else if (isAuthenticated === false) {
     return <Navigate to='/login'/>;
   }
