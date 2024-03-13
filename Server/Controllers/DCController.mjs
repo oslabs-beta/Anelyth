@@ -1,4 +1,4 @@
-import { cruise, } from "dependency-cruiser";
+import { cruise } from "dependency-cruiser";
 import fs from 'fs';
 import path from 'path';
 
@@ -10,66 +10,88 @@ const cruiseOptions = {
   doNotFollow: "node_modules",
 };
 
-// --------------- WORKING CODE FOR LOCAL STORAGE OF UPLOADED FILES --------------- //
+// ------ HELPER FUNC TO GET FILE HIERARCHY WITH DEPENDENCIES ----- //
 
-// ------ HELPER FUNC TO GET FILE HEIRARCHY ----- //
+function isFrontendFile(filePath) {
+  return filePath.toLowerCase().includes("client") || filePath.toLowerCase().includes("frontend") || filePath.toLowerCase().includes("public") || filePath.toLowerCase().includes("src") || filePath.toLowerCase().includes("app") || filePath.toLowerCase().includes("ui") || filePath.toLowerCase().includes("view") || filePath.toLowerCase().includes("views") || filePath.toLowerCase().includes("assets") || filePath.toLowerCase().includes("components") || filePath.toLowerCase().includes("pages") || filePath.toLowerCase().includes("features");
+}
 
-function buildHierarchy(filePath, level = 0) {
+function buildHierarchy(filePath, depResult, level = 0) {
   const stat = fs.statSync(filePath);
 
   if (stat.isDirectory()) {
     const files = fs.readdirSync(filePath);
 
+    const children = files.map(file => buildHierarchy(path.join(filePath, file), depResult, level + 1)).filter(child => child); // Filter out null/undefined children
+
+    if (children.length === 0) {
+      return null; // Skip empty directories
+    }
+
     return {
       name: path.basename(filePath),
-      children: files.map(file => buildHierarchy(path.join(filePath, file), level + 1))
+      children: children
     };
   } else {
+    const dependencies = depResult.modules.filter(module => module.source === filePath).flatMap(module => {
+      return module.dependencies.map(dependency => ({
+        module: dependency.module,
+        resolved: dependency.resolved,
+        dependencyTypes: dependency.dependencyTypes,
+        source: path.basename(dependency.resolved) // Use basename of the resolved dependency path as source
+      }));
+    });
+
+    if (dependencies.length === 0) {
+      return null; // Skip files with no dependencies
+    }
+
+    const isFrontend = isFrontendFile(filePath);
+
     return {
       name: path.basename(filePath),
       value: stat.size,
-      color:"#4169E1",
+      color: isFrontend ? "lightgreen" : "#4169E1", // Purple for frontend, Green for backend
+      dependencies: dependencies
     };
   }
 }
 
-function printDirectoryTree(dir) {
-  const hierarchy = buildHierarchy(dir);
+function printDirectoryTree(dir, depResult) {
+  const hierarchy = buildHierarchy(dir, depResult);
   return hierarchy;
 }
 
+// ------- MIDDLEWARE FOR GETTING FILE HIERARCHY AND DEPENDENCIES ------- //
 
+// DCController.getTree = (req, res, next) => {
+//   try {
+//     const uploadsPath = './Server/temp-file-upload';
+//     const hierarchy = printDirectoryTree(uploadsPath, res.locals.depResult);
+//     console.log('File Hierarchy with Dependencies:\n', hierarchy);
+//     res.locals.hierarchy = hierarchy;
+//     return next();
+//   } catch (err) {
+//     return next({
+//       log: 'error in DCController.getTree',
+//       message: err
+//     })
+//   }
+// }
 
+// ------- MIDDLEWARE TO INVOKE DEPENDENCY CRUISER AND ANALYZE DEPENDENCIES ------- //
 
-// ------ MIDDLEWARE FOR GETTING FILE HEIARCHY ------- //
-DCController.getTree = (req,res, next) => {
-  try {
-    const uploadsPath = './Server/temp-file-upload';
-    const hierarchy = printDirectoryTree(uploadsPath);
-    console.log('File Hierarchy:\n', hierarchy);
-  } catch (err) {
-    return next({
-      log: 'error in DCController.getTree',
-      message: err
-    })
-  }
-}
-
-// ------- MIDDLEWARE TO INVOKE DEPENDENCY CRUISER --------- //
 DCController.analyze = async (req, res, next) => {
   try {
     console.log('in dccontroller.analyze');
-    // CRUISE PASSING IN OPTIONS
     const uploadsPath = './Server/temp-file-upload';
     const depResult = await cruise([uploadsPath], cruiseOptions);
-    // LOG OUTPUT
     console.log(JSON.stringify(JSON.parse(depResult.output), null, 2));
-    // LOG TREE
-    const hierarchy = printDirectoryTree(uploadsPath);
-    console.log('File Hierarchy:\n', hierarchy.children);
-    console.log('depResult:', depResult)
-    res.locals.depResult = depResult
-    res.locals.hierarchy = hierarchy
+
+    const hierarchy = printDirectoryTree(uploadsPath, JSON.parse(depResult.output));
+
+    res.locals.hierarchy = hierarchy;
+
     return next();
   } catch (err) {
     return next({
@@ -78,10 +100,5 @@ DCController.analyze = async (req, res, next) => {
     });
   }
 };
-
-
-
-
-
 
 export default DCController;

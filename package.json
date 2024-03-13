@@ -7,7 +7,8 @@
     "build": "webpack",
     "start": "webpack-dev-server --mode development --open --hot",
     "dev": "nodemon ./Server/server.js",
-    "both": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --color\" \"nodemon --ignore temp-file-upload/ ./server/server.mjs\""
+    "both": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --color\" \"nodemon --ignore temp-file-upload/ ./server/server.mjs\"",
+    "style": "npx tailwindcss -i ./Client/input.css -o ./Client/Styles/output.css --watch"
   },
   "repository": {
     "type": "git",
@@ -20,29 +21,41 @@
   },
   "homepage": "https://github.com/oslabs-beta/FFSS-OSP#readme",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.525.0",
     "@babel/core": "^7.23.9",
     "@babel/preset-env": "^7.23.9",
+    "aws-sdk": "^2.1569.0",
     "babel-loader": "^9.1.3",
     "babel-preset-react-app": "^10.0.1",
+    "bcryptjs": "^2.4.3",
     "cjs-loader": "^0.1.0",
     "concurrently": "^8.2.2",
+    "cookie-parser": "^1.4.6",
     "cross-env": "^7.0.3",
     "css-loader": "^6.10.0",
     "d3": "^7.8.5",
+    "dotenv": "^16.4.5",
     "esprima": "^4.0.1",
     "express": "^4.18.2",
     "multer": "^1.4.5-lts.1",
+    "pg": "^8.11.3",
+    "postcss-cli": "^11.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.22.1",
+    "react-router": "^6.22.2",
+    "react-router-dom": "^6.22.2",
     "style-loader": "^3.3.4",
     "util": "^0.12.5",
     "webpack-cli": "^5.1.4"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.18",
     "dependency-cruiser": "^16.2.1",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.6.0",
     "nodemon": "^3.1.0",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
     "webpack": "^5.90.3",
     "webpack-dev-server": "^5.0.2"
   }

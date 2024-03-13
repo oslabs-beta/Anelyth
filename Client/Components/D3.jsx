@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Legend from './Legend.jsx';
 import * as d3 from 'd3';
 
 
 const PackChart = ({ data, options }) => {
     /*Using the useRef hook. The useRef Hook allows you to persist values between renders. */
   const svgRef = useRef(null);
+ 
   
   useEffect(() => {
     const svg = d3.create("svg"); // Create SVG element
@@ -40,9 +42,9 @@ const Pack = (data, options) => { //data and options are props passed down from 
     marginBottom = margin,
     marginLeft = margin,
     padding = 3,
-    fill = "#ddd",
+    fill,
     fillOpacity,
-    stroke = "#bbb",
+    stroke,
     strokeWidth,
     strokeOpacity,
   } = options;
@@ -59,6 +61,22 @@ const Pack = (data, options) => { //data and options are props passed down from 
 
   //  value == null ? root.count() : root.sum(d => Math.max(0, value(d)));
   root.sum((d) => d.value || 0); // Sum the file sizes
+
+  const maxDepth = getMaxDepth(root); // Calculate the maximum depth of the hierarchy
+
+  const calculateOpacity = (depth) => {
+    const maxOpacity = 1; // Maximum opacity
+  const minOpacity = 0.025; // Minimum opacity (increased from 0.2)
+  const opacityIncrement = 0.1; // Increment value for opacity
+  // Calculate the opacity based on a linear scale with an increment
+  return Math.min(minOpacity + opacityIncrement * depth, maxOpacity);
+  };
+
+  // Function to calculate the maximum depth of the hierarchy
+  function getMaxDepth(node) {
+    if (!node.children) return 0;
+    return 1 + Math.max(...node.children.map(getMaxDepth));
+  }
 
   
   /*This method, provided by D3.js, returns an array containing all descendant nodes of the root node. It traverses the hierarchical 
@@ -92,12 +110,38 @@ const Pack = (data, options) => { //data and options are props passed down from 
 
   if (sort != null) root.sort(sort);
 
-  const links = data.children.flatMap(parent => {
-    return parent.dependencies.map(dependency => {
-      const target = descendants.find(d => d.data.name === dependency.module);
-      return { source: parent, target };
-    });
-  });
+  // const links = data.children.flatMap(parent => {
+  //   return parent.dependencies.flatMap(dependency => {
+  //     const source = descendants.find(d => d.data.name === parent.name);
+  //     const target = descendants.find(d => d.data.name === dependency.source);
+  //       console.log('source', source, 'target', target)
+  //     if (source && target) {
+  //         return { source, target };
+  //       }
+  //       return null;
+  //   });
+  // }).filter(link => link !== null);
+
+  const links = generateLinks(data);
+
+  function generateLinks(node) {
+    const links = [];
+    if (node.children) {
+      node.children.forEach(child => {
+        if (child.dependencies) {
+          child.dependencies.forEach(dependency => {
+            const sourceNode = descendants.find(d => d.data.name === child.name);
+            const targetNode = descendants.find(d => d.data.name === dependency.source);
+            if (sourceNode && targetNode) {
+              links.push({ source: sourceNode, target: targetNode });
+            }
+          });
+        }
+        links.push(...generateLinks(child));
+      });
+    }
+    return links;
+  }
 
   d3.pack()
     .size([width - marginLeft - marginRight, height - marginTop - marginBottom])
@@ -114,6 +158,51 @@ const Pack = (data, options) => { //data and options are props passed down from 
     .attr("text-anchor", "middle"); //more styling 
 
 
+
+  svg.append("defs").append("marker")
+    .attr("id", "arrowhead")
+    .attr("viewBox", "-10 -10 25 25")
+    .attr("refX", 0)
+    .attr("refY", 0)
+    .attr("orient", "auto")
+    .attr("markerWidth", 5)
+    .attr("markerHeight", 5)
+    .append("path")
+    .attr("d", "M0,5L-10,0L0,-5")
+    .attr("fill", "#ccc");
+
+
+    const filterLinks = (links, hoveredNode) => {
+      console.log('What is Hovered Node in filterLinks?', hoveredNode);
+      const result = links.filter(link => link.source === hoveredNode || link.target === hoveredNode);
+      console.log (`These are the filtered links from ${hoveredNode}`, result);
+      return result;
+    };
+
+    const hoverIn = (event, node) => {
+      console.log ('WHAT IS NODE? in hoverIn function', node);
+      const filteredLinks = filterLinks(links, node);
+      //if we want to change for this functionality to happen only on hover then we can make this a function ? 
+  
+     svg.selectAll(".link")
+    .data(filteredLinks) //instead of rendering all of the links we will only pass in the links of the current node being hovered. 
+    .enter().append("line")
+    .attr("class", "link")
+    .style("stroke", "black")
+    .style("stroke-width", 5)
+    .attr("marker-start", "url(#arrowhead)") // Add this line to add the arrowhead
+    .attr("x1", d => d.source.x)
+    .attr("y1", d => d.source.y)
+    .attr("x2", d => d.target.x)
+    .attr("y2", d => d.target.y)
+    .attr("stroke", "#ccc")
+    .attr("stroke-width", 1);
+   }
+
+      const hoverOut = () => {
+        svg.selectAll(".link").remove();
+      };
+
 /*this block of code dynamically creates and configures anchor elements within the SVG to represent each node in the 
 hierarchical structure. It sets the href, target, and transform attributes of each anchor element based on the provided data 
 and options. */
@@ -123,17 +212,35 @@ and options. */
     .attr("xlink:href", link == null ? null : (d, i) => link(d.data, d))
     .attr("target", link == null ? null : linkTarget)
     .attr("transform", d => `translate(${d.x},${d.y})`)
+    .on("mouseover", hoverIn)
+    .on("mouseout", hoverOut);
+
+    
+    
 
     /*responsible for appending circle elements (<circle>) to the anchor elements (<a>) created earlier, and then setting 
     various attributes (such as fill color, stroke color, etc.) of these circle elements based on the data associated with
      each node (d). */
   node.append("circle")
-    .attr("fill", d => d.children ? "#FF0000" : (d.data.color || fill)) //this is changing the color based on the color being passed in on the node data
-    .attr("fill-opacity", d => d.children ? null : fillOpacity)
-    .attr("stroke", d => d.children ? stroke : null)
-    .attr("stroke-width", d => d.children ? strokeWidth : null)
-    .attr("stroke-opacity", d => d.children ? strokeOpacity : null)
-    .attr("r", d => d.r);
+    .attr("fill", d => d.children ? "#016e91" : (d.data.color || fill)) //this is changing the color based on the color being passed in on the node data
+    .attr("fill-opacity", d => calculateOpacity(d.depth)) // Calculate opacity based on depth
+    .attr("stroke", stroke)
+    .attr("stroke-width", strokeWidth)
+    .attr("stroke-opacity", strokeOpacity)
+    .attr("r", d => d.r)
+    .on("mouseover", (event) => {
+      d3.select(event.currentTarget).attr("stroke-width", 5);
+    })
+    .on("mouseout", (event) => {
+      d3.select(event.currentTarget).attr("stroke-width", d => d.children ? strokeWidth : null);
+    });
+  
+
+
+    /* This line of code dynamically creates and sets the title text for each node in the hierarchical structure based
+     on the generated array of title texts (T). If T contains title texts for the nodes, they are appended to the corresponding
+      title elements within each node's anchor element, providing additional information or context when hovering over the nodes 
+      in the visualization. */ 
 
     /* This line of code dynamically creates and sets the title text for each node in the hierarchical structure based
      on the generated array of title texts (T). If T contains title texts for the nodes, they are appended to the corresponding
@@ -164,82 +271,115 @@ and options. */
       .text(d => d);
   }
 
-  svg.selectAll(".link")
-    .data(links)
-    .enter().append("line")
-    .attr("class", "link")
-    .attr("x1", d => d.source.x)
-    .attr("y1", d => d.source.y)
-    .attr("x2", d => d.target.x)
-    .attr("y2", d => d.target.y)
-    .attr("stroke", "#ccc")
-    .attr("stroke-width", 1);
-
   return svg.node();
 };
 
 
 
 // //Uncomment this if you want to use test data. 
-const D3 = () => {
-  const data = {
-    name: "main-folder",
-    children: [
-          {
-            name: "index1.js",
-            value: 10,
-            color: "#FF4433",
-            dependencies: [
-              {
-                module: "./main-folder/index2.js",
-                resolved: "Server/main-folder/index2.js",
-                dependencyTypes: ["local", "import"]
-              }
-            ]
-          },
-          {
-            name: "index2.js",
-            value: 10,
-            color: "#FF4433",
-            dependencies: [
-              {
-                module: "./main-folder/index1.js",
-                resolved: "Server/main-folder/index1.js",
-                dependencyTypes: ["local", "import"]
-              }
-            ]
-          }
-      ]
-  };
+// const D3 = () => {
+//   const data = {
+//     name: "main-folder",
+//     children: [
+//       {
+//         name: "index1.js",
+//         value: 10,
+//         color: "#FF4433",
+//         dependencies: [
+//           {
+//             module: "./main-folder/index2.js",
+//             resolved: "Server/main-folder/index2.js",
+//             dependencyTypes: ["local", "import"],
+//             source: "index2.js" // Add source property
+//           }
+//         ]
+//       },
+//       {
+//         name: "index2.js",
+//         value: 15,
+//         color: "#FF4433",
+//         dependencies: [
+//           {
+//             module: "./main-folder/index1.js",
+//             resolved: "Server/main-folder/index1.js",
+//             dependencyTypes: ["local", "import"],
+//             source: "index1.js" // Add source property
+//           }
+//         ]
+//       },
+//       {
+//         name: "index3.js",
+//         value: 10,
+//         color: "#FF4433",
+//         dependencies: [
+//           {
+//             module: "./main-folder/index2.js",
+//             resolved: "Server/main-folder/index2.js",
+//             dependencyTypes: ["local", "import"],
+//             source: "index2.js" // Add source property
+//           }
+//         ]
+//       },
+//       {
+//         name: "index4.js",
+//         value: 29,
+//         color: "#FF4433",
+//         dependencies: [
+//           {
+//             module: "./main-folder/index2.js",
+//             resolved: "Server/main-folder/index2.js",
+//             dependencyTypes: ["local", "import"],
+//             source: "index3.js" // Add source property
+//           },
+//           {
+//             module: "./main-folder/index2.js",
+//             resolved: "Server/main-folder/index2.js",
+//             dependencyTypes: ["local", "import"],
+//             source: "index1.js" // Add source property
+//           },
+//           {
+//             module: "./main-folder/index2.js",
+//             resolved: "Server/main-folder/index2.js",
+//             dependencyTypes: ["local", "import"],
+//             source: "index2.js" // Add source property
+//           }
+//         ]
+//       }
+//     ]
+//   };
 
-
-// //   const data = {
-// //     name: "Root",
-// //     title: "Root Title",
-// //     label: "Root Label",
-// //     children: [
-// //         {
-// //             name: "Node 1",
-// //             title: "Node 1 Title",
-// //             label: "Node 1 Label",
-// //             children: [
-// //                 { name: "Leaf 1.1", value: 10, title: "Leaf 1.1 Title", label: "Leaf 1.1 Label" },
-// //                 { name: "Leaf 1.2", value: 15, title: "Leaf 1.2 Title", label: "Leaf 1.2 Label" }
-// //             ]
-// //         },
-// //         {
-// //             name: "Node 2",
-// //             title: "Node 2 Title",
-// //             label: "Node 2 Label",
-// //             children: [
-// //                 { name: "Leaf 2.1", value: 12, title: "Leaf 2.1 Title", label: "Leaf 2.1 Label" }
-// //             ]
-// //         }
-// //     ]
-// // };
 
 
   
+
+//   const options = {
+//     width: 500,
+//     height: 500,
+//     fill: "blue",
+//     fillOpacity: 0.5,
+//     stroke: "black",
+//     strokeWidth: 2,
+//     strokeOpacity: 0.7
+//     };
+
+//   return (
+//     <div className='d3'>
+//       <h1>Pack Chart</h1>
+//       <PackChart data={data} options={options}/>
+//     </div>
+//   );
+// };
+
+// export default D3;
+
+const D3 = ({ hierarchyData }) => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    if (hierarchyData) {
+      setData(hierarchyData);
+    }
+  }, [hierarchyData]);
 
   const options = {
     width: 500,
@@ -251,38 +391,10 @@ const D3 = () => {
   return (
     <div className='d3'>
       <h1>Pack Chart</h1>
-      <PackChart data={data} options={options} />
+      <Legend /> {/* Include the Legend component */}
+      {data && <PackChart data={data} options={options} />}
     </div>
   );
 };
 
 export default D3;
-
-// const D3 = ({ hierarchyData }) => {
-
-//   const [data, setData] = useState(null);
-
-//   useEffect(() => {
-//     if (hierarchyData) {
-//       setData(hierarchyData);
-//     }
-//   }, [hierarchyData]);
-
-//   const options = {
-//     width: 500,
-//     height: 500,
-//     fill: "#ddd",
-//     stroke: "#bbb"
-//   };
-
-//   return (
-//     <div className='d3'>
-//       <h1>Pack Chart</h1>
-//       {data && <PackChart data={data} 
-//       options={options} 
-//       />}
-//     </div>
-//   );
-// };
-
-// export default D3;

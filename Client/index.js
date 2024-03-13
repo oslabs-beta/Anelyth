@@ -1,8 +1,8 @@
 import React from "react";
-import App from './Components/App.jsx';
 import { BrowserRouter } from "react-router-dom";
 import { createRoot } from 'react-dom/client';
-import './styles.css';
+import App from './App.jsx';
+import './input.css';
 
 const root = createRoot(document.querySelector('#root'));
 
