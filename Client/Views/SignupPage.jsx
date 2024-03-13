@@ -21,7 +21,7 @@ function SignupPage() {
       });
 
       if (response.status === 200) {
-        alert('Signup Successful!');
+        // alert('Signup Successful!');
         navigate('/login');
       } else {
         alert('Error occured during signup');

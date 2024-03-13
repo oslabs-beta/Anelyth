@@ -23,7 +23,6 @@ function LoginPage() {
       if (response.status === 404) {
         alert('Username or password incorrect!');
       } else if (response.status === 200) {
-        alert('Login successful!')
         navigate('/usermain');
       }
       response = await response.json();
@@ -42,8 +41,8 @@ function LoginPage() {
         <div className='login-title'>Log In</div>
         <div className='inner-container'>
           <div className='enter-info'>
-            <label className='input-title'>Username:</label>
-            <input className='form-input' type="text" name='username' value={formData.username} onChange={handleChange}/>
+            <label className='input-title'>Username or Email:</label>
+            <input className='form-input' type="text" name='userOrEmail' value={formData.username} onChange={handleChange}/>
           </div>
           <div className='enter-info'>
             <label className='input-title'>Password:</label>

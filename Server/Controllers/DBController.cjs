@@ -81,21 +81,25 @@ DBController.saveCreds = async (req, res, next) => {
 };
 
 DBController.verifyCredentials = async (req, res, next) => {
-  const { username, password } = req.body;
+  console.log(req.body)
+  const { userOrEmail, password } = req.body;
   
-  const values = [username];
+  const values = [userOrEmail];
+
+  console.log('values:', values)
 
   const querySTR = `
-    SELECT user_id, password 
+    SELECT *
     FROM users
-    WHERE username = $1
+    WHERE username = $1 OR email = $1
     ;
   `;
 
   try {
     const response = await db.query(querySTR, values);
+    console.log(response.rows)
 
-    if (response.rows.length > 1) throw new Error('More than 1 result returned.')
+    // if (response.rows.length !== 1) throw new Error('Invalid credentials.');
 
     if (response.rows.length === 1) {
       const { user_id, password: responsePassword } = response.rows[0];
