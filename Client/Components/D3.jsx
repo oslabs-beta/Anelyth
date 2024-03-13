@@ -9,16 +9,11 @@ const PackChart = ({ data, options }) => {
  
   
   useEffect(() => {
-    const svg = d3.create("svg"); // Create SVG element
+  const svg = Pack(data, { ...options, value: (d) => d.size });
 
-    const pack = Pack(data, { ...options, value: (d) => d.size }); 
-
-    svg.selectAll("*").remove(); // Clear existing SVG content
-    svg.node().appendChild(pack); // Append the generated SVG to the component's SVG
-
-    svgRef.current.appendChild(svg.node()); // Append the SVG to the ref element
-
-  }, [data, options]);
+  svgRef.current.innerHTML = ''; // Clear existing SVG content
+  svgRef.current.appendChild(svg.node()); // Append the SVG to the ref element
+}, [data, options]);
 
 
   return (
@@ -212,8 +207,31 @@ and options. */
     .attr("xlink:href", link == null ? null : (d, i) => link(d.data, d))
     .attr("target", link == null ? null : linkTarget)
     .attr("transform", d => `translate(${d.x},${d.y})`)
+    .call(d3.drag()
+    .on("start", dragstarted)
+    .on("drag", dragged)
+    .on("end", dragended))
     .on("mouseover", hoverIn)
     .on("mouseout", hoverOut);
+
+    // Drag functions
+function dragstarted(event, d) {
+  if (!event.active) root.fx = d.x;
+  if (!event.active) root.fy = d.y;
+  d3.select(this).attr("cursor", "grabbing").raise();
+}
+
+function dragged(event, d) {
+  root.fx = event.x;
+  root.fy = event.y;
+  d3.select(this).attr("transform", `translate(${d.x = event.x},${d.y = event.y})`);
+}
+
+function dragended(event, d) {
+  if (!event.active) root.fx = null;
+  if (!event.active) root.fy = null;
+  d3.select(this).attr("cursor", "grab");
+}
 
     
     
@@ -268,7 +286,9 @@ and options. */
   
   
 
-  return svg.node();
+  // return svg.node();
+  //returning the svg without rendering it, this solves the double render issue
+  return svg; 
 };
 
 
