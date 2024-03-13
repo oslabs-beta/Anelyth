@@ -251,6 +251,9 @@ function dragended(event, d) {
     })
     .on("mouseout", (event) => {
       d3.select(event.currentTarget).attr("stroke-width", d => d.children ? strokeWidth : null);
+    })
+    .on("click", (event) => {
+      d3.select(event.currentTarget).attr("fill", "#4C2E05");
     });
   
 
