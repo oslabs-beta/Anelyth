@@ -21,7 +21,7 @@ const ProtectedRoute = ({ component: ProtectedComponent }) => {
     checkAuth();
   }, []);
 
-  if (isAuthenticated === null) return <div>Loading...</div>
+  // if (isAuthenticated === null) return <div>Loading...</div>
   
   if (isAuthenticated === true) {
     return ProtectedComponent;
