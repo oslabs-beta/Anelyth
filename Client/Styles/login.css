@@ -1,0 +1,34 @@
+.login-container {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 15%;
+  top: 25%;
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  z-index: 2;
+  /* border: 3px solid #7c7c7c97; */
+  /* background-color: #d2d1d2; */
+  /* border-radius: 10px; */
+  filter: drop-shadow(-5px 5px 10px #4747474d);
+}
+
+.bg-img {
+  object-fit: cover;
+}
+
+.enter-username {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

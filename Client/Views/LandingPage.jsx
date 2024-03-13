@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import '../Styles/landingpage.css';
 
 import screenshot from '../Assets/Screenshot 2024-03-07 at 9.21.34 PM.png';
@@ -6,9 +6,17 @@ import Header from '../Components/Header.jsx';
 import Blocks from '../Components/blocks.jsx';
 import Shatter from '../Components/Shatter.jsx';
 import scott from '../Assets/teamPics/scottimg.jpg';
+import github from '../Assets/github-logo.png';
+import linkedin from '../Assets/linkedin-logo.png';
 
 
 function LandingPage() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+
   return ( 
   <>
     <Header />
@@ -16,7 +24,7 @@ function LandingPage() {
     <div className='landingMasterDiv'>
       <div className='main-top-container'>
         <div className='greeting-text'>Microservice Migration Simplified</div>
-        <div className='greeting-blerb'>Make calculated code architecture decisions by applying data driven calulations to determine microservice bounderies</div>
+        <div className='greeting-blerb'>An automated, data-driven approach to identifying potential microservices.</div>
         <div className='btn-container'>
           <button className='btn btn-focus'>Download</button>
           <button className='btn btn-secondary'>Sign Up</button>
@@ -33,7 +41,9 @@ function LandingPage() {
         <div className='main-s-inner'>
           <img className='app-img1' src={screenshot} alt="" /> 
           <div className='ms-r-container'>
-            <div className='ms-r-text'>With Fisson, you can visualize your code structure in an highly informative and digestable manner with total control over what data you need. View file heiarchy, dependencies, or even code complextiy with the click of a button. </div>
+            <div className='ms-text-headline'>Everything you need in one place.</div>
+            <div className='ms-r-text'>Obtain a comprehensive understanding of the codebase.
+Identifying potential microservices at different levels. From larger modules that might represent a service to finer-grained functionalities within modules that could be decoupled.</div>
           </div>
         </div>
       </div>
@@ -42,8 +52,9 @@ function LandingPage() {
       <div className='main-third-container'>
 
         <div className='mt-l-container'>
+          <div className='ml-l-headline'>The solution that your team has been looking for.</div>
           <div className='mt-l-text'>
-          With MonoSplits data driven approach, you are able to see potential microservices in your codebase.
+          By employing automated extraction techniques to identify potential microservices boundaries within the monolithic codebase, we can analyze code coupling, cohesion, and domain boundaries to determine optimal decomposition strategies and extract cohesive modules as microservices.
           </div>
 
         </div>
@@ -61,22 +72,72 @@ function LandingPage() {
           <div className='person-card'>
             <img className='person-img' src="" alt="" />
             <div className='person-name'>Ross Terker</div>
+            <div className='social-container'>
+              <div className='socials'>
+                <a href="" target='_blank'><img className='social-logo' src={github} alt="" /></a>
+                <a className='social-text' href="" target='_blank'>GitHub</a>
+              </div>
+              <div className='socials'>
+                <a href="" target='_blank'><img className='social-logo' src={linkedin} alt="" /></a>
+                <a className='social-text' href="" target='_blank'>LinkedIn</a>
+              </div>
+            </div>
           </div>
           <div className='person-card'>
             <img className='person-img' src="" alt="" />
             <div className='person-name'>Moises Gomez</div>
+            <div className='social-container'>
+              <div className='socials'>
+                <a href="" target='_blank'><img className='social-logo' src={github} alt="" /></a>
+                <a className='social-text' href="" target='_blank'>GitHub</a>
+              </div>
+              <div className='socials'>
+                <a href="" target='_blank'><img className='social-logo' src={linkedin} alt="" /></a>
+                <a className='social-text' href="" target='_blank'>LinkedIn</a>
+              </div>
+            </div>
           </div>
           <div className='person-card'>
             <img className='person-img' src={scott} alt="" />
             <div className='person-name'>Scott Zembsch</div>
+            <div className='social-container'>
+              <div className='socials'>
+                <a href="https://github.com/ScottZembsch" target='_blank'><img className='social-logo' src={github} alt="" /></a>
+                <a className='social-text' href="https://github.com/ScottZembsch" target='_blank'>GitHub</a>
+              </div>
+              <div className='socials'>
+                <a href=""><img className='social-logo' src={linkedin} alt="" /></a>
+                <a className='social-text' href="">LinkedIn</a>
+              </div>
+            </div>
           </div>
           <div className='person-card'>
             <img className='person-img' src="" alt="" />
             <div className='person-name'>Greg Silvia</div>
+            <div className='social-container'>
+              <div className='socials'>
+                <a href="" target='_blank'><img className='social-logo' src={github} alt="" /></a>
+                <a className='social-text' href="" target='_blank'>GitHub</a>
+              </div>
+              <div className='socials'>
+                <a href="" target='_blank'><img className='social-logo' src={linkedin} alt="" /></a>
+                <a className='social-text' href="" target='_blank'>LinkedIn</a>
+              </div>
+            </div>
           </div>
           <div className='person-card'>
             <img className='person-img' src="" alt="" />
             <div className='person-name'>Christian Magorrian</div>
+            <div className='social-container'>
+              <div className='socials'>
+                <a href="" target='_blank'><img className='social-logo' src={github} alt="" /></a>
+                <a className='social-text' href="" target='_blank'>GitHub</a>
+              </div>
+              <div className='socials'>
+                <a href="" target='_blank'><img className='social-logo' src={linkedin} alt="" /></a>
+                <a className='social-text' href="" target='_blank'>LinkedIn</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -46,7 +46,7 @@ body {
   /* border: 1px solid white; */
   margin-top: 30px;
   display: flex;
-  width: 25%;
+  width: 20%;
   justify-content: space-between;
   align-items: center;
 }
@@ -97,26 +97,35 @@ body {
   justify-content: space-between;
   margin: 0 80px 0 80px;
   align-items: center;
+  width: 80%;
 }
 
 .app-img1 {
   height: 550px;
   filter: invert();
-  margin-left: 100px;
+  /* margin-left: 100px; */
 }
 
 .ms-r-container {
   display: flex;
   justify-content: center;
+  align-items: end;
+  flex-direction: column;
+}
+
+.ms-text-headline {
+  text-align: right;
+  font-size: 56px;
+  width: 650px;
+  margin-bottom: 30px;
 }
 
 .ms-r-text {
-  width: 50%;
-  font-size: 27px;
-  text-align: center;
+  font-size: 24px;
   font-family: "PT Sans", sans-serif;
-  text-align: center;
-  color: white;
+  text-align: center; 
+  color: #86868b;
+  width: 500px;
 }
 
 .hz-rule {
@@ -139,26 +148,34 @@ body {
   justify-content: space-between;
   margin: 0 80px 0 80px;
   align-items: center;
+  z-index: -1;
 }
 
 
 .blocksimg {
   height: 400px;
-  
 }
 
 .mt-l-container {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  margin-left: 200px;
+}
+
+.ml-l-headline {
+  font-size: 56px;
+  width: 670px;
+  margin-bottom: 30px;
 }
 
 .mt-l-text {
   width: 50%;
-  font-size: 27px;
+  font-size: 24px;
   text-align: center;
   font-family: "PT Sans", sans-serif;
-  text-align: center;
-  color: white;
+  text-align: left;
+  color: #86868b;
 }
 
 .fourth-container-main {
@@ -187,7 +204,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 300px;
+  height: 410px;
   width: 250px;
   border: 1px solid white;
   border-radius: 10px;
@@ -197,8 +214,8 @@ body {
 }
 
 .person-name {
-  font-size: 20px;
-  margin: 10px 0 10px 0;
+  font-size: 24px;
+  margin: 7px 0 7px 0;
 
 }
 
@@ -206,5 +223,36 @@ body {
   height: 100%;
   width: 100%;
   object-fit: cover;
+  border-bottom: 1px solid white;
+}
 
+.social-container {
+  width: 60%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 7px;
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+}
+
+.social-logo {
+  filter: invert();
+  height: 40px;
+}
+
+.social-text {
+  font-size: 12px;
+}
+
+.socials:hover {
+  cursor: pointer;
+  color: #bdbdbd;
+  filter: invert(0.5);
 }

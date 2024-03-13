@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import UserMainPage from './Views/UserMainPage.jsx';
 import LoginPage from './Views/LoginPage.jsx';
@@ -11,6 +11,7 @@ import LandingPage from './Views/LandingPage.jsx';
 
 
 export default function App() {
+
 
   return (
  

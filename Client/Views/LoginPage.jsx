@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
+import bgIMG from '../Assets/loginimg.png';
+import '../Styles/login.css';
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -35,19 +37,22 @@ function LoginPage() {
 
   return (
     <>
-      <div className='enter-username'>
-        <label>Username:
+    <div className='login-container'>
+
+      <div className='form-container'>
+        <div className='enter-username'>
+          <label>Username:</label>
           <input type="text" name='username' value={formData.username} onChange={handleChange}/>
-        </label>
-      </div>
-      <div className='enter-password'>
-        <label>Password:
+        </div>
+        <div className='enter-password'>
+          <label>Password:</label>
           <input type="text" name='password' value={formData.password} onChange={handleChange}/>
-        </label>
+        </div>
+        <input className='login-button' type="button" value='Submit' onClick={handleSubmit}/>
+        <a href="/signup">Signup</a>
       </div>
-      <input className='login-button' type="button" value='Submit' onClick={handleSubmit}/>
-      <br />
-      <a href="/signup">Signup</a>
+      <img className='bg-img' src={bgIMG} alt="" />
+    </div>
     </>
   )
 }
