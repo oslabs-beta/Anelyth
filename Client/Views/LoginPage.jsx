@@ -38,19 +38,25 @@ function LoginPage() {
   return (
     <>
     <div className='login-container'>
-
       <div className='form-container'>
-        <div className='enter-username'>
-          <label>Username:</label>
-          <input type="text" name='username' value={formData.username} onChange={handleChange}/>
+        <div className='login-title'>Log In</div>
+        <div className='inner-container'>
+          <div className='enter-info'>
+            <label className='input-title'>Username:</label>
+            <input className='form-input' type="text" name='username' value={formData.username} onChange={handleChange}/>
+          </div>
+          <div className='enter-info'>
+            <label className='input-title'>Password:</label>
+            <input className='form-input' type="password" name='password' value={formData.password} onChange={handleChange}/>
+          </div>
+          <input className='login-button' type="button" value='Submit' onClick={handleSubmit}/>
+
+          <div className='no-acc-container'>
+            <div className='no-acc-text'>No Account?</div>
+            <a className='no-acc-link' href="/signup">Sign Up</a>
+          </div>
         </div>
-        <div className='enter-password'>
-          <label>Password:</label>
-          <input type="password" name='password' value={formData.password} onChange={handleChange}/>
         </div>
-        <input className='login-button' type="button" value='Submit' onClick={handleSubmit}/>
-        <a href="/signup">Signup</a>
-      </div>
       <img className='bg-img' src={bgIMG} alt="" />
     </div>
     </>

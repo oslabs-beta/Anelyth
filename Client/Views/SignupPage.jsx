@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
+import '../Styles/signup.css';
+import bgIMG from '../Assets/loginimg.png';
 
 function SignupPage() {
   const navigate = useNavigate();
@@ -32,32 +34,36 @@ function SignupPage() {
 
   return (
     <>
+    <div>
       <div className='enter-username'>
-        <label>Username:
-          <input type="text" name='username' value={formData.username} onChange={handleChange}/>
-        </label>
+        <label className='input-title'>Username:</label>
+        <input type="text" name='username' value={formData.username} onChange={handleChange}/>
+        
       </div>
       <div className='enter-firstName'>
-        <label>First name:
-          <input type="text" name='firstName' value={formData.firstName} onChange={handleChange}/>
-        </label>
+        <label>First name:</label>
+        <input type="text" name='firstName' value={formData.firstName} onChange={handleChange}/>
+        
       </div>
       <div className='enter-lastName'>
-        <label>Last name:
-          <input type="text" name='lastName' value={formData.lastName} onChange={handleChange}/>
-        </label>
+        <label>Last name:</label>
+        <input type="text" name='lastName' value={formData.lastName} onChange={handleChange}/>
+        
       </div>
       <div className='enter-email'>
-        <label>Email:
-          <input type="text" name='email' value={formData.email} onChange={handleChange}/>
-        </label>
+        <label>Email:</label>
+        <input type="text" name='email' value={formData.email} onChange={handleChange}/>
+        
       </div>
       <div className='enter-password'>
-        <label>Password:
-          <input type="password" name='password' value={formData.password} onChange={handleChange} />
-        </label>
+        <label>Password:</label>
+        <input type="password" name='password' value={formData.password} onChange={handleChange} />
+        
       </div>
       <input type="button" value='Submit' onClick={handleSubmit}/>
+    </div>
+    <img className='bg-img' src={bgIMG} alt="" />
+
     </>
   )
 }

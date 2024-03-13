@@ -1,0 +1,9 @@
+.input-title {
+  color: black;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.bg-img {
+  object-fit: cover;
+}
