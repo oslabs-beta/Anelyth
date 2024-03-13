@@ -33,7 +33,6 @@ app.post('/api/login',
 );
 
 app.post('/api/signup', 
-    DBController.initDB,
     DBController.createUser,
     DBController.saveCreds,
     (req, res) => {
