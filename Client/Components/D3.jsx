@@ -291,104 +291,6 @@ function dragended(event, d) {
   return svg; 
 };
 
-
-
-// //Uncomment this if you want to use test data. 
-// const D3 = () => {
-//   const data = {
-//     name: "main-folder",
-//     children: [
-//       {
-//         name: "index1.js",
-//         value: 10,
-//         color: "#FF4433",
-//         dependencies: [
-//           {
-//             module: "./main-folder/index2.js",
-//             resolved: "Server/main-folder/index2.js",
-//             dependencyTypes: ["local", "import"],
-//             source: "index2.js" // Add source property
-//           }
-//         ]
-//       },
-//       {
-//         name: "index2.js",
-//         value: 15,
-//         color: "#FF4433",
-//         dependencies: [
-//           {
-//             module: "./main-folder/index1.js",
-//             resolved: "Server/main-folder/index1.js",
-//             dependencyTypes: ["local", "import"],
-//             source: "index1.js" // Add source property
-//           }
-//         ]
-//       },
-//       {
-//         name: "index3.js",
-//         value: 10,
-//         color: "#FF4433",
-//         dependencies: [
-//           {
-//             module: "./main-folder/index2.js",
-//             resolved: "Server/main-folder/index2.js",
-//             dependencyTypes: ["local", "import"],
-//             source: "index2.js" // Add source property
-//           }
-//         ]
-//       },
-//       {
-//         name: "index4.js",
-//         value: 29,
-//         color: "#FF4433",
-//         dependencies: [
-//           {
-//             module: "./main-folder/index2.js",
-//             resolved: "Server/main-folder/index2.js",
-//             dependencyTypes: ["local", "import"],
-//             source: "index3.js" // Add source property
-//           },
-//           {
-//             module: "./main-folder/index2.js",
-//             resolved: "Server/main-folder/index2.js",
-//             dependencyTypes: ["local", "import"],
-//             source: "index1.js" // Add source property
-//           },
-//           {
-//             module: "./main-folder/index2.js",
-//             resolved: "Server/main-folder/index2.js",
-//             dependencyTypes: ["local", "import"],
-//             source: "index2.js" // Add source property
-//           }
-//         ]
-//       }
-//     ]
-//   };
-
-
-
-  
-
-//   const options = {
-//     width: 500,
-//     height: 500,
-//     fill: "blue",
-//     fillOpacity: 0.5,
-//     stroke: "black",
-//     strokeWidth: 2,
-//     strokeOpacity: 0.7
-//     };
-
-//   return (
-//     <div className='d3'>
-//       <h1>Pack Chart</h1>
-//       <PackChart data={data} options={options}/>
-//     </div>
-//   );
-// };
-
-// export default D3;
-
 const D3 = ({ hierarchyData }) => {
   const [data, setData] = useState(null);
 
@@ -399,8 +301,8 @@ const D3 = ({ hierarchyData }) => {
   }, [hierarchyData]);
 
   const options = {
-    width: 500,
-    height: 500,
+    width: 928,
+    height: 600,
     fill: "#ddd",
     stroke: "#bbb"
   };
