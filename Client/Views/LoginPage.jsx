@@ -46,7 +46,7 @@ function LoginPage() {
         </div>
         <div className='enter-password'>
           <label>Password:</label>
-          <input type="text" name='password' value={formData.password} onChange={handleChange}/>
+          <input type="password" name='password' value={formData.password} onChange={handleChange}/>
         </div>
         <input className='login-button' type="button" value='Submit' onClick={handleSubmit}/>
         <a href="/signup">Signup</a>
