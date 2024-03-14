@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Legend from './Legend.jsx';
-import '../Styles/d3.css';
 import * as d3 from 'd3';
 
 

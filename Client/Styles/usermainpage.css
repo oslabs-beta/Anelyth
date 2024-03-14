@@ -3,6 +3,11 @@ body {
   color: black;
 }
 
+svg {
+  height: 1000px;
+  width: 100%;
+}
+
 .usermainpage {
   background-color: white;
   color: black;
@@ -19,14 +24,15 @@ body {
 }
 
 .main-content {
-  width: 70%;
+  width: 60%;
   min-width: 800px;
 }
 
 .info-panel {
+  box-sizing: border-box;
   background-color: black;
+  flex-grow: 1;
   height: 100vh;
-  min-width: 350px;
   display: flex;
   flex-direction: column;
 }
