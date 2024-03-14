@@ -8,11 +8,25 @@ body {
   color: black;
   position: relative;
   display: flex;
+  width: 100%;
 }
 
 .side-panel {
   background-color: rgb(0, 0, 0);
   height: 100vh;
-  width: 250px;
+  min-width: 250px;
   position: relative;
+}
+
+.main-content {
+  width: 70%;
+  min-width: 800px;
+}
+
+.info-panel {
+  background-color: black;
+  height: 100vh;
+  min-width: 350px;
+  display: flex;
+  flex-direction: column;
 }

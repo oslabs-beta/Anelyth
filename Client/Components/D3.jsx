@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Legend from './Legend.jsx';
-import NodeInfoModal from './NodeInfoModal.jsx';
+import '../Styles/d3.css';
 import * as d3 from 'd3';
+
 
 
 const PackChart = ({ data, options }) => {
@@ -297,10 +298,8 @@ function dragended(event, d) {
   return svg; 
 };
 
-const D3 = ({ hierarchyData }) => {
+const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData }) => {
   const [data, setData] = useState(null);
-  const [popupShowing, setPopupShowing] = useState(false);
-  const [clickedNodeData, setClickedNodeData] = useState(null);
 
   useEffect(() => {
     if (hierarchyData) {
@@ -326,10 +325,6 @@ const D3 = ({ hierarchyData }) => {
       <h1>Pack Chart</h1>
       <Legend /> {/* Include the Legend component */}
       {data && <PackChart data={data} options={options} />}
-      {
-        popupShowing && 
-        <NodeInfoModal data={clickedNodeData}/>
-      }
     </div>
   );
 };

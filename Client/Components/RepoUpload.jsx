@@ -3,7 +3,7 @@ import D3 from './D3.jsx';
 
 
 
-function RepoUpload() {
+function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData }) {
   const [hierarchyData, setHierarchyData] = useState(null);
 
   async function apiCall(event) {
@@ -62,7 +62,7 @@ function RepoUpload() {
         <input type="file" name="file" id="file" multiple webkitdirectory="true" />
         <button type="submit" id="submit-btn">Submit</button>
       </form>
-      <D3 hierarchyData={hierarchyData} />
+      <D3 hierarchyData={hierarchyData} popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} />
     </div>
   </div>
   )
