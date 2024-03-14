@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Legend from './Legend.jsx';
+import NodeInfoModal from './NodeInfoModal.jsx';
 import * as d3 from 'd3';
 
 
@@ -42,6 +43,7 @@ const Pack = (data, options) => { //data and options are props passed down from 
     stroke,
     strokeWidth,
     strokeOpacity,
+    onNodeClick
   } = options;
 
   /* This part constructs the root node of the hierarchical data structure to be visualized. It uses the provided 
@@ -252,9 +254,10 @@ function dragended(event, d) {
     .on("mouseout", (event) => {
       d3.select(event.currentTarget).attr("stroke-width", d => d.children ? strokeWidth : null);
     })
-    .on("click", (event) => {
-      d3.select(event.currentTarget).attr("fill", "#4C2E05");
-    });
+    .on("click", (event, d) => {
+      //take the data in this node and pass it to the state of D3 parent component to render the node data modal
+      onNodeClick(d.data);
+    });      
   
 
 
@@ -296,6 +299,8 @@ function dragended(event, d) {
 
 const D3 = ({ hierarchyData }) => {
   const [data, setData] = useState(null);
+  const [popupShowing, setPopupShowing] = useState(false);
+  const [clickedNodeData, setClickedNodeData] = useState(null);
 
   useEffect(() => {
     if (hierarchyData) {
@@ -303,11 +308,17 @@ const D3 = ({ hierarchyData }) => {
     }
   }, [hierarchyData]);
 
+  function handleNodeClick(nodeData) {
+    setClickedNodeData(nodeData);
+    setPopupShowing(!popupShowing);
+  }
+
   const options = {
     width: 928,
     height: 600,
     fill: "#ddd",
-    stroke: "#bbb"
+    stroke: "#bbb",
+    onNodeClick: handleNodeClick
   };
 
   return (
@@ -315,6 +326,10 @@ const D3 = ({ hierarchyData }) => {
       <h1>Pack Chart</h1>
       <Legend /> {/* Include the Legend component */}
       {data && <PackChart data={data} options={options} />}
+      {
+        popupShowing && 
+        <NodeInfoModal data={clickedNodeData}/>
+      }
     </div>
   );
 };
