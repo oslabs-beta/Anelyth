@@ -3,22 +3,18 @@ import Legend from './Legend.jsx';
 import * as d3 from 'd3';
 
 
+
 const PackChart = ({ data, options }) => {
     /*Using the useRef hook. The useRef Hook allows you to persist values between renders. */
   const svgRef = useRef(null);
  
   
   useEffect(() => {
-    const svg = d3.create("svg"); // Create SVG element
+  const svg = Pack(data, { ...options, value: (d) => d.size });
 
-    const pack = Pack(data, { ...options, value: (d) => d.size }); 
-
-    svg.selectAll("*").remove(); // Clear existing SVG content
-    svg.node().appendChild(pack); // Append the generated SVG to the component's SVG
-
-    svgRef.current.appendChild(svg.node()); // Append the SVG to the ref element
-
-  }, [data, options]);
+  svgRef.current.innerHTML = ''; // Clear existing SVG content
+  svgRef.current.appendChild(svg.node()); // Append the SVG to the ref element
+}, [data, options]);
 
 
   return (
@@ -47,6 +43,7 @@ const Pack = (data, options) => { //data and options are props passed down from 
     stroke,
     strokeWidth,
     strokeOpacity,
+    onNodeClick
   } = options;
 
   /* This part constructs the root node of the hierarchical data structure to be visualized. It uses the provided 
@@ -212,8 +209,31 @@ and options. */
     .attr("xlink:href", link == null ? null : (d, i) => link(d.data, d))
     .attr("target", link == null ? null : linkTarget)
     .attr("transform", d => `translate(${d.x},${d.y})`)
+    .call(d3.drag()
+    .on("start", dragstarted)
+    .on("drag", dragged)
+    .on("end", dragended))
     .on("mouseover", hoverIn)
     .on("mouseout", hoverOut);
+
+    // Drag functions
+function dragstarted(event, d) {
+  if (!event.active) root.fx = d.x;
+  if (!event.active) root.fy = d.y;
+  d3.select(this).attr("cursor", "grabbing").raise();
+}
+
+function dragged(event, d) {
+  root.fx = event.x;
+  root.fy = event.y;
+  d3.select(this).attr("transform", `translate(${d.x = event.x},${d.y = event.y})`);
+}
+
+function dragended(event, d) {
+  if (!event.active) root.fx = null;
+  if (!event.active) root.fy = null;
+  d3.select(this).attr("cursor", "grab");
+}
 
     
     
@@ -233,7 +253,11 @@ and options. */
     })
     .on("mouseout", (event) => {
       d3.select(event.currentTarget).attr("stroke-width", d => d.children ? strokeWidth : null);
-    });
+    })
+    .on("click", (event, d) => {
+      //take the data in this node and pass it to the state of D3 parent component to render the node data modal
+      onNodeClick(d.data);
+    });      
   
 
 
@@ -268,108 +292,12 @@ and options. */
   
   
 
-  return svg.node();
+  // return svg.node();
+  //returning the svg without rendering it, this solves the double render issue
+  return svg; 
 };
 
-
-
-// //Uncomment this if you want to use test data. 
-// const D3 = () => {
-//   const data = {
-//     name: "main-folder",
-//     children: [
-//       {
-//         name: "index1.js",
-//         value: 10,
-//         color: "#FF4433",
-//         dependencies: [
-//           {
-//             module: "./main-folder/index2.js",
-//             resolved: "Server/main-folder/index2.js",
-//             dependencyTypes: ["local", "import"],
-//             source: "index2.js" // Add source property
-//           }
-//         ]
-//       },
-//       {
-//         name: "index2.js",
-//         value: 15,
-//         color: "#FF4433",
-//         dependencies: [
-//           {
-//             module: "./main-folder/index1.js",
-//             resolved: "Server/main-folder/index1.js",
-//             dependencyTypes: ["local", "import"],
-//             source: "index1.js" // Add source property
-//           }
-//         ]
-//       },
-//       {
-//         name: "index3.js",
-//         value: 10,
-//         color: "#FF4433",
-//         dependencies: [
-//           {
-//             module: "./main-folder/index2.js",
-//             resolved: "Server/main-folder/index2.js",
-//             dependencyTypes: ["local", "import"],
-//             source: "index2.js" // Add source property
-//           }
-//         ]
-//       },
-//       {
-//         name: "index4.js",
-//         value: 29,
-//         color: "#FF4433",
-//         dependencies: [
-//           {
-//             module: "./main-folder/index2.js",
-//             resolved: "Server/main-folder/index2.js",
-//             dependencyTypes: ["local", "import"],
-//             source: "index3.js" // Add source property
-//           },
-//           {
-//             module: "./main-folder/index2.js",
-//             resolved: "Server/main-folder/index2.js",
-//             dependencyTypes: ["local", "import"],
-//             source: "index1.js" // Add source property
-//           },
-//           {
-//             module: "./main-folder/index2.js",
-//             resolved: "Server/main-folder/index2.js",
-//             dependencyTypes: ["local", "import"],
-//             source: "index2.js" // Add source property
-//           }
-//         ]
-//       }
-//     ]
-//   };
-
-
-
-  
-
-//   const options = {
-//     width: 500,
-//     height: 500,
-//     fill: "blue",
-//     fillOpacity: 0.5,
-//     stroke: "black",
-//     strokeWidth: 2,
-//     strokeOpacity: 0.7
-//     };
-
-//   return (
-//     <div className='d3'>
-//       <h1>Pack Chart</h1>
-//       <PackChart data={data} options={options}/>
-//     </div>
-//   );
-// };
-
-// export default D3;
-
-const D3 = ({ hierarchyData }) => {
+const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData }) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -378,11 +306,17 @@ const D3 = ({ hierarchyData }) => {
     }
   }, [hierarchyData]);
 
+  function handleNodeClick(nodeData) {
+    setClickedNodeData(nodeData);
+    setPopupShowing(!popupShowing);
+  }
+
   const options = {
-    width: 500,
-    height: 500,
+    width: 928,
+    height: 600,
     fill: "#ddd",
-    stroke: "#bbb"
+    stroke: "#bbb",
+    onNodeClick: handleNodeClick
   };
 
   return (

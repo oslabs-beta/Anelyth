@@ -8,6 +8,7 @@ import Header from '../Components/Header.jsx';
 function LoginPage() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
+  console.log('formData:', formData)
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -27,9 +28,6 @@ function LoginPage() {
       } else if (response.status === 200) {
         navigate('/usermain');
       }
-      response = await response.json();
-      console.log('response:', response)
-      //TODO: handle response
     } catch (error) {
       console.log(`The following error occured during login attempt: ${error}`);
     }
@@ -45,7 +43,7 @@ function LoginPage() {
         <div className='inner-container'>
           <div className='enter-info'>
             <label className='input-title'>Username or Email:</label>
-            <input className='form-input' type="text" name='userOrEmail' value={formData.username} onChange={handleChange}/>
+            <input className='form-input' type="text" name='userOrEmail' value={formData.userOrEmail} onChange={handleChange}/>
           </div>
           <div className='enter-info'>
             <label className='input-title'>Password:</label>

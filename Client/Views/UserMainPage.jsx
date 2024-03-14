@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../Styles/usermainpage.css';
 import icon1 from '../Assets/icons/icons8-project-100.png';
 import icon2 from '../Assets/icons/icons8-molecule-100.png';
@@ -6,8 +6,12 @@ import icon3 from '../Assets/icons/icons8-dificulty-64.png';
 import icon4 from '../Assets/icons/icons8-pyramid-96.png';
 
 import RepoUpload from '../Components/RepoUpload.jsx';
+import NodeInfoModal from '../Components/NodeInfoModal.jsx';
 
 function UserMainPage() {
+  const [popupShowing, setPopupShowing] = useState(false);
+  const [clickedNodeData, setClickedNodeData] = useState(null);
+
   return (
   <>
   <div className='usermainpage'>
@@ -35,10 +39,12 @@ function UserMainPage() {
     </div>
     <div className='main-content'>
       <div className='visual-container'>
-        <RepoUpload />
+        <RepoUpload popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} />
+    </div>
+    <div className='info-panel'>
+      {popupShowing && <NodeInfoModal data={clickedNodeData}/>}
       </div>
     </div>
-
   </div>
   </>
   )
