@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
 import bgIMG from '../Assets/loginimg.png';
 import '../Styles/login.css';
+import Header from '../Components/Header.jsx';
+
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -36,6 +38,7 @@ function LoginPage() {
 
   return (
     <>
+    <Header />
     <div className='login-container'>
       <div className='form-container'>
         <div className='login-title'>Log In</div>

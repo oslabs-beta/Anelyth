@@ -5,12 +5,12 @@ function Header() {
   return (
       <header className="header">
         <nav className='navbar'>
-          <div className='title'>MonoSplit</div>
+          <div ><a className='header-title' href="/">MonoSplit</a></div>
           <div className='nav-links'>
-            <a className='' href="/usermain">Main</a>
-            <a className='' href="/docs">Documentation</a>
+            <a className='header-links' href="/usermain">Main</a>
+            <a className='header-links' href="/docs">Documentation</a>
             {/* <a className='' href="/signup">Signup</ßa> */}
-            <a className='' href="/login">Login</a>
+            <a className='header-links' href="/login">Login</a>
           </div>
         </nav>
       </header>

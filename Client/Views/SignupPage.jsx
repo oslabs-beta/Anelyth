@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
 import '../Styles/signup.css';
 import bgIMG from '../Assets/loginimg.png';
+import Header from '../Components/Header.jsx';
 
 function SignupPage() {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ function SignupPage() {
 
   return (
     <>
+    <Header />
     <div className='signup-container'>
       <div className='form-container'>
         <div className='login-title'>Sign Up</div>

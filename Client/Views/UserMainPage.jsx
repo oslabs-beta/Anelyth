@@ -1,5 +1,9 @@
 import React from 'react';
 import '../Styles/usermainpage.css';
+import icon1 from '../Assets/icons/icons8-project-100.png';
+import icon2 from '../Assets/icons/icons8-molecule-100.png';
+import icon3 from '../Assets/icons/icons8-dificulty-64.png';
+import icon4 from '../Assets/icons/icons8-pyramid-96.png';
 
 import RepoUpload from '../Components/RepoUpload.jsx';
 
@@ -8,15 +12,31 @@ function UserMainPage() {
   <>
   <div className='usermainpage'>
     <div className='side-panel'>
+      <div className='app-title'>MonoSplit</div>
+      <hr />
       <div className='side-items-container'>
-        <div className='items'><a href="/repos">Projects</a></div>
-        <div className='items'><a href="/">Heiarchy</a></div>
-        <div className='items'><a href="/">Dependencies</a></div>
-        <div className='items'><a href="/">Goals</a></div>
+        <div className='item-container'>
+          <img className='icon-inv' src={icon1} alt="" />
+          <a className='items' href="/repos">Projects</a>
+        </div>
+        <div className='item-container'>
+          <img className='icon-inv' src={icon4} alt="" />
+          <a className='items' href="/">Heiarchy</a>
+        </div>
+        <div className='item-container'>
+          <img className='icon-inv' src={icon2} alt="" />
+          <a  className='items' href="/">Dependencies</a>
+        </div>
+        <div className='item-container'>
+          <img className='icon-inv' src={icon3} alt="" />
+          <a className='items' href="/">Complexity</a>
+        </div>
       </div>
     </div>
     <div className='main-content'>
-      <RepoUpload />
+      <div className='visual-container'>
+        <RepoUpload />
+      </div>
     </div>
 
   </div>

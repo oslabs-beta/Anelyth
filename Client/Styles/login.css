@@ -103,5 +103,10 @@
   margin-left: 10px;
   font-size: 18px;
   color: #D9F334;
-  
+}
+
+.no-acc-link:hover {
+  cursor: pointer;
+  /* text-decoration: underline; */
+  color: black;
 }
