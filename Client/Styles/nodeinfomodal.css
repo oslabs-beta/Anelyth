@@ -1,9 +1,11 @@
 .info-modal {
   box-sizing: border-box;
   height: 350px;
-  width: 100%;
-  margin-top: 20px;
-  padding-left: 20px;
+  width: 400px;
   color: white;
-  line-height: 1.5em;
+  line-height: 1.5em;;
+  background-color: black;
+  z-index: 2;
+  border: 3px solid green;
+  position: absolute;
 }

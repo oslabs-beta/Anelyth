@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Legend from './Legend.jsx';
 import * as d3 from 'd3';
+import '../Styles/d3.css';
 
 
 
@@ -312,8 +313,8 @@ const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData }
   }
 
   const options = {
-    width: 928,
-    height: 600,
+    width: 1000,
+    height: 820,
     fill: "#ddd",
     stroke: "#bbb",
     onNodeClick: handleNodeClick

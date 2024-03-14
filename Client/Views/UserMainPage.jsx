@@ -37,14 +37,16 @@ function UserMainPage() {
         </div>
       </div>
     </div>
+
     <div className='main-content'>
       <div className='visual-container'>
         <RepoUpload popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} />
-    </div>
-    <div className='info-panel'>
-      {popupShowing && <NodeInfoModal data={clickedNodeData}/>}
+        <div className='info-panel'>
+          {popupShowing && <NodeInfoModal data={clickedNodeData}/>}
+        </div>
       </div>
     </div>
+
   </div>
   </>
   )

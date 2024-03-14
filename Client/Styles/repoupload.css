@@ -1,0 +1,32 @@
+.repo-upload-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-example {
+  /* border: 1px solid red; */
+  height: 40px;
+  width: 500px;
+
+  form {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  button {
+    width: 200px;
+    background-color: black;
+    color: #D9F334;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-family: "Roboto", sans-serif;
+    height: 20px;
+  }
+}
+
+.d3-visual-container {
+  height: 100%;
+  width: 1000px;
+  border: 2px solid blue;
+}
+
