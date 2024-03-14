@@ -18,6 +18,11 @@ const PackChart = ({ data, options }) => {
 
     svgRef.current.appendChild(svg.node()); // Append the SVG to the ref element
 
+
+    
+
+    // Call zoom behavior on the SVG (or potentially the group element)
+    
   }, [data, options]);
 
 
@@ -55,11 +60,7 @@ const Pack = (data, options) => { //data and options are props passed down from 
   
   const root = d3.hierarchy(data);
 
-  /* This line dynamically chooses whether to count the nodes or calculate the sum of values for the nodes based
-   on the presence of the value property in the options object. In our case we are not setting a value to the value variable so 
-   it is null */
 
-  //  value == null ? root.count() : root.sum(d => Math.max(0, value(d)));
   root.sum((d) => d.value || 0); // Sum the file sizes
 
   const maxDepth = getMaxDepth(root); // Calculate the maximum depth of the hierarchy
@@ -83,14 +84,14 @@ const Pack = (data, options) => { //data and options are props passed down from 
   structure and collects all nodes into an array, including the root node itself. */
   const descendants = root.descendants();
 
-  console.log('Calling descendants', descendants);
+  // console.log('Calling descendants', descendants);
   
   /*filtering the array of descendant nodes (descendants) to only include nodes that do not have children.
   !d.children evaluates to true if d.children is falsy or an empty array */
 
   const leaves = descendants.filter(d => !d.children);
   
-  console.log ('Loggin the leaves', leaves);
+  // console.log ('Loggin the leaves', leaves);
   /* iterates through each leaf node in the leaves array and assigns an index to each leaf node. */
   leaves.forEach((d, i) => d.index = i);
 
@@ -144,9 +145,19 @@ const Pack = (data, options) => { //data and options are props passed down from 
   }
 
   d3.pack()
-    .size([width - marginLeft - marginRight, height - marginTop - marginBottom])
+    .size([400, 400])
     .padding(padding)
     (root);
+
+
+    function handleZoom(e) {
+      d3.select('svg')
+     .attr('transform', e.transform);
+     }
+
+    const zoom = d3.zoom()
+    .scaleExtent([.5, 2])
+    .on('zoom', handleZoom);
 
   const svg = d3.create("svg") // creates a new SVG element with the specified tag name, in this case, "svg".
     .attr("viewBox", [-marginLeft, -marginTop, width, height]) //This sets the viewBox attribute of the SVG element.
@@ -155,7 +166,9 @@ const Pack = (data, options) => { //data and options are props passed down from 
     .attr("style", "max-width: 100%; height: auto; height: intrinsic;") //more styling 
     .attr("font-family", "sans-serif") //more styling 
     .attr("font-size", 10) //more styling 
-    .attr("text-anchor", "middle"); //more styling 
+    .attr("text-anchor", "middle")//more styling 
+    .call(zoom); 
+
 
 
 
@@ -172,6 +185,7 @@ const Pack = (data, options) => { //data and options are props passed down from 
     .attr("fill", "#ccc");
 
 
+    
     const filterLinks = (links, hoveredNode) => {
       console.log('What is Hovered Node in filterLinks?', hoveredNode);
       const result = links.filter(link => link.source === hoveredNode || link.target === hoveredNode);
@@ -203,6 +217,11 @@ const Pack = (data, options) => { //data and options are props passed down from 
         svg.selectAll(".link").remove();
       };
 
+
+
+
+      
+
 /*this block of code dynamically creates and configures anchor elements within the SVG to represent each node in the 
 hierarchical structure. It sets the href, target, and transform attributes of each anchor element based on the provided data 
 and options. */
@@ -233,7 +252,8 @@ and options. */
     })
     .on("mouseout", (event) => {
       d3.select(event.currentTarget).attr("stroke-width", d => d.children ? strokeWidth : null);
-    });
+    })
+    
   
 
 
