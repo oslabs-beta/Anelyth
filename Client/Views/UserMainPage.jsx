@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../Styles/usermainpage.css';
 
 import RepoUpload from '../Components/RepoUpload.jsx';
+import NodeInfoModal from '../Components/NodeInfoModal.jsx';
 
 function UserMainPage() {
+  const [popupShowing, setPopupShowing] = useState(false);
+  const [clickedNodeData, setClickedNodeData] = useState(null);
+
   return (
   <>
   <div className='usermainpage'>
@@ -16,9 +20,11 @@ function UserMainPage() {
       </div>
     </div>
     <div className='main-content'>
-      <RepoUpload />
+      <RepoUpload popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} />
     </div>
-
+    <div className='info-panel'>
+      {popupShowing && <NodeInfoModal data={clickedNodeData}/>}
+    </div>
   </div>
   </>
   )
