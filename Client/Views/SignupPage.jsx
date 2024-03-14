@@ -36,32 +36,38 @@ function SignupPage() {
     <>
     <div className='signup-container'>
       <div className='form-container'>
-        <div className='enter-username'>
+        <div className='login-title'>Sign Up</div>
+        <div className='enter-info'>
           <label className='input-title'>Username:</label>
-          <input type="text" name='username' value={formData.username} onChange={handleChange}/>
+          <input className='form-input' type="text" name='username' value={formData.username} onChange={handleChange}/>
           
         </div>
-        <div className='enter-firstName'>
-          <label>First name:</label>
-          <input type="text" name='firstName' value={formData.firstName} onChange={handleChange}/>
+        <div className='enter-info'>
+          <label className='input-title'>First name:</label>
+          <input className='form-input' type="text" name='firstName' value={formData.firstName} onChange={handleChange}/>
           
         </div>
-        <div className='enter-lastName'>
-          <label>Last name:</label>
-          <input type="text" name='lastName' value={formData.lastName} onChange={handleChange}/>
+        <div className='enter-info'>
+          <label className='input-title'>Last name:</label>
+          <input className='form-input' type="text" name='lastName' value={formData.lastName} onChange={handleChange}/>
           
         </div>
-        <div className='enter-email'>
-          <label>Email:</label>
-          <input type="text" name='email' value={formData.email} onChange={handleChange}/>
+        <div className='enter-info'>
+          <label className='input-title'>Email:</label>
+          <input className='form-input' type="text" name='email' value={formData.email} onChange={handleChange}/>
           
         </div>
-        <div className='enter-password'>
-          <label>Password:</label>
-          <input type="password" name='password' value={formData.password} onChange={handleChange} />
+        <div className='enter-info'>
+          <label className='input-title'>Password:</label>
+          <input className='form-input' type="password" name='password' value={formData.password} onChange={handleChange} />
           
         </div>
-        <input type="button" value='Submit' onClick={handleSubmit}/>
+        <input className='login-button' type="button" value='Submit' onClick={handleSubmit}/>
+
+        <div className='no-acc-container'>
+            <div className='no-acc-text'>Already Have An Account?</div>
+            <a className='no-acc-link' href="/login">Log In</a>
+          </div>
       </div>
     <img className='bg-img' src={bgIMG} alt="" />
     </div>
