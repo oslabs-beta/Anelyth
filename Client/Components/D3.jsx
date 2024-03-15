@@ -3,6 +3,7 @@ import Legend from './Legend.jsx';
 import * as d3 from 'd3';
 
 
+
 const PackChart = ({ data, options }) => {
     /*Using the useRef hook. The useRef Hook allows you to persist values between renders. */
   const svgRef = useRef(null);
@@ -42,6 +43,7 @@ const Pack = (data, options) => { //data and options are props passed down from 
     stroke,
     strokeWidth,
     strokeOpacity,
+    onNodeClick
   } = options;
 
   /* This part constructs the root node of the hierarchical data structure to be visualized. It uses the provided 
@@ -251,7 +253,11 @@ function dragended(event, d) {
     })
     .on("mouseout", (event) => {
       d3.select(event.currentTarget).attr("stroke-width", d => d.children ? strokeWidth : null);
-    });
+    })
+    .on("click", (event, d) => {
+      //take the data in this node and pass it to the state of D3 parent component to render the node data modal
+      onNodeClick(d.data);
+    });      
   
 
 
@@ -294,7 +300,7 @@ function dragended(event, d) {
   return svg; 
 };
 
-const D3 = ({ hierarchyData }) => {
+const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData }) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -303,11 +309,17 @@ const D3 = ({ hierarchyData }) => {
     }
   }, [hierarchyData]);
 
+  function handleNodeClick(nodeData) {
+    setClickedNodeData(nodeData);
+    setPopupShowing(!popupShowing);
+  }
+
   const options = {
     width: 928,
     height: 600,
     fill: "#ddd",
-    stroke: "#bbb"
+    stroke: "#bbb",
+    onNodeClick: handleNodeClick
   };
 
   return (
