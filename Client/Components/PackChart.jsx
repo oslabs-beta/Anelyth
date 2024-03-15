@@ -276,6 +276,7 @@ function dragstarted(event, d) {
   if (!event.active) root.fy = d.y;
   d3.select(this).attr("cursor", "grabbing").raise();
 }
+//
 
 function dragged(event, d) {
   root.fx = event.x;
