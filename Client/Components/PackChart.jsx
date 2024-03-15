@@ -11,6 +11,8 @@ const PackChart = ({ data, options }) => {
   
   useEffect(() => {
   const svg = Pack(data, { ...options, value: (d) => d.size });
+  
+
 
   svgRef.current.innerHTML = ''; // Clear existing SVG content
   svgRef.current.appendChild(svg.node()); // Append the SVG to the ref element
@@ -352,11 +354,25 @@ function dragended(event, d) {
       .text(d => d);
   }
 
+  const simulation = d3.forceSimulation()
+    // .force("charge", d3.forceManyBody().strength(1)) // Nodes are attracted to each other if value is > 0
+    .force("collide", d3.forceCollide().strength(.1).radius(30)) // Force that avoids circle overlapping
+    .alphaDecay(0) // Disable alpha decay
+    .alpha(1); // Set initial alpha value
+
+  // Apply these forces to the nodes
+  simulation.nodes(leaves)
+    .on("tick", () => {
+      // Update node positions on each tick
+      node.attr("transform", d => `translate(${d.x},${d.y})`);
+    });
+
 
   // return svg.node();
   //returning the svg without rendering it, this solves the double render issue
   return svg; 
 };
+
 
 
 
