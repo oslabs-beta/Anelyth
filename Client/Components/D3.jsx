@@ -191,7 +191,7 @@ const Pack = (data, options) => { //data and options are props passed down from 
 
     
     const filterLinks = (links, hoveredNode) => {
-      console.log('What is Hovered Node in filterLinks?', hoveredNode);
+      // console.log('What is Hovered Node in filterLinks?', hoveredNode);
       const result = links.filter(link => link.source === hoveredNode || link.target === hoveredNode);
       console.log (`These are the filtered links from ${hoveredNode}`, result);
       return result;
@@ -280,11 +280,31 @@ function dragended(event, d) {
       d3.select(event.currentTarget).attr("stroke-width", 5);
     })
     .on("mouseout", (event) => {
-      d3.select(event.currentTarget).attr("stroke-width", d => d.children ? strokeWidth : null);
+      d3.select(event.currentTarget).attr("stroke-width", d => d.children ? strokeWidth : null)
     })
+    .on("dblclick", (event, d) => zoomToNode(d));
     
     
-  
+    function zoomToNode(d) {
+      const zoomLevel = 1/(((2*d.r))/(width)); // Adjust this value to control the zoom level
+      const centerX = d.x; // Get the x-coordinate of the node
+      const centerY = d.y; // Get the y-coordinate of the node
+    
+      console.log('d=========>', d)
+      console.log('(2*d.r)=========>', (2*d.r), width,height )
+      console.log('zoomLevel=========>', zoomLevel)
+      // Create a new zoom transformation with the desired zoom level and center
+      const newTransform = d3.zoomIdentity
+        // .translate(centerX, centerY)
+        .scale(zoomLevel)
+        // .translate(centerX, centerY);
+    
+      // Apply the new zoom transformation to the svg element
+      d3.select('svg g')
+        .transition()
+        .duration(1500) // Adjust the duration for a smoother animation
+        .attr('transform', newTransform);
+    }
 
 
     /* This line of code dynamically creates and sets the title text for each node in the hierarchical structure based
