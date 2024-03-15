@@ -326,6 +326,7 @@ function dragended(event, d) {
     .attr("stroke-width", strokeWidth)
     .attr("stroke-opacity", strokeOpacity)
     .attr("r", d => d.r)
+    .style("cursor", "grab") // Set cursor style to grab
     .on("mouseover", (event) => {
       d3.select(event.currentTarget).attr("stroke-width", 5);
     })
