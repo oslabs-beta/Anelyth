@@ -270,25 +270,48 @@ and options. */
     .on("mouseover", hoverIn)
     .on("mouseout", hoverOut);
 
-    // Drag functions
+    //Drag functions
+// function dragstarted(event, d) {
+//   if (!event.active) root.fx = d.x;
+//   if (!event.active) root.fy = d.y;
+//   d3.select(this).attr("cursor", "grabbing").raise();
+// }
+// //
+
+// function dragged(event, d) {
+//   root.fx = event.x;
+//   root.fy = event.y;
+//   d3.select(this).attr("transform", `translate(${d.x = event.x},${d.y = event.y})`);
+// }
+
 function dragstarted(event, d) {
   if (!event.active) root.fx = d.x;
   if (!event.active) root.fy = d.y;
-  d3.select(this).attr("cursor", "grabbing").raise();
+  if (!d.children) {
+    // If it's a leaf node, initiate the drag behavior
+    d3.select(this).attr("cursor", "grabbing").raise();
+  } else {
+    d3.select(this).attr("cursor", "grabbing")
+    
+  }
 }
-//
 
 function dragged(event, d) {
+  // Update the position of the dragged node
   root.fx = event.x;
   root.fy = event.y;
   d3.select(this).attr("transform", `translate(${d.x = event.x},${d.y = event.y})`);
 }
+
 
 function dragended(event, d) {
   if (!event.active) root.fx = null;
   if (!event.active) root.fy = null;
   d3.select(this).attr("cursor", "grab");
 }
+
+
+
 
     
     
