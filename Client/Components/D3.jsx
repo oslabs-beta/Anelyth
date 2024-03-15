@@ -11,13 +11,31 @@ const PackChart = ({ data, options }) => {
   useEffect(() => {
   const svg = Pack(data, { ...options, value: (d) => d.size });
 
+  let zoom = d3.zoom()
+	.on('zoom', handleZoom)
+  .scaleExtent([.5,4]);
+
+  function handleZoom(e) {
+    d3.select('svg g')
+      .attr('transform', e.transform);
+  }
+
+
+    d3.select('svg')
+    .call(zoom);
+      
+
+
   svgRef.current.innerHTML = ''; // Clear existing SVG content
   svgRef.current.appendChild(svg.node()); // Append the SVG to the ref element
+
+  
 }, [data, options]);
 
 
   return (
-    <svg ref={svgRef}></svg>
+
+      <svg ref={svgRef}></svg>
   );
 };
 
@@ -140,14 +158,9 @@ const Pack = (data, options) => { //data and options are props passed down from 
     (root);
 
 
-    function handleZoom(e) {
-      d3.select('svg')
-     .attr('transform', e.transform);
-     }
 
-    const zoom = d3.zoom()
-    .scaleExtent([.5, 2])
-    .on('zoom', handleZoom);
+
+  
 
   const svg = d3.create("svg") // creates a new SVG element with the specified tag name, in this case, "svg".
     .attr("viewBox", [-marginLeft, -marginTop, width, height]) //This sets the viewBox attribute of the SVG element.
@@ -157,12 +170,12 @@ const Pack = (data, options) => { //data and options are props passed down from 
     .attr("font-family", "sans-serif") //more styling 
     .attr("font-size", 10) //more styling 
     .attr("text-anchor", "middle")//more styling 
-    .call(zoom); 
+
+    const g = svg.append("g")
+    .attr("id", "pack");
 
 
-
-
-  svg.append("defs").append("marker")
+  g.append("defs").append("marker")
     .attr("id", "arrowhead")
     .attr("viewBox", "-10 -10 25 25")
     .attr("refX", 0)
@@ -173,6 +186,7 @@ const Pack = (data, options) => { //data and options are props passed down from 
     .append("path")
     .attr("d", "M0,5L-10,0L0,-5")
     .attr("fill", "#ccc");
+
 
 
     
@@ -188,7 +202,7 @@ const Pack = (data, options) => { //data and options are props passed down from 
       const filteredLinks = filterLinks(links, node);
       //if we want to change for this functionality to happen only on hover then we can make this a function ? 
   
-     svg.selectAll(".link")
+     g.selectAll(".link")
     .data(filteredLinks) //instead of rendering all of the links we will only pass in the links of the current node being hovered. 
     .enter().append("line")
     .attr("class", "link")
@@ -215,7 +229,7 @@ const Pack = (data, options) => { //data and options are props passed down from 
 /*this block of code dynamically creates and configures anchor elements within the SVG to represent each node in the 
 hierarchical structure. It sets the href, target, and transform attributes of each anchor element based on the provided data 
 and options. */
-  const node = svg.selectAll("a") //
+  const node = g.selectAll("a") //
     .data(descendants)
     .join("a")
     .attr("xlink:href", link == null ? null : (d, i) => link(d.data, d))
@@ -226,7 +240,9 @@ and options. */
     .on("drag", dragged)
     .on("end", dragended))
     .on("mouseover", hoverIn)
-    .on("mouseout", hoverOut);
+    .on("mouseout", hoverOut)
+    
+    
 
     // Drag functions
 function dragstarted(event, d) {
@@ -266,6 +282,7 @@ function dragended(event, d) {
     .on("mouseout", (event) => {
       d3.select(event.currentTarget).attr("stroke-width", d => d.children ? strokeWidth : null);
     })
+    
     
   
 
