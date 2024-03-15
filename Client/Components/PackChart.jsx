@@ -1,9 +1,12 @@
 import * as d3 from 'd3';
 import React, { useEffect, useRef, useState } from 'react';
 
+
 const PackChart = ({ data, options }) => {
     /*Using the useRef hook. The useRef Hook allows you to persist values between renders. */
   const svgRef = useRef(null);
+  
+
  
   
   useEffect(() => {
@@ -11,6 +14,7 @@ const PackChart = ({ data, options }) => {
 
   svgRef.current.innerHTML = ''; // Clear existing SVG content
   svgRef.current.appendChild(svg.node()); // Append the SVG to the ref element
+
 }, [data, options]);
 
 
@@ -142,6 +146,7 @@ const Pack = (data, options) => { //data and options are props passed down from 
     .padding(padding)
     (root);
 
+
   const svg = d3.create("svg") // creates a new SVG element with the specified tag name, in this case, "svg".
     .attr("viewBox", [-marginLeft, -marginTop, width, height]) //This sets the viewBox attribute of the SVG element.
     .attr("width", width) // This sets the width attribute of the SVG element to the specified width (width), which was provided in the options object.
@@ -235,6 +240,7 @@ const marker = svg.append("defs")
           .append("line")
           .attr("class", "link")
           .style("stroke", "black") // Set the color of the links to black
+          .style("stroke-dasharray", "5,5") // Define the dashed pattern
           .style("stroke-width", 2) // Set the width of the lines
           .attr("marker-start", "url(#circle-marker)") // Add a circle marker
           .attr("x1", d => d.target.x) // Set initial positions to target node
@@ -246,16 +252,12 @@ const marker = svg.append("defs")
           .ease(d3.easeLinear)
           .attr("x2", d => d.source.x) // Transition to source node positions
           .attr("y2", d => d.source.y) // Transition to source node positions
-          .each(function() {
-              // Apply styles to the marker
-              d3.select(this).attr("marker-start", function() {
-                  // Modify marker attributes here
-                  return "url(#circle-marker)";
-              });
-          });
-    };
       
+    };
 
+    
+   
+  
 /*this block of code dynamically creates and configures anchor elements within the SVG to represent each node in the 
 hierarchical structure. It sets the href, target, and transform attributes of each anchor element based on the provided data 
 and options. */
@@ -270,19 +272,6 @@ and options. */
     .on("mouseover", hoverIn)
     .on("mouseout", hoverOut);
 
-    //Drag functions
-// function dragstarted(event, d) {
-//   if (!event.active) root.fx = d.x;
-//   if (!event.active) root.fy = d.y;
-//   d3.select(this).attr("cursor", "grabbing").raise();
-// }
-// //
-
-// function dragged(event, d) {
-//   root.fx = event.x;
-//   root.fy = event.y;
-//   d3.select(this).attr("transform", `translate(${d.x = event.x},${d.y = event.y})`);
-// }
 
 function dragstarted(event, d) {
   if (!event.active) root.fx = d.x;
@@ -309,12 +298,6 @@ function dragended(event, d) {
   if (!event.active) root.fy = null;
   d3.select(this).attr("cursor", "grab");
 }
-
-
-
-
-    
-    
 
     /*responsible for appending circle elements (<circle>) to the anchor elements (<a>) created earlier, and then setting 
     various attributes (such as fill color, stroke color, etc.) of these circle elements based on the data associated with
@@ -368,13 +351,16 @@ function dragended(event, d) {
       .attr("fill-opacity", (d, i, D) => i === D.length - 1 ? 0.7 : null)
       .text(d => d);
   }
-  
-  
+
 
   // return svg.node();
   //returning the svg without rendering it, this solves the double render issue
   return svg; 
 };
+
+
+
+
 
 export default PackChart;
 
