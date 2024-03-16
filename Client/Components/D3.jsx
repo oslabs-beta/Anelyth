@@ -17,7 +17,19 @@ const PackChart = ({ data, options }) => {
   
   useEffect(() => {
   const svg = Pack(data, { ...options, value: (d) => d.size });
-  
+  let zoom = d3.zoom()
+	.on('zoom', handleZoom)
+  .scaleExtent([.5,4])
+  .translateExtent([[0, 0], [2000, 2000]]);
+
+  function handleZoom(e) {
+    d3.select('svg g')
+      .attr('transform', e.transform);
+  }
+
+
+    d3.select('svg')
+    .call(zoom);
 
 
   svgRef.current.innerHTML = ''; // Clear existing SVG content
@@ -177,8 +189,26 @@ const Pack = (data, options) => { //data and options are props passed down from 
 //     .append("path")
 //     .attr("d", "M0,5L-10,0L0,-5")
 //     .attr("fill", "#ccc");
-const marker = svg.append("defs")
-  .append("marker")
+// svg.append("defs")
+//   .append("marker")
+//   .attr("id", "circle-marker")
+//   .attr("markerWidth", 12) // Enlarge the marker width
+//   .attr("markerHeight", 12) // Enlarge the marker height
+//   .attr("refX", 6) // Position the marker at the end of the line
+//   .attr("refY", 6)
+//   .append("circle")
+//   .attr("cx", 6)
+//   .attr("cy", 6)
+//   .attr("r", 3) // Radius of the circle
+//   .style("fill", "yellow") // Color of the circle
+//   .style("filter", "drop-shadow(0 0 5px rgba(255, 255, 0, 0.7))"); // Glow effect
+
+  const g = svg.append("g")
+  .attr("id", "pack");
+
+
+g.append("defs")
+.append("marker")
   .attr("id", "circle-marker")
   .attr("markerWidth", 12) // Enlarge the marker width
   .attr("markerHeight", 12) // Enlarge the marker height
@@ -190,6 +220,8 @@ const marker = svg.append("defs")
   .attr("r", 3) // Radius of the circle
   .style("fill", "yellow") // Color of the circle
   .style("filter", "drop-shadow(0 0 5px rgba(255, 255, 0, 0.7))"); // Glow effect
+
+
 
 
     const filterLinks = (links, hoveredNode) => {
@@ -238,10 +270,10 @@ const marker = svg.append("defs")
       const filteredLinks = filterLinks(links, node);
       
         // Select all existing links and remove them
-        svg.selectAll(".link").remove();
+        g.selectAll(".link").remove();
       
         // Append new lines for the filtered links with animation
-        svg.selectAll(".link")
+        g.selectAll(".link")
           .data(filteredLinks)
           .enter()
           .append("line")
@@ -280,7 +312,7 @@ const marker = svg.append("defs")
 /*this block of code dynamically creates and configures anchor elements within the SVG to represent each node in the 
 hierarchical structure. It sets the href, target, and transform attributes of each anchor element based on the provided data 
 and options. */
-  const node = svg.selectAll("g") //
+  const node = g.selectAll("g") //
     .data(descendants)
     .join("g")
     .attr("transform", d => `translate(${d.x},${d.y})`)
@@ -340,7 +372,28 @@ function dragended(event, d) {
     .on("click", (event, d) => {
       //take the data in this node and pass it to the state of D3 parent component to render the node data modal
       onNodeClick(d.data);
-    });      
+    })
+    .on("dblclick", (event, d) => zoomToNode(event, d));    
+  
+    function zoomToNode(event, d) {
+      const zoomLevel = width/(2*d.r + 40); // Adjust this value to control the zoom level
+      const centerX = d.x; // Get the x-coordinate of the node
+      const centerY = d.y; // Get the y-coordinate of the node
+    
+      console.log('d=========>', d)
+      console.log('event=========>', event)
+      // Create a new zoom transformation with the desired zoom level and center
+      const newTransform = d3.zoomIdentity
+        .translate((width / 2 - centerX * zoomLevel),(height / 2 - centerY * zoomLevel))
+        .scale(zoomLevel)
+        // .translate(d.x-event.x,d.y-event.y);
+    
+      // Apply the new zoom transformation to the svg element
+      d3.select('svg g')
+        .transition()
+        .duration(1500) // Adjust the duration for a smoother animation
+        .attr('transform', newTransform);
+    }    
   
 
 
