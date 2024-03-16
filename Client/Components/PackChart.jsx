@@ -374,7 +374,7 @@ function dragended(event, d) {
 
   const simulation = d3.forceSimulation()
     // .force("charge", d3.forceManyBody().strength(1)) // Nodes are attracted to each other if value is > 0
-    .force("collide", d3.forceCollide().strength(.1).radius(30)) // Force that avoids circle overlapping
+    .force("collide", d3.forceCollide().strength(.1).radius(2)) // Force that avoids circle overlapping
     .alphaDecay(0) // Disable alpha decay
     .alpha(1); // Set initial alpha value
 
