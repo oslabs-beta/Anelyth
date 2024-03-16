@@ -16,7 +16,7 @@ function UserMainPage() {
   <>
   <div className='usermainpage'>
     <div className='side-panel'>
-      <div className='app-title'>MonoSplit</div>
+      <div className='app-title'><a className='app-title-link' href="/">MonoSplit</a></div>
       <hr />
       <div className='side-items-container'>
         <div className='item-container'>

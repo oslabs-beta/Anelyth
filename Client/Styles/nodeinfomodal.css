@@ -2,10 +2,10 @@
   box-sizing: border-box;
   height: 350px;
   width: 400px;
-  color: white;
+  color: black;
   line-height: 1.5em;;
-  background-color: black;
+  background-color: whitesmoke;
   z-index: 2;
-  border: 3px solid green;
+  /* border: 3px solid green; */
   position: absolute;
 }

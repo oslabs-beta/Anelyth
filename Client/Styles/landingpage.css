@@ -74,6 +74,11 @@ body {
   border: 1px solid white;
 }
 
+.btn-link {
+  text-decoration: none;
+  color: white;
+}
+
 .shatter {
   position: absolute;
   z-index: -1;
@@ -223,6 +228,7 @@ body {
   height: 100%;
   width: 100%;
   object-fit: cover;
+  overflow: hidden;
   border-bottom: 1px solid white;
 }
 
@@ -249,6 +255,8 @@ body {
 
 .social-text {
   font-size: 12px;
+  text-decoration: none;
+  color: white;
 }
 
 .socials:hover {

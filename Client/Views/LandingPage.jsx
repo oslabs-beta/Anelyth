@@ -6,6 +6,10 @@ import Header from '../Components/Header.jsx';
 import Blocks from '../Components/blocks.jsx';
 import Shatter from '../Components/Shatter.jsx';
 import scott from '../Assets/teamPics/scottimg.jpg';
+import cm from '../Assets/teamPics/cm.png';
+import mg from '../Assets/teamPics/mg.jpg';
+import rt from '../Assets/teamPics/rt.jpeg';
+import gs from '../Assets/teamPics/gs.jpeg';
 import github from '../Assets/github-logo.png';
 import linkedin from '../Assets/linkedin-logo.png';
 
@@ -27,7 +31,7 @@ function LandingPage() {
         <div className='greeting-blerb'>An automated, data-driven approach to identifying potential microservices.</div>
         <div className='btn-container'>
           <button className='btn btn-focus'>Download</button>
-          <button className='btn btn-secondary'>Sign Up</button>
+          <button className='btn btn-secondary'><a className='btn-link' href="/signup">Sign Up</a></button>
         </div>
         <div className='shatter'>
           <Shatter />
@@ -70,30 +74,30 @@ Identifying potential microservices at different levels. From larger modules tha
         <div className='meet-header'>Meet The Team</div>
         <div className='team-container'>
           <div className='person-card'>
-            <img className='person-img' src="" alt="" />
+            <img className='person-img' src={rt} alt="" />
             <div className='person-name'>Ross Terker</div>
             <div className='social-container'>
               <div className='socials'>
-                <a href="" target='_blank'><img className='social-logo' src={github} alt="" /></a>
-                <a className='social-text' href="" target='_blank'>GitHub</a>
+                <a href="https://github.com/rterker" target='_blank'><img className='social-logo' src={github} alt="" /></a>
+                <a className='social-text' href="https://github.com/rterker" target='_blank'>GitHub</a>
               </div>
               <div className='socials'>
-                <a href="" target='_blank'><img className='social-logo' src={linkedin} alt="" /></a>
-                <a className='social-text' href="" target='_blank'>LinkedIn</a>
+                <a href="https://www.linkedin.com/in/ross-terker-6168a0b" target='_blank'><img className='social-logo' src={linkedin} alt="" /></a>
+                <a className='social-text' href="https://www.linkedin.com/in/ross-terker-6168a0b" target='_blank'>LinkedIn</a>
               </div>
             </div>
           </div>
           <div className='person-card'>
-            <img className='person-img' src="" alt="" />
+            <img className='person-img' src={mg} alt="" />
             <div className='person-name'>Moises Gomez</div>
             <div className='social-container'>
               <div className='socials'>
-                <a href="" target='_blank'><img className='social-logo' src={github} alt="" /></a>
-                <a className='social-text' href="" target='_blank'>GitHub</a>
+                <a href="https://github.com/moisesgomez1" target='_blank'><img className='social-logo' src={github} alt="" /></a>
+                <a className='social-text' href="https://github.com/moisesgomez1" target='_blank'>GitHub</a>
               </div>
               <div className='socials'>
-                <a href="" target='_blank'><img className='social-logo' src={linkedin} alt="" /></a>
-                <a className='social-text' href="" target='_blank'>LinkedIn</a>
+                <a href="https://www.linkedin.com/in/moisesgomezr/" target='_blank'><img className='social-logo' src={linkedin} alt="" /></a>
+                <a className='social-text' href="https://www.linkedin.com/in/moisesgomezr/" target='_blank'>LinkedIn</a>
               </div>
             </div>
           </div>
@@ -112,12 +116,12 @@ Identifying potential microservices at different levels. From larger modules tha
             </div>
           </div>
           <div className='person-card'>
-            <img className='person-img' src="" alt="" />
+            <img className='person-img' src={gs} alt="" />
             <div className='person-name'>Greg Silvia</div>
             <div className='social-container'>
               <div className='socials'>
-                <a href="" target='_blank'><img className='social-logo' src={github} alt="" /></a>
-                <a className='social-text' href="" target='_blank'>GitHub</a>
+                <a href="https://github.com/GregSilvia" target='_blank'><img className='social-logo' src={github} alt="" /></a>
+                <a className='social-text' href="https://github.com/GregSilvia" target='_blank'>GitHub</a>
               </div>
               <div className='socials'>
                 <a href="" target='_blank'><img className='social-logo' src={linkedin} alt="" /></a>
@@ -126,16 +130,16 @@ Identifying potential microservices at different levels. From larger modules tha
             </div>
           </div>
           <div className='person-card'>
-            <img className='person-img' src="" alt="" />
+            <img className='person-img' src={cm} alt="" />
             <div className='person-name'>Christian Magorrian</div>
             <div className='social-container'>
               <div className='socials'>
-                <a href="" target='_blank'><img className='social-logo' src={github} alt="" /></a>
-                <a className='social-text' href="" target='_blank'>GitHub</a>
+                <a href="https://github.com/cmagorr1" target='_blank'><img className='social-logo' src={github} alt="" /></a>
+                <a className='social-text' href="https://github.com/cmagorr1" target='_blank'>GitHub</a>
               </div>
               <div className='socials'>
-                <a href="" target='_blank'><img className='social-logo' src={linkedin} alt="" /></a>
-                <a className='social-text' href="" target='_blank'>LinkedIn</a>
+                <a href="https://www.linkedin.com/in/christian-magorrian-651362116/" target='_blank'><img className='social-logo' src={linkedin} alt="" /></a>
+                <a className='social-text' href="https://www.linkedin.com/in/christian-magorrian-651362116/" target='_blank'>LinkedIn</a>
               </div>
             </div>
           </div>

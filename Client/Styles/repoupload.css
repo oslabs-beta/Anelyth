@@ -15,8 +15,8 @@
 
   button {
     width: 200px;
-    background-color: black;
-    color: #D9F334;
+    /* background-color: black; */
+    /* color: #D9F334; */
     border: 1px solid black;
     border-radius: 4px;
     font-family: "Roboto", sans-serif;
@@ -27,6 +27,6 @@
 .d3-visual-container {
   height: 100%;
   width: 1000px;
-  border: 2px solid blue;
+  /* border: 2px solid blue; */
 }
 

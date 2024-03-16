@@ -21,15 +21,11 @@ svg {
   font-size: 40px;
   text-align: center;
   margin: 20px 0 20px 0;
-
 }
 
-.app-title {
+.app-title-link{
+  text-decoration: none;
   color: whitesmoke;
-  font-size: 40px;
-  text-align: center;
-  margin: 20px 0 20px 0;
-
 }
 
 .side-panel {
@@ -76,10 +72,14 @@ svg {
   text-decoration: none;
 }
 
+.items:hover {
+  color: #D9F334;
+}
+
 .icon-inv {
   height: 35px;
   filter: invert();
-  margin-right: 12px;
+  margin-right: 12px
 }
 
 .main-content {
@@ -100,7 +100,7 @@ svg {
 }
 
 .info-panel {
-  border: 2px solid red;
+  /* border: 2px solid red; */
   width: 400px;
   height: 350px;
 }
