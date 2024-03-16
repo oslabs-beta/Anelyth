@@ -36,3 +36,7 @@ svg {
   display: flex;
   flex-direction: column;
 }
+.node.highlighted circle {
+  stroke: #ff0000; /* Highlighted outline color */
+  stroke-width: 2; /* Highlighted outline width */
+}

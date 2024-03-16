@@ -1,3 +1,6 @@
+//Last 4: 27 pm 
+
+
 import * as d3 from 'd3';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -253,12 +256,19 @@ const marker = svg.append("defs")
           .ease(d3.easeLinear)
           .attr("x2", d => d.source.x) // Transition to source node positions
           .attr("y2", d => d.source.y) // Transition to source node positions
-      
+          svg.selectAll("circle")
+    .filter(d => filteredLinks.some(link => link.source === d || link.target === d))
+    .attr("stroke-width", 3) // Set thicker stroke
+    .attr("stroke", "yellow"); // Set highlight color
+
     };
 
     const hoverOut = () => {
       // Remove all links
       svg.selectAll(".link").remove();
+      svg.selectAll("circle")
+    .attr("stroke-width", strokeWidth) // Restore original stroke width
+    .attr("stroke", stroke); // Restore original stroke color
     };
 
     
@@ -385,5 +395,6 @@ function dragended(event, d) {
 
 
 export default PackChart;
+
 
 
