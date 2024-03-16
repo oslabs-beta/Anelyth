@@ -289,19 +289,20 @@ function dragended(event, d) {
       //take the data in this node and pass it to the state of D3 parent component to render the node data modal
       onNodeClick(d.data);
     })
-    .on("dblclick", (event, d) => zoomToNode(d));    
+    .on("dblclick", (event, d) => zoomToNode(event, d));    
   
-    function zoomToNode(d) {
-      const zoomLevel = width/(2*d.r); // Adjust this value to control the zoom level
+    function zoomToNode(event, d) {
+      const zoomLevel = width/(2*d.r + 40); // Adjust this value to control the zoom level
       const centerX = d.x; // Get the x-coordinate of the node
       const centerY = d.y; // Get the y-coordinate of the node
     
       console.log('d=========>', d)
+      console.log('event=========>', event)
       // Create a new zoom transformation with the desired zoom level and center
       const newTransform = d3.zoomIdentity
-        // .translate(centerX, centerY)
+        .translate((width / 2 - centerX * zoomLevel),(height / 2 - centerY * zoomLevel))
         .scale(zoomLevel)
-        // .translate(centerX, centerY);
+        // .translate(d.x-event.x,d.y-event.y);
     
       // Apply the new zoom transformation to the svg element
       d3.select('svg g')
@@ -364,8 +365,8 @@ const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData }
   }
 
   const options = {
-    width: 928,
-    height: 600,
+    width: 900,
+    height: 900,
     fill: "#ddd",
     stroke: "#bbb",
     onNodeClick: handleNodeClick
