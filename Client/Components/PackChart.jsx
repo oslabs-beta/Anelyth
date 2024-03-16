@@ -222,15 +222,14 @@ const marker = svg.append("defs")
     
     
     
-
+  let isDragging = false;
     
-      const hoverOut = () => {
-        // Remove all links
-        svg.selectAll(".link").remove();
-      };
+      
 
     const hoverIn = (event, node) => {
-        const filteredLinks = filterLinks(links, node);
+
+      if (isDragging) return;
+      const filteredLinks = filterLinks(links, node);
       
         // Select all existing links and remove them
         svg.selectAll(".link").remove();
@@ -257,6 +256,11 @@ const marker = svg.append("defs")
       
     };
 
+    const hoverOut = () => {
+      // Remove all links
+      svg.selectAll(".link").remove();
+    };
+
     
    
   
@@ -276,6 +280,7 @@ and options. */
 
 
 function dragstarted(event, d) {
+  isDragging = true;
   if (!event.active) root.fx = d.x;
   if (!event.active) root.fy = d.y;
   if (!d.children) {
@@ -296,6 +301,7 @@ function dragged(event, d) {
 
 
 function dragended(event, d) {
+  isDragging = false;
   if (!event.active) root.fx = null;
   if (!event.active) root.fy = null;
   d3.select(this).attr("cursor", "grab");
@@ -379,4 +385,5 @@ function dragended(event, d) {
 
 
 export default PackChart;
+
 
