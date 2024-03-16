@@ -3,6 +3,7 @@ import Legend from './Legend.jsx';
 import * as d3 from 'd3';
 
 
+
 const PackChart = ({ data, options }) => {
     /*Using the useRef hook. The useRef Hook allows you to persist values between renders. */
   const svgRef = useRef(null);
@@ -13,7 +14,8 @@ const PackChart = ({ data, options }) => {
 
   let zoom = d3.zoom()
 	.on('zoom', handleZoom)
-  .scaleExtent([.5,4]);
+  .scaleExtent([.5,4])
+  .translateExtent([[0, 0], [2000, 2000]]);
 
   function handleZoom(e) {
     d3.select('svg g')
@@ -60,6 +62,7 @@ const Pack = (data, options) => { //data and options are props passed down from 
     stroke,
     strokeWidth,
     strokeOpacity,
+    onNodeClick
   } = options;
 
   /* This part constructs the root node of the hierarchical data structure to be visualized. It uses the provided 
@@ -280,19 +283,20 @@ function dragended(event, d) {
       d3.select(event.currentTarget).attr("stroke-width", 5);
     })
     .on("mouseout", (event) => {
-      d3.select(event.currentTarget).attr("stroke-width", d => d.children ? strokeWidth : null)
+      d3.select(event.currentTarget).attr("stroke-width", d => d.children ? strokeWidth : null);
     })
-    .on("dblclick", (event, d) => zoomToNode(d));
-    
-    
+    .on("click", (event, d) => {
+      //take the data in this node and pass it to the state of D3 parent component to render the node data modal
+      onNodeClick(d.data);
+    })
+    .on("dblclick", (event, d) => zoomToNode(d));    
+  
     function zoomToNode(d) {
-      const zoomLevel = 1/(((2*d.r))/(width)); // Adjust this value to control the zoom level
+      const zoomLevel = width/(2*d.r); // Adjust this value to control the zoom level
       const centerX = d.x; // Get the x-coordinate of the node
       const centerY = d.y; // Get the y-coordinate of the node
     
       console.log('d=========>', d)
-      console.log('(2*d.r)=========>', (2*d.r), width,height )
-      console.log('zoomLevel=========>', zoomLevel)
       // Create a new zoom transformation with the desired zoom level and center
       const newTransform = d3.zoomIdentity
         // .translate(centerX, centerY)
@@ -305,7 +309,6 @@ function dragended(event, d) {
         .duration(1500) // Adjust the duration for a smoother animation
         .attr('transform', newTransform);
     }
-
 
     /* This line of code dynamically creates and sets the title text for each node in the hierarchical structure based
      on the generated array of title texts (T). If T contains title texts for the nodes, they are appended to the corresponding
@@ -346,7 +349,7 @@ function dragended(event, d) {
   return svg; 
 };
 
-const D3 = ({ hierarchyData }) => {
+const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData }) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -355,11 +358,17 @@ const D3 = ({ hierarchyData }) => {
     }
   }, [hierarchyData]);
 
+  function handleNodeClick(nodeData) {
+    setClickedNodeData(nodeData);
+    setPopupShowing(!popupShowing);
+  }
+
   const options = {
     width: 928,
     height: 600,
     fill: "#ddd",
-    stroke: "#bbb"
+    stroke: "#bbb",
+    onNodeClick: handleNodeClick
   };
 
   return (

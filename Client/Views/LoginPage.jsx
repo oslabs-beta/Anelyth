@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 function LoginPage() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
+  console.log('formData:', formData)
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -23,9 +24,6 @@ function LoginPage() {
       } else if (response.status === 200) {
         navigate('/usermain');
       }
-      response = await response.json();
-      console.log('response:', response)
-      //TODO: handle response
     } catch (error) {
       console.log(`The following error occured during login attempt: ${error}`);
     }
@@ -36,7 +34,7 @@ function LoginPage() {
     <>
       <div className='enter-username'>
         <label>Username or Email:
-          <input type="text" name='userOrEmail' value={formData.username} onChange={handleChange}/>
+          <input type="text" name='userOrEmail' value={formData.userOrEmail} onChange={handleChange}/>
         </label>
       </div>
       <div className='enter-password'>
