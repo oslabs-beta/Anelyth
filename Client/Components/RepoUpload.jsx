@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import D3 from './D3.jsx';
+import '../Styles/repoupload.css';
 
 
 
@@ -55,16 +56,24 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData }) {
 
 
   return (
-    <div>
-    <div className="form-example">
-      <form onSubmit={apiCall}>
-        <label htmlFor="file">Choose file: </label>
-        <input type="file" name="file" id="file" multiple webkitdirectory="true" />
-        <button type="submit" id="submit-btn">Submit</button>
-      </form>
-      <D3 hierarchyData={hierarchyData} popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} />
+    <>
+    <div className='repo-upload-main'>
+
+      <div className="form-example">
+        <form onSubmit={apiCall}>
+          <input type="file" name="file" id="file" multiple webkitdirectory="true" />
+          <button type="submit" id="submit-btn">Submit</button>
+        </form>
+      </div>
+
+      <div className='d3-visual-container'>
+        <D3 hierarchyData={hierarchyData} popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} />
+      </div>
+
     </div>
-  </div>
+    
+    </>
+
   )
 }
 

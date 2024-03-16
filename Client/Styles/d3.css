@@ -1,0 +1,40 @@
+svg{
+    /* height: 1000rem;
+    width: 1000rem; */
+    height: 100%;
+    width: 100%;
+}
+
+.legend {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    /* margin-right: 20px; */
+  }
+  
+  .legend-color {
+    width: 20px;
+    height: 20px;
+    /* margin-right: 5px; */
+  }
+  
+  .legend-label {
+    font-size: 14px;
+  }
+
+  .d3 {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+  }
+
+
+  

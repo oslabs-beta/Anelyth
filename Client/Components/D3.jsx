@@ -6,6 +6,8 @@ import Legend from './Legend.jsx';
 
 import * as d3 from 'd3';
 import React, { useEffect, useRef, useState } from 'react';
+import '../Styles/d3.css';
+
 
 
 const PackChart = ({ data, options }) => {
@@ -468,8 +470,8 @@ const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData }
   }
 
   const options = {
-    width: 900,
-    height: 900,
+    width: 1000,
+    height: 820,
     fill: "#ddd",
     stroke: "#bbb",
     onNodeClick: handleNodeClick
