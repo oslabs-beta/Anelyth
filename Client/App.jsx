@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import UserMainPage from './Views/UserMainPage.jsx';
 import LoginPage from './Views/LoginPage.jsx';
@@ -12,6 +12,7 @@ import ProtectedRoute from './Components/ProtectedRoute.jsx';
 
 
 export default function App() {
+
 
   return (
  

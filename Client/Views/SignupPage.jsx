@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
+import '../Styles/signup.css';
+import bgIMG from '../Assets/loginimg.png';
+import Header from '../Components/Header.jsx';
 
 function SignupPage() {
   const navigate = useNavigate();
@@ -32,32 +35,45 @@ function SignupPage() {
 
   return (
     <>
-      <div className='enter-username'>
-        <label>Username:
-          <input type="text" name='username' value={formData.username} onChange={handleChange}/>
-        </label>
+    <Header />
+    <div className='signup-container'>
+      <div className='form-container'>
+        <div className='login-title'>Sign Up</div>
+        <div className='enter-info'>
+          <label className='input-title'>Username:</label>
+          <input className='form-input' type="text" name='username' value={formData.username} onChange={handleChange}/>
+          
+        </div>
+        <div className='enter-info'>
+          <label className='input-title'>First name:</label>
+          <input className='form-input' type="text" name='firstName' value={formData.firstName} onChange={handleChange}/>
+          
+        </div>
+        <div className='enter-info'>
+          <label className='input-title'>Last name:</label>
+          <input className='form-input' type="text" name='lastName' value={formData.lastName} onChange={handleChange}/>
+          
+        </div>
+        <div className='enter-info'>
+          <label className='input-title'>Email:</label>
+          <input className='form-input' type="text" name='email' value={formData.email} onChange={handleChange}/>
+          
+        </div>
+        <div className='enter-info'>
+          <label className='input-title'>Password:</label>
+          <input className='form-input' type="password" name='password' value={formData.password} onChange={handleChange} />
+          
+        </div>
+        <input className='login-button' type="button" value='Submit' onClick={handleSubmit}/>
+
+        <div className='no-acc-container'>
+            <div className='no-acc-text'>Already Have An Account?</div>
+            <a className='no-acc-link' href="/login">Log In</a>
+          </div>
       </div>
-      <div className='enter-firstName'>
-        <label>First name:
-          <input type="text" name='firstName' value={formData.firstName} onChange={handleChange}/>
-        </label>
-      </div>
-      <div className='enter-lastName'>
-        <label>Last name:
-          <input type="text" name='lastName' value={formData.lastName} onChange={handleChange}/>
-        </label>
-      </div>
-      <div className='enter-email'>
-        <label>Email:
-          <input type="text" name='email' value={formData.email} onChange={handleChange}/>
-        </label>
-      </div>
-      <div className='enter-password'>
-        <label>Password:
-          <input type="password" name='password' value={formData.password} onChange={handleChange} />
-        </label>
-      </div>
-      <input type="button" value='Submit' onClick={handleSubmit}/>
+    <img className='bg-img' src={bgIMG} alt="" />
+    </div>
+
     </>
   )
 }

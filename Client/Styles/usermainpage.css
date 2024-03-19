@@ -4,7 +4,7 @@ body {
 }
 
 svg {
-  height: 1000px;
+  height: 100%;
   width: 100%;
 }
 
@@ -13,7 +13,19 @@ svg {
   color: black;
   position: relative;
   display: flex;
-  width: 100%;
+  
+}
+
+.app-title {
+  color: whitesmoke;
+  font-size: 40px;
+  text-align: center;
+  margin: 20px 0 20px 0;
+}
+
+.app-title-link{
+  text-decoration: none;
+  color: whitesmoke;
 }
 
 .side-panel {
@@ -36,3 +48,68 @@ svg {
   display: flex;
   flex-direction: column;
 }
+.node.highlighted circle {
+  stroke: #ff0000; /* Highlighted outline color */
+  stroke-width: 2; /* Highlighted outline width */
+}
+
+.side-items-container {
+  /* border: 1px solid red; */
+  margin-top: 100px;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* background-color: rgb(15, 15, 15); */
+}
+
+.item-container {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.items {
+  font-size: 20px;
+  /* color: rgb(146, 146, 146); */
+  color: white;
+  text-decoration: none;
+}
+
+.items:hover {
+  color: #D9F334;
+}
+
+.icon-inv {
+  height: 35px;
+  filter: invert();
+  margin-right: 12px
+}
+
+.main-content {
+  background-color: whitesmoke;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.info-panel {
+  background-color: whitesmoke;
+}
+
+.visual-container {
+  height: 100%;
+  display: flex;
+
+}
+
+.info-panel {
+  /* border: 2px solid red; */
+  width: 400px;
+  height: 350px;
+}
+
+
+
+
+

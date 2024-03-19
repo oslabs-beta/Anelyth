@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
+import bgIMG from '../Assets/loginimg.png';
+import '../Styles/login.css';
+import Header from '../Components/Header.jsx';
+
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -32,19 +36,29 @@ function LoginPage() {
 
   return (
     <>
-      <div className='enter-username'>
-        <label>Username or Email:
-          <input type="text" name='userOrEmail' value={formData.userOrEmail} onChange={handleChange}/>
-        </label>
-      </div>
-      <div className='enter-password'>
-        <label>Password:
-          <input type="password" name='password' value={formData.password} onChange={handleChange}/>
-        </label>
-      </div>
-      <input className='login-button' type="button" value='Submit' onClick={handleSubmit}/>
-      <br />
-      <a href="/signup">Signup</a>
+    <Header />
+    <div className='login-container'>
+      <div className='form-container'>
+        <div className='login-title'>Log In</div>
+        <div className='inner-container'>
+          <div className='enter-info'>
+            <label className='input-title'>Username or Email:</label>
+            <input className='form-input' type="text" name='userOrEmail' value={formData.userOrEmail} onChange={handleChange}/>
+          </div>
+          <div className='enter-info'>
+            <label className='input-title'>Password:</label>
+            <input className='form-input' type="password" name='password' value={formData.password} onChange={handleChange}/>
+          </div>
+          <input className='login-button' type="button" value='Submit' onClick={handleSubmit}/>
+
+          <div className='no-acc-container'>
+            <div className='no-acc-text'>No Account?</div>
+            <a className='no-acc-link' href="/signup">Sign Up</a>
+          </div>
+        </div>
+        </div>
+      <img className='bg-img' src={bgIMG} alt="" />
+    </div>
     </>
   )
 }
