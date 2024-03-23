@@ -13,6 +13,7 @@ import DCController from "./Controllers/DCController.mjs";
 import S3Controller from "./Controllers/S3Controller.mjs";
 import DBController from "./Controllers/DBController.cjs";
 import SessionController from "./Controllers/SessionController.cjs";
+import DataController from "./Controllers/DataController.cjs";
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
