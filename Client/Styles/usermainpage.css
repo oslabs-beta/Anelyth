@@ -63,6 +63,11 @@ svg {
   /* background-color: rgb(15, 15, 15); */
 }
 
+.side-bottom-container {
+  border: #ff0000 1px solid;
+  
+}
+
 .item-container {
   display: flex;
   align-items: center;
