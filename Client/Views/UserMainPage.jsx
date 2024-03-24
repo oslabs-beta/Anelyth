@@ -4,6 +4,7 @@ import icon1 from '../Assets/icons/icons8-project-100.png';
 import icon2 from '../Assets/icons/icons8-molecule-100.png';
 import icon3 from '../Assets/icons/icons8-dificulty-64.png';
 import icon4 from '../Assets/icons/icons8-pyramid-96.png';
+import icon5 from '../Assets/icons/icons8-logout-96.png';
 
 import RepoUpload from '../Components/RepoUpload.jsx';
 import NodeInfoModal from '../Components/NodeInfoModal.jsx';
@@ -34,6 +35,12 @@ function UserMainPage() {
         <div className='item-container'>
           <img className='icon-inv' src={icon3} alt="" />
           <a className='items' href="/">Complexity</a>
+        </div>
+      </div>
+      <div className='side-bottom-container'>
+        <div className='item-container'>
+          <img className='icon-inv' src={icon5} alt="signout icon" />
+          <a className='items' href="/api/signout">Sign Out</a>
         </div>
       </div>
     </div>

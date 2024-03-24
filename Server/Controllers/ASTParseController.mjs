@@ -102,7 +102,7 @@ ASTParseController.parse = async (req, res, next) => {
     const parsedFiles = await traverseAndParse(uploadsPath);
 
     // FILTER OUT FRONTEND FILES
-    // const backendFileASTs = parsedFiles.filter(file => backendFilePaths.includes(file.filePath));
+    const backendFileASTs = parsedFiles.filter(file => backendFilePaths.includes(file.filePath));
 
     // ADD TO RES.LOCALS
     res.locals.backendFileASTs = backendFileASTs;
