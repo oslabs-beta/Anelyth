@@ -64,8 +64,11 @@ svg {
 }
 
 .side-bottom-container {
-  border: #ff0000 1px solid;
-  
+  position: sticky;
+  top: 100%;
+  margin-bottom: 20px;
+  border-top: 2px solid whitesmoke;
+  padding-top: 20px;
 }
 
 .item-container {

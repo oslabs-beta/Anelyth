@@ -7,4 +7,10 @@ SessionController.createCookie = (req, res, next) => {
   return next();
 };
 
+// create delete cookie middleware
+SessionController.deleteCookie = (req, res, next) => {
+  res.clearCookie('temp-id');
+  return next();
+};
+
 module.exports = SessionController;
