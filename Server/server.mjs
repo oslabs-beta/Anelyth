@@ -18,6 +18,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+app.get('/api/checkSession', (req, res) => {
+    if (req.cookies['temp-id']) return res.status(200).json({ authenticated: true }); 
+    else return res.status(200).json({ authenticated: false });
+});
+
 app.post('/api/login', 
     DBController.verifyCredentials,
     SessionController.createCookie,
@@ -28,7 +33,6 @@ app.post('/api/login',
 );
 
 app.post('/api/signup', 
-    DBController.initDB,
     DBController.createUser,
     DBController.saveCreds,
     (req, res) => {
