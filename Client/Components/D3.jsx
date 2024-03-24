@@ -11,7 +11,7 @@ import '../Styles/d3.css';
 
 
 const PackChart = ({ data, options }) => {
-    /*Using the useRef hook. The useRef Hook allows you to persist values between renders. */
+  /*Using the useRef hook. The useRef Hook allows you to persist values between renders. */
   const svgRef = useRef(null);
   
 
@@ -36,13 +36,9 @@ const PackChart = ({ data, options }) => {
 
   svgRef.current.innerHTML = ''; // Clear existing SVG content
   svgRef.current.appendChild(svg.node()); // Append the SVG to the ref element
-
 }, [data, options]);
 
-
-  return (
-    <svg ref={svgRef}></svg>
-  );
+  return <svg ref={svgRef}></svg>;
 };
 
 const Pack = (data, options) => { //data and options are props passed down from App
@@ -409,8 +405,9 @@ function dragended(event, d) {
   if (L) {
     // const uid = `O-${Math.random().toString(16).slice(2)}`;
 
-    const leaf = node
-      .filter(d => !d.children && d.r > 10 && L[d.index] != null);
+    const leaf = node.filter(
+      (d) => !d.children && d.r > 10 && L[d.index] != null
+    );
 
     // leaf.append("clipPath")
     //   .attr("id", d => `${uid}-clip-${d.index}`)
@@ -420,12 +417,12 @@ function dragended(event, d) {
     leaf.append("text")
       // .attr("clip-path", d => `url(${new URL(`#${uid}-clip-${d.index}`, location)})`)
       .selectAll("tspan")
-      .data(d => `${L[d.index]}`.split(/\n/g))
+      .data((d) => `${L[d.index]}`.split(/\n/g))
       .join("tspan")
       .attr("x", 0)
-      .attr("y", (d, i, D) => `${(i - D.length / 2) + 0.85}em`)
-      .attr("fill-opacity", (d, i, D) => i === D.length - 1 ? 0.7 : null)
-      .text(d => d);
+      .attr("y", (d, i, D) => `${i - D.length / 2 + 0.85}em`)
+      .attr("fill-opacity", (d, i, D) => (i === D.length - 1 ? 0.7 : null))
+      .text((d) => d);
   }
 
   const simulation = d3.forceSimulation()
@@ -478,7 +475,7 @@ const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData }
   };
 
   return (
-    <div className='d3'>
+    <div className="d3">
       <h1>Pack Chart</h1>
       <Legend /> {/* Include the Legend component */}
       {data && <PackChart data={data} options={options} />}
@@ -487,4 +484,5 @@ const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData }
 };
 
 export default D3;
+
 
