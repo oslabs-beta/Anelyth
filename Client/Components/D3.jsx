@@ -1,23 +1,42 @@
-import React, { useEffect, useRef, useState } from 'react';
+
 import Legend from './Legend.jsx';
+
+//Last 9:18 pm 
+
+
 import * as d3 from 'd3';
+import React, { useEffect, useRef, useState } from 'react';
+import '../Styles/d3.css';
+
 
 
 const PackChart = ({ data, options }) => {
   /*Using the useRef hook. The useRef Hook allows you to persist values between renders. */
   const svgRef = useRef(null);
+  
+
  
   
   useEffect(() => {
-    const svg = d3.create("svg"); // Create SVG element
+  const svg = Pack(data, { ...options, value: (d) => d.size });
+  let zoom = d3.zoom()
+	.on('zoom', handleZoom)
+  .scaleExtent([.5,4])
+  .translateExtent([[0, 0], [2000, 2000]]);
 
-    const pack = Pack(data, { ...options, value: (d) => d.size }); 
+  function handleZoom(e) {
+    d3.select('svg g')
+      .attr('transform', e.transform);
+  }
 
-    svg.selectAll("*").remove(); // Clear existing SVG content
-    svg.node().appendChild(pack); // Append the generated SVG to the component's SVG
 
-    svgRef.current.appendChild(svg.node()); // Append the SVG to the ref element
-  }, [data, options]);
+    d3.select('svg')
+    .call(zoom);
+
+
+  svgRef.current.innerHTML = ''; // Clear existing SVG content
+  svgRef.current.appendChild(svg.node()); // Append the SVG to the ref element
+}, [data, options]);
 
   return <svg ref={svgRef}></svg>;
 };
@@ -43,6 +62,7 @@ const Pack = (data, options) => { //data and options are props passed down from 
     stroke,
     strokeWidth,
     strokeOpacity,
+    onNodeClick
   } = options;
 
   /* This part constructs the root node of the hierarchical data structure to be visualized. It uses the provided 
@@ -141,7 +161,9 @@ const Pack = (data, options) => { //data and options are props passed down from 
 
   d3.pack()
     .size([width - marginLeft - marginRight, height - marginTop - marginBottom])
-    .padding(padding)(root);
+    .padding(padding)
+    (root);
+
 
   const svg = d3.create("svg") // creates a new SVG element with the specified tag name, in this case, "svg".
     .attr("viewBox", [-marginLeft, -marginTop, width, height]) //This sets the viewBox attribute of the SVG element.
@@ -154,17 +176,50 @@ const Pack = (data, options) => { //data and options are props passed down from 
 
 
 
-  svg.append("defs").append("marker")
-    .attr("id", "arrowhead")
-    .attr("viewBox", "-10 -10 25 25")
-    .attr("refX", 0)
-    .attr("refY", 0)
-    .attr("orient", "auto")
-    .attr("markerWidth", 5)
-    .attr("markerHeight", 5)
-    .append("path")
-    .attr("d", "M0,5L-10,0L0,-5")
-    .attr("fill", "#ccc");
+//   svg.append("defs").append("marker")
+//     .attr("id", "arrowhead")
+//     .attr("viewBox", "-10 -10 25 25")
+//     .attr("refX", 0)
+//     .attr("refY", 0)
+//     .attr("orient", "auto")
+//     .attr("markerWidth", 5)
+//     .attr("markerHeight", 5)
+//     .append("path")
+//     .attr("d", "M0,5L-10,0L0,-5")
+//     .attr("fill", "#ccc");
+// svg.append("defs")
+//   .append("marker")
+//   .attr("id", "circle-marker")
+//   .attr("markerWidth", 12) // Enlarge the marker width
+//   .attr("markerHeight", 12) // Enlarge the marker height
+//   .attr("refX", 6) // Position the marker at the end of the line
+//   .attr("refY", 6)
+//   .append("circle")
+//   .attr("cx", 6)
+//   .attr("cy", 6)
+//   .attr("r", 3) // Radius of the circle
+//   .style("fill", "yellow") // Color of the circle
+//   .style("filter", "drop-shadow(0 0 5px rgba(255, 255, 0, 0.7))"); // Glow effect
+
+  const g = svg.append("g")
+  .attr("id", "pack");
+
+
+g.append("defs")
+.append("marker")
+  .attr("id", "circle-marker")
+  .attr("markerWidth", 12) // Enlarge the marker width
+  .attr("markerHeight", 12) // Enlarge the marker height
+  .attr("refX", 6) // Position the marker at the end of the line
+  .attr("refY", 6)
+  .append("circle")
+  .attr("cx", 6)
+  .attr("cy", 6)
+  .attr("r", 3) // Radius of the circle
+  .style("fill", "yellow") // Color of the circle
+  .style("filter", "drop-shadow(0 0 5px rgba(255, 255, 0, 0.7))"); // Glow effect
+
+
 
 
     const filterLinks = (links, hoveredNode) => {
@@ -174,44 +229,126 @@ const Pack = (data, options) => { //data and options are props passed down from 
       return result;
     };
 
+    // const hoverIn = (event, node) => {
+    //     const filteredLinks = filterLinks(links, node);
+      
+    //     // Select all existing links and remove them
+    //     svg.selectAll(".link").remove();
+      
+    //     // Append new lines for the filtered links with animation
+    //     svg.selectAll(".link")
+    //       .data(filteredLinks)
+    //       .enter()
+    //       .append("line")
+    //       .attr("class", "link")
+    //       .style("stroke", "black") // Set the color of the links to black
+    //       .style("stroke-width", 2) // Set the width of the lines
+    //       .attr("marker-start", "url(#arrowhead)") // Add a circle marker
+
+    //       .attr("x1", d => d.target.x) // Set initial positions to target node
+    //       .attr("y1", d => d.target.y) // Set initial positions to target node
+    //       .attr("x2", d => d.target.x) // Set initial positions to target node
+    //       .attr("y2", d => d.target.y) // Set initial positions to target node
+    //       .transition()
+    //       .duration(1000) // Set the duration of the transition in milliseconds
+    //       .ease(d3.easeLinear)
+    //       .attr("x2", d => d.source.x) // Transition to source node positions
+    //       .attr("y2", d => d.source.y); // Transition to source node positions
+    // };
+    
+    
+    
+  let isDragging = false;
+    
+      
+
     const hoverIn = (event, node) => {
-      console.log ('WHAT IS NODE? in hoverIn function', node);
+
+      if (isDragging) return;
       const filteredLinks = filterLinks(links, node);
-      //if we want to change for this functionality to happen only on hover then we can make this a function ? 
+      
+        // Select all existing links and remove them
+        g.selectAll(".link").remove();
+      
+        // Append new lines for the filtered links with animation
+        g.selectAll(".link")
+          .data(filteredLinks)
+          .enter()
+          .append("line")
+          .attr("class", "link")
+          .style("stroke", "yellow") // Set the color of the links to black
+          // .style("stroke-dasharray", "5,5") // Define the dashed pattern
+          .style("stroke-width", 6) // Set the width of the lines
+          .style("opacity", .6)
+          .attr("x1", d => d.target.x) // Set initial positions to target node
+          .attr("y1", d => d.target.y) // Set initial positions to target node
+          .attr("x2", d => d.target.x) // Set initial positions to target node
+          .attr("y2", d => d.target.y) // Set initial positions to target node
+          .transition()
+          .duration(500) // Set the duration of the transition in milliseconds
+          .ease(d3.easeLinear)
+          .attr("x2", d => d.source.x) // Transition to source node positions
+          .attr("y2", d => d.source.y) // Transition to source node positions
+          svg.selectAll("circle")
+    .filter(d => filteredLinks.some(link => link.source === d || link.target === d))
+    .attr("stroke-width", 3) // Set thicker stroke
+    .attr("stroke", "yellow"); // Set highlight color
+
+    };
+
+    const hoverOut = () => {
+      // Remove all links
+      svg.selectAll(".link").remove();
+      svg.selectAll("circle")
+    .attr("stroke-width", strokeWidth) // Restore original stroke width
+    .attr("stroke", stroke); // Restore original stroke color
+    };
+
+    
+   
   
-     svg.selectAll(".link")
-    .data(filteredLinks) //instead of rendering all of the links we will only pass in the links of the current node being hovered. 
-    .enter().append("line")
-    .attr("class", "link")
-    .style("stroke", "black")
-    .style("stroke-width", 5)
-    .attr("marker-start", "url(#arrowhead)") // Add this line to add the arrowhead
-    .attr("x1", d => d.source.x)
-    .attr("y1", d => d.source.y)
-    .attr("x2", d => d.target.x)
-    .attr("y2", d => d.target.y)
-    .attr("stroke", "#ccc")
-    .attr("stroke-width", 1);
-   }
-
-      const hoverOut = () => {
-        svg.selectAll(".link").remove();
-      };
-
 /*this block of code dynamically creates and configures anchor elements within the SVG to represent each node in the 
 hierarchical structure. It sets the href, target, and transform attributes of each anchor element based on the provided data 
 and options. */
-  const node = svg.selectAll("a") //
+  const node = g.selectAll("g") //
     .data(descendants)
-    .join("a")
-    .attr("xlink:href", link == null ? null : (d, i) => link(d.data, d))
-    .attr("target", link == null ? null : linkTarget)
+    .join("g")
     .attr("transform", d => `translate(${d.x},${d.y})`)
+    .call(d3.drag()
+    .on("start", dragstarted)
+    .on("drag", dragged)
+    .on("end", dragended))
     .on("mouseover", hoverIn)
     .on("mouseout", hoverOut);
 
+
+function dragstarted(event, d) {
+  isDragging = true;
+  if (!event.active) root.fx = d.x;
+  if (!event.active) root.fy = d.y;
+  if (!d.children) {
+    // If it's a leaf node, initiate the drag behavior
+    d3.select(this).attr("cursor", "grabbing").raise();
+  } else {
+    d3.select(this).attr("cursor", "grabbing")
     
-    
+  }
+}
+
+function dragged(event, d) {
+  // Update the position of the dragged node
+  root.fx = event.x;
+  root.fy = event.y;
+  d3.select(this).attr("transform", `translate(${d.x = event.x},${d.y = event.y})`);
+}
+
+
+function dragended(event, d) {
+  isDragging = false;
+  if (!event.active) root.fx = null;
+  if (!event.active) root.fy = null;
+  d3.select(this).attr("cursor", "grab");
+}
 
     /*responsible for appending circle elements (<circle>) to the anchor elements (<a>) created earlier, and then setting 
     various attributes (such as fill color, stroke color, etc.) of these circle elements based on the data associated with
@@ -223,12 +360,38 @@ and options. */
     .attr("stroke-width", strokeWidth)
     .attr("stroke-opacity", strokeOpacity)
     .attr("r", d => d.r)
+    .style("cursor", "grab") // Set cursor style to grab
     .on("mouseover", (event) => {
       d3.select(event.currentTarget).attr("stroke-width", 5);
     })
     .on("mouseout", (event) => {
       d3.select(event.currentTarget).attr("stroke-width", d => d.children ? strokeWidth : null);
-    });
+    })
+    .on("click", (event, d) => {
+      //take the data in this node and pass it to the state of D3 parent component to render the node data modal
+      onNodeClick(d.data);
+    })
+    .on("dblclick", (event, d) => zoomToNode(event, d));    
+  
+    function zoomToNode(event, d) {
+      const zoomLevel = width/(2*d.r + 40); // Adjust this value to control the zoom level
+      const centerX = d.x; // Get the x-coordinate of the node
+      const centerY = d.y; // Get the y-coordinate of the node
+    
+      console.log('d=========>', d)
+      console.log('event=========>', event)
+      // Create a new zoom transformation with the desired zoom level and center
+      const newTransform = d3.zoomIdentity
+        .translate((width / 2 - centerX * zoomLevel),(height / 2 - centerY * zoomLevel))
+        .scale(zoomLevel)
+        // .translate(d.x-event.x,d.y-event.y);
+    
+      // Apply the new zoom transformation to the svg element
+      d3.select('svg g')
+        .transition()
+        .duration(1500) // Adjust the duration for a smoother animation
+        .attr('transform', newTransform);
+    }    
   
 
 
@@ -261,111 +424,35 @@ and options. */
       .attr("fill-opacity", (d, i, D) => (i === D.length - 1 ? 0.7 : null))
       .text((d) => d);
   }
-  
-  
 
-  return svg.node();
+  const simulation = d3.forceSimulation()
+    // .force("charge", d3.forceManyBody().strength(1)) // Nodes are attracted to each other if value is > 0
+    .force("collide", d3.forceCollide().strength(.1).radius(2)) // Force that avoids circle overlapping
+    .alphaDecay(0) // Disable alpha decay
+    .alpha(1); // Set initial alpha value
+
+  // Apply these forces to the nodes
+  simulation.nodes(leaves)
+    .on("tick", () => {
+      // Update node positions on each tick
+      node.attr("transform", d => `translate(${d.x},${d.y})`);
+    });
+
+
+  // return svg.node();
+  //returning the svg without rendering it, this solves the double render issue
+  return svg; 
 };
 
 
 
-// //Uncomment this if you want to use test data. 
-// const D3 = () => {
-//   const data = {
-//     name: "main-folder",
-//     children: [
-//       {
-//         name: "index1.js",
-//         value: 10,
-//         color: "#FF4433",
-//         dependencies: [
-//           {
-//             module: "./main-folder/index2.js",
-//             resolved: "Server/main-folder/index2.js",
-//             dependencyTypes: ["local", "import"],
-//             source: "index2.js" // Add source property
-//           }
-//         ]
-//       },
-//       {
-//         name: "index2.js",
-//         value: 15,
-//         color: "#FF4433",
-//         dependencies: [
-//           {
-//             module: "./main-folder/index1.js",
-//             resolved: "Server/main-folder/index1.js",
-//             dependencyTypes: ["local", "import"],
-//             source: "index1.js" // Add source property
-//           }
-//         ]
-//       },
-//       {
-//         name: "index3.js",
-//         value: 10,
-//         color: "#FF4433",
-//         dependencies: [
-//           {
-//             module: "./main-folder/index2.js",
-//             resolved: "Server/main-folder/index2.js",
-//             dependencyTypes: ["local", "import"],
-//             source: "index2.js" // Add source property
-//           }
-//         ]
-//       },
-//       {
-//         name: "index4.js",
-//         value: 29,
-//         color: "#FF4433",
-//         dependencies: [
-//           {
-//             module: "./main-folder/index2.js",
-//             resolved: "Server/main-folder/index2.js",
-//             dependencyTypes: ["local", "import"],
-//             source: "index3.js" // Add source property
-//           },
-//           {
-//             module: "./main-folder/index2.js",
-//             resolved: "Server/main-folder/index2.js",
-//             dependencyTypes: ["local", "import"],
-//             source: "index1.js" // Add source property
-//           },
-//           {
-//             module: "./main-folder/index2.js",
-//             resolved: "Server/main-folder/index2.js",
-//             dependencyTypes: ["local", "import"],
-//             source: "index2.js" // Add source property
-//           }
-//         ]
-//       }
-//     ]
-//   };
 
 
 
-  
 
-//   const options = {
-//     width: 500,
-//     height: 500,
-//     fill: "blue",
-//     fillOpacity: 0.5,
-//     stroke: "black",
-//     strokeWidth: 2,
-//     strokeOpacity: 0.7
-//     };
 
-//   return (
-//     <div className='d3'>
-//       <h1>Pack Chart</h1>
-//       <PackChart data={data} options={options}/>
-//     </div>
-//   );
-// };
 
-// export default D3;
-
-const D3 = ({ hierarchyData }) => {
+const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData }) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -374,11 +461,17 @@ const D3 = ({ hierarchyData }) => {
     }
   }, [hierarchyData]);
 
+  function handleNodeClick(nodeData) {
+    setClickedNodeData(nodeData);
+    setPopupShowing(!popupShowing);
+  }
+
   const options = {
-    width: 500,
-    height: 500,
+    width: 1000,
+    height: 820,
     fill: "#ddd",
     stroke: "#bbb",
+    onNodeClick: handleNodeClick
   };
 
   return (
@@ -391,3 +484,5 @@ const D3 = ({ hierarchyData }) => {
 };
 
 export default D3;
+
+

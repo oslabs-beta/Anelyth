@@ -57,29 +57,36 @@ const parseFileToAST = (filePath) => {
 
 ASTParseController.parse = async (req, res, next) => {
   try {
-    // Check if uploads directory exists
+    // CHECK IF REPO HAS BEEN UPLOADED
     const uploadsPath = './Server/temp-file-upload';
     if (!fs.existsSync(uploadsPath)) {
       throw new Error(`Directory ${uploadsPath} does not exist.`);
     }
 
-    const backendFilePaths = []; // Array for backend file paths
+    const backendFilePaths = []; // ARRAY FOR BACKEND FILE PATHS
 
-    // Function to traverse and parse files
+    // TRAVERSE AND PARSE
     const traverseAndParse = async (dirPath) => {
+      // STORE ASTS OF ALL FILES
       const asts = [];
+      // GET ALL FILES IN DIRECTORY
       const files = await fs.promises.readdir(dirPath);
 
+      // ITERATE THROUGH FILES
       for (const file of files) {
         const filePath = path.join(dirPath, file);
+        // RETRIEVE METADATA OF FILE FOR CHECKING IF DIRECTORY
         const stat = await fs.promises.stat(filePath);
 
         if (stat.isDirectory()) {
+          // RECURSIVELY TRAVERSE SUBDIRECTORIES
           const subAsts = await traverseAndParse(filePath);
           asts.push(...subAsts);
+          // CHECK AND PUSH INTO BACKEND ARRAY
         } else if (path.extname(filePath).toLowerCase() === '.js' && !isFrontendFile(filePath)) {
-          backendFilePaths.push(filePath); // Add to backend file paths
+          backendFilePaths.push(filePath);
           try {
+            // PARSE FILE TO AST
             const ast = await parseFileToAST(filePath);
             asts.push({ filePath, ast });
           } catch (parseErr) {
@@ -91,13 +98,13 @@ ASTParseController.parse = async (req, res, next) => {
       return asts;
     };
 
-    // Get all parsed files
+    // GET ASTS OF ALL FILES
     const parsedFiles = await traverseAndParse(uploadsPath);
 
-    // Filter parsedFiles to include only backend files
-    const backendFileASTs = parsedFiles.filter(file => backendFilePaths.includes(file.filePath));
+    // FILTER OUT FRONTEND FILES
+    // const backendFileASTs = parsedFiles.filter(file => backendFilePaths.includes(file.filePath));
 
-    // Attach filtered ASTs to res.locals
+    // ADD TO RES.LOCALS
     res.locals.backendFileASTs = backendFileASTs;
 
     console.log("Backend Files in AST-Parse-Controller:", backendFilePaths);
