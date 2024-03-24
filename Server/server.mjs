@@ -1,8 +1,8 @@
-// const fs = require('fs');
-// const esprima = require('esprima');
-import path from "path";
-import express from "express";
-import cookieParser from "cookie-parser";
+import fs from 'fs';
+import esprima from 'esprima';
+import path from 'path';
+import express from 'express';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 const port = 3000;
@@ -12,7 +12,8 @@ import FileController from "./Controllers/FileController.cjs";
 import DCController from "./Controllers/DCController.mjs";
 import S3Controller from "./Controllers/S3Controller.mjs";
 import DBController from "./Controllers/DBController.cjs";
-import ASTController from "./Controllers/ASTController.mjs";
+import ASTParseController from "./Controllers/ASTParseController.mjs";
+import ASTDbQueryController from "./Controllers/ASTDbQueryController.mjs";
 import SessionController from "./Controllers/SessionController.cjs";
 
 app.use(express.json());
@@ -40,8 +41,8 @@ app.post('/api/signup',
 app.post('/api/fileupload',
     FileController.upload,
     DCController.analyze,
-    ASTController.parse,
-    ASTController.query,
+    ASTParseController.parse,
+    ASTDbQueryController.query,
     FileController.deleteDir,
     // S3Controller.upload,
     (req, res) => {
