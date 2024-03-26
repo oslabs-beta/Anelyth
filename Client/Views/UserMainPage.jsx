@@ -49,7 +49,7 @@ function UserMainPage() {
       <div className='visual-container'>
         <RepoUpload popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} />
         <div className='info-panel'>
-          {popupShowing && <NodeInfoModal data={clickedNodeData}/>}
+          {popupShowing && clickedNodeData.dependencies && <NodeInfoModal data={clickedNodeData}/>}
         </div>
       </div>
     </div>
