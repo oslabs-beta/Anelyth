@@ -1,0 +1,560 @@
+{
+  "name": "unit-11SB-auth",
+  "type": "directory",
+  "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth",
+  "children": [
+    {
+      "name": ".eslintrc.json",
+      "type": "file",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/.eslintrc.json"
+    },
+    {
+      "name": "README.md",
+      "type": "file",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/README.md"
+    },
+    {
+      "name": "client",
+      "type": "directory",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/client",
+      "children": [
+        {
+          "name": "index.html",
+          "type": "file",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/client/index.html"
+        },
+        {
+          "name": "main.js",
+          "type": "file",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/client/main.js",
+          "children": [],
+          "info": {
+            "fileSize": "test",
+            "linesOfCode": 36,
+            "complexity": 4,
+            "dependents": "test",
+            "dependencies": "test"
+          },
+          "deepInfo": {
+            "circularDependencies": "test",
+            "orphan": "teset",
+            "funcDecName": {
+              "arguments": [
+                "test"
+              ],
+              "returnValues": "test",
+              "calle": "test",
+              "orphan": "test"
+            },
+            "funcExpName": {
+              "arguments": [
+                "test"
+              ],
+              "returnValues": "test",
+              "calle": "test",
+              "orphan": "test"
+            },
+            "classDecName": "test",
+            "classDecValue": "test",
+            "memberExpObjName": "test",
+            "memberExpPropName": "test"
+          },
+          "dbInfo": {
+            "dbType": "test",
+            "dbQuery": "test",
+            "dbQueryType": "test",
+            "dbQueryValue": "test",
+            "dbQueryReturn": "test"
+          },
+          "apiInfo": {
+            "apiType": "test",
+            "apiEndpoint": "test",
+            "apiMethod": "test",
+            "apiRequest": "test"
+          }
+        }
+      ]
+    },
+    {
+      "name": "data",
+      "type": "directory",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/data",
+      "children": [
+        {
+          "name": "messages.js",
+          "type": "file",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/data/messages.js",
+          "children": [],
+          "info": {
+            "fileSize": "test",
+            "linesOfCode": 10,
+            "complexity": 1,
+            "dependents": "test",
+            "dependencies": "test"
+          },
+          "deepInfo": {
+            "circularDependencies": "test",
+            "orphan": "teset",
+            "funcDecName": {
+              "arguments": [
+                "test"
+              ],
+              "returnValues": "test",
+              "calle": "test",
+              "orphan": "test"
+            },
+            "funcExpName": {
+              "arguments": [
+                "test"
+              ],
+              "returnValues": "test",
+              "calle": "test",
+              "orphan": "test"
+            },
+            "classDecName": "test",
+            "classDecValue": "test",
+            "memberExpObjName": "test",
+            "memberExpPropName": "test"
+          },
+          "dbInfo": {
+            "dbType": "test",
+            "dbQuery": "test",
+            "dbQueryType": "test",
+            "dbQueryValue": "test",
+            "dbQueryReturn": "test"
+          },
+          "apiInfo": {
+            "apiType": "test",
+            "apiEndpoint": "test",
+            "apiMethod": "test",
+            "apiRequest": "test"
+          }
+        }
+      ]
+    },
+    {
+      "name": "docs",
+      "type": "directory",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/docs",
+      "children": [
+        {
+          "name": "assets",
+          "type": "directory",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/docs/assets",
+          "children": [
+            {
+              "name": "images",
+              "type": "directory",
+              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/docs/assets/images",
+              "children": [
+                {
+                  "name": "authorizationheader.jpg",
+                  "type": "file",
+                  "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/docs/assets/images/authorizationheader.jpg"
+                },
+                {
+                  "name": "headerstruct.png",
+                  "type": "file",
+                  "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/docs/assets/images/headerstruct.png"
+                },
+                {
+                  "name": "middleware.png",
+                  "type": "file",
+                  "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/docs/assets/images/middleware.png"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "package-lock.json",
+      "type": "file",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/package-lock.json"
+    },
+    {
+      "name": "package.json",
+      "type": "file",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/package.json"
+    },
+    {
+      "name": "server",
+      "type": "directory",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/server",
+      "children": [
+        {
+          "name": "messages",
+          "type": "directory",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/server/messages",
+          "children": [
+            {
+              "name": "messageController.js",
+              "type": "file",
+              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/server/messages/messageController.js",
+              "children": [],
+              "info": {
+                "fileSize": "test",
+                "linesOfCode": 16,
+                "complexity": 2,
+                "dependents": "test",
+                "dependencies": "test"
+              },
+              "deepInfo": {
+                "circularDependencies": "test",
+                "orphan": "teset",
+                "funcDecName": {
+                  "arguments": [
+                    "test"
+                  ],
+                  "returnValues": "test",
+                  "calle": "test",
+                  "orphan": "test"
+                },
+                "funcExpName": {
+                  "arguments": [
+                    "test"
+                  ],
+                  "returnValues": "test",
+                  "calle": "test",
+                  "orphan": "test"
+                },
+                "classDecName": "test",
+                "classDecValue": "test",
+                "memberExpObjName": "test",
+                "memberExpPropName": "test"
+              },
+              "dbInfo": {
+                "dbType": "test",
+                "dbQuery": "test",
+                "dbQueryType": "test",
+                "dbQueryValue": "test",
+                "dbQueryReturn": "test"
+              },
+              "apiInfo": {
+                "apiType": "test",
+                "apiEndpoint": "test",
+                "apiMethod": "test",
+                "apiRequest": "test"
+              }
+            }
+          ]
+        },
+        {
+          "name": "server.js",
+          "type": "file",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/server/server.js",
+          "children": [],
+          "info": {
+            "fileSize": "test",
+            "linesOfCode": 13,
+            "complexity": 1,
+            "dependents": "test",
+            "dependencies": "test"
+          },
+          "deepInfo": {
+            "circularDependencies": "test",
+            "orphan": "teset",
+            "funcDecName": {
+              "arguments": [
+                "test"
+              ],
+              "returnValues": "test",
+              "calle": "test",
+              "orphan": "test"
+            },
+            "funcExpName": {
+              "arguments": [
+                "test"
+              ],
+              "returnValues": "test",
+              "calle": "test",
+              "orphan": "test"
+            },
+            "classDecName": "test",
+            "classDecValue": "test",
+            "memberExpObjName": "test",
+            "memberExpPropName": "test"
+          },
+          "dbInfo": {
+            "dbType": "test",
+            "dbQuery": "test",
+            "dbQueryType": "test",
+            "dbQueryValue": "test",
+            "dbQueryReturn": "test"
+          },
+          "apiInfo": {
+            "apiType": "test",
+            "apiEndpoint": "test",
+            "apiMethod": "test",
+            "apiRequest": "test"
+          }
+        },
+        {
+          "name": "utils",
+          "type": "directory",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/server/utils",
+          "children": [
+            {
+              "name": "authController.js",
+              "type": "file",
+              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/server/utils/authController.js",
+              "children": [],
+              "info": {
+                "fileSize": "test",
+                "linesOfCode": 9,
+                "complexity": 2,
+                "dependents": "test",
+                "dependencies": "test"
+              },
+              "deepInfo": {
+                "circularDependencies": "test",
+                "orphan": "teset",
+                "funcDecName": {
+                  "arguments": [
+                    "test"
+                  ],
+                  "returnValues": "test",
+                  "calle": "test",
+                  "orphan": "test"
+                },
+                "funcExpName": {
+                  "arguments": [
+                    "test"
+                  ],
+                  "returnValues": "test",
+                  "calle": "test",
+                  "orphan": "test"
+                },
+                "classDecName": "test",
+                "classDecValue": "test",
+                "memberExpObjName": "test",
+                "memberExpPropName": "test"
+              },
+              "dbInfo": {
+                "dbType": "test",
+                "dbQuery": "test",
+                "dbQueryType": "test",
+                "dbQueryValue": "test",
+                "dbQueryReturn": "test"
+              },
+              "apiInfo": {
+                "apiType": "test",
+                "apiEndpoint": "test",
+                "apiMethod": "test",
+                "apiRequest": "test"
+              }
+            },
+            {
+              "name": "denied.js",
+              "type": "file",
+              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/server/utils/denied.js",
+              "children": [],
+              "info": {
+                "fileSize": "test",
+                "linesOfCode": 3,
+                "complexity": 1,
+                "dependents": "test",
+                "dependencies": "test"
+              },
+              "deepInfo": {
+                "circularDependencies": "test",
+                "orphan": "teset",
+                "funcDecName": {
+                  "arguments": [
+                    "test"
+                  ],
+                  "returnValues": "test",
+                  "calle": "test",
+                  "orphan": "test"
+                },
+                "funcExpName": {
+                  "arguments": [
+                    "test"
+                  ],
+                  "returnValues": "test",
+                  "calle": "test",
+                  "orphan": "test"
+                },
+                "classDecName": "test",
+                "classDecValue": "test",
+                "memberExpObjName": "test",
+                "memberExpPropName": "test"
+              },
+              "dbInfo": {
+                "dbType": "test",
+                "dbQuery": "test",
+                "dbQueryType": "test",
+                "dbQueryValue": "test",
+                "dbQueryReturn": "test"
+              },
+              "apiInfo": {
+                "apiType": "test",
+                "apiEndpoint": "test",
+                "apiMethod": "test",
+                "apiRequest": "test"
+              }
+            },
+            {
+              "name": "error.js",
+              "type": "file",
+              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/server/utils/error.js",
+              "children": [],
+              "info": {
+                "fileSize": "test",
+                "linesOfCode": 3,
+                "complexity": 1,
+                "dependents": "test",
+                "dependencies": "test"
+              },
+              "deepInfo": {
+                "circularDependencies": "test",
+                "orphan": "teset",
+                "funcDecName": {
+                  "arguments": [
+                    "test"
+                  ],
+                  "returnValues": "test",
+                  "calle": "test",
+                  "orphan": "test"
+                },
+                "funcExpName": {
+                  "arguments": [
+                    "test"
+                  ],
+                  "returnValues": "test",
+                  "calle": "test",
+                  "orphan": "test"
+                },
+                "classDecName": "test",
+                "classDecValue": "test",
+                "memberExpObjName": "test",
+                "memberExpPropName": "test"
+              },
+              "dbInfo": {
+                "dbType": "test",
+                "dbQuery": "test",
+                "dbQueryType": "test",
+                "dbQueryValue": "test",
+                "dbQueryReturn": "test"
+              },
+              "apiInfo": {
+                "apiType": "test",
+                "apiEndpoint": "test",
+                "apiMethod": "test",
+                "apiRequest": "test"
+              }
+            },
+            {
+              "name": "success.js",
+              "type": "file",
+              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/server/utils/success.js",
+              "children": [],
+              "info": {
+                "fileSize": "test",
+                "linesOfCode": 3,
+                "complexity": 1,
+                "dependents": "test",
+                "dependencies": "test"
+              },
+              "deepInfo": {
+                "circularDependencies": "test",
+                "orphan": "teset",
+                "funcDecName": {
+                  "arguments": [
+                    "test"
+                  ],
+                  "returnValues": "test",
+                  "calle": "test",
+                  "orphan": "test"
+                },
+                "funcExpName": {
+                  "arguments": [
+                    "test"
+                  ],
+                  "returnValues": "test",
+                  "calle": "test",
+                  "orphan": "test"
+                },
+                "classDecName": "test",
+                "classDecValue": "test",
+                "memberExpObjName": "test",
+                "memberExpPropName": "test"
+              },
+              "dbInfo": {
+                "dbType": "test",
+                "dbQuery": "test",
+                "dbQueryType": "test",
+                "dbQueryValue": "test",
+                "dbQueryReturn": "test"
+              },
+              "apiInfo": {
+                "apiType": "test",
+                "apiEndpoint": "test",
+                "apiMethod": "test",
+                "apiRequest": "test"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "test",
+      "type": "directory",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/test",
+      "children": [
+        {
+          "name": "index.js",
+          "type": "file",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/test/index.js",
+          "children": [],
+          "info": {
+            "fileSize": "test",
+            "linesOfCode": 70,
+            "complexity": 1,
+            "dependents": "test",
+            "dependencies": "test"
+          },
+          "deepInfo": {
+            "circularDependencies": "test",
+            "orphan": "teset",
+            "funcDecName": {
+              "arguments": [
+                "test"
+              ],
+              "returnValues": "test",
+              "calle": "test",
+              "orphan": "test"
+            },
+            "funcExpName": {
+              "arguments": [
+                "test"
+              ],
+              "returnValues": "test",
+              "calle": "test",
+              "orphan": "test"
+            },
+            "classDecName": "test",
+            "classDecValue": "test",
+            "memberExpObjName": "test",
+            "memberExpPropName": "test"
+          },
+          "dbInfo": {
+            "dbType": "test",
+            "dbQuery": "test",
+            "dbQueryType": "test",
+            "dbQueryValue": "test",
+            "dbQueryReturn": "test"
+          },
+          "apiInfo": {
+            "apiType": "test",
+            "apiEndpoint": "test",
+            "apiMethod": "test",
+            "apiRequest": "test"
+          }
+        }
+      ]
+    }
+  ]
+}
