@@ -32,12 +32,11 @@
             "fileSize": 1150,
             "linesOfCode": 36,
             "complexity": 4,
-            "dependents": "test",
-            "dependencies": "test"
+            "dependents": [],
+            "dependencies": []
           },
           "deepInfo": {
-            "circularDependencies": "test",
-            "orphan": "teset",
+            "orphan": true,
             "funcDecName": {
               "arguments": [
                 "test"
@@ -89,12 +88,13 @@
             "fileSize": 552,
             "linesOfCode": 10,
             "complexity": 1,
-            "dependents": "test",
-            "dependencies": "test"
+            "dependents": [
+              "Server/temp-file-upload/unit-11SB-auth/server/messages/messageController.js"
+            ],
+            "dependencies": []
           },
           "deepInfo": {
-            "circularDependencies": "test",
-            "orphan": "teset",
+            "orphan": false,
             "funcDecName": {
               "arguments": [
                 "test"
@@ -197,12 +197,65 @@
                 "fileSize": 633,
                 "linesOfCode": 16,
                 "complexity": 2,
-                "dependents": "test",
-                "dependencies": "test"
+                "dependents": [
+                  "Server/temp-file-upload/unit-11SB-auth/server/server.js"
+                ],
+                "dependencies": [
+                  {
+                    "module": "./../../data/messages",
+                    "moduleSystem": "cjs",
+                    "dynamic": false,
+                    "exoticallyRequired": false,
+                    "dependencyTypes": [
+                      "local",
+                      "require"
+                    ],
+                    "resolved": "Server/temp-file-upload/unit-11SB-auth/data/messages.js",
+                    "coreModule": false,
+                    "followable": true,
+                    "couldNotResolve": false,
+                    "matchesDoNotFollow": false,
+                    "circular": false,
+                    "valid": true
+                  },
+                  {
+                    "module": "./../utils/error.js",
+                    "moduleSystem": "cjs",
+                    "dynamic": false,
+                    "exoticallyRequired": false,
+                    "dependencyTypes": [
+                      "local",
+                      "require"
+                    ],
+                    "resolved": "Server/temp-file-upload/unit-11SB-auth/server/utils/error.js",
+                    "coreModule": false,
+                    "followable": true,
+                    "couldNotResolve": false,
+                    "matchesDoNotFollow": false,
+                    "circular": false,
+                    "valid": true
+                  },
+                  {
+                    "module": "./../utils/success.js",
+                    "moduleSystem": "cjs",
+                    "dynamic": false,
+                    "exoticallyRequired": false,
+                    "dependencyTypes": [
+                      "local",
+                      "require"
+                    ],
+                    "resolved": "Server/temp-file-upload/unit-11SB-auth/server/utils/success.js",
+                    "coreModule": false,
+                    "followable": true,
+                    "couldNotResolve": false,
+                    "matchesDoNotFollow": false,
+                    "circular": false,
+                    "valid": true
+                  }
+                ]
               },
               "deepInfo": {
-                "circularDependencies": "test",
-                "orphan": "teset",
+                "orphan": false,
                 "funcDecName": {
                   "arguments": [
                     "test"
@@ -249,12 +302,65 @@
             "fileSize": 555,
             "linesOfCode": 13,
             "complexity": 1,
-            "dependents": "test",
-            "dependencies": "test"
+            "dependents": [
+              "Server/temp-file-upload/unit-11SB-auth/test/index.js"
+            ],
+            "dependencies": [
+              {
+                "module": "./messages/messageController",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "local",
+                  "require"
+                ],
+                "resolved": "Server/temp-file-upload/unit-11SB-auth/server/messages/messageController.js",
+                "coreModule": false,
+                "followable": true,
+                "couldNotResolve": false,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              },
+              {
+                "module": "./utils/authController",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "local",
+                  "require"
+                ],
+                "resolved": "Server/temp-file-upload/unit-11SB-auth/server/utils/authController.js",
+                "coreModule": false,
+                "followable": true,
+                "couldNotResolve": false,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              },
+              {
+                "module": "path",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "core",
+                  "require"
+                ],
+                "resolved": "path",
+                "coreModule": true,
+                "followable": false,
+                "couldNotResolve": false,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              }
+            ]
           },
           "deepInfo": {
-            "circularDependencies": "test",
-            "orphan": "teset",
+            "orphan": false,
             "funcDecName": {
               "arguments": [
                 "test"
@@ -304,12 +410,31 @@
                 "fileSize": 278,
                 "linesOfCode": 9,
                 "complexity": 2,
-                "dependents": "test",
-                "dependencies": "test"
+                "dependents": [
+                  "Server/temp-file-upload/unit-11SB-auth/server/server.js"
+                ],
+                "dependencies": [
+                  {
+                    "module": "./denied",
+                    "moduleSystem": "cjs",
+                    "dynamic": false,
+                    "exoticallyRequired": false,
+                    "dependencyTypes": [
+                      "local",
+                      "require"
+                    ],
+                    "resolved": "Server/temp-file-upload/unit-11SB-auth/server/utils/denied.js",
+                    "coreModule": false,
+                    "followable": true,
+                    "couldNotResolve": false,
+                    "matchesDoNotFollow": false,
+                    "circular": false,
+                    "valid": true
+                  }
+                ]
               },
               "deepInfo": {
-                "circularDependencies": "test",
-                "orphan": "teset",
+                "orphan": false,
                 "funcDecName": {
                   "arguments": [
                     "test"
@@ -354,12 +479,13 @@
                 "fileSize": 59,
                 "linesOfCode": 3,
                 "complexity": 1,
-                "dependents": "test",
-                "dependencies": "test"
+                "dependents": [
+                  "Server/temp-file-upload/unit-11SB-auth/server/utils/authController.js"
+                ],
+                "dependencies": []
               },
               "deepInfo": {
-                "circularDependencies": "test",
-                "orphan": "teset",
+                "orphan": false,
                 "funcDecName": {
                   "arguments": [
                     "test"
@@ -404,12 +530,13 @@
                 "fileSize": 67,
                 "linesOfCode": 3,
                 "complexity": 1,
-                "dependents": "test",
-                "dependencies": "test"
+                "dependents": [
+                  "Server/temp-file-upload/unit-11SB-auth/server/messages/messageController.js"
+                ],
+                "dependencies": []
               },
               "deepInfo": {
-                "circularDependencies": "test",
-                "orphan": "teset",
+                "orphan": false,
                 "funcDecName": {
                   "arguments": [
                     "test"
@@ -454,12 +581,13 @@
                 "fileSize": 67,
                 "linesOfCode": 3,
                 "complexity": 1,
-                "dependents": "test",
-                "dependencies": "test"
+                "dependents": [
+                  "Server/temp-file-upload/unit-11SB-auth/server/messages/messageController.js"
+                ],
+                "dependencies": []
               },
               "deepInfo": {
-                "circularDependencies": "test",
-                "orphan": "teset",
+                "orphan": false,
                 "funcDecName": {
                   "arguments": [
                     "test"
@@ -513,12 +641,61 @@
             "fileSize": 4201,
             "linesOfCode": 70,
             "complexity": 1,
-            "dependents": "test",
-            "dependencies": "test"
+            "dependents": [],
+            "dependencies": [
+              {
+                "module": "./../server/server",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "local",
+                  "require"
+                ],
+                "resolved": "Server/temp-file-upload/unit-11SB-auth/server/server.js",
+                "coreModule": false,
+                "followable": true,
+                "couldNotResolve": false,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              },
+              {
+                "module": "chai",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "unknown"
+                ],
+                "resolved": "chai",
+                "coreModule": false,
+                "followable": false,
+                "couldNotResolve": true,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              },
+              {
+                "module": "supertest",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "unknown"
+                ],
+                "resolved": "supertest",
+                "coreModule": false,
+                "followable": false,
+                "couldNotResolve": true,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              }
+            ]
           },
           "deepInfo": {
-            "circularDependencies": "test",
-            "orphan": "teset",
+            "orphan": false,
             "funcDecName": {
               "arguments": [
                 "test"

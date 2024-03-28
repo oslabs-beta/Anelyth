@@ -13,6 +13,8 @@ DataController.superStructure = async (req, res, next) => {
     console.log('in DataController.superStructure')
 
     let superStructure = {};
+    const dcdata = res.locals.depResult;
+    // console.log('dcdata: ',dcdata)
     
     const filePath = path.resolve(__dirname, '../temp-file-upload');
 
@@ -22,8 +24,9 @@ DataController.superStructure = async (req, res, next) => {
     const codeHierarchy = hierarchy.children[0];
     // console.log('total hierarchy: ', codeHierarchy);
 
-    superStructure = await traverseHierarchy(codeHierarchy);
-    console.log('super structure: ',superStructure);
+    superStructure = await traverseHierarchy(codeHierarchy, dcdata);
+    // console.log('super structure: ',superStructure);
+
     // temp log of super structure
     const logFilePath = './super-structure.log';
     const logStream = fs.createWriteStream(logFilePath);
@@ -171,7 +174,10 @@ function buildHierarchy(filePath, level = 0) {
 // }
 
 
-async function traverseHierarchy(node) {
+async function traverseHierarchy(node, dcdata) {
+  // console.log('data from dcdata: ',dcdata)
+  // console.log(node.path)
+
   if (!node) {
     return null;
   }
@@ -184,6 +190,7 @@ async function traverseHierarchy(node) {
     };
   }
 
+
   const newNode = {
     name: node.name,
     type: node.children ? 'directory' : 'file',
@@ -192,23 +199,26 @@ async function traverseHierarchy(node) {
   };
 
   if (node.children) {
-    newNode.children = await Promise.all(node.children.map(async child => await traverseHierarchy(child)));
+    newNode.children = await Promise.all(node.children.map(async child => await traverseHierarchy(child,dcdata)));
   } else {
 
+    // CALL HELPER FUNCS TO GET DATA 
     const complexityAndLines = await getComplexityAndLinesOfCode(node.path);
     const size = await getFileSize(node.path);
-    console.log('size: ', size);
+    const dependentsAndDependencies = await getDependenciesAndDependents(node.path, dcdata)
+    // console.log(dependentsAndDependencies)
+    
+  
 
     newNode.info = {
       fileSize: size, 
       linesOfCode: complexityAndLines.linesOfCode,
       complexity: complexityAndLines.complexity,
-      dependents: 'test',
-      dependencies: 'test', 
+      dependents: dependentsAndDependencies.dependents,
+      dependencies: dependentsAndDependencies.dependencies, 
     };
     newNode.deepInfo = {
-            circularDependencies: 'test',
-            orphan: 'teset',
+            orphan: dependentsAndDependencies.orphan,
             funcDecName: {
               arguments: ['test'],
               returnValues: 'test',
@@ -279,6 +289,15 @@ async function getComplexityAndLinesOfCode (filePath) {
     linesOfCode: linesOfCode,
     complexity: complexity
   };
+}
+
+
+// GET DEPENDENCIES AND DEPENDENTS FUNCTION
+function getDependenciesAndDependents(filePath, dcdata) {
+  // console.log('curr lower file ',filePath.toLowerCase())
+  nodeData = dcdata.modules.filter(el => filePath.toLowerCase().includes(el.source.toLowerCase()));
+  console.log('nodeData: ',nodeData[0].dependencies)
+  return nodeData[0];
 }
 
 module.exports =  DataController;
