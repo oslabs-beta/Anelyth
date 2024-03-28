@@ -29,7 +29,7 @@
           "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/client/main.js",
           "children": [],
           "info": {
-            "fileSize": "test",
+            "fileSize": 1150,
             "linesOfCode": 36,
             "complexity": 4,
             "dependents": "test",
@@ -86,7 +86,7 @@
           "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/data/messages.js",
           "children": [],
           "info": {
-            "fileSize": "test",
+            "fileSize": 552,
             "linesOfCode": 10,
             "complexity": 1,
             "dependents": "test",
@@ -194,7 +194,7 @@
               "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/server/messages/messageController.js",
               "children": [],
               "info": {
-                "fileSize": "test",
+                "fileSize": 633,
                 "linesOfCode": 16,
                 "complexity": 2,
                 "dependents": "test",
@@ -246,7 +246,7 @@
           "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/server/server.js",
           "children": [],
           "info": {
-            "fileSize": "test",
+            "fileSize": 555,
             "linesOfCode": 13,
             "complexity": 1,
             "dependents": "test",
@@ -301,7 +301,7 @@
               "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/server/utils/authController.js",
               "children": [],
               "info": {
-                "fileSize": "test",
+                "fileSize": 278,
                 "linesOfCode": 9,
                 "complexity": 2,
                 "dependents": "test",
@@ -351,7 +351,7 @@
               "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/server/utils/denied.js",
               "children": [],
               "info": {
-                "fileSize": "test",
+                "fileSize": 59,
                 "linesOfCode": 3,
                 "complexity": 1,
                 "dependents": "test",
@@ -401,7 +401,7 @@
               "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/server/utils/error.js",
               "children": [],
               "info": {
-                "fileSize": "test",
+                "fileSize": 67,
                 "linesOfCode": 3,
                 "complexity": 1,
                 "dependents": "test",
@@ -451,7 +451,7 @@
               "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/server/utils/success.js",
               "children": [],
               "info": {
-                "fileSize": "test",
+                "fileSize": 67,
                 "linesOfCode": 3,
                 "complexity": 1,
                 "dependents": "test",
@@ -510,7 +510,7 @@
           "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/unit-11SB-auth/test/index.js",
           "children": [],
           "info": {
-            "fileSize": "test",
+            "fileSize": 4201,
             "linesOfCode": 70,
             "complexity": 1,
             "dependents": "test",

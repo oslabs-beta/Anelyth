@@ -194,9 +194,13 @@ async function traverseHierarchy(node) {
   if (node.children) {
     newNode.children = await Promise.all(node.children.map(async child => await traverseHierarchy(child)));
   } else {
+
     const complexityAndLines = await getComplexityAndLinesOfCode(node.path);
+    const size = await getFileSize(node.path);
+    console.log('size: ', size);
+
     newNode.info = {
-      fileSize: 'test', 
+      fileSize: size, 
       linesOfCode: complexityAndLines.linesOfCode,
       complexity: complexityAndLines.complexity,
       dependents: 'test',
@@ -244,7 +248,12 @@ async function traverseHierarchy(node) {
 
 
 
-
+// GET FILE SIZE FUNCTION
+function getFileSize(filePath) {
+  const stats = fs.statSync(filePath);
+  const fileSizeInBytes = stats.size;
+  return fileSizeInBytes;
+}
 
 
 // GET COMPLEXITY AND LINES OF CODE FUNCTION
