@@ -67,7 +67,11 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData }) {
       </div>
 
       <div className='d3-visual-container'>
+        {hierarchyData === null ? (
+          <h1>Upload A Repository</h1>
+        ) : (
         <D3 hierarchyData={hierarchyData} popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} />
+        )}
       </div>
 
     </div>
