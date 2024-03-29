@@ -59,15 +59,28 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData }) {
     <>
     <div className='repo-upload-main'>
 
-      <div className="form-example">
+      {/* <div className="form-example">
         <form onSubmit={apiCall}>
           <input type="file" name="file" id="file" multiple webkitdirectory="true" />
           <button type="submit" id="submit-btn">Submit</button>
         </form>
-      </div>
+      </div> */}
 
       <div className='d3-visual-container'>
+        {hierarchyData === null ? (
+          <div className='upload-repo-container'>
+            <h1 className='upload-alert'>Upload A Repository</h1>
+            <div className="form-example">
+              <form onSubmit={apiCall}>
+                <input type="file" name="file" id="file" multiple webkitdirectory="true" />
+                <button type="submit" id="submit-btn">Submit</button>
+              </form>
+            </div>
+          </div>
+          
+        ) : (
         <D3 hierarchyData={hierarchyData} popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} />
+        )}
       </div>
 
     </div>
