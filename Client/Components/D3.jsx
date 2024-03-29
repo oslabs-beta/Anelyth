@@ -476,8 +476,10 @@ const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData }
 
   return (
     <div className="d3">
-      <h1>Pack Chart</h1>
-      <Legend /> {/* Include the Legend component */}
+      <div className='d3-title-container'>
+        <h1>Repository Overview</h1>
+        <Legend /> {/* Include the Legend component */}
+      </div>
       {data && <PackChart data={data} options={options} />}
     </div>
   );
