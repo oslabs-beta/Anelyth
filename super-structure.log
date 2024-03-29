@@ -37,26 +37,11 @@
           },
           "deepInfo": {
             "orphan": true,
-            "funcDecName": {
-              "arguments": [
-                "test"
-              ],
-              "returnValues": "test",
-              "calle": "test",
-              "orphan": "test"
-            },
-            "funcExpName": {
-              "arguments": [
-                "test"
-              ],
-              "returnValues": "test",
-              "calle": "test",
-              "orphan": "test"
-            },
-            "classDecName": "test",
-            "classDecValue": "test",
-            "memberExpObjName": "test",
-            "memberExpPropName": "test"
+            "funcDecName": [],
+            "funcExpressions": [],
+            "classDeclarations": [],
+            "callExpressions": [],
+            "memberExpressions": []
           },
           "dbInfo": {
             "dbType": "test",
@@ -95,26 +80,11 @@
           },
           "deepInfo": {
             "orphan": false,
-            "funcDecName": {
-              "arguments": [
-                "test"
-              ],
-              "returnValues": "test",
-              "calle": "test",
-              "orphan": "test"
-            },
-            "funcExpName": {
-              "arguments": [
-                "test"
-              ],
-              "returnValues": "test",
-              "calle": "test",
-              "orphan": "test"
-            },
-            "classDecName": "test",
-            "classDecValue": "test",
-            "memberExpObjName": "test",
-            "memberExpPropName": "test"
+            "funcDecName": [],
+            "funcExpressions": [],
+            "classDeclarations": [],
+            "callExpressions": [],
+            "memberExpressions": []
           },
           "dbInfo": {
             "dbType": "test",
@@ -256,26 +226,11 @@
               },
               "deepInfo": {
                 "orphan": false,
-                "funcDecName": {
-                  "arguments": [
-                    "test"
-                  ],
-                  "returnValues": "test",
-                  "calle": "test",
-                  "orphan": "test"
-                },
-                "funcExpName": {
-                  "arguments": [
-                    "test"
-                  ],
-                  "returnValues": "test",
-                  "calle": "test",
-                  "orphan": "test"
-                },
-                "classDecName": "test",
-                "classDecValue": "test",
-                "memberExpObjName": "test",
-                "memberExpPropName": "test"
+                "funcDecName": [],
+                "funcExpressions": [],
+                "classDeclarations": [],
+                "callExpressions": [],
+                "memberExpressions": []
               },
               "dbInfo": {
                 "dbType": "test",
@@ -361,26 +316,11 @@
           },
           "deepInfo": {
             "orphan": false,
-            "funcDecName": {
-              "arguments": [
-                "test"
-              ],
-              "returnValues": "test",
-              "calle": "test",
-              "orphan": "test"
-            },
-            "funcExpName": {
-              "arguments": [
-                "test"
-              ],
-              "returnValues": "test",
-              "calle": "test",
-              "orphan": "test"
-            },
-            "classDecName": "test",
-            "classDecValue": "test",
-            "memberExpObjName": "test",
-            "memberExpPropName": "test"
+            "funcDecName": [],
+            "funcExpressions": [],
+            "classDeclarations": [],
+            "callExpressions": [],
+            "memberExpressions": []
           },
           "dbInfo": {
             "dbType": "test",
@@ -435,26 +375,11 @@
               },
               "deepInfo": {
                 "orphan": false,
-                "funcDecName": {
-                  "arguments": [
-                    "test"
-                  ],
-                  "returnValues": "test",
-                  "calle": "test",
-                  "orphan": "test"
-                },
-                "funcExpName": {
-                  "arguments": [
-                    "test"
-                  ],
-                  "returnValues": "test",
-                  "calle": "test",
-                  "orphan": "test"
-                },
-                "classDecName": "test",
-                "classDecValue": "test",
-                "memberExpObjName": "test",
-                "memberExpPropName": "test"
+                "funcDecName": [],
+                "funcExpressions": [],
+                "classDeclarations": [],
+                "callExpressions": [],
+                "memberExpressions": []
               },
               "dbInfo": {
                 "dbType": "test",
@@ -486,26 +411,11 @@
               },
               "deepInfo": {
                 "orphan": false,
-                "funcDecName": {
-                  "arguments": [
-                    "test"
-                  ],
-                  "returnValues": "test",
-                  "calle": "test",
-                  "orphan": "test"
-                },
-                "funcExpName": {
-                  "arguments": [
-                    "test"
-                  ],
-                  "returnValues": "test",
-                  "calle": "test",
-                  "orphan": "test"
-                },
-                "classDecName": "test",
-                "classDecValue": "test",
-                "memberExpObjName": "test",
-                "memberExpPropName": "test"
+                "funcDecName": [],
+                "funcExpressions": [],
+                "classDeclarations": [],
+                "callExpressions": [],
+                "memberExpressions": []
               },
               "dbInfo": {
                 "dbType": "test",
@@ -537,26 +447,11 @@
               },
               "deepInfo": {
                 "orphan": false,
-                "funcDecName": {
-                  "arguments": [
-                    "test"
-                  ],
-                  "returnValues": "test",
-                  "calle": "test",
-                  "orphan": "test"
-                },
-                "funcExpName": {
-                  "arguments": [
-                    "test"
-                  ],
-                  "returnValues": "test",
-                  "calle": "test",
-                  "orphan": "test"
-                },
-                "classDecName": "test",
-                "classDecValue": "test",
-                "memberExpObjName": "test",
-                "memberExpPropName": "test"
+                "funcDecName": [],
+                "funcExpressions": [],
+                "classDeclarations": [],
+                "callExpressions": [],
+                "memberExpressions": []
               },
               "dbInfo": {
                 "dbType": "test",
@@ -588,26 +483,11 @@
               },
               "deepInfo": {
                 "orphan": false,
-                "funcDecName": {
-                  "arguments": [
-                    "test"
-                  ],
-                  "returnValues": "test",
-                  "calle": "test",
-                  "orphan": "test"
-                },
-                "funcExpName": {
-                  "arguments": [
-                    "test"
-                  ],
-                  "returnValues": "test",
-                  "calle": "test",
-                  "orphan": "test"
-                },
-                "classDecName": "test",
-                "classDecValue": "test",
-                "memberExpObjName": "test",
-                "memberExpPropName": "test"
+                "funcDecName": [],
+                "funcExpressions": [],
+                "classDeclarations": [],
+                "callExpressions": [],
+                "memberExpressions": []
               },
               "dbInfo": {
                 "dbType": "test",
@@ -696,26 +576,11 @@
           },
           "deepInfo": {
             "orphan": false,
-            "funcDecName": {
-              "arguments": [
-                "test"
-              ],
-              "returnValues": "test",
-              "calle": "test",
-              "orphan": "test"
-            },
-            "funcExpName": {
-              "arguments": [
-                "test"
-              ],
-              "returnValues": "test",
-              "calle": "test",
-              "orphan": "test"
-            },
-            "classDecName": "test",
-            "classDecValue": "test",
-            "memberExpObjName": "test",
-            "memberExpPropName": "test"
+            "funcDecName": [],
+            "funcExpressions": [],
+            "classDeclarations": [],
+            "callExpressions": [],
+            "memberExpressions": []
           },
           "dbInfo": {
             "dbType": "test",
