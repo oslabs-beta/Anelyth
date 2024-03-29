@@ -14,6 +14,7 @@ import S3Controller from "./Controllers/S3Controller.mjs";
 import DBController from "./Controllers/DBController.cjs";
 import ASTParseController from "./Controllers/ASTParseController.mjs";
 import ASTDbQueryController from "./Controllers/ASTDbQueryController.mjs";
+import ASTApiQueryController from './Controllers/ASTApiQueryController.mjs';
 import SessionController from "./Controllers/SessionController.cjs";
 import DataController from "./Controllers/DataController.cjs";
 
@@ -48,6 +49,7 @@ app.post('/api/fileupload',
     DCController.analyze,
     ASTParseController.parse,
     ASTDbQueryController.query,
+    ASTApiQueryController.query,
     FileController.deleteDir,
     // S3Controller.upload,
     (req, res) => {

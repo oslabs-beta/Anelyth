@@ -17,7 +17,7 @@ function isFrontendFile(filePath) {
          filePath.toLowerCase().includes("public") || 
         //  filePath.toLowerCase().includes("src") || 
          filePath.toLowerCase().includes("config") ||  
-         filePath.toLowerCase().includes("app") || 
+        //  filePath.toLowerCase().includes("app") || 
          filePath.toLowerCase().includes("ui") || 
          filePath.toLowerCase().includes("view") || 
          filePath.toLowerCase().includes("views") || 
