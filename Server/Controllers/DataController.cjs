@@ -9,9 +9,8 @@ const jsx = require('acorn-jsx');
 
 jsx(Parser);
 
-
-
 const DataController = {};
+
 
 // ------- MIDDLEWARE FOR CREATING SUPER STRUCTURE ------- //
 DataController.superStructure = async (req, res, next) => {
@@ -50,38 +49,6 @@ DataController.superStructure = async (req, res, next) => {
 }
 
 
-// ------- MIDDLEWARE FOR GETTING COMPLEXITY AND LINES OF CODE ------- //
-// -- only works on .js, .jsx, .cjs, and .mjs files -- //
-DataController.complexity = async (req, res, next) => {
-  try{
-    // SET THE FILE WE WANT TO ANALYZE ((--- HARD CODED FOR NOW ---))
-    const path1 = path.resolve(__dirname, '../../package.json');
-    // READ THE FILE AND SAVE TO VARIABLE
-    const code1 = fs.readFileSync(path1, 'utf8');
-
-    // TRANSFORM THE FILE USING BABEL SO ESCOMPLEX CAN ANALYZE IT
-    const transformed = babel.transformSync(code1, {filename: path1, presets: ['@babel/preset-react', '@babel/preset-env', '@babel/preset-typescript']})
-    // ANALYZE THE TRANSFORMED CODE WITH ESCOMPLEX
-    const result = await escomplex.analyse(transformed.code);
-
-    // GET THE LINES OF CODE AND CYCLOMATIC COMPLEXITY
-    const linesOfCode = result.aggregate.sloc.logical;
-    const complexity = result.aggregate.cyclomatic;
-
-    // CONSOLE LOG THE RESULTS
-    console.log('results of esxcomplex analysis: ', result)
-
-    return next();
-  } catch (err) {
-    return next({
-      log: 'DataController.complexity: ERROR: ' + err,
-      message: { err: 'DataController.complexity: ERROR: Check server logs for details' },
-    })
-  }
-}
-
-
-
 
 // FUNCTION TO BUILD HIERARCHY OF FILES
 function buildHierarchy(filePath, level = 0) {
@@ -112,76 +79,8 @@ function buildHierarchy(filePath, level = 0) {
   
 }
 
-// FUNCTION TO TRAVERSE OVER HIERARCHY
-// function traverseHierarchy(node) {
-//   if (!node) {
-//     return null;
-//   }
 
-//   if (node.name.endsWith('.json') || node.name.endsWith('.md') || node.name.endsWith('.html') || node.name.endsWith('.jpg') || node.name.endsWith('.jpeg') || node.name.endsWith('.png')) {
-//     return {
-//       name: node.name,
-//       type: 'file',
-//       path: node.path,
-//     }
-//   }
-
-//   const newNode = {
-//     name: node.name,
-//     type: node.children ? 'directory' : 'file', // Determine if the node represents a directory or a file
-//     path: node.path,
-//     children: []
-//   };
-
-//   if (node.children) {
-//     newNode.children = node.children.map(child => traverseHierarchy(child)).filter(child => child !== null);
-//   } else {
-//     newNode.info = {
-//       fileSize: 'test',
-//       linesOfCode: getComplexityAndLinesOfCode(node.path).linesOfCode,
-//       complexity: getComplexityAndLinesOfCode(node.path).complexity,
-//       dependents: 'test',
-//       dependencies: 'test', 
-//     }
-//     newNode.deepInfo = {
-//       circularDependencies: 'test',
-//       orphan: 'teset',
-//       funcDecName: {
-//         arguments: ['test'],
-//         returnValues: 'test',
-//         calle: 'test',
-//         orphan: 'test',
-//       },
-//       funcExpName: {
-//         arguments: ['test'],
-//         returnValues: 'test',
-//         calle: 'test',
-//         orphan: 'test',
-//       },
-//       classDecName: 'test',
-//       classDecValue: 'test',
-//       memberExpObjName: 'test',
-//       memberExpPropName: 'test',
-//     }
-//     newNode.dbInfo = {
-//       dbType: 'test',
-//       dbQuery: 'test',
-//       dbQueryType: 'test',
-//       dbQueryValue: 'test',
-//       dbQueryReturn: 'test',
-//     }
-//     newNode.apiInfo = {
-//       apiType: 'test',
-//       apiEndpoint: 'test',
-//       apiMethod: 'test',
-//       apiRequest: 'test',
-//     }
-//   }
-
-//   return newNode;
-// }
-
-
+// MAIN FUNCTION TO BUILD OUT SUPER STRUCTURE //
 async function traverseHierarchy(node, dcdata) {
   // console.log('data from dcdata: ',dcdata)
   // console.log(node.path)
@@ -215,7 +114,9 @@ async function traverseHierarchy(node, dcdata) {
     const size = await getFileSize(node.path);
     const dependentsAndDependencies = await getDependenciesAndDependents(node.path, dcdata)
     const nodeAst = await parseFileToAST(node.path);
-    console.log('nodeAst: ',nodeAst)
+    // current testing 
+    const nodeAstCallExps = getASTClassDecs(nodeAst);
+    console.log('test data: ',nodeAstCallExps)
   
 
     newNode.info = {
@@ -253,7 +154,7 @@ async function traverseHierarchy(node, dcdata) {
 
 
 
-
+// ----------- FILE PARSING FUNCTIONS ----------- //
 
 // GET FILE SIZE FUNCTION
 function getFileSize(filePath) {
@@ -261,7 +162,6 @@ function getFileSize(filePath) {
   const fileSizeInBytes = stats.size;
   return fileSizeInBytes;
 }
-
 
 // GET COMPLEXITY AND LINES OF CODE FUNCTION
 async function getComplexityAndLinesOfCode (filePath) {
@@ -288,6 +188,7 @@ async function getComplexityAndLinesOfCode (filePath) {
   };
 }
 
+// ----------- DC PARSING FUNCTIONS ----------- //
 
 // GET DEPENDENCIES AND DEPENDENTS FUNCTION
 function getDependenciesAndDependents(filePath, dcdata) {
@@ -297,6 +198,8 @@ function getDependenciesAndDependents(filePath, dcdata) {
   return nodeData[0];
 }
 
+
+// ---------- AST PARSING FUNCTIONS ---------- //
 
 // PARSE FILE TO AST FUNCTION
 const parseFileToAST = (filePath) => {
@@ -335,6 +238,7 @@ function getASTFuncDecs(ast){
   return resultArr;
 }
 
+// GET AST FUNC EXPRESSIONS FUNCTION
 function getASTFuncExps(ast){
   const functionExpressions = esquery(ast, "FunctionExpression");
   let resultArr = [];
@@ -348,61 +252,115 @@ function getASTFuncExps(ast){
   return resultArr;
 }
 
-// function getASTClassDecs(ast){
-//   const classDeclarations = esquery(ast, "ClassDeclaration");
-//   let resultArr = [];
-//   classDeclarations.forEach(node => {
-//     let classObj = {
-//       name: node.id.name,
-//       method: node.key.name,
-//       key:
-//       value:
-//       kind: node.kind
-//     };
-
-//     resultArr.push(classObj);
-//   })
-//   return resultArr;
-// }
-
-
-function getASTClassDecs(ast) {
-  const classDeclarations = esquery(ast, "ClassDeclaration");
+// GET AST FUNC DECLARATIONS FUNCTION
+function getASTFuncDecs(ast){
+  const functionDeclarations = esquery(ast, "FunctionDeclaration");
   let resultArr = [];
-  classDeclarations.forEach(node => {
-    let classObj = {
-      name: node.id.name,
-      methods: []
+  functionDeclarations.forEach(node => {
+    let funcObj = {
+      name: node.id ? node.id.name : "Anonymous Function"
     };
 
-    // Iterate through the body of the class
-    node.body.body.forEach(methodNode => {
-      // Check if the node is a MethodDefinition
-      if (methodNode.type === 'MethodDefinition') {
-        // Extract method name
-        const methodName = methodNode.key.name;
-        
-        // Initialize an object to hold method details
-        let methodObj = {
-          name: methodName,
-          kind: methodNode.kind,
-          value: null
-        };
-
-        // If it's a constructor, extract the value
-        if (methodName === 'constructor') {
-          methodObj.value = methodNode.value.body.body.map(stmt => stmt.expression.right.value);
-        }
-
-        // Push the method object to the methods array
-        classObj.methods.push(methodObj);
-      }
-    });
-
-    resultArr.push(classObj);
-  });
+    resultArr.push(funcObj);
+  })
   return resultArr;
 }
+
+// GET AST FUNC EXPRESSIONS FUNCTION
+function getASTFuncExps(ast){
+  const functionExpressions = esquery(ast, "FunctionExpression");
+  let resultArr = [];
+  functionExpressions.forEach(node => {
+    let funcObj = {
+      name: node.id ? node.id.name : "Anonymous Function"
+    };
+
+    resultArr.push(funcObj);
+  })
+  return resultArr;
+}
+
+// GET AST CLASS DECLARATIONS FUNCTION
+function getASTClassDecs(ast){
+  const classDeclarations = esquery(ast, "ClassDeclaration");
+  let resultArr = [];
+
+  classDeclarations.forEach(node => {
+    let classObj = {};
+
+    console.log(node.body.body);
+    // console.log('constutror shitt:  ', node.body.body[0].value.body.body[0].expression.left)
+    // node.body.body[0].value.body.body.forEach(el => console.log('look here!!!!! : ',el.expression.left))
+
+      classObj.className = node.id.name;
+      classObj.constructorProps = []
+      classObj.methods = []
+   
+      node.body.body.forEach(el => {
+        if (el.kind === 'method') {
+          classObj.methods.push(el.key.name);
+        }
+        // value: el.value
+      });
+
+      // if (classObj.kind === 'method') {
+      //   classObj.methods.push(el.key.name);
+      // }
+
+    resultArr.push(classObj);
+  })
+  return resultArr;
+}
+
+
+// GET AST CALL EXPRESSIONS FUNCTION
+function getASTCallExps(ast){
+  const callExpressions = esquery(ast, "CallExpression");
+  let resultArr = [];
+  callExpressions.forEach(node => {
+    let callObj = {
+      name: node,
+      callee: node.callee,
+      arguments: node.arguments
+    };
+
+    resultArr.push(callObj);
+  })
+  return resultArr;
+}
+
+
+
+// GET AST MEMBER EXPRESSIONS FUNCTION
+function getASTMemberExps(ast){
+  const memberExpressions = esquery(ast, "MemberExpression");
+  let resultArr = [];
+  
+  memberExpressions.forEach(node => {
+    
+    const getExpression = (expr) => {
+      if (expr === null) return;
+      if (expr.type === 'Identifier') {
+        return expr.name;
+      } else if (expr.name === 'MemberExpression') {
+        return getExpression(expr.object) + (expr.computed ? `[${getExpression(expr.property)}]` : `.${getExpression(expr.property)}` )
+      }
+      return;
+    }
+
+    let memberObject = {
+      object: getExpression(node.object),
+      property: node.property.type === 'Identifier' && [node.computed ? node.property.name : getExpression(node.property)]
+    }
+    resultArr.push(memberObject)
+  })
+
+  return resultArr;
+}
+
+
+
+
 
 
 module.exports =  DataController;
