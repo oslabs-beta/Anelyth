@@ -10,7 +10,15 @@
 
   form {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
+    align-items: center;
+  }
+
+  input {
+    width: 200px;
+    margin-bottom: 10px;
+    margin-top: 10px;
   }
 
   button {
@@ -27,6 +35,18 @@
 .d3-visual-container {
   height: 100%;
   width: 1000px;
-  /* border: 2px solid blue; */
+  border: 1px solid rgb(183, 183, 183);
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+.upload-repo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid rgb(199, 0, 0); */
+  height: 100%;
 }
 

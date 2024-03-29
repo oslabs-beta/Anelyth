@@ -1,7 +1,7 @@
 import fs from 'fs';
 import esprima from 'esprima';
 import path from 'path';
-import express from 'express';
+import express, { application } from 'express';
 import cookieParser from 'cookie-parser';
 
 const app = express();
@@ -60,6 +60,14 @@ app.post('/api/fileupload',
         res.status(200).send(res.locals.hierarchy);
     }
 );
+
+app.get('/api/signout',
+    SessionController.deleteCookie,
+    (req, res) => {
+        res.redirect('/').sendStatus(200);
+    }
+);
+
 
 
 app.get('/', (req, res) => {
