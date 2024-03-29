@@ -1,13 +1,19 @@
 // Class declarations
 class Animal {
-  constructor(name, sound) {
+  constructor(name, sound,fuck) {
     this.name = name;
     this.sound = sound;
+    this.test = 'yupp'
+    this.test2 = 'noting'
   }
 
   makeSound() {
     console.log(this.sound);
   }
+
+  // makeMove(){
+  //   console.log('Move');
+  // }
 }
 
 // class Dog extends Animal {

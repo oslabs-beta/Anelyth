@@ -82,11 +82,9 @@ function buildHierarchy(filePath, level = 0) {
 
 // MAIN FUNCTION TO BUILD OUT SUPER STRUCTURE //
 async function traverseHierarchy(node, dcdata) {
-  // console.log('data from dcdata: ',dcdata)
-  // console.log(node.path)
 
   if (!node) {
-    return null;
+    return;
   }
 
   if (node.name.endsWith('.json') || node.name.endsWith('.md') || node.name.endsWith('.html') || node.name.endsWith('.jpg') || node.name.endsWith('.jpeg') || node.name.endsWith('.png')) {
@@ -114,9 +112,6 @@ async function traverseHierarchy(node, dcdata) {
     const size = await getFileSize(node.path);
     const dependentsAndDependencies = await getDependenciesAndDependents(node.path, dcdata)
     const nodeAst = await parseFileToAST(node.path);
-    // current testing 
-    const nodeAstCallExps = getASTClassDecs(nodeAst);
-    console.log('test data: ',nodeAstCallExps)
   
 
     newNode.info = {
@@ -128,11 +123,12 @@ async function traverseHierarchy(node, dcdata) {
     };
     newNode.deepInfo = {
             orphan: dependentsAndDependencies.orphan,
-            funcDecName: [],
-            funcExpressions: [],
-            classDeclarations: [],
-            callExpressions: [],
-            memberExpressions: [],
+            funcDecName: getASTFuncDecs(nodeAst),
+            funcExpressions: getASTFuncExps(nodeAst),
+            funcArrowExpressions: getASTArrowFuncExps(nodeAst),
+            classDeclarations: getASTClassDecs(nodeAst),
+            funcCallExpressions: getASTCallExps(nodeAst),
+            memberExpressions: getASTMemberExps(nodeAst),
           }
           newNode.dbInfo = {
             dbType: 'test',
@@ -230,7 +226,7 @@ function getASTFuncDecs(ast){
   let resultArr = [];
   functionDeclarations.forEach(node => {
     let funcObj = {
-      name: node.id ? node.id.name : "Anonymous Function"
+      funcName: node.id.name
     };
 
     resultArr.push(funcObj);
@@ -239,43 +235,22 @@ function getASTFuncDecs(ast){
 }
 
 // GET AST FUNC EXPRESSIONS FUNCTION
+// gets name of variable that was assigned to a anonymous function
 function getASTFuncExps(ast){
-  const functionExpressions = esquery(ast, "FunctionExpression");
+  const anonFuncs = esquery(ast, 'VariableDeclarator[init.type="FunctionExpression"][init.params]')
   let resultArr = [];
-  functionExpressions.forEach(node => {
-    let funcObj = {
-      name: node.id ? node.id.name : "Anonymous Function"
-    };
-
-    resultArr.push(funcObj);
+  anonFuncs.forEach(node => {
+    resultArr.push({anonFuncName: node.id.name})
   })
   return resultArr;
 }
 
-// GET AST FUNC DECLARATIONS FUNCTION
-function getASTFuncDecs(ast){
-  const functionDeclarations = esquery(ast, "FunctionDeclaration");
+// GET AST FUNC ARROW FUNCTIONS
+function getASTArrowFuncExps(ast){
+  const arrowFuncs = esquery(ast, 'VariableDeclarator[init.type="ArrowFunctionExpression"][init.params]')
   let resultArr = [];
-  functionDeclarations.forEach(node => {
-    let funcObj = {
-      name: node.id ? node.id.name : "Anonymous Function"
-    };
-
-    resultArr.push(funcObj);
-  })
-  return resultArr;
-}
-
-// GET AST FUNC EXPRESSIONS FUNCTION
-function getASTFuncExps(ast){
-  const functionExpressions = esquery(ast, "FunctionExpression");
-  let resultArr = [];
-  functionExpressions.forEach(node => {
-    let funcObj = {
-      name: node.id ? node.id.name : "Anonymous Function"
-    };
-
-    resultArr.push(funcObj);
+  arrowFuncs.forEach(node => {
+    resultArr.push({arrowFuncName: node.id.name})
   })
   return resultArr;
 }
@@ -293,50 +268,71 @@ function getASTClassDecs(ast){
     // node.body.body[0].value.body.body.forEach(el => console.log('look here!!!!! : ',el.expression.left))
 
       classObj.className = node.id.name;
-      classObj.constructorProps = []
-      classObj.methods = []
+      classObj.constructorArgs = [];
+      classObj.constuctorProps = [];
+      classObj.methods = [];
    
       node.body.body.forEach(el => {
+        
+        // get methods of class
         if (el.kind === 'method') {
           classObj.methods.push(el.key.name);
         }
-        // value: el.value
+
+        // get constructor arguments of class
+        if (el.kind === 'constructor') {
+          el.value.params.forEach(param => {
+            // console.log('looking param:   ', param.name)
+            classObj.constructorArgs.push(param.name)
+          })
+        }
+
+        // get constructor properties of class
+        if (el.kind === 'constructor') {
+          el.value.body.body.forEach(prop => {
+            // console.log('looking prop:   ', prop.expression.left.property.name)
+            classObj.constuctorProps.push(prop.expression.left.property.name)
+          })
+        }
+
       });
 
-      // if (classObj.kind === 'method') {
-      //   classObj.methods.push(el.key.name);
-      // }
+
 
     resultArr.push(classObj);
   })
   return resultArr;
 }
 
-
 // GET AST CALL EXPRESSIONS FUNCTION
+// finds when a function is evoked/called and the args passed in
 function getASTCallExps(ast){
   const callExpressions = esquery(ast, "CallExpression");
   let resultArr = [];
   callExpressions.forEach(node => {
+    
     let callObj = {
-      name: node,
-      callee: node.callee,
-      arguments: node.arguments
+      functionName: node.callee.name,
+      arguments: [],
     };
+
+    node.arguments.forEach(el => {
+      if (el.value) callObj.arguments.push(el.value)
+    })
 
     resultArr.push(callObj);
   })
   return resultArr;
 }
 
-
-
 // GET AST MEMBER EXPRESSIONS FUNCTION
+// finds all instances where we are accessing a property of an object
 function getASTMemberExps(ast){
   const memberExpressions = esquery(ast, "MemberExpression");
   let resultArr = [];
   
   memberExpressions.forEach(node => {
+    // console.log('look here: ', node)
     
     const getExpression = (expr) => {
       if (expr === null) return;
@@ -350,7 +346,8 @@ function getASTMemberExps(ast){
 
     let memberObject = {
       object: getExpression(node.object),
-      property: node.property.type === 'Identifier' && [node.computed ? node.property.name : getExpression(node.property)]
+      property: node.property.type === 'Identifier' && [node.computed ? node.property.name : getExpression(node.property)],
+      property_access_notation: node.computed ? 'bracket' : 'dot'
     }
     resultArr.push(memberObject)
   })
