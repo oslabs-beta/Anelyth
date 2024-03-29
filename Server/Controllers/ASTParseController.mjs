@@ -17,7 +17,7 @@ function isFrontendFile(filePath) {
          filePath.toLowerCase().includes("public") || 
         //  filePath.toLowerCase().includes("src") || 
          filePath.toLowerCase().includes("config") ||  
-         filePath.toLowerCase().includes("app") || 
+        //  filePath.toLowerCase().includes("app") || 
          filePath.toLowerCase().includes("ui") || 
          filePath.toLowerCase().includes("view") || 
          filePath.toLowerCase().includes("views") || 
@@ -102,7 +102,7 @@ ASTParseController.parse = async (req, res, next) => {
     const parsedFiles = await traverseAndParse(uploadsPath);
 
     // FILTER OUT FRONTEND FILES
-    // const backendFileASTs = parsedFiles.filter(file => backendFilePaths.includes(file.filePath));
+    const backendFileASTs = parsedFiles.filter(file => backendFilePaths.includes(file.filePath));
 
     // ADD TO RES.LOCALS
     res.locals.backendFileASTs = backendFileASTs;
