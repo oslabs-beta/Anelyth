@@ -94,7 +94,7 @@ ASTParseController.parse = async (req, res, next) => {
           }
         }
       }
-
+      res.locals.astData = asts;
       return asts;
     };
 

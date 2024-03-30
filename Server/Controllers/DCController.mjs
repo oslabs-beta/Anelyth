@@ -16,6 +16,7 @@ function isFrontendFile(filePath) {
   return filePath.toLowerCase().includes("client") || filePath.toLowerCase().includes("frontend") || filePath.toLowerCase().includes("public") || filePath.toLowerCase().includes("src") || filePath.toLowerCase().includes("app") || filePath.toLowerCase().includes("ui") || filePath.toLowerCase().includes("view") || filePath.toLowerCase().includes("views") || filePath.toLowerCase().includes("assets") || filePath.toLowerCase().includes("components") || filePath.toLowerCase().includes("pages") || filePath.toLowerCase().includes("features");
 }
 
+
 function buildHierarchy(filePath, depResult, level = 0) {
   const stat = fs.statSync(filePath);
 
@@ -57,6 +58,7 @@ function buildHierarchy(filePath, depResult, level = 0) {
   }
 }
 
+
 function printDirectoryTree(dir, depResult) {
   const hierarchy = buildHierarchy(dir, depResult);
   return hierarchy;
@@ -86,11 +88,12 @@ DCController.analyze = async (req, res, next) => {
     console.log('in dccontroller.analyze');
     const uploadsPath = './Server/temp-file-upload';
     const depResult = await cruise([uploadsPath], cruiseOptions);
-    console.log(JSON.stringify(JSON.parse(depResult.output), null, 2));
+    // console.log(JSON.stringify(JSON.parse(depResult.output), null, 2));
 
     const hierarchy = printDirectoryTree(uploadsPath, JSON.parse(depResult.output));
-
+    // console.log('dc analyze output',hierarchy)
     res.locals.hierarchy = hierarchy;
+    res.locals.depResult = JSON.parse(depResult.output);
 
     return next();
   } catch (err) {

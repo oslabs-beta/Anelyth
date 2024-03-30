@@ -48,9 +48,10 @@ app.post('/api/fileupload',
     FileController.upload,
     DCController.analyze,
     ASTParseController.parse,
-    ASTDbQueryController.query,
+    // ASTDbQueryController.query,
     ASTApiQueryController.query,
-    FileController.deleteDir,
+    DataController.superStructure,
+    // FileController.deleteDir,
     // S3Controller.upload,
     (req, res) => {
         // console.log(res.locals.parsedFiles);
