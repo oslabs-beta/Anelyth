@@ -22,7 +22,7 @@ function checkDatabase(fileAst, importPaths) {
        CallExpression[callee.type="Import"][arguments.0.value="${importPath}"]`
     );
 
-    console.log(`Checking for ${importPath}:`, queryResult.length > 0);
+    // console.log(`Checking for ${importPath}:`, queryResult.length > 0);
 
     return queryResult.length > 0;
   });
@@ -178,6 +178,161 @@ function checkDatabase(fileAst, importPaths) {
     };
 
 
+// --------- DATABASE HANDLER OBJECT (FUNCTION NOT MIDDLEWARE VERSION) --------- //
+ASTDbQueryController.query2 = (newAST, astFilePath) => {
+  try {
+    // DATABASE HANDLERS
+    const databaseHandlers = {
+      'MongoDB': {
+        check: (ast) => checkDatabase(ast, ['mongoose', 'mongodb']),
+        analyze: (ast, filePath) => analyzeMongoDBInteractions(ast, filePath)
+      },
+      'PostgreSQL': {
+        check: (ast) => checkDatabase(ast, ['pg']),
+        analyze: (ast, filePath) => analyzePostgreSQLInteractions(ast, filePath)
+      },
+      'SQL Server': {
+        check: (ast) => checkDatabase(ast, ['mssql']),
+        analyze: (ast, filePath) => analyzeSQLServerInteractions(ast, filePath)
+      },
+      'MySQL': {
+        check: (ast) => checkDatabase(ast, ['mysql']),
+        analyze: (ast, filePath) => analyzeMySQLInteractions(ast, filePath)
+      },
+      'SQLite': {
+        check: (ast) => checkDatabase(ast, ['sqlite3']),
+        analyze: (ast, filePath) => analyzeSQLiteInteractions(ast, filePath)
+      },
+      'Oracle': {
+        check: (ast) => checkDatabase(ast, ['oracledb']),
+        analyze: (ast, filePath) => analyzeOracleInteractions(ast, filePath)
+      },
+      'Redis': {
+        check: (ast) => checkDatabase(ast, ['redis']),
+        analyze: (ast, filePath) => analyzeRedisInteractions(ast, filePath)
+      },
+      'Firebase': {
+        check: (ast) => checkDatabase(ast, ['firebase', 'firebase-admin']),
+        analyze: (ast, filePath) => analyzeFirebaseInteractions(ast, filePath)
+      },
+      'DynamoDB': {
+        check: (ast) => checkDatabase(ast, ['aws-sdk']),
+        analyze: (ast, filePath) => analyzeDynamoDBInteractions(ast, filePath)
+      },
+      'Couchbase': {
+        check: (ast) => checkDatabase(ast, ['couchbase']),
+        analyze: (ast, filePath) => analyzeCouchbaseInteractions(ast, filePath)
+      },
+      'CouchDB': {
+        check: (ast) => checkDatabase(ast, ['nano', 'pouchdb']),
+        analyze: (ast, filePath) => analyzeCouchDBInteractions(ast, filePath)
+      },
+      'Neo4j': {
+        check: (ast) => checkDatabase(ast, ['neo4j-driver']),
+        analyze: (ast, filePath) => analyzeNeo4jInteractions(ast, filePath)
+      },
+      'ArangoDB': {
+        check: (ast) => checkDatabase(ast, ['arangojs']),
+        analyze: (ast, filePath) => analyzeArangoDBInteractions(ast, filePath)
+      },
+      'RethinkDB': {
+        check: (ast) => checkDatabase(ast, ['rethinkdb']),
+        analyze: (ast, filePath) => analyzeRethinkDBInteractions(ast, filePath)
+      },
+      'InfluxDB': {
+        check: (ast) => checkDatabase(ast, ['influx']),
+        analyze: (ast, filePath) => analyzeInfluxDBInteractions(ast, filePath)
+      },
+      'Elasticsearch': {
+        check: (ast) => checkDatabase(ast, ['elasticsearch']),
+        analyze: (ast, filePath) => analyzeElasticsearchInteractions(ast, filePath)
+      },
+      'Solr': {
+        check: (ast) => checkDatabase(ast, ['solr-client']),
+        analyze: (ast, filePath) => analyzeSolrInteractions(ast, filePath)
+      },
+      'Cassandra': {
+        check: (ast) => checkDatabase(ast, ['cassandra-driver']),
+        analyze: (ast, filePath) => analyzeCassandraInteractions(ast, filePath)
+      },
+      'HBase': {
+        check: (ast) => checkDatabase(ast, ['hbase']),
+        analyze: (ast, filePath) => analyzeHBaseInteractions(ast, filePath)
+      },
+      'Kafka': {
+        check: (ast) => checkDatabase(ast, ['kafka-node', 'kafkajs']),
+        analyze: (ast, filePath) => analyzeKafkaInteractions(ast, filePath)
+      },
+      'RabbitMQ': {
+        check: (ast) => checkDatabase(ast, ['amqplib']),
+        analyze: (ast, filePath) => analyzeRabbitMQInteractions(ast, filePath)
+      },
+      'SQS': {
+        check: (ast) => checkDatabase(ast, ['aws-sdk']),
+        analyze: (ast, filePath) => analyzeSQSInteractions(ast, filePath)
+      },
+      'Kinesis': {
+        check: (ast) => checkDatabase(ast, ['aws-sdk']),
+        analyze: (ast, filePath) => analyzeKinesisInteractions(ast, filePath)
+      },
+      'S3': {
+        check: (ast) => checkDatabase(ast, ['aws-sdk']),
+        analyze: (ast, filePath) => analyzeS3Interactions(ast, filePath)
+      },
+      'Azure Blob Storage': {
+        check: (ast) => checkDatabase(ast, ['@azure/storage-blob']),
+        analyze: (ast, filePath) => analyzeAzureBlobStorageInteractions(ast, filePath)
+      },
+      'Google Cloud Storage': {
+        check: (ast) => checkDatabase(ast, ['@google-cloud/storage']),
+        analyze: (ast, filePath) => analyzeGoogleCloudStorageInteractions(ast, filePath)
+      },
+      'Minio': {
+        check: (ast) => checkDatabase(ast, ['minio']),
+        analyze: (ast, filePath) => analyzeMinioInteractions(ast, filePath)
+      }
+    };
+
+      const ast = newAST;
+      const filePath = astFilePath;
+      // console.log(`\nAnalyzing file: ${filePath}`);
+    
+      const results = [];
+
+      // CHECK AND ANALYZE DATABASE INTERACTIONS
+      for (const dbKey of Object.keys(databaseHandlers)) {
+        const handler = databaseHandlers[dbKey];
+        if (handler.check(ast)) {
+          const analysisResults = handler.analyze(ast, filePath);
+          results.push({
+            dbInteraction: true,
+            dbType: dbKey,
+            totalInteractions: analysisResults.totalInteractions,
+            details: analysisResults.details
+          });
+        }
+      }
+  
+      if (!results.length){
+        results.push({
+          dbInteraction: false,
+          dbType: null,
+          totalInteractions: 0,
+          details: null
+        });
+      } 
+
+      return results;
+  } catch (err) {
+    console.error('Error in ASTDbQueryController.query:', err);
+    return ({
+      log: 'error in ASTDbQueryController.query',
+      message: err,
+    });
+  }
+};
+
+
 
 
 // ---- DATABASE ANALYSIS HELPER FUNCTIONS ---- //
@@ -253,7 +408,7 @@ function analyzePostgreSQLInteractions(fileAst, filePath) {
     totalInteractions: interactions.length,
     details: interactions
   };
-
+  // console.log('interaction here result: ', interactions)
   return results;
 }
 
