@@ -1,151 +1,33 @@
 {
-  "name": "test-repo",
+  "name": "Test Repo",
   "type": "directory",
-  "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/test-repo",
+  "path": "/Users/moisesgomez/Desktop/FFSS-OSP/server/temp-file-upload/Test Repo",
   "children": [
     {
-      "name": "classDec.js",
+      "name": "file1.js",
       "type": "file",
-      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/test-repo/classDec.js",
+      "path": "/Users/moisesgomez/Desktop/FFSS-OSP/server/temp-file-upload/Test Repo/file1.js",
       "children": [],
       "info": {
-        "fileSize": 745,
-        "linesOfCode": 51,
-        "complexity": 16,
-        "dependents": [],
-        "dependencies": []
-      },
-      "deepInfo": {
-        "orphan": true,
-        "funcDecName": [],
-        "funcExpressions": [],
-        "funcArrowExpressions": [],
-        "classDeclarations": [
-          {
-            "className": "Animal",
-            "constructorArgs": [
-              "name",
-              "sound",
-              "fuck"
-            ],
-            "constuctorProps": [
-              "name",
-              "sound",
-              "test",
-              "test2"
-            ],
-            "methods": [
-              "makeSound"
-            ]
-          }
-        ],
-        "funcCallExpressions": [
-          {
-            "arguments": []
-          }
-        ],
-        "memberExpressions": [
-          {
-            "property": [
-              "name"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "property": [
-              "sound"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "property": [
-              "test"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "property": [
-              "test2"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "console",
-            "property": [
-              "log"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "property": [
-              "sound"
-            ],
-            "property_access_notation": "dot"
-          }
-        ]
-      },
-      "dbInfo": {
-        "dbType": "test",
-        "dbQuery": "test",
-        "dbQueryType": "test",
-        "dbQueryValue": "test",
-        "dbQueryReturn": "test"
-      },
-      "apiInfo": {
-        "apiType": "test",
-        "apiEndpoint": "test",
-        "apiMethod": "test",
-        "apiRequest": "test"
-      }
-    },
-    {
-      "name": "funcExpressions.js",
-      "type": "file",
-      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/test-repo/funcExpressions.js",
-      "children": [],
-      "info": {
-        "fileSize": 562,
-        "linesOfCode": 14,
+        "fileSize": 95,
+        "linesOfCode": 8,
         "complexity": 1,
-        "dependents": [],
+        "dependents": [
+          "Server/temp-file-upload/Test Repo/file2.js"
+        ],
         "dependencies": []
       },
       "deepInfo": {
-        "orphan": true,
+        "orphan": false,
         "funcDecName": [
           {
-            "funcName": "add"
-          },
-          {
-            "funcName": "subtract"
+            "funcName": "addOne"
           }
         ],
-        "funcExpressions": [
-          {
-            "anonFuncName": "multiply"
-          },
-          {
-            "anonFuncName": "divide"
-          }
-        ],
-        "funcArrowExpressions": [
-          {
-            "arrowFuncName": "square"
-          },
-          {
-            "arrowFuncName": "cube"
-          }
-        ],
+        "funcExpressions": [],
+        "funcArrowExpressions": [],
         "classDeclarations": [],
-        "funcCallExpressions": [
-          {
-            "functionName": "add",
-            "arguments": [
-              5,
-              "three"
-            ]
-          }
-        ],
+        "funcCallExpressions": [],
         "memberExpressions": []
       },
       "dbInfo": {
@@ -163,38 +45,59 @@
       }
     },
     {
-      "name": "memExpressions.js",
+      "name": "file2.js",
       "type": "file",
-      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/test-repo/memExpressions.js",
+      "path": "/Users/moisesgomez/Desktop/FFSS-OSP/server/temp-file-upload/Test Repo/file2.js",
       "children": [],
       "info": {
-        "fileSize": 419,
-        "linesOfCode": 9,
-        "complexity": 1,
+        "fileSize": 79,
+        "linesOfCode": 7,
+        "complexity": 2,
         "dependents": [],
-        "dependencies": []
+        "dependencies": [
+          {
+            "module": "./file1",
+            "moduleSystem": "es6",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "dependencyTypes": [
+              "local",
+              "import"
+            ],
+            "resolved": "Server/temp-file-upload/Test Repo/file1.js",
+            "coreModule": false,
+            "followable": true,
+            "couldNotResolve": false,
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "valid": true
+          }
+        ]
       },
       "deepInfo": {
-        "orphan": true,
+        "orphan": false,
         "funcDecName": [],
         "funcExpressions": [],
         "funcArrowExpressions": [],
         "classDeclarations": [],
-        "funcCallExpressions": [],
-        "memberExpressions": [
+        "funcCallExpressions": [
           {
-            "object": "car",
-            "property": [
-              "make"
-            ],
-            "property_access_notation": "dot"
+            "functionName": "addOne",
+            "arguments": [
+              3
+            ]
           },
           {
-            "object": "car",
+            "arguments": []
+          }
+        ],
+        "memberExpressions": [
+          {
+            "object": "console",
             "property": [
-              "cityName2"
+              "log"
             ],
-            "property_access_notation": "bracket"
+            "property_access_notation": "dot"
           }
         ]
       },
