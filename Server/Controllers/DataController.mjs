@@ -6,6 +6,7 @@ import esquery from 'esquery';
 import { Parser } from 'acorn';
 import jsx from 'acorn-jsx';
 import ASTDbQueryController from './ASTDbQueryController.mjs';
+import ASTApiQueryController from './ASTApiQueryController.mjs';
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -120,7 +121,8 @@ async function traverseHierarchy(node, dcdata) {
       const nodeAst = await parseFileToAST(node.path);
  
       const dbData = await ASTDbQueryController.query2(nodeAst, node.path);
-  // console.log('dbData: ',dbData)
+      const apiData = await ASTApiQueryController.queryFunc(nodeAst, node.path);
+      // console.log('apiData here: ',apiData)
     
       newNode.info = {
         fileSize: size, 
@@ -143,10 +145,8 @@ async function traverseHierarchy(node, dcdata) {
       newNode.dbInfo = dbData;
 
       newNode.apiInfo = {
-        apiType: 'test',
-        apiEndpoint: 'test',
-        apiMethod: 'test',
-        apiRequest: 'test',
+        totalInteractions: apiData.totalInteractions,
+        details: getApiData(apiData)
       }
     }
   
@@ -373,7 +373,19 @@ function getASTMemberExps(ast){
   return resultArr;
 }
 
-
+// API HELPER FUNC
+function getApiData(data){
+  let result = [];
+  let apiData = data.details;
+  apiData.forEach(el => {
+    result.push({
+      apiType: el.method,
+      apiURL: el.url,
+      typeOfCall: el.httpMethod
+    })
+  })
+  return result;
+}
 
 
 
