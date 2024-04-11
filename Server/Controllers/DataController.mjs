@@ -134,6 +134,7 @@ async function traverseHierarchy(node, dcdata) {
         dependents: dependentsAndDependencies.dependents,
         dependencies: dependentsAndDependencies.dependencies,
         isModule: allExports.length > 0 ? true : false,
+        exportedModules: allExports
       };
 
       newNode.deepInfo = {
