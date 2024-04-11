@@ -16,6 +16,7 @@ const ASTApiQueryController = {};
 // --------------- CHECK API FUNCTION --------------- //
 
 function checkApiCalls(fileAst, apiLibraries) { 
+
   // Check for libraries that need explicit import/require
   const importRequired = apiLibraries.some(library => {
     if (['node-fetch', 'axios', 'superagent', 'got'].includes(library)) {
@@ -32,15 +33,21 @@ function checkApiCalls(fileAst, apiLibraries) {
 
   if (importRequired) return true;
 
+  // console.log(fileAst)
   // Special checks for APIs that don't require import/require in a browser environment
   const browserAPIs = ['fetch', 'XMLHttpRequest', '$', 'jQuery'];
   const browserApiCheck = apiLibraries.some(library => {
     if (browserAPIs.includes(library)) {
+      // v1 - 
       const queryResult = esquery.query(
         fileAst,
         `CallExpression[callee.name="${library}"],
          NewExpression[callee.name="${library}"]`
       );
+      // console.log('whats this look like?',queryResult)
+
+        // console.log('what do i have:',queryResult)
+
       return queryResult.length > 0;
     }
     return false;
@@ -125,7 +132,7 @@ Object.keys(apiHandlers).forEach(apiKey => {
   const handler = apiHandlers[apiKey];
   if (handler.check(ast)) {
     const analysisResults = handler.analyze(ast, filePath);
-    console.log(`${apiKey} API Analysis Results:`, analysisResults);
+    // console.log(`${apiKey} API Analysis Results:`, analysisResults);
   }
 });
 });
@@ -141,49 +148,202 @@ next ();
 };
 
 
+
+
+ASTApiQueryController.queryFunc = async (nodeAST,nodePath) => {
+  try {
+  // console.log('Inside ASTApiQueryController.queryFunc')
+  // API HANDLERS
+  const apiHandlers = {
+    'Fetch': {
+      check: ast => {
+        // console.log('Fetch API interactions...');
+        const hasFetch = checkApiCalls(ast, ['fetch']);
+        const hasNodeFetch = checkApiCalls(ast, ['node-fetch']);
+        return hasFetch && !hasNodeFetch;
+      },
+      analyze: async (ast, filePath) => analyzeFetchCalls(ast, filePath),
+    },
+    'Axios': {
+      check: ast => {
+        // console.log('Axios API interactions...');
+        return checkApiCalls(ast, ['axios']);
+      },
+      analyze: (ast, filePath) => analyzeAxiosCalls(ast, filePath),
+    },
+    'XMLHttpRequest': {
+      check: ast => {
+        // console.log('XMLHttpRequest API interactions...');
+        return checkApiCalls(ast, ['XMLHttpRequest']);
+      },
+      analyze: (ast, filePath) => analyzeXMLHttpRequestCalls(ast, filePath),
+    },
+    'Node Fetch': {
+      check: ast => {
+        // console.log('Node Fetch API interactions...');
+        return checkApiCalls(ast, ['node-fetch']);
+      },
+      analyze: (ast, filePath) => analyzeNodeFetchInteractions(ast, filePath),
+    },
+    'Superagent': {
+      check: ast => {
+        // console.log('Superagent API interactions...');
+        return checkApiCalls(ast, ['superagent']);
+      },
+      analyze: (ast, filePath) => analyzeSuperagentInteractions(ast, filePath),
+    },
+    'jQuery': {
+      check: ast => {
+        // console.log('jQuery API interactions...');
+        return checkApiCalls(ast, ['$', 'jQuery']);
+      },
+      analyze: (ast, filePath) => analyzeJQueryInteractions(ast, filePath),
+    },
+    'Got': {
+      check: ast => {
+        // console.log('Got API interactions...');
+        return checkApiCalls(ast, ['got']);
+      },
+      analyze: (ast, filePath) => analyzeGotCalls(ast, filePath),
+    },
+  };
+  
+  
+  // RUN EACH FILE THROUGH THE API HANDLERS
+  
+    const ast = nodeAST;
+    const filePath = nodePath;
+
+  // CHECK AND ANALYZE API CALLS
+  let analysisResults;
+
+  for (const apiKey of Object.keys(apiHandlers)) {
+    const handler = apiHandlers[apiKey];
+    if (handler.check(ast)) {
+      // Use await inside an async function
+      analysisResults = await handler.analyze(ast, filePath);
+      // Once you have the analysis result, you can break out of the loop if needed
+      break;
+    }
+  }
+  
+
+  // console.log('analysisResults:',analysisResults)
+  return analysisResults;
+  } catch (err) {
+    console.error('Error in ASTApiQueryController.queryFunc:', err);
+    return ({
+      log: 'error in ASTApiQueryController.queryFunc',
+      message: err,
+    });
+  }
+};
+
+
+
+
 // --------------- API ANALYSIS HELPER FUNCTIONS --------------- //
 
 // ANALYZE FETCH CALLS
 function analyzeFetchCalls(ast, filePath) {
   console.log(`\x1b[35mInside Fetch API Extended Analysis`);
 
-  const fetchCalls = esquery.query(ast, `
-    CallExpression[callee.name="fetch"],
-    AwaitExpression[argument.callee.name="fetch"]
-  `);
+  //V2
+  const fetchCalls = esquery.query(ast,'Program > ExpressionStatement > CallExpression');
+  const fetchCalls2 = esquery.query(ast,'Program > VariableDeclaration > VariableDeclarator > CallExpression')
 
- let interactions = fetchCalls.map(call => {
-    let interactionDetail = {
-      method: 'fetch',
-      line: call.loc.start.line,
-      url: null, // PLACEHOLDER
-      httpMethod: 'GET' // DEFAULT
-    };
+  const allCalls = [...fetchCalls, ...fetchCalls2];
+  // console.log('concated', allCalls)
+
+  
+  
+  let interactions = allCalls.map(call => {
+    
+
+    // let interactionDetail = {
+    //   method: 'fetch',
+    //   line: call.loc.start.line,
+    //   url: null, // PLACEHOLDER
+    //   httpMethod: 'GET' // DEFAULT
+    // };
+
+    // console.log('call', call)
+
+    // find http method
+    if (call.callee.object.arguments){
+
+      let interactionDetail = {
+        method: 'fetch',
+        line: call.loc.start.line,
+        url: null, // PLACEHOLDER
+        httpMethod: 'GET' // DEFAULT
+      };
+
+      call.callee.object.arguments.forEach(arg => {
+        if (arg.type === 'ObjectExpression') {
+          arg.properties.forEach(prop => {
+            if (prop.key.name === 'method') {
+              interactionDetail.httpMethod = prop.value.value;
+            }
+          });
+        }
+      })
+
+      call.callee.object.arguments.forEach(arg => {
+        if (arg.type === 'Literal') {
+          interactionDetail.url = arg.value;
+        }
+      })
+
+      return interactionDetail;
+    } else {
+      return;
+    }
+
+    // console.log('final result', call.callee.object.arguments[1].properties[0].value.value)
+
 
     // EXTRACT URL
-    if (call.arguments && call.arguments[0] && call.arguments[0].type === 'Literal') {
-      interactionDetail.url = call.arguments[0].value;
-    } else {
-      interactionDetail.url = 'dynamic';
-    }
+    // if (call.arguments && call.arguments[0] && call.arguments[0].type === 'Literal') {
+    //   interactionDetail.url = call.arguments[0].value;
+    // } else {
+    //   interactionDetail.url = 'dynamic';
+    // }
+
+
+    // extract url 2
+      // console.log('looking here bitchhh: ', call.callee.object.arguments)
+
+      // if (call.callee.object.arguments){
+      //   call.callee.object.arguments.forEach(arg => {
+      //     if (arg.type === 'Literal') {
+      //       interactionDetail.url = arg.value;
+      //     }
+      //   })
+      // }
+
 
     // EXTRACT HTTP METHOD
-    if (call.arguments[1] && call.arguments[1].type === 'ObjectExpression') {
-      const options = call.arguments[1];
-      const methodProperty = options.properties.find(property => property.key.name === 'method');
-      if (methodProperty && methodProperty.value.type === 'Literal') {
-        interactionDetail.httpMethod = methodProperty.value.value;
-      }
-    }
+    // if (call.arguments[1] && call.arguments[1].type === 'ObjectExpression') {
+    //   const options = call.arguments[1];
+    //   const methodProperty = options.properties.find(property => property.key.name === 'method');
+    //   if (methodProperty && methodProperty.value.type === 'Literal') {
+    //     interactionDetail.httpMethod = methodProperty.value.value;
+    //   }
+    // }
 
-    return interactionDetail;
+    // console.log('interaction detail:   ',interactionDetail)
+    // return interactionDetail;
   });
 
-  return {
-    filePath,
-    totalInteractions: interactions.length,
-    details: interactions
-  };
+  console.log('interactions:', interactions)
+
+    return {
+      filePath: filePath,
+      totalInteractions: interactions.filter(el => el !== undefined).length,
+      details: interactions
+    };
+
 }
 
 // ANALYZE AXIOS CALLS

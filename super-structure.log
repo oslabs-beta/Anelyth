@@ -4,172 +4,13 @@
   "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/test-repo",
   "children": [
     {
-      "name": "classDec.js",
+      "name": "got.js",
       "type": "file",
-      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/test-repo/classDec.js",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/test-repo/got.js",
       "children": [],
       "info": {
-        "fileSize": 745,
-        "linesOfCode": 51,
-        "complexity": 16,
-        "dependents": [],
-        "dependencies": []
-      },
-      "deepInfo": {
-        "orphan": true,
-        "funcDecName": [],
-        "funcExpressions": [],
-        "funcArrowExpressions": [],
-        "classDeclarations": [
-          {
-            "className": "Animal",
-            "constructorArgs": [
-              "name",
-              "sound",
-              "fuck"
-            ],
-            "constuctorProps": [
-              "name",
-              "sound",
-              "test",
-              "test2"
-            ],
-            "methods": [
-              "makeSound"
-            ]
-          }
-        ],
-        "funcCallExpressions": [
-          {
-            "arguments": []
-          }
-        ],
-        "memberExpressions": [
-          {
-            "property": [
-              "name"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "property": [
-              "sound"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "property": [
-              "test"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "property": [
-              "test2"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "console",
-            "property": [
-              "log"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "property": [
-              "sound"
-            ],
-            "property_access_notation": "dot"
-          }
-        ]
-      },
-      "dbInfo": {
-        "dbType": "test",
-        "dbQuery": "test",
-        "dbQueryType": "test",
-        "dbQueryValue": "test",
-        "dbQueryReturn": "test"
-      },
-      "apiInfo": {
-        "apiType": "test",
-        "apiEndpoint": "test",
-        "apiMethod": "test",
-        "apiRequest": "test"
-      }
-    },
-    {
-      "name": "funcExpressions.js",
-      "type": "file",
-      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/test-repo/funcExpressions.js",
-      "children": [],
-      "info": {
-        "fileSize": 562,
-        "linesOfCode": 14,
-        "complexity": 1,
-        "dependents": [],
-        "dependencies": []
-      },
-      "deepInfo": {
-        "orphan": true,
-        "funcDecName": [
-          {
-            "funcName": "add"
-          },
-          {
-            "funcName": "subtract"
-          }
-        ],
-        "funcExpressions": [
-          {
-            "anonFuncName": "multiply"
-          },
-          {
-            "anonFuncName": "divide"
-          }
-        ],
-        "funcArrowExpressions": [
-          {
-            "arrowFuncName": "square"
-          },
-          {
-            "arrowFuncName": "cube"
-          }
-        ],
-        "classDeclarations": [],
-        "funcCallExpressions": [
-          {
-            "functionName": "add",
-            "arguments": [
-              5,
-              "three"
-            ]
-          }
-        ],
-        "memberExpressions": []
-      },
-      "dbInfo": {
-        "dbType": "test",
-        "dbQuery": "test",
-        "dbQueryType": "test",
-        "dbQueryValue": "test",
-        "dbQueryReturn": "test"
-      },
-      "apiInfo": {
-        "apiType": "test",
-        "apiEndpoint": "test",
-        "apiMethod": "test",
-        "apiRequest": "test"
-      }
-    },
-    {
-      "name": "memExpressions.js",
-      "type": "file",
-      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/test-repo/memExpressions.js",
-      "children": [],
-      "info": {
-        "fileSize": 419,
-        "linesOfCode": 9,
+        "fileSize": 250,
+        "linesOfCode": 6,
         "complexity": 1,
         "dependents": [],
         "dependencies": []
@@ -183,33 +24,62 @@
         "funcCallExpressions": [],
         "memberExpressions": [
           {
-            "object": "car",
             "property": [
-              "make"
+              "then"
             ],
             "property_access_notation": "dot"
           },
           {
-            "object": "car",
+            "object": "console",
             "property": [
-              "cityName2"
+              "log"
             ],
-            "property_access_notation": "bracket"
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "console",
+            "property": [
+              "log"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "property": [
+              "then"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "console",
+            "property": [
+              "log"
+            ],
+            "property_access_notation": "dot"
           }
         ]
       },
-      "dbInfo": {
-        "dbType": "test",
-        "dbQuery": "test",
-        "dbQueryType": "test",
-        "dbQueryValue": "test",
-        "dbQueryReturn": "test"
-      },
+      "dbInfo": [
+        {
+          "dbInteraction": false,
+          "dbType": null,
+          "totalInteractions": 0,
+          "details": null
+        }
+      ],
       "apiInfo": {
-        "apiType": "test",
-        "apiEndpoint": "test",
-        "apiMethod": "test",
-        "apiRequest": "test"
+        "totalInteractions": 2,
+        "details": [
+          {
+            "apiType": "fetch",
+            "apiURL": "https://jsonplaceholder.typicode.com/posts/1",
+            "typeOfCall": "DELETE"
+          },
+          {
+            "apiType": "fetch",
+            "apiURL": "https://jsonplaceholder.typicode.com/posts/3",
+            "typeOfCall": "POST"
+          }
+        ]
       }
     }
   ]

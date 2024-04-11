@@ -1,12 +1,18 @@
+import escomplex from 'escomplex';
+import path from 'path';
+import fs from 'fs';
+import babel from '@babel/core';
+import esquery from 'esquery';
+import { Parser } from 'acorn';
+import jsx from 'acorn-jsx';
+import ASTDbQueryController from './ASTDbQueryController.mjs';
+import ASTApiQueryController from './ASTApiQueryController.mjs';
 
-const escomplex = require('escomplex');
-const path = require('path');
-const fs = require('fs');
-const babel = require('@babel/core');
-const esquery = require('esquery');
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-const { Parser } = require('acorn');
-const jsx = require('acorn-jsx');
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 
 jsx(Parser);
 
@@ -26,7 +32,7 @@ DataController.superStructure = async (req, res, next) => {
     const filePath = path.resolve(__dirname, '../temp-file-upload');
 
     // SAVE RESULT OF BUILDHIERARCHY TO VARIABLE
-    const hierarchy = await buildHierarchy(filePath, level = 0);
+    const hierarchy = await buildHierarchy(filePath);
     // CREATE NEW VARIABLE STARTING AT UPLOADED REPO ROOT DIRECTORY
     const codeHierarchy = hierarchy.children[0];
     // console.log('total hierarchy: ', codeHierarchy);
@@ -83,70 +89,76 @@ function buildHierarchy(filePath, level = 0) {
 
 // MAIN FUNCTION TO BUILD OUT SUPER STRUCTURE //
 async function traverseHierarchy(node, dcdata) {
-
-  if (!node) {
-    return;
-  }
-
-  if (node.name.endsWith('.json') || node.name.endsWith('.md') || node.name.endsWith('.html') || node.name.endsWith('.jpg') || node.name.endsWith('.jpeg') || node.name.endsWith('.png')) {
-    return {
-      name: node.name,
-      type: 'file',
-      path: node.path,
-    };
-  }
-
-
-  const newNode = {
-    name: node.name,
-    type: node.children ? 'directory' : 'file',
-    path: node.path,
-    children: []
-  };
-
-  if (node.children) {
-    newNode.children = await Promise.all(node.children.map(async child => await traverseHierarchy(child,dcdata)));
-  } else {
-
-    // CALL HELPER FUNCS TO GET DATA 
-    const complexityAndLines = await getComplexityAndLinesOfCode(node.path);
-    const size = await getFileSize(node.path);
-    const dependentsAndDependencies = await getDependenciesAndDependents(node.path, dcdata)
-    const nodeAst = await parseFileToAST(node.path);
+  try{
+    if (!node) {
+      return;
+    }
   
-
-    newNode.info = {
-      fileSize: size, 
-      linesOfCode: complexityAndLines.linesOfCode,
-      complexity: complexityAndLines.complexity,
-      dependents: dependentsAndDependencies.dependents,
-      dependencies: dependentsAndDependencies.dependencies, 
+    if (node.name.endsWith('.json') || node.name.endsWith('.md') || node.name.endsWith('.html') || node.name.endsWith('.jpg') || node.name.endsWith('.jpeg') || node.name.endsWith('.png')) {
+      return {
+        name: node.name,
+        type: 'file',
+        path: node.path,
+      };
+    }
+  
+  
+    const newNode = {
+      name: node.name,
+      type: node.children ? 'directory' : 'file',
+      path: node.path,
+      children: []
     };
-    newNode.deepInfo = {
-            orphan: dependentsAndDependencies.orphan,
-            funcDecName: getASTFuncDecs(nodeAst),
-            funcExpressions: getASTFuncExps(nodeAst),
-            funcArrowExpressions: getASTArrowFuncExps(nodeAst),
-            classDeclarations: getASTClassDecs(nodeAst),
-            funcCallExpressions: getASTCallExps(nodeAst),
-            memberExpressions: getASTMemberExps(nodeAst),
-          }
-          newNode.dbInfo = {
-            dbType: 'test',
-            dbQuery: 'test',
-            dbQueryType: 'test',
-            dbQueryValue: 'test',
-            dbQueryReturn: 'test',
-          }
-          newNode.apiInfo = {
-            apiType: 'test',
-            apiEndpoint: 'test',
-            apiMethod: 'test',
-            apiRequest: 'test',
-          }
+  
+    if (node.children) {
+      newNode.children = await Promise.all(node.children.map(async child => await traverseHierarchy(child,dcdata)));
+    } else {
+  
+      // CALL HELPER FUNCS TO GET DATA 
+      const complexityAndLines = await getComplexityAndLinesOfCode(node.path);
+      const size = await getFileSize(node.path);
+      const dependentsAndDependencies = await getDependenciesAndDependents(node.path, dcdata)
+      const nodeAst = await parseFileToAST(node.path);
+ 
+      const dbData = await ASTDbQueryController.query2(nodeAst, node.path);
+      const apiData = await ASTApiQueryController.queryFunc(nodeAst, node.path);
+      // console.log('apiData here: ',apiData)
+    
+      newNode.info = {
+        fileSize: size, 
+        linesOfCode: complexityAndLines.linesOfCode,
+        complexity: complexityAndLines.complexity,
+        dependents: dependentsAndDependencies.dependents,
+        dependencies: dependentsAndDependencies.dependencies,
+      };
+
+      newNode.deepInfo = {
+        orphan: dependentsAndDependencies.orphan,
+        funcDecName: getASTFuncDecs(nodeAst),
+        funcExpressions: getASTFuncExps(nodeAst),
+        funcArrowExpressions: getASTArrowFuncExps(nodeAst),
+        classDeclarations: getASTClassDecs(nodeAst),
+        funcCallExpressions: getASTCallExps(nodeAst),
+        memberExpressions: getASTMemberExps(nodeAst),
+      }
+
+      newNode.dbInfo = dbData;
+
+      newNode.apiInfo = {
+        totalInteractions: apiData.totalInteractions,
+        details: getApiData(apiData)
+      }
+    }
+  
+    return newNode;
+  } catch (err) {
+    return ({
+      log: 'DataController.traverseHierarchy: ERROR: ' + err,
+      message: { err: 'DataController.traverseHierarchy: ERROR: Check server logs for details' },
+    })
   }
 
-  return newNode;
+  
 }
 
 
@@ -190,9 +202,14 @@ async function getComplexityAndLinesOfCode (filePath) {
 // GET DEPENDENCIES AND DEPENDENTS FUNCTION
 function getDependenciesAndDependents(filePath, dcdata) {
   // console.log('curr lower file ',filePath.toLowerCase())
-  nodeData = dcdata.modules.filter(el => filePath.toLowerCase().includes(el.source.toLowerCase()));
-  console.log('nodeData: ',nodeData[0].dependencies)
-  return nodeData[0];
+  try{
+    let nodeData = dcdata.modules.filter(el => filePath.toLowerCase().includes(el.source.toLowerCase()));
+    // console.log('nodeData: ',nodeData[0].dependencies)
+    return nodeData[0];
+
+  } catch (err){
+    console.log(err)
+  }
 }
 
 
@@ -321,7 +338,9 @@ function getASTCallExps(ast){
       if (el.value) callObj.arguments.push(el.value)
     })
 
-    resultArr.push(callObj);
+    if (callObj.name){
+      resultArr.push(callObj);
+    }
   })
   return resultArr;
 }
@@ -356,9 +375,24 @@ function getASTMemberExps(ast){
   return resultArr;
 }
 
+// API HELPER FUNC
+function getApiData(data){
+  let result = [];
+  let apiData = data.details;
+  apiData.forEach(el => {
+    if (el){
+      result.push({
+        apiType: el.method,
+        apiURL: el.url,
+        typeOfCall: el.httpMethod
+      })
+    }
+  })
+  return result;
+}
 
 
 
 
-
-module.exports =  DataController;
+// module.exports =  DataController;
+export default DataController;
