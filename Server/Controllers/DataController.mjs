@@ -122,14 +122,18 @@ async function traverseHierarchy(node, dcdata) {
  
       const dbData = await ASTDbQueryController.query2(nodeAst, node.path);
       const apiData = await ASTApiQueryController.queryFunc(nodeAst, node.path);
-      // console.log('apiData here: ',apiData)
-    
+      const exportsData = getModuleDotExports(nodeAst);
+      const exportsData2 = getES6DefaultExports(nodeAst);
+      const exportsData3 = getES6Exports(nodeAst);
+      const allExports = [...exportsData, ...exportsData2, ...exportsData3];
+      
       newNode.info = {
         fileSize: size, 
         linesOfCode: complexityAndLines.linesOfCode,
         complexity: complexityAndLines.complexity,
         dependents: dependentsAndDependencies.dependents,
         dependencies: dependentsAndDependencies.dependencies,
+        isModule: allExports.length > 0 ? true : false,
       };
 
       newNode.deepInfo = {
@@ -144,10 +148,19 @@ async function traverseHierarchy(node, dcdata) {
 
       newNode.dbInfo = dbData;
 
-      newNode.apiInfo = {
-        totalInteractions: apiData.totalInteractions,
-        details: getApiData(apiData)
+      if (apiData) {
+        newNode.apiInfo = {
+          totalInteractions: apiData.totalInteractions || 0,
+          details: getApiData(apiData)
+        }
+      } else {
+        newNode.apiInfo = {
+          totalInteractions: 0,
+          details: []
+        }
       }
+
+
     }
   
     return newNode;
@@ -379,7 +392,9 @@ function getASTMemberExps(ast){
 function getApiData(data){
   let result = [];
   let apiData = data.details;
+  // console.log('here')
   apiData.forEach(el => {
+    // console.log('el: ',el)
     if (el){
       result.push({
         apiType: el.method,
@@ -391,7 +406,45 @@ function getApiData(data){
   return result;
 }
 
+// GET MODEULE.EXPORTS HELPER FUNC
+function getModuleDotExports(ast){
+  try {
+    let moduleNames = []
+    ast.body.forEach(el => {
 
+      if (el.type === 'ExpressionStatement' && el.expression.left !== undefined && el.expression.left.object !== undefined && el.expression.left.object.name === 'module' && el.expression.left.property.name === 'exports'){
+        moduleNames.push(el.expression.right.name)
+      }
+
+    })
+    return moduleNames;
+  } catch (err) {
+    console.log('err: ',err)
+  }
+}
+
+// GET ES6 EXPORT DEFAULT HELPER FUNC
+function getES6DefaultExports(ast){
+  let moduleNames = []
+  // console.log(ast)
+  const results = esquery(ast, 'ExportDefaultDeclaration')
+  results.forEach(el => {
+    moduleNames.push(el.declaration.name)
+  })
+  return moduleNames;
+}
+
+// GET ES6 EXPORTS HELPER FUNC
+function getES6Exports(ast){
+  let moduleNames = []
+  let results = esquery(ast, 'ExportNamedDeclaration')
+  results.forEach(el => {
+    el.specifiers.forEach(spec => {
+      moduleNames.push(spec.exported.name)
+    })
+  })
+  return moduleNames;
+}
 
 
 // module.exports =  DataController;

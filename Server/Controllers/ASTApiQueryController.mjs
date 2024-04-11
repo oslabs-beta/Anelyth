@@ -336,12 +336,12 @@ function analyzeFetchCalls(ast, filePath) {
     // return interactionDetail;
   });
 
-  console.log('interactions:', interactions)
+  // console.log('interactions:', interactions)
 
     return {
       filePath: filePath,
       totalInteractions: interactions.filter(el => el !== undefined).length,
-      details: interactions
+      details: interactions.filter(el => el !== undefined)
     };
 
 }

@@ -13,7 +13,8 @@
         "linesOfCode": 6,
         "complexity": 1,
         "dependents": [],
-        "dependencies": []
+        "dependencies": [],
+        "isModule": false
       },
       "deepInfo": {
         "orphan": true,
@@ -80,6 +81,56 @@
             "typeOfCall": "POST"
           }
         ]
+      }
+    },
+    {
+      "name": "moduleexport.js",
+      "type": "file",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/test-repo/moduleexport.js",
+      "children": [],
+      "info": {
+        "fileSize": 98,
+        "linesOfCode": 5,
+        "complexity": 1,
+        "dependents": [],
+        "dependencies": [],
+        "isModule": true
+      },
+      "deepInfo": {
+        "orphan": true,
+        "funcDecName": [],
+        "funcExpressions": [],
+        "funcArrowExpressions": [],
+        "classDeclarations": [],
+        "funcCallExpressions": [],
+        "memberExpressions": [
+          {
+            "object": "testModule",
+            "property": [
+              "func1"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "module",
+            "property": [
+              "exports"
+            ],
+            "property_access_notation": "dot"
+          }
+        ]
+      },
+      "dbInfo": [
+        {
+          "dbInteraction": false,
+          "dbType": null,
+          "totalInteractions": 0,
+          "details": null
+        }
+      ],
+      "apiInfo": {
+        "totalInteractions": 0,
+        "details": []
       }
     }
   ]
