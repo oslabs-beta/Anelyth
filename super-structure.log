@@ -9,8 +9,8 @@
       "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/test-repo/got.js",
       "children": [],
       "info": {
-        "fileSize": 226,
-        "linesOfCode": 5,
+        "fileSize": 250,
+        "linesOfCode": 6,
         "complexity": 1,
         "dependents": [],
         "dependencies": []
@@ -37,17 +37,22 @@
             ]
           },
           {
+            "arguments": [
+              "test line"
+            ]
+          },
+          {
             "arguments": []
           },
           {
             "functionName": "fetch",
             "arguments": [
-              "https://jsonplaceholder.typicode.com/posts/1"
+              "https://jsonplaceholder.typicode.com/posts/3"
             ]
           },
           {
             "arguments": [
-              "hellooooo"
+              "helloagainnnn"
             ]
           }
         ],
@@ -55,6 +60,13 @@
           {
             "property": [
               "then"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "console",
+            "property": [
+              "log"
             ],
             "property_access_notation": "dot"
           },
@@ -93,12 +105,12 @@
         "details": [
           {
             "apiType": "fetch",
-            "apiURL": "dynamic",
+            "apiURL": "https://jsonplaceholder.typicode.com/posts/1",
             "typeOfCall": "DELETE"
           },
           {
             "apiType": "fetch",
-            "apiURL": "dynamic",
+            "apiURL": "https://jsonplaceholder.typicode.com/posts/3",
             "typeOfCall": "POST"
           }
         ]

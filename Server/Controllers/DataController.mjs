@@ -129,7 +129,7 @@ async function traverseHierarchy(node, dcdata) {
         linesOfCode: complexityAndLines.linesOfCode,
         complexity: complexityAndLines.complexity,
         dependents: dependentsAndDependencies.dependents,
-        dependencies: dependentsAndDependencies.dependencies, 
+        dependencies: dependentsAndDependencies.dependencies,
       };
 
       newNode.deepInfo = {
@@ -378,11 +378,13 @@ function getApiData(data){
   let result = [];
   let apiData = data.details;
   apiData.forEach(el => {
-    result.push({
-      apiType: el.method,
-      apiURL: el.url,
-      typeOfCall: el.httpMethod
-    })
+    if (el){
+      result.push({
+        apiType: el.method,
+        apiURL: el.url,
+        typeOfCall: el.httpMethod
+      })
+    }
   })
   return result;
 }

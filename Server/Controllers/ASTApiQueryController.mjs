@@ -259,37 +259,69 @@ function analyzeFetchCalls(ast, filePath) {
   
   let interactions = allCalls.map(call => {
     
-    // console.log('checking here',call)
 
-    let interactionDetail = {
-      method: 'fetch',
-      line: call.loc.start.line,
-      url: null, // PLACEHOLDER
-      httpMethod: 'GET' // DEFAULT
-    };
+    // let interactionDetail = {
+    //   method: 'fetch',
+    //   line: call.loc.start.line,
+    //   url: null, // PLACEHOLDER
+    //   httpMethod: 'GET' // DEFAULT
+    // };
 
     // console.log('call', call)
 
     // find http method
-    call.callee.object.arguments.forEach(arg => {
-      if (arg.type === 'ObjectExpression') {
-        arg.properties.forEach(prop => {
-          if (prop.key.name === 'method') {
-            interactionDetail.httpMethod = prop.value.value;
-          }
-        });
-      }
-    })
+    if (call.callee.object.arguments){
+
+      let interactionDetail = {
+        method: 'fetch',
+        line: call.loc.start.line,
+        url: null, // PLACEHOLDER
+        httpMethod: 'GET' // DEFAULT
+      };
+
+      call.callee.object.arguments.forEach(arg => {
+        if (arg.type === 'ObjectExpression') {
+          arg.properties.forEach(prop => {
+            if (prop.key.name === 'method') {
+              interactionDetail.httpMethod = prop.value.value;
+            }
+          });
+        }
+      })
+
+      call.callee.object.arguments.forEach(arg => {
+        if (arg.type === 'Literal') {
+          interactionDetail.url = arg.value;
+        }
+      })
+
+      return interactionDetail;
+    } else {
+      return;
+    }
 
     // console.log('final result', call.callee.object.arguments[1].properties[0].value.value)
 
 
     // EXTRACT URL
-    if (call.arguments && call.arguments[0] && call.arguments[0].type === 'Literal') {
-      interactionDetail.url = call.arguments[0].value;
-    } else {
-      interactionDetail.url = 'dynamic';
-    }
+    // if (call.arguments && call.arguments[0] && call.arguments[0].type === 'Literal') {
+    //   interactionDetail.url = call.arguments[0].value;
+    // } else {
+    //   interactionDetail.url = 'dynamic';
+    // }
+
+
+    // extract url 2
+      // console.log('looking here bitchhh: ', call.callee.object.arguments)
+
+      // if (call.callee.object.arguments){
+      //   call.callee.object.arguments.forEach(arg => {
+      //     if (arg.type === 'Literal') {
+      //       interactionDetail.url = arg.value;
+      //     }
+      //   })
+      // }
+
 
     // EXTRACT HTTP METHOD
     // if (call.arguments[1] && call.arguments[1].type === 'ObjectExpression') {
@@ -299,15 +331,18 @@ function analyzeFetchCalls(ast, filePath) {
     //     interactionDetail.httpMethod = methodProperty.value.value;
     //   }
     // }
-    console.log('interaction detail:   ',interactionDetail)
-    return interactionDetail;
+
+    // console.log('interaction detail:   ',interactionDetail)
+    // return interactionDetail;
   });
 
-  return {
-    filePath: filePath,
-    totalInteractions: interactions.length,
-    details: interactions
-  };
+  console.log('interactions:', interactions)
+
+    return {
+      filePath: filePath,
+      totalInteractions: interactions.filter(el => el !== undefined).length,
+      details: interactions
+    };
 
 }
 
