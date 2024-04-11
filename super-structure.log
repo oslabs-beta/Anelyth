@@ -21,41 +21,7 @@
         "funcExpressions": [],
         "funcArrowExpressions": [],
         "classDeclarations": [],
-        "funcCallExpressions": [
-          {
-            "arguments": []
-          },
-          {
-            "functionName": "fetch",
-            "arguments": [
-              "https://jsonplaceholder.typicode.com/posts/1"
-            ]
-          },
-          {
-            "arguments": [
-              "hello"
-            ]
-          },
-          {
-            "arguments": [
-              "test line"
-            ]
-          },
-          {
-            "arguments": []
-          },
-          {
-            "functionName": "fetch",
-            "arguments": [
-              "https://jsonplaceholder.typicode.com/posts/3"
-            ]
-          },
-          {
-            "arguments": [
-              "helloagainnnn"
-            ]
-          }
-        ],
+        "funcCallExpressions": [],
         "memberExpressions": [
           {
             "property": [

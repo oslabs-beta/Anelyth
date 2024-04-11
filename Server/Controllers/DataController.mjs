@@ -338,7 +338,9 @@ function getASTCallExps(ast){
       if (el.value) callObj.arguments.push(el.value)
     })
 
-    resultArr.push(callObj);
+    if (callObj.name){
+      resultArr.push(callObj);
+    }
   })
   return resultArr;
 }
