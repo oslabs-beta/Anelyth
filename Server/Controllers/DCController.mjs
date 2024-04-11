@@ -8,6 +8,10 @@ const cruiseOptions = {
   outputType: "json",
   exclude: "node_modules",
   doNotFollow: "node_modules",
+  enhancedResolveOptions: {
+    exportsFields: ['exports', 'module'],
+    conditionNames: ['import', 'require', 'node', 'default'] 
+  },
 };
 
 // ------ HELPER FUNC TO GET FILE HIERARCHY WITH DEPENDENCIES ----- //
@@ -88,7 +92,7 @@ DCController.analyze = async (req, res, next) => {
     console.log('in dccontroller.analyze');
     const uploadsPath = './Server/temp-file-upload';
     const depResult = await cruise([uploadsPath], cruiseOptions);
-    // console.log(JSON.stringify(JSON.parse(depResult.output), null, 2));
+    // console.log('checking hereeeee:',JSON.stringify(JSON.parse(depResult.output), null, 2));
 
     const hierarchy = printDirectoryTree(uploadsPath, JSON.parse(depResult.output));
     // console.log('dc analyze output',hierarchy)
