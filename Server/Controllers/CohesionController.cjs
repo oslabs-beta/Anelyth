@@ -5,6 +5,7 @@ const CohesionController = {};
 const arr = [
   {fileName: 'file1', details: [{url: 'endpoint1'}, {url: 'endpoint2'}]}, 
   {fileName: 'file2', details: [{url: 'endpoint1'}, {url: 'endpoint2'}, {url: 'endpoint3'}]}, 
+  {fileName: 'file5', details: [{url: 'endpoint6'}]},
   {fileName: 'file3', details: [{url: 'endpoint1'}, {url: 'endpoint4'}]},
   {fileName: 'file4', details: [{url: 'endpoint3'}]}
 ];
@@ -23,83 +24,75 @@ const arr = [
   // [{fileName: 'file1', details: [{url: 'value1'}, {url: 'value2'}]}, {fileName: 'file2', details: [{url: 'value1'}, {url: 'value3'}]}]
 //output: array of arrays of objects: grouped by potential microservice based on api cohesion metric
 CohesionController.calculateApiCohesion = (arr) => {
-  //copy the input array
-  const workingArr = JSON.parse(JSON.stringify(arr)); 
   //declare output array
   const result = [];
   //declare remaining array of elements
-  const remaining = [...workingArr];
+  const remaining = JSON.parse(JSON.stringify(arr)); 
   //loop
   while (remaining.length > 0) {
-    const i = 0;
     //declare subarray, initialize with 1st element left
-    const potentialMicroservice = [remaining[i]];
-    let j = 1;
+    const potentialMicroservice = [remaining.shift()];
+    console.log('outer potentialMicroservice:', potentialMicroservice)
+    let j = 0;
     //element to compare
     let element = remaining[j];
     while (element) {
+      console.log('element:', element)
+      console.log('inner potentialMicroservice:', potentialMicroservice)
       //compare elements, if passes, combine. if combined, that becomes an element. if not, continue.
       //pass in threshold here
-      const shouldCombine = compare(potentialMicroservice, element, 0.5);
-      if (shouldCombine) {
+      if (shouldCombine(potentialMicroservice, element, 0.5)) {
         const deleted = remaining.splice(j, 1);
         potentialMicroservice.push(...deleted);
+      } else {
+        //if not combined, increment pointer to next element
+        j++;
       }
       //compare next element
-      element = remaining[j + 1];
+      element = remaining[j];
+      console.log('remaining:', remaining)
     }
-    //remove first element from remaining
-    remaining.splice(i, 1);
-
     //once you get to the end of remaining array, you have any potentialMicroservice that remaining[i] would be part of, so push it to result
     result.push(potentialMicroservice);
   }
 
-
   return result;
 
-
-  function compare (elementOne, elementTwo, threshold) {
-    //create two arrays with unique endpoints
-    let elementOneEndpoints;
-    if (elementOne.length === 1) {
-      elementOneEndpoints = elementOne[0].details;
-    } else {
-      elementOneEndpoints = elementOne.reduce((acc, curr) => {
-        const accDetails = acc.details;
-        const currDetails = curr.details;
-        return [...accDetails, ...currDetails];
+  function shouldCombine (elementOne, elementTwo, threshold) {
+    console.log('entering shouldCombine');
+    //create two sets with unique endpoints
+    const elementOneEndpoints = new Set();
+    const elementTwoEndpoints = new Set();
+    //iterate over elementOne and elementTwo and push to set to create sets of unique endopints for each
+    for (let i = 0; i < elementOne.length; i++) {
+      const currFileDetails = elementOne[i].details;
+      currFileDetails.forEach(({ url }) => {
+        elementOneEndpoints.add(url);
       });
     }
-    elementOneEndpoints = elementOneEndpoints.reduce(( acc, { url }) => {
-      if (!acc.includes(url)) {
-        acc.push(url);
-      }
-      return acc;
-    }, []);
+    elementTwo.details.forEach(({ url }) => {
+      elementTwoEndpoints.add(url);
+    });
 
-    const elementTwoEndpoints = elementTwo.details.reduce(( acc, { url }) => {
-      if (!acc.includes(url)) {
-        acc.push(url);
-      }
-      return acc;
-    }, []);
+    console.log('elementOneEndpoints:', elementOneEndpoints)
+    console.log('elementTwoEndpoints:', elementTwoEndpoints)
 
-    const lengthOne = elementOneEndpoints.length;
-    const lengthTwo = elementTwoEndpoints.length;
+    const lengthOne = elementOneEndpoints.size;
+    const lengthTwo = elementTwoEndpoints.size;
 
     const smallerElement = lengthTwo < lengthOne ? elementTwoEndpoints : elementOneEndpoints;
     const largerElement = lengthTwo < lengthOne ? elementOneEndpoints : elementTwoEndpoints;
 
     const inCommon = [];
 
-    for (let i = 0; i < smallerElement.length; i++) {
-      if (largerElement.includes(smallerElement[i])) {
-        inCommon.push(smallerElement[i]);
-      }
-    }
+    smallerElement.forEach((val) => {
+      console.log('val:', val)
+      if (largerElement.has(val)) inCommon.push(val);
+    });
 
-    const percentInCommon = inCommon.length / smallerElement.length;
+    console.log('inCommon:', inCommon)
+
+    const percentInCommon = inCommon.length / smallerElement.size;
 
     if (percentInCommon >= threshold) return true;
     else return false;
@@ -110,3 +103,4 @@ const result = CohesionController.calculateApiCohesion(arr);
 console.log('result:', result)
 
 // module.exports = CohesionController;
+
