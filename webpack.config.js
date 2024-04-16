@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    index: './Client/index.js',
+    index: './src/Client/index.js',
   },
   output: {
     filename: 'bundle.js',
@@ -26,7 +26,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       hash: true,
-      template: './Client/index.html' // Updated template path
+      template: './src/Client/index.html' // Updated template path
     })
   ],
 
@@ -43,6 +43,11 @@ module.exports = {
             ]
           }
         }
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: ['ts-loader'],
       },
       {
         test: /\.css$/,
@@ -74,4 +79,7 @@ module.exports = {
       },
     ]
   },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js','.jsx'] // Add .tsx and .ts to resolve extensions
+  }
 };
