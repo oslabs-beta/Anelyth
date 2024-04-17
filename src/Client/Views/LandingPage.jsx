@@ -3,7 +3,7 @@ import '../Styles/landingpage.css';
 
 import screenshot from '../Assets/Screenshot 2024-03-07 at 9.21.34 PM.png';
 import Header from '../Components/Header.tsx';
-import Blocks from '../Components/blocks.jsx';
+import Blocks from '../Components/Blocks.tsx';
 import Shatter from '../Components/Shatter.jsx';
 import scott from '../Assets/teamPics/scottimg.jpg';
 import cm from '../Assets/teamPics/cm.png';

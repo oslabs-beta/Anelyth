@@ -8,5 +8,12 @@
     "moduleResolution": "node",
     "noImplicitAny": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": [
+    "**/*.png",
+    "**/*.jpg",
+    "**/*.jpeg",
+    "**/*.gif",
+    "**/*.svg",
+  ]
 }

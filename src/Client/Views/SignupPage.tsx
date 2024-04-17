@@ -1,14 +1,24 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
 import '../Styles/signup.css';
+// @ts-ignore
 import bgIMG from '../Assets/loginimg.png';
-import Header from '../Components/Header.tsx';
+import Header from '../Components/Header';
 
-function SignupPage() {
+interface FormData {
+  username: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+
+}
+
+function SignupPage(): JSX.Element {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState<FormData>({username: '', firstName: '', lastName: '', email: '', password: ''});
 
-  function handleChange(e) {
+  function handleChange(e: any) {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({...prevFormData, [name]: value}));
   }

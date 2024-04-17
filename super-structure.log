@@ -1,196 +1,3257 @@
 {
-  "name": "test-repo",
+  "name": "unit-11-authentication",
   "type": "directory",
-  "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/test-repo",
+  "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication",
   "children": [
     {
-      "name": "es6exports.js",
+      "name": ".eslintrc.json",
       "type": "file",
-      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/test-repo/es6exports.js",
-      "children": [],
-      "info": {
-        "fileSize": 138,
-        "linesOfCode": 12,
-        "complexity": 1,
-        "dependents": [],
-        "dependencies": [],
-        "isModule": true,
-        "exportedModules": [
-          "add",
-          "two",
-          "three"
-        ]
-      },
-      "deepInfo": {
-        "orphan": true,
-        "funcDecName": [],
-        "funcExpressions": [],
-        "funcArrowExpressions": [
-          {
-            "arrowFuncName": "two"
-          },
-          {
-            "arrowFuncName": "three"
-          }
-        ],
-        "classDeclarations": [],
-        "funcCallExpressions": [],
-        "memberExpressions": [
-          {
-            "object": "add",
-            "property": [
-              "one"
-            ],
-            "property_access_notation": "dot"
-          }
-        ]
-      },
-      "dbInfo": [
-        {
-          "dbInteraction": false,
-          "dbType": null,
-          "totalInteractions": 0,
-          "details": null
-        }
-      ],
-      "apiInfo": {
-        "totalInteractions": 0,
-        "details": []
-      }
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/.eslintrc.json"
     },
     {
-      "name": "got.js",
+      "name": "README.md",
       "type": "file",
-      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/test-repo/got.js",
-      "children": [],
-      "info": {
-        "fileSize": 250,
-        "linesOfCode": 6,
-        "complexity": 1,
-        "dependents": [],
-        "dependencies": [],
-        "isModule": false,
-        "exportedModules": []
-      },
-      "deepInfo": {
-        "orphan": true,
-        "funcDecName": [],
-        "funcExpressions": [],
-        "funcArrowExpressions": [],
-        "classDeclarations": [],
-        "funcCallExpressions": [],
-        "memberExpressions": [
-          {
-            "property": [
-              "then"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "console",
-            "property": [
-              "log"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "console",
-            "property": [
-              "log"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "property": [
-              "then"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "console",
-            "property": [
-              "log"
-            ],
-            "property_access_notation": "dot"
-          }
-        ]
-      },
-      "dbInfo": [
-        {
-          "dbInteraction": false,
-          "dbType": null,
-          "totalInteractions": 0,
-          "details": null
-        }
-      ],
-      "apiInfo": {
-        "totalInteractions": 2,
-        "details": [
-          {
-            "apiType": "fetch",
-            "apiURL": "https://jsonplaceholder.typicode.com/posts/1",
-            "typeOfCall": "DELETE"
-          },
-          {
-            "apiType": "fetch",
-            "apiURL": "https://jsonplaceholder.typicode.com/posts/3",
-            "typeOfCall": "POST"
-          }
-        ]
-      }
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/README.md"
     },
     {
-      "name": "moduleexport.js",
-      "type": "file",
-      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/server/temp-file-upload/test-repo/moduleexport.js",
-      "children": [],
-      "info": {
-        "fileSize": 98,
-        "linesOfCode": 5,
-        "complexity": 1,
-        "dependents": [],
-        "dependencies": [],
-        "isModule": true,
-        "exportedModules": [
-          "testModule"
-        ]
-      },
-      "deepInfo": {
-        "orphan": true,
-        "funcDecName": [],
-        "funcExpressions": [],
-        "funcArrowExpressions": [],
-        "classDeclarations": [],
-        "funcCallExpressions": [],
-        "memberExpressions": [
-          {
-            "object": "testModule",
-            "property": [
-              "func1"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "module",
-            "property": [
-              "exports"
-            ],
-            "property_access_notation": "dot"
-          }
-        ]
-      },
-      "dbInfo": [
+      "name": "client",
+      "type": "directory",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/client",
+      "children": [
         {
-          "dbInteraction": false,
-          "dbType": null,
-          "totalInteractions": 0,
-          "details": null
+          "name": "index.html",
+          "type": "file",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/client/index.html"
+        },
+        {
+          "name": "scripts",
+          "type": "directory",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/client/scripts",
+          "children": [
+            {
+              "name": "secret.js",
+              "type": "file",
+              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/client/scripts/secret.js",
+              "children": [],
+              "info": {
+                "fileSize": 374,
+                "linesOfCode": 9,
+                "complexity": 1,
+                "dependents": [],
+                "dependencies": [],
+                "isModule": false,
+                "exportedModules": []
+              },
+              "deepInfo": {
+                "orphan": true,
+                "funcDecName": [],
+                "funcExpressions": [],
+                "funcArrowExpressions": [],
+                "classDeclarations": [],
+                "funcCallExpressions": [],
+                "memberExpressions": [
+                  {
+                    "object": "document",
+                    "property": [
+                      "querySelector"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "then"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "then"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "json"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "data",
+                    "property": [
+                      "users"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "users",
+                    "property": [
+                      "forEach"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "document",
+                    "property": [
+                      "createElement"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "userListItem",
+                    "property": [
+                      "appendChild"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "document",
+                    "property": [
+                      "createTextNode"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "user",
+                    "property": [
+                      "username"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "user",
+                    "property": [
+                      "password"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "secrets",
+                    "property": [
+                      "appendChild"
+                    ],
+                    "property_access_notation": "dot"
+                  }
+                ]
+              },
+              "dbInfo": [
+                {
+                  "dbInteraction": false,
+                  "dbType": null,
+                  "totalInteractions": 0,
+                  "details": null
+                }
+              ],
+              "apiInfo": {
+                "totalInteractions": 1,
+                "details": [
+                  {
+                    "apiType": "fetch",
+                    "apiURL": null,
+                    "typeOfCall": "GET"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "secret.html",
+          "type": "file",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/client/secret.html"
+        },
+        {
+          "name": "signup.html",
+          "type": "file",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/client/signup.html"
         }
-      ],
-      "apiInfo": {
-        "totalInteractions": 0,
-        "details": []
-      }
+      ]
+    },
+    {
+      "name": "docs",
+      "type": "directory",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/docs",
+      "children": [
+        {
+          "name": "assets",
+          "type": "directory",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/docs/assets",
+          "children": [
+            {
+              "name": "images",
+              "type": "directory",
+              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/docs/assets/images",
+              "children": [
+                {
+                  "log": "DataController.traverseHierarchy: ERROR: SyntaxError: /Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/docs/assets/images/bcrypt-hashing.svg: Unexpected token (1:1)\n\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 1 |\u001b[39m \u001b[33m<\u001b[39m\u001b[33m?\u001b[39mxml version\u001b[33m=\u001b[39m\u001b[32m\"1.0\"\u001b[39m encoding\u001b[33m=\u001b[39m\u001b[32m\"UTF-8\"\u001b[39m standalone\u001b[33m=\u001b[39m\u001b[32m\"no\"\u001b[39m\u001b[33m?\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m   |\u001b[39m  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 2 |\u001b[39m \u001b[33m<\u001b[39m\u001b[33m!\u001b[39m\u001b[33m--\u001b[39m \u001b[33mCreated\u001b[39m \u001b[36mwith\u001b[39m \u001b[33mInkscape\u001b[39m (http\u001b[33m:\u001b[39m\u001b[90m//www.inkscape.org/) -->\u001b[39m\n \u001b[90m 3 |\u001b[39m\n \u001b[90m 4 |\u001b[39m \u001b[33m<\u001b[39m\u001b[33msvg\u001b[39m\u001b[0m",
+                  "message": {
+                    "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
+                  }
+                },
+                {
+                  "log": "DataController.traverseHierarchy: ERROR: SyntaxError: /Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/docs/assets/images/bcrypt.gif: Unexpected character '�'. (1:6)\n\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 1 |\u001b[39m \u001b[33mGIF89a�\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0001\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m��������o�h\u001b[37m\u001b[41m\u001b[1m\u001b\u001b[22m\u001b[49m\u001b[39m�� t����쓥����ghghT���\u001b[32m`\f\f\fEFF�������ҺfK\u0015��������779�#��Ӫ�����զ$�������������ε�����\"ϙ')))��������ڝ���'���|}}���RRR������SF�R/\u000f��\u0019����#���������ʰ��큂���������ɓ���ɬ���qgP���m{�rrr�������\u0018�������h'�S'���������}z�\\\\\\����u��#������������0&\u0003{b�������âW|wdx���������ã��������������}��(nX�Ė!������lb�=>?@ACV\\c���Vaq�<\u0017��֭��eL���Ņ�r���Ŧ�ǩ�ő������\\L�������m�������������ϝ��\\RCbP�����ۥ��yĽ����cu������ԕ�����xn��ͮ���m\u001c�������������m:ߟ#�{%������Yd���䳫�f_PJRZ����G&�T\u001a���8\u0019\u0006C7%KLL�������������=\u001f`\u001b[39mk{��\u001b[33m?\u001b[39m��\u001b[33m~\u001b[39m�˿���js\u001b[37m\u001b[41m\u001b[1m\u001b[22m\u001b[49m\u001b[39mabbTJ7���������������\u001b[33m.\u001b[39m\u001b[33m.\u001b[39m\u001b[33m/\u001b[39m����±������TUV�\u001b[33m#\u001b[39m��q���x�����nnm������sr_ \u001b[33m!\u001b[39m\u001b[33m!\u001b[39m\u001b[35m233\u001b[39m���xz\u001b[37m\u001b[41m\u001b[1m\u001b[22m\u001b[49m\u001b[39m����$��{���I\u001b[33m?\u001b[39m�}�p�������ś������WWX���nm��б������uuu\u001b[33m-\u001b[39m\u001b[33m,\u001b[39m\u001b[33m!\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0018\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0018\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0018\u001b[22m\u001b[49m\u001b[39m���xxx����������ɨ�������������粰�ݭ\u001b[33m<\u001b[39m�����������\u001b[37m\u001b[41m\u001b[1m\u001a\u001b[22m\u001b[49m\u001b[39m��\u001b[33m;\u001b[39m���8g\u001b[33m?\u001b[39mc\u001b[37m\u001b[41m\u001b[1m\\\u001b[22m\u001b[49m\u001b[39my\u001b[37m\u001b[41m\u001b[1m\\\u001b[22m\u001b[49m\u001b[39m\u001b[33mYJҵ\u001b[39m\u001b[32m'��'\u001b[39m��ߨ��\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m���\u001b[33m!\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33m,\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0001\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\b\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�\t\u001b[37m\u001b[41m\u001b[1m\u001c\u001b[22m\u001b[49m\u001b[39m\u001b[33mH����\u001b[39m\u001b[37m\u001b[41m\u001b[1m\b\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0013\u001b[22m\u001b[49m\u001b[39m\u001b[33m*\u001b[39m\u001b[37m\u001b[41m\u001b[1m\\\u001b[22m\u001b[49m\u001b[39m\u001b[33mȰ�Ç\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39m\u001b[33m#\u001b[39m\u001b[33mJ�H��ŋ\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0018\u001b[22m\u001b[49m\u001b[39m\u001b[35m3\u001b[39mj�ȱ�Ǐ \u001b[33mC�\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u001c\u001b[22m\u001b[49m\u001b[39m\u001b[33mI��ɓ\u001b[39m(\u001b[33mS�\u001b[39m\u001b[37m\u001b[41m\u001b[1m\\\u001b[22m\u001b[49m\u001b[39mɲ�˗0cʜI��͛8s���2�7{\u001b[35m6\u001b[39mx\n \u001b[90m   |\u001b[39m       \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 2 |\u001b[39m \u001b[33m=\u001b[39m�\u001b[33m/\u001b[39m�У\t]����iIK��53�g9\u001b[37m\u001b[41m\u001b[1m\u001b[22m\u001b[49m\u001b[39m\u001b[33mO2TE���\u001b[39m\u001b[33m?\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0006\u001b[22m\u001b[49m\u001b[39m\u001b[33m*\u001b[39m�m\u001b[37m\u001b[41m\u001b[1m\u001d\u001b[22m\u001b[49m\u001b[39m��\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39m���\u001b[37m\u001b[41m\u001b[1m\u001a\u001b[22m\u001b[49m\u001b[39m�\u001b[32m\"{S\u0005�+\f�\u0005e���\b�#Nd��7Ⅿ��&��\u0017�+�\"\u001b[39m\u001b[35m0\u001b[39m�բpM�R�Ee�±e�f�\u001b[33m=\u001b[39m\u001b[33mJ\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0011\u001b[22m\u001b[49m\u001b[39m�߸oD\u001b[33m.\u001b[39m�Tq�\u001b[33m@\u001b[39m\f\u001b[35m40\u001b[39m�\tc\u001b[33m*\u001b[39m�\u001b[33m%\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0013\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0017\u001b[22m\u001b[49m\u001b[39m\u001b[33mX�e������\u001b[39m\u001b[33m:\u001b[39m�\u001b[33m&\u001b[39m�߈\u001b[33m~\u001b[39m�O\u001b[37m\u001b[41m\u001b[1m\u001e\u001b[22m\u001b[49m\u001b[39m�\u001b[32m`�\u0000�\u0010�\u0018�0\u0010\\%�b\u0002[T�ʠ���|33A��_�\u0004h\u001b���.��\u0019\u0016f\u0018�7��o�&��#3_\u001e���H<�?\u0016�\u0006���C�*h��\u001b[39m\n \u001b[90m 3 |\u001b[39m \u001b[32m\u001d\u001d&�\u0012(�3�0Ѡ\u0011�?��� H�� \u0010w��S�Y�T�؅Hig�\t�\u0005�\u0019u*0G�E�̀B)\f�`\u001b[39m�\f\u001b[33m!\u001b[39m�5�u\u001b[33m/\u001b[39mj��\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39m�0��\u001b[37m\u001b[41m\u001b[1m\u001e\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\b\u001b[22m\u001b[49m\u001b[39m���6���\u001b[33m#\u001b[39m\u001b[33mO��b�\u001b[39m\u001b[33m?\u001b[39m�\u001b[32m`�]w���ޒ\u0013\u001d��\u00063pRJ\u0012\"\f3�>\u001a�ǌ\fXb�\\\u0006_�pɐѱA]8<�ISf�\\\u0012�Yj��!?\t�H��\u000e\u001d�%'RH��\u0012�����\u0012�e!�\u0011A��\u001e����\tE�I�}Q\tC�Q�P�\u001eL ��`\u001b[39mp��BTm\u001b[37m\u001b[41m\u001b[1m\u0014\u001b[22m\u001b[49m\u001b[39m�9�B�I��\u001b[37m\u001b[41m\u001b[1m\u0012\u001b[22m\u001b[49m\u001b[39m\u001b[33mJp�A\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0015\u001b[22m\u001b[49m\u001b[39m$pK\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u001a\u001b[22m\u001b[49m\u001b[39m\f\u001b[33m#\u001b[39m\u001b[33mE�q�����\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u000e\u001b[22m\u001b[49m\u001b[39m��YlLQdw�tv��\u001b[33m/\u001b[39me6E\u001b[37m\u001b[41m\u001b[1m\u0011\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u000e\u001b[22m\u001b[49m\u001b[39m�Q�)�}f�\u001b[33m@\u001b[39m���\u001b[37m\u001b[41m\u001b[1m\u0016\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\b\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u001d\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39m����\u001b[33m@\u001b[39m \u001b[33m<\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39m�G\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39maJ�\u001b[37m\u001b[41m\u001b[1m\u0001\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\\\u001b[22m\u001b[49m\u001b[39m\u001b[33mӒ�\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u000e\u001b[22m\u001b[49m\u001b[39m�j\txX\u001b[33m=\u001b[39m��\u001b[37m\u001b[41m\u001b[1m\u0017\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0013\u001b[22m\u001b[49m\u001b[39m��\u001b[33m-\u001b[39m���\n \u001b[90m 4 |\u001b[39m n\u001b[37m\u001b[41m\u001b[1m\\\u001b[22m\u001b[49m\u001b[39m��\u001b[37m\u001b[41m\u001b[1m\u0003\u001b[22m\u001b[49m\u001b[39m���\u000b\u001b[35m4\u001b[39m_\u001b[33m<\u001b[39m\u001b[32m\"\u0018�\u0006\u001d���I� �\u001d\u0001(��\u001f����&R��\u000f2\u0014#d)&��\u0002��%\u0010X�5d4\u0010�8����v�D��%{�ɇ�0\u0001�d\f���@\u001b[39m\u001b[0m",
+                  "message": {
+                    "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
+                  }
+                },
+                {
+                  "name": "cookie-header.png",
+                  "type": "file",
+                  "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/docs/assets/images/cookie-header.png"
+                },
+                {
+                  "name": "ejs.png",
+                  "type": "file",
+                  "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/docs/assets/images/ejs.png"
+                },
+                {
+                  "name": "password-hashing.png",
+                  "type": "file",
+                  "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/docs/assets/images/password-hashing.png"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "package-lock.json",
+      "type": "file",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/package-lock.json"
+    },
+    {
+      "name": "package.json",
+      "type": "file",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/package.json"
+    },
+    {
+      "name": "pull_request_template.md",
+      "type": "file",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/pull_request_template.md"
+    },
+    {
+      "name": "server",
+      "type": "directory",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server",
+      "children": [
+        {
+          "name": "controllers",
+          "type": "directory",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/controllers",
+          "children": [
+            {
+              "name": "cookieController.js",
+              "type": "file",
+              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/controllers/cookieController.js",
+              "children": [],
+              "info": {
+                "fileSize": 569,
+                "linesOfCode": 14,
+                "complexity": 1,
+                "dependents": [
+                  "src/Server/temp-file-upload/unit-11-authentication/server/server.js"
+                ],
+                "dependencies": [],
+                "isModule": true,
+                "exportedModules": [
+                  "cookieController"
+                ]
+              },
+              "deepInfo": {
+                "orphan": false,
+                "funcDecName": [],
+                "funcExpressions": [],
+                "funcArrowExpressions": [],
+                "classDeclarations": [],
+                "funcCallExpressions": [],
+                "memberExpressions": [
+                  {
+                    "object": "Math",
+                    "property": [
+                      "floor"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "Math",
+                    "property": [
+                      "random"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "cookieController",
+                    "property": [
+                      "setCookie"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "cookie"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "cookie"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "cookieController",
+                    "property": [
+                      "setSSIDCookie"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "userID"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "locals"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "cookie"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "module",
+                    "property": [
+                      "exports"
+                    ],
+                    "property_access_notation": "dot"
+                  }
+                ]
+              },
+              "dbInfo": [
+                {
+                  "dbInteraction": false,
+                  "dbType": null,
+                  "totalInteractions": 0,
+                  "details": null
+                }
+              ],
+              "apiInfo": {
+                "totalInteractions": 0,
+                "details": []
+              }
+            },
+            {
+              "name": "sessionController.js",
+              "type": "file",
+              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/controllers/sessionController.js",
+              "children": [],
+              "info": {
+                "fileSize": 1267,
+                "linesOfCode": 347,
+                "complexity": 89,
+                "dependents": [
+                  "src/Server/temp-file-upload/unit-11-authentication/server/server.js"
+                ],
+                "dependencies": [
+                  {
+                    "module": "../models/sessionModel",
+                    "moduleSystem": "cjs",
+                    "dynamic": false,
+                    "exoticallyRequired": false,
+                    "dependencyTypes": [
+                      "local",
+                      "require"
+                    ],
+                    "resolved": "src/Server/temp-file-upload/unit-11-authentication/server/models/sessionModel.js",
+                    "coreModule": false,
+                    "followable": true,
+                    "couldNotResolve": false,
+                    "matchesDoNotFollow": false,
+                    "circular": false,
+                    "valid": true
+                  }
+                ],
+                "isModule": true,
+                "exportedModules": [
+                  "sessionController"
+                ]
+              },
+              "deepInfo": {
+                "orphan": false,
+                "funcDecName": [],
+                "funcExpressions": [],
+                "funcArrowExpressions": [],
+                "classDeclarations": [],
+                "funcCallExpressions": [],
+                "memberExpressions": [
+                  {
+                    "object": "sessionController",
+                    "property": [
+                      "isLoggedIn"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "ssid"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "req",
+                    "property": [
+                      "cookies"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "Session",
+                    "property": [
+                      "find"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "ssid"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "req",
+                    "property": [
+                      "cookies"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "sessionQuery",
+                    "property": [
+                      "length"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "isLogged"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "locals"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "isLogged"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "locals"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "sessionController",
+                    "property": [
+                      "startSession"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "userID"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "locals"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "ssid"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "req",
+                    "property": [
+                      "cookies"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "Session",
+                    "property": [
+                      "find"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "sessionQuery",
+                    "property": [
+                      "length"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "Session",
+                    "property": [
+                      "findOneAndUpdate"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "Date",
+                    "property": [
+                      "now"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "newSession",
+                    "property": [
+                      "save"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "cookie"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "newSession",
+                    "property": [
+                      "_id"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "module",
+                    "property": [
+                      "exports"
+                    ],
+                    "property_access_notation": "dot"
+                  }
+                ]
+              },
+              "dbInfo": [
+                {
+                  "dbInteraction": false,
+                  "dbType": null,
+                  "totalInteractions": 0,
+                  "details": null
+                }
+              ],
+              "apiInfo": {
+                "totalInteractions": 0,
+                "details": []
+              }
+            },
+            {
+              "name": "userController.js",
+              "type": "file",
+              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/controllers/userController.js",
+              "children": [],
+              "info": {
+                "fileSize": 2491,
+                "linesOfCode": 361,
+                "complexity": 92,
+                "dependents": [
+                  "src/Server/temp-file-upload/unit-11-authentication/server/server.js"
+                ],
+                "dependencies": [
+                  {
+                    "module": "../models/userModel",
+                    "moduleSystem": "cjs",
+                    "dynamic": false,
+                    "exoticallyRequired": false,
+                    "dependencyTypes": [
+                      "local",
+                      "require"
+                    ],
+                    "resolved": "src/Server/temp-file-upload/unit-11-authentication/server/models/userModel.js",
+                    "coreModule": false,
+                    "followable": true,
+                    "couldNotResolve": false,
+                    "matchesDoNotFollow": false,
+                    "circular": false,
+                    "valid": true
+                  }
+                ],
+                "isModule": true,
+                "exportedModules": [
+                  "userController"
+                ]
+              },
+              "deepInfo": {
+                "orphan": false,
+                "funcDecName": [],
+                "funcExpressions": [],
+                "funcArrowExpressions": [],
+                "classDeclarations": [],
+                "funcCallExpressions": [],
+                "memberExpressions": [
+                  {
+                    "object": "userController",
+                    "property": [
+                      "getAllUsers"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "User",
+                    "property": [
+                      "find"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "JSON",
+                    "property": [
+                      "stringify"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "users"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "locals"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "userController",
+                    "property": [
+                      "createUser"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "req",
+                    "property": [
+                      "body"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "User",
+                    "property": [
+                      "create"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "valid"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "locals"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "valid"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "locals"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "userController",
+                    "property": [
+                      "verifyUser"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "req",
+                    "property": [
+                      "body"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "User",
+                    "property": [
+                      "find"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "bcrypt",
+                    "property": [
+                      "compare"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "password"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "dbQuery",
+                    "property": false,
+                    "property_access_notation": "bracket"
+                  },
+                  {
+                    "object": "dbQuery",
+                    "property": [
+                      "length"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "loginValid"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "locals"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "userID"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "locals"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "_id"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "dbQuery",
+                    "property": false,
+                    "property_access_notation": "bracket"
+                  },
+                  {
+                    "property": [
+                      "loginValid"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "locals"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "loginValid"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "locals"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "module",
+                    "property": [
+                      "exports"
+                    ],
+                    "property_access_notation": "dot"
+                  }
+                ]
+              },
+              "dbInfo": [
+                {
+                  "dbInteraction": false,
+                  "dbType": null,
+                  "totalInteractions": 0,
+                  "details": null
+                }
+              ],
+              "apiInfo": {
+                "totalInteractions": 0,
+                "details": []
+              }
+            }
+          ]
+        },
+        {
+          "name": "models",
+          "type": "directory",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models",
+          "children": [
+            {
+              "name": "sessionModel.js",
+              "type": "file",
+              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/sessionModel.js",
+              "children": [],
+              "info": {
+                "fileSize": 685,
+                "linesOfCode": 12,
+                "complexity": 1,
+                "dependents": [
+                  "src/Server/temp-file-upload/unit-11-authentication/server/controllers/sessionController.js",
+                  "src/Server/temp-file-upload/unit-11-authentication/test/index.js"
+                ],
+                "dependencies": [
+                  {
+                    "module": "mongoose",
+                    "moduleSystem": "cjs",
+                    "dynamic": false,
+                    "exoticallyRequired": false,
+                    "dependencyTypes": [
+                      "unknown"
+                    ],
+                    "resolved": "mongoose",
+                    "coreModule": false,
+                    "followable": false,
+                    "couldNotResolve": true,
+                    "matchesDoNotFollow": false,
+                    "circular": false,
+                    "valid": true
+                  }
+                ],
+                "isModule": true,
+                "exportedModules": [
+                  null
+                ]
+              },
+              "deepInfo": {
+                "orphan": false,
+                "funcDecName": [],
+                "funcExpressions": [],
+                "funcArrowExpressions": [],
+                "classDeclarations": [],
+                "funcCallExpressions": [],
+                "memberExpressions": [
+                  {
+                    "object": "mongoose",
+                    "property": [
+                      "Schema"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "Date",
+                    "property": [
+                      "now"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "module",
+                    "property": [
+                      "exports"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "mongoose",
+                    "property": [
+                      "model"
+                    ],
+                    "property_access_notation": "dot"
+                  }
+                ]
+              },
+              "dbInfo": [
+                {
+                  "dbInteraction": true,
+                  "dbType": "MongoDB",
+                  "totalInteractions": 10,
+                  "details": [
+                    {
+                      "keyword": "mongoose",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/sessionModel.js",
+                      "line": 1
+                    },
+                    {
+                      "keyword": "mongoose",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/sessionModel.js",
+                      "line": 1
+                    },
+                    {
+                      "keyword": "mongoose",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/sessionModel.js",
+                      "line": 2
+                    },
+                    {
+                      "keyword": "mongoose",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/sessionModel.js",
+                      "line": 16
+                    },
+                    {
+                      "keyword": "Schema",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/sessionModel.js",
+                      "line": 2
+                    },
+                    {
+                      "keyword": "Schema",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/sessionModel.js",
+                      "line": 2
+                    },
+                    {
+                      "keyword": "Schema",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/sessionModel.js",
+                      "line": 2
+                    },
+                    {
+                      "keyword": "Schema",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/sessionModel.js",
+                      "line": 11
+                    },
+                    {
+                      "keyword": "model",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/sessionModel.js",
+                      "line": 16
+                    },
+                    {
+                      "keyword": "model",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/sessionModel.js",
+                      "line": 16
+                    }
+                  ]
+                }
+              ],
+              "apiInfo": {
+                "totalInteractions": 0,
+                "details": []
+              }
+            },
+            {
+              "name": "userModel.js",
+              "type": "file",
+              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/userModel.js",
+              "children": [],
+              "info": {
+                "fileSize": 592,
+                "linesOfCode": 21,
+                "complexity": 2,
+                "dependents": [
+                  "src/Server/temp-file-upload/unit-11-authentication/server/controllers/userController.js",
+                  "src/Server/temp-file-upload/unit-11-authentication/test/index.js"
+                ],
+                "dependencies": [
+                  {
+                    "module": "mongoose",
+                    "moduleSystem": "cjs",
+                    "dynamic": false,
+                    "exoticallyRequired": false,
+                    "dependencyTypes": [
+                      "unknown"
+                    ],
+                    "resolved": "mongoose",
+                    "coreModule": false,
+                    "followable": false,
+                    "couldNotResolve": true,
+                    "matchesDoNotFollow": false,
+                    "circular": false,
+                    "valid": true
+                  }
+                ],
+                "isModule": true,
+                "exportedModules": [
+                  null
+                ]
+              },
+              "deepInfo": {
+                "orphan": false,
+                "funcDecName": [],
+                "funcExpressions": [],
+                "funcArrowExpressions": [],
+                "classDeclarations": [],
+                "funcCallExpressions": [],
+                "memberExpressions": [
+                  {
+                    "object": "mongoose",
+                    "property": [
+                      "Schema"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "userSchema",
+                    "property": [
+                      "pre"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "bcrypt",
+                    "property": [
+                      "hash"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "password"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "password"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "module",
+                    "property": [
+                      "exports"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "mongoose",
+                    "property": [
+                      "model"
+                    ],
+                    "property_access_notation": "dot"
+                  }
+                ]
+              },
+              "dbInfo": [
+                {
+                  "dbInteraction": true,
+                  "dbType": "MongoDB",
+                  "totalInteractions": 10,
+                  "details": [
+                    {
+                      "keyword": "mongoose",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/userModel.js",
+                      "line": 1
+                    },
+                    {
+                      "keyword": "mongoose",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/userModel.js",
+                      "line": 1
+                    },
+                    {
+                      "keyword": "mongoose",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/userModel.js",
+                      "line": 2
+                    },
+                    {
+                      "keyword": "mongoose",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/userModel.js",
+                      "line": 26
+                    },
+                    {
+                      "keyword": "Schema",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/userModel.js",
+                      "line": 2
+                    },
+                    {
+                      "keyword": "Schema",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/userModel.js",
+                      "line": 2
+                    },
+                    {
+                      "keyword": "Schema",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/userModel.js",
+                      "line": 2
+                    },
+                    {
+                      "keyword": "Schema",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/userModel.js",
+                      "line": 10
+                    },
+                    {
+                      "keyword": "model",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/userModel.js",
+                      "line": 26
+                    },
+                    {
+                      "keyword": "model",
+                      "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/models/userModel.js",
+                      "line": 26
+                    }
+                  ]
+                }
+              ],
+              "apiInfo": {
+                "totalInteractions": 0,
+                "details": []
+              }
+            }
+          ]
+        },
+        {
+          "name": "server.js",
+          "type": "file",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/server.js",
+          "children": [],
+          "info": {
+            "fileSize": 2940,
+            "linesOfCode": 54,
+            "complexity": 6,
+            "dependents": [
+              "src/Server/temp-file-upload/unit-11-authentication/test/index.js"
+            ],
+            "dependencies": [
+              {
+                "module": "./controllers/cookieController",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "local",
+                  "require"
+                ],
+                "resolved": "src/Server/temp-file-upload/unit-11-authentication/server/controllers/cookieController.js",
+                "coreModule": false,
+                "followable": true,
+                "couldNotResolve": false,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              },
+              {
+                "module": "./controllers/sessionController",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "local",
+                  "require"
+                ],
+                "resolved": "src/Server/temp-file-upload/unit-11-authentication/server/controllers/sessionController.js",
+                "coreModule": false,
+                "followable": true,
+                "couldNotResolve": false,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              },
+              {
+                "module": "./controllers/userController",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "local",
+                  "require"
+                ],
+                "resolved": "src/Server/temp-file-upload/unit-11-authentication/server/controllers/userController.js",
+                "coreModule": false,
+                "followable": true,
+                "couldNotResolve": false,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              },
+              {
+                "module": "mongoose",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "unknown"
+                ],
+                "resolved": "mongoose",
+                "coreModule": false,
+                "followable": false,
+                "couldNotResolve": true,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              },
+              {
+                "module": "path",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "core",
+                  "require"
+                ],
+                "resolved": "path",
+                "coreModule": true,
+                "followable": false,
+                "couldNotResolve": false,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              },
+              {
+                "module": "worker_threads",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "core",
+                  "require"
+                ],
+                "resolved": "worker_threads",
+                "coreModule": true,
+                "followable": false,
+                "couldNotResolve": false,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              }
+            ],
+            "isModule": true,
+            "exportedModules": [
+              "app"
+            ]
+          },
+          "deepInfo": {
+            "orphan": false,
+            "funcDecName": [],
+            "funcExpressions": [],
+            "funcArrowExpressions": [],
+            "classDeclarations": [],
+            "funcCallExpressions": [],
+            "memberExpressions": [
+              {
+                "property": [
+                  "NODE_ENV"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "process",
+                "property": [
+                  "env"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "mongoose",
+                "property": [
+                  "connect"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "app",
+                "property": [
+                  "use"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "express",
+                "property": [
+                  "json"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "app",
+                "property": [
+                  "use"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "express",
+                "property": [
+                  "urlencoded"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "app",
+                "property": [
+                  "use"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "app",
+                "property": [
+                  "use"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "express",
+                "property": [
+                  "static"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "path",
+                "property": [
+                  "resolve"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "app",
+                "property": [
+                  "get"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "cookieController",
+                "property": [
+                  "setCookie"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "sendFile"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "path",
+                "property": [
+                  "resolve"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "app",
+                "property": [
+                  "get"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "sendFile"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "path",
+                "property": [
+                  "resolve"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "app",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "userController",
+                "property": [
+                  "createUser"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "userController",
+                "property": [
+                  "verifyUser"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "cookieController",
+                "property": [
+                  "setSSIDCookie"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "sessionController",
+                "property": [
+                  "startSession"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "valid"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "locals"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "redirect"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "status"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "json"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "status"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "redirect"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "app",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "userController",
+                "property": [
+                  "verifyUser"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "cookieController",
+                "property": [
+                  "setSSIDCookie"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "sessionController",
+                "property": [
+                  "startSession"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "loginValid"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "locals"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "redirect"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "redirect"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "app",
+                "property": [
+                  "get"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "sessionController",
+                "property": [
+                  "isLoggedIn"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "isLogged"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "locals"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "sendFile"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "path",
+                "property": [
+                  "resolve"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "redirect"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "app",
+                "property": [
+                  "get"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "sessionController",
+                "property": [
+                  "isLoggedIn"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "userController",
+                "property": [
+                  "getAllUsers"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "isLogged"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "locals"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "users"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "locals"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "redirect"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "app",
+                "property": [
+                  "use"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "status"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "app",
+                "property": [
+                  "use"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "console",
+                "property": [
+                  "log"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "status"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "app",
+                "property": [
+                  "listen"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "console",
+                "property": [
+                  "log"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "module",
+                "property": [
+                  "exports"
+                ],
+                "property_access_notation": "dot"
+              }
+            ]
+          },
+          "dbInfo": [
+            {
+              "dbInteraction": true,
+              "dbType": "MongoDB",
+              "totalInteractions": 5,
+              "details": [
+                {
+                  "keyword": "mongoose",
+                  "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/server.js",
+                  "line": 4
+                },
+                {
+                  "keyword": "mongoose",
+                  "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/server.js",
+                  "line": 4
+                },
+                {
+                  "keyword": "mongoose",
+                  "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/server.js",
+                  "line": 16
+                },
+                {
+                  "keyword": "connect",
+                  "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/server.js",
+                  "line": 16
+                },
+                {
+                  "keyword": "connect",
+                  "filePath": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/server/server.js",
+                  "line": 16
+                }
+              ]
+            }
+          ],
+          "apiInfo": {
+            "totalInteractions": 0,
+            "details": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "test",
+      "type": "directory",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/test",
+      "children": [
+        {
+          "name": "index.js",
+          "type": "file",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-11-authentication/test/index.js",
+          "children": [],
+          "info": {
+            "fileSize": 9843,
+            "linesOfCode": 190,
+            "complexity": 1,
+            "dependents": [],
+            "dependencies": [
+              {
+                "module": "./../server/models/sessionModel",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "local",
+                  "require"
+                ],
+                "resolved": "src/Server/temp-file-upload/unit-11-authentication/server/models/sessionModel.js",
+                "coreModule": false,
+                "followable": true,
+                "couldNotResolve": false,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              },
+              {
+                "module": "./../server/models/userModel",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "local",
+                  "require"
+                ],
+                "resolved": "src/Server/temp-file-upload/unit-11-authentication/server/models/userModel.js",
+                "coreModule": false,
+                "followable": true,
+                "couldNotResolve": false,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              },
+              {
+                "module": "./../server/server",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "local",
+                  "require"
+                ],
+                "resolved": "src/Server/temp-file-upload/unit-11-authentication/server/server.js",
+                "coreModule": false,
+                "followable": true,
+                "couldNotResolve": false,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              },
+              {
+                "module": "chai",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "unknown"
+                ],
+                "resolved": "chai",
+                "coreModule": false,
+                "followable": false,
+                "couldNotResolve": true,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              },
+              {
+                "module": "sinon",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "unknown"
+                ],
+                "resolved": "sinon",
+                "coreModule": false,
+                "followable": false,
+                "couldNotResolve": true,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              },
+              {
+                "module": "supertest",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "unknown"
+                ],
+                "resolved": "supertest",
+                "coreModule": false,
+                "followable": false,
+                "couldNotResolve": true,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              }
+            ],
+            "isModule": false,
+            "exportedModules": []
+          },
+          "deepInfo": {
+            "orphan": false,
+            "funcDecName": [
+              {
+                "funcName": "getCookieValue"
+              },
+              {
+                "funcName": "getCookie"
+              }
+            ],
+            "funcExpressions": [],
+            "funcArrowExpressions": [],
+            "classDeclarations": [],
+            "funcCallExpressions": [],
+            "memberExpressions": [
+              {
+                "property": [
+                  "expect"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "sinon",
+                "property": [
+                  "useFakeTimers"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "User",
+                "property": [
+                  "remove"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "Session",
+                "property": [
+                  "remove"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "User",
+                "property": [
+                  "create"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "user",
+                "property": [
+                  "id"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "clock",
+                "property": [
+                  "restore"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "end"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "type"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "User",
+                "property": [
+                  "findOne"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "null"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "be"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "exist"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "end"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "type"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "null"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "be"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "not"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "match"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "text"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "end"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "type"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "User",
+                "property": [
+                  "findOne"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "exist"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "not"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "end"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "type"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "eql"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "location"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "headers"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "end"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "type"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "eql"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "location"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "headers"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "end"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "type"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "eql"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "location"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "headers"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "expect"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "get"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "expect"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "get"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "expect"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "get"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "end"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "get"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": false,
+                "property_access_notation": "bracket"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "headers"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "end"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "get"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": false,
+                "property_access_notation": "bracket"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "headers"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "within"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "be"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "within"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "be"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "eql"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "not"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "expect"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "type"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "expect"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "type"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "expect"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "type"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "expect"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "type"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "end"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "type"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "User",
+                "property": [
+                  "findOne"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "Session",
+                "property": [
+                  "findOne"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "user",
+                "property": [
+                  "_id"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "null"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "be"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "exist"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "end"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "type"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "User",
+                "property": [
+                  "findOne"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "Session",
+                "property": [
+                  "findOne"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "user",
+                "property": [
+                  "_id"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "null"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "be"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "exist"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "end"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "type"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "User",
+                "property": [
+                  "findOne"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "Session",
+                "property": [
+                  "findOne"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "user",
+                "property": [
+                  "_id"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "null"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "be"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "exist"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "not"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "end"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "get"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "include"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "not"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "text"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "include"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "not"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "text"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "end"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "expect"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "get"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "eql"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "location"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "headers"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "end"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "type"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": false,
+                "property_access_notation": "bracket"
+              },
+              {
+                "property": [
+                  "split"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": false,
+                "property_access_notation": "bracket"
+              },
+              {
+                "property": false,
+                "property_access_notation": "bracket"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "headers"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "end"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "expect"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "set"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "get"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "contain"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "text"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "end"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "type"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "Session",
+                "property": [
+                  "remove"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "end"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "expect"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "get"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "eql"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "location"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "headers"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "end"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "type"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "User",
+                "property": [
+                  "findOne"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "eql"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "not"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "user",
+                "property": [
+                  "password"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "end"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "type"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "request",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "User",
+                "property": [
+                  "findOne"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "true"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "be"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "bcrypt",
+                "property": [
+                  "compareSync"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "user",
+                "property": [
+                  "password"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "User",
+                "property": [
+                  "create"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "eql"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "not"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "user",
+                "property": [
+                  "password"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "true"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "be"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "to"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "bcrypt",
+                "property": [
+                  "compareSync"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "user",
+                "property": [
+                  "password"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": false,
+                "property_access_notation": "bracket"
+              },
+              {
+                "property": [
+                  "split"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": false,
+                "property_access_notation": "bracket"
+              },
+              {
+                "property": [
+                  "split"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "cookie",
+                "property": false,
+                "property_access_notation": "bracket"
+              },
+              {
+                "object": "cookieArray",
+                "property": [
+                  "filter"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": false,
+                "property_access_notation": "bracket"
+              },
+              {
+                "property": [
+                  "split"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": false,
+                "property_access_notation": "bracket"
+              },
+              {
+                "object": "el",
+                "property": [
+                  "split"
+                ],
+                "property_access_notation": "dot"
+              }
+            ]
+          },
+          "dbInfo": [
+            {
+              "dbInteraction": false,
+              "dbType": null,
+              "totalInteractions": 0,
+              "details": null
+            }
+          ],
+          "apiInfo": {
+            "totalInteractions": 0,
+            "details": []
+          }
+        }
+      ]
     }
   ]
 }

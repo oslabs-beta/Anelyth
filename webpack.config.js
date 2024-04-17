@@ -80,6 +80,6 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js','.jsx'] // Add .tsx and .ts to resolve extensions
+    extensions: ['.tsx', '.ts', '.js','.jsx,', '.png', '.jpg', '.jpeg', '.gif', '.svg']
   }
 };

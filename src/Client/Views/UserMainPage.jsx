@@ -6,7 +6,7 @@ import icon3 from '../Assets/icons/icons8-dificulty-64.png';
 import icon4 from '../Assets/icons/icons8-pyramid-96.png';
 import icon5 from '../Assets/icons/icons8-logout-96.png';
 
-import RepoUpload from '../Components/RepoUpload.jsx';
+import RepoUpload from '../Components/RepoUpload.tsx';
 import NodeInfoModal from '../Components/NodeInfoModal.jsx';
 
 function UserMainPage() {
