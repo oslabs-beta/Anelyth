@@ -12,6 +12,7 @@ import NodeInfoModal from '../Components/NodeInfoModal.jsx';
 function UserMainPage() {
   const [popupShowing, setPopupShowing] = useState(false);
   const [clickedNodeData, setClickedNodeData] = useState(null);
+  const [analyzeButtonShowing, setAnalyzeButton] = useState(false);
 
   return (
   <>
@@ -36,7 +37,17 @@ function UserMainPage() {
           <img className='icon-inv' src={icon3} alt="" />
           <a className='items' href="/">Complexity</a>
         </div>
+        
       </div>
+      
+      {analyzeButtonShowing && (
+      <div className='btn-container-main-page'>
+        <button className='btn btn-secondary btn-pulse'><a className='btn-link'>Analyze</a></button>
+
+
+        </div>)}
+
+
       <div className='side-bottom-container'>
         <div className='item-container'>
           <img className='icon-inv' src={icon5} alt="signout icon" />
@@ -47,7 +58,7 @@ function UserMainPage() {
 
     <div className='main-content'>
       <div className='visual-container'>
-        <RepoUpload popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} />
+        <RepoUpload popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} setAnalyzeButton={setAnalyzeButton}/>
         <div className='info-panel'>
         {popupShowing && clickedNodeData.dependencies && <NodeInfoModal data={clickedNodeData}/>}
         </div>

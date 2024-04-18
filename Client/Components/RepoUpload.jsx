@@ -4,7 +4,7 @@ import '../Styles/repoupload.css';
 
 
 
-function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData }) {
+function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnalyzeButton}) {
   const [hierarchyData, setHierarchyData] = useState(null);
 
   async function apiCall(event) {
@@ -44,6 +44,7 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData }) {
 
         // for now to test //
         setHierarchyData(data.children[0]);
+        setAnalyzeButton(true); //setter function to render analyze button
 
       } else {
         console.error('Upload failed');
