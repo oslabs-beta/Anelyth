@@ -1,13 +1,24 @@
+const fs = require('fs');
+const path = require('path');
+
 
 const CohesionController = {};
 
 
-const arr = [
+const arrOne = [
   {fileName: 'file1', details: [{url: 'endpoint1'}, {url: 'endpoint2'}]}, 
   {fileName: 'file2', details: [{url: 'endpoint1'}, {url: 'endpoint2'}, {url: 'endpoint3'}]}, 
   {fileName: 'file5', details: [{url: 'endpoint6'}]},
   {fileName: 'file3', details: [{url: 'endpoint1'}, {url: 'endpoint4'}]},
   {fileName: 'file4', details: [{url: 'endpoint3'}]}
+];
+
+const arrTwo = [
+  {fileName: 'file1', apiDetails: [{url: 'endpoint1'}, {url: 'endpoint2'}], dbDetails: [{keyword: 'mongoose'}, {keyword: 'model'}], moduleDetails: [{module: './models.js'}]}, 
+  {fileName: 'file2', apiDetails: [{url: 'endpoint1'}, {url: 'endpoint2'}, {url: 'endpoint3'}], dbDetails: [{keyword: 'mongoose'}], moduleDetails: [{module: './controllers/controller1.js'}]}, 
+  {fileName: 'file5', apiDetails: [{url: 'endpoint6'}], dbDetails: [], moduleDetails: [{module: './routes.js'}, {module: './controllers/controllers2.js'}]},
+  {fileName: 'file3', apiDetails: [{url: 'endpoint1'}, {url: 'endpoint4'}], dbDetails: [], moduleDetails: [{module: './module1.js'}, {module: './controllers/controllers2.js'}]},
+  {fileName: 'file4', apiDetails: [{url: 'endpoint3'}], dbDetails: [], moduleDetails: [{module: './module1.js'}]}
 ];
 
 //approach 1: what percentage of unique endpoints do they have in common?
@@ -41,7 +52,7 @@ CohesionController.calculateApiCohesion = (arr) => {
       console.log('inner potentialMicroservice:', potentialMicroservice)
       //compare elements, if passes, combine. if combined, that becomes an element. if not, continue.
       //pass in threshold here
-      if (shouldCombine(potentialMicroservice, element, 0.5)) {
+      if (shouldCombine(potentialMicroservice, element, 0.75)) {
         const deleted = remaining.splice(j, 1);
         potentialMicroservice.push(...deleted);
       } else {
@@ -60,47 +71,81 @@ CohesionController.calculateApiCohesion = (arr) => {
 
   function shouldCombine (elementOne, elementTwo, threshold) {
     console.log('entering shouldCombine');
-    //create two sets with unique endpoints
-    const elementOneEndpoints = new Set();
-    const elementTwoEndpoints = new Set();
+    const elOneApiEndpoints = new Set();
+    const elTwoApiEndpoints = new Set();
+
+    const elOneDbKeywords = new Set();
+    const elTwoDbKeywords = new Set();
+
+    const elOneModuleDetails = new Set();
+    const elTwoModuleDetails = new Set();
     //iterate over elementOne and elementTwo and push to set to create sets of unique endopints for each
     for (let i = 0; i < elementOne.length; i++) {
-      const currFileDetails = elementOne[i].details;
-      currFileDetails.forEach(({ url }) => {
-        elementOneEndpoints.add(url);
+      //apiEndpoints
+      elementOne[i].apiDetails.forEach(({ url }) => {
+        elOneApiEndpoints.add(url);
+      });
+      //dbDetails
+      elementOne[i].dbDetails.forEach(({ keyword }) => {
+        elOneDbKeywords.add(keyword);
+      });
+      //moduleDetails
+      elementOne[i].moduleDetails.forEach(({ module }) => {
+        elOneModuleDetails.add(module);
       });
     }
-    elementTwo.details.forEach(({ url }) => {
-      elementTwoEndpoints.add(url);
+    //apiEndpoints
+    elementTwo.apiDetails.forEach(({ url }) => {
+      elTwoApiEndpoints.add(url);
+    });
+    //dbDetails
+    elementTwo.dbDetails.forEach(({ keyword }) => {
+      elTwoDbKeywords.add(keyword);
+    });
+    //moduleDetails
+    elementTwo.moduleDetails.forEach(({ module }) => {
+      elTwoModuleDetails.add(module);
     });
 
-    console.log('elementOneEndpoints:', elementOneEndpoints)
-    console.log('elementTwoEndpoints:', elementTwoEndpoints)
+    const lengthOne = elOneApiEndpoints.size + elOneDbKeywords.size + elOneModuleDetails.size;
+    const lengthTwo = elTwoApiEndpoints.size + elTwoDbKeywords.size + elTwoModuleDetails.size;
 
-    const lengthOne = elementOneEndpoints.size;
-    const lengthTwo = elementTwoEndpoints.size;
+    const elOne = {
+      api: elOneApiEndpoints,
+      db: elOneDbKeywords,
+      module: elOneModuleDetails
+    };
 
-    const smallerElement = lengthTwo < lengthOne ? elementTwoEndpoints : elementOneEndpoints;
-    const largerElement = lengthTwo < lengthOne ? elementOneEndpoints : elementTwoEndpoints;
+    const elTwo = {
+      api: elTwoApiEndpoints,
+      db: elTwoDbKeywords,
+      module: elTwoModuleDetails
+    };
+
+    const smallerElement = lengthTwo < lengthOne ? elTwo : elOne;
+    const largerElement = lengthTwo < lengthOne ? elOne : elTwo;
 
     const inCommon = [];
 
-    smallerElement.forEach((val) => {
-      console.log('val:', val)
-      if (largerElement.has(val)) inCommon.push(val);
-    });
+    for (let key in smallerElement) {
+      smallerElement[key].forEach((val) => {
+        if (largerElement[key].has(val)) inCommon.push(val);
+      });
+    }
 
-    console.log('inCommon:', inCommon)
+    // console.log('inCommon:', inCommon)
 
-    const percentInCommon = inCommon.length / smallerElement.size;
+    const percentInCommon = inCommon.length / (smallerElement.api.size + smallerElement.db.size + smallerElement.module.size);
 
     if (percentInCommon >= threshold) return true;
     else return false;
   };
 };
 
-const result = CohesionController.calculateApiCohesion(arr);
-console.log('result:', result)
-
+const result = CohesionController.calculateApiCohesion(arrOne);
+// console.log('result:', result)
+const logFilePath = path.join('..', '..', 'cohesionController.log');
+const logStream = fs.createWriteStream(logFilePath);
+logStream.write(JSON.stringify(result, null, 2));
 // module.exports = CohesionController;
 
