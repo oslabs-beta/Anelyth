@@ -295,7 +295,7 @@ function getASTClassDecs(ast){
   classDeclarations.forEach(node => {
     let classObj = {};
 
-    console.log(node.body.body);
+    // console.log(node.body.body);
     // console.log('constutror shitt:  ', node.body.body[0].value.body.body[0].expression.left)
     // node.body.body[0].value.body.body.forEach(el => console.log('look here!!!!! : ',el.expression.left))
 

@@ -1,4 +1,4 @@
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { S3Client, PutObjectCommand, GetObjectCommand, ListObjectsCommand } from '@aws-sdk/client-s3';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
@@ -60,6 +60,24 @@ S3Controller.upload = async (req, res, next) => {
     })
   }
 }
+
+S3Controller.getBucketItems = async (req, res, next) => {
+  // need to get this from the front end when clicking on the repo i want to pull up
+  const bucketKey = res.locals.bucketKey;
+
+  // so this wont work till we get the bucket key from the front end
+  const params = {
+    Bucket: bucketName,
+    Key: bucketKey
+  };
+
+  const command = new GetObjectCommand(params);
+  const data = await s3.send(command);
+  console.log(data)
+
+  return next();
+};
+
 
 
 

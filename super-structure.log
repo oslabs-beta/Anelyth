@@ -1,324 +1,102 @@
 {
-  "name": "unit-10-databases",
+  "name": "grad-assessment-app-e",
   "type": "directory",
-  "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases",
+  "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e",
   "children": [
-    {
-      "log": "DataController.traverseHierarchy: ERROR: SyntaxError: /Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/.babelrc: Missing semicolon. (2:11)\n\n\u001b[0m \u001b[90m 1 |\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 2 |\u001b[39m   \u001b[32m\"presets\"\u001b[39m\u001b[33m:\u001b[39m [\u001b[32m\"@babel/preset-env\"\u001b[39m\u001b[33m,\u001b[39m \u001b[32m\"@babel/preset-react\"\u001b[39m]\n \u001b[90m   |\u001b[39m            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 3 |\u001b[39m }\u001b[0m",
-      "message": {
-        "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
-      }
-    },
     {
       "name": ".eslintrc.json",
       "type": "file",
-      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/.eslintrc.json"
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e/.eslintrc.json"
     },
     {
       "name": "README.md",
       "type": "file",
-      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/README.md"
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e/README.md"
     },
     {
-      "name": "client",
+      "name": "assets",
       "type": "directory",
-      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e/assets",
       "children": [
         {
-          "name": "App.jsx",
-          "type": "file",
-          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/App.jsx",
-          "children": [],
-          "info": {
-            "fileSize": 891,
-            "linesOfCode": 53,
-            "complexity": 14,
-            "dependents": [
-              "src/Server/temp-file-upload/unit-10-databases/client/index.js"
-            ],
-            "dependencies": [
-              {
-                "module": "./components/Characters",
-                "moduleSystem": "es6",
-                "dynamic": false,
-                "exoticallyRequired": false,
-                "dependencyTypes": [
-                  "local",
-                  "import"
-                ],
-                "resolved": "src/Server/temp-file-upload/unit-10-databases/client/components/Characters.jsx",
-                "coreModule": false,
-                "followable": true,
-                "couldNotResolve": false,
-                "matchesDoNotFollow": false,
-                "circular": false,
-                "valid": true
-              },
-              {
-                "module": "./components/CreateCharacter",
-                "moduleSystem": "es6",
-                "dynamic": false,
-                "exoticallyRequired": false,
-                "dependencyTypes": [
-                  "local",
-                  "import"
-                ],
-                "resolved": "src/Server/temp-file-upload/unit-10-databases/client/components/CreateCharacter.jsx",
-                "coreModule": false,
-                "followable": true,
-                "couldNotResolve": false,
-                "matchesDoNotFollow": false,
-                "circular": false,
-                "valid": true
-              },
-              {
-                "module": "./stylesheets/styles.css",
-                "moduleSystem": "es6",
-                "dynamic": false,
-                "exoticallyRequired": false,
-                "dependencyTypes": [
-                  "local",
-                  "import"
-                ],
-                "resolved": "src/Server/temp-file-upload/unit-10-databases/client/stylesheets/styles.css",
-                "coreModule": false,
-                "followable": false,
-                "couldNotResolve": false,
-                "matchesDoNotFollow": false,
-                "circular": false,
-                "valid": true
-              }
-            ],
-            "isModule": true,
-            "exportedModules": [
-              "App"
-            ]
-          },
-          "deepInfo": {
-            "orphan": false,
-            "funcDecName": [],
-            "funcExpressions": [],
-            "funcArrowExpressions": [
-              {
-                "arrowFuncName": "App"
-              }
-            ],
-            "classDeclarations": [],
-            "funcCallExpressions": [],
-            "memberExpressions": []
-          },
-          "dbInfo": [
-            {
-              "dbInteraction": false,
-              "dbType": null,
-              "totalInteractions": 0,
-              "details": null
-            }
-          ],
-          "apiInfo": {
-            "totalInteractions": 0,
-            "details": []
-          }
-        },
-        {
-          "name": "components",
+          "name": "css",
           "type": "directory",
-          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/components",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e/assets/css",
           "children": [
             {
-              "name": "CharacterCard.jsx",
+              "log": "DataController.traverseHierarchy: ERROR: SyntaxError: /Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e/assets/css/style.css: Missing semicolon. (1:4)\n\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 1 |\u001b[39m body {\n \u001b[90m   |\u001b[39m     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 2 |\u001b[39m   font\u001b[33m-\u001b[39mfamily\u001b[33m:\u001b[39m \u001b[32m\"Helvetica Neue\"\u001b[39m\u001b[33m,\u001b[39m \u001b[33mHelvetica\u001b[39m\u001b[33m,\u001b[39m \u001b[33mArial\u001b[39m\u001b[33m,\u001b[39m sans\u001b[33m-\u001b[39mserif\u001b[33m;\u001b[39m\n \u001b[90m 3 |\u001b[39m }\n \u001b[90m 4 |\u001b[39m\u001b[0m",
+              "message": {
+                "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
+              }
+            }
+          ]
+        },
+        {
+          "name": "js",
+          "type": "directory",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e/assets/js",
+          "children": [
+            {
+              "name": "index.js",
               "type": "file",
-              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/components/CharacterCard.jsx",
+              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e/assets/js/index.js",
               "children": [],
               "info": {
-                "fileSize": 2043,
-                "linesOfCode": 75,
-                "complexity": 3,
-                "dependents": [
-                  "src/Server/temp-file-upload/unit-10-databases/client/components/Characters.jsx"
-                ],
-                "dependencies": [
-                  {
-                    "module": "@fortawesome/free-regular-svg-icons",
-                    "moduleSystem": "es6",
-                    "dynamic": false,
-                    "exoticallyRequired": false,
-                    "dependencyTypes": [
-                      "unknown"
-                    ],
-                    "resolved": "@fortawesome/free-regular-svg-icons",
-                    "coreModule": false,
-                    "followable": false,
-                    "couldNotResolve": true,
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                  },
-                  {
-                    "module": "@fortawesome/react-fontawesome",
-                    "moduleSystem": "es6",
-                    "dynamic": false,
-                    "exoticallyRequired": false,
-                    "dependencyTypes": [
-                      "unknown"
-                    ],
-                    "resolved": "@fortawesome/react-fontawesome",
-                    "coreModule": false,
-                    "followable": false,
-                    "couldNotResolve": true,
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                  }
-                ],
-                "isModule": true,
-                "exportedModules": [
-                  "CharacterCard"
-                ]
+                "fileSize": 1523,
+                "linesOfCode": 329,
+                "complexity": 78,
+                "dependents": [],
+                "dependencies": [],
+                "isModule": false,
+                "exportedModules": []
               },
               "deepInfo": {
-                "orphan": false,
+                "orphan": true,
                 "funcDecName": [],
                 "funcExpressions": [],
-                "funcArrowExpressions": [
-                  {
-                    "arrowFuncName": "CharacterCard"
-                  },
-                  {
-                    "arrowFuncName": "openDetailsModal"
-                  }
-                ],
+                "funcArrowExpressions": [],
                 "classDeclarations": [],
                 "funcCallExpressions": [],
                 "memberExpressions": [
                   {
-                    "object": "films",
+                    "object": "document",
                     "property": [
-                      "map"
+                      "querySelector"
                     ],
                     "property_access_notation": "dot"
                   },
                   {
-                    "object": "film",
+                    "object": "document",
                     "property": [
-                      "title"
+                      "querySelector"
                     ],
                     "property_access_notation": "dot"
                   },
                   {
-                    "object": "film",
+                    "object": "document",
                     "property": [
-                      "id"
+                      "querySelector"
                     ],
                     "property_access_notation": "dot"
                   },
                   {
-                    "object": "e",
+                    "object": "document",
                     "property": [
-                      "pageY"
+                      "querySelector"
                     ],
                     "property_access_notation": "dot"
                   },
                   {
-                    "object": "e",
+                    "object": "window",
                     "property": [
-                      "pageX"
+                      "addEventListener"
                     ],
                     "property_access_notation": "dot"
-                  }
-                ]
-              },
-              "dbInfo": [
-                {
-                  "dbInteraction": false,
-                  "dbType": null,
-                  "totalInteractions": 0,
-                  "details": null
-                }
-              ],
-              "apiInfo": {
-                "totalInteractions": 0,
-                "details": []
-              }
-            },
-            {
-              "log": "DataController.traverseHierarchy: ERROR: TypeError: Cannot read properties of undefined (reading 'property')",
-              "message": {
-                "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
-              }
-            },
-            {
-              "log": "DataController.traverseHierarchy: ERROR: TypeError: Cannot read properties of undefined (reading 'forEach')",
-              "message": {
-                "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
-              }
-            },
-            {
-              "name": "DetailsModal.jsx",
-              "type": "file",
-              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/components/DetailsModal.jsx",
-              "children": [],
-              "info": {
-                "fileSize": 3047,
-                "linesOfCode": 170,
-                "complexity": 40,
-                "dependents": [
-                  "src/Server/temp-file-upload/unit-10-databases/client/components/Characters.jsx"
-                ],
-                "dependencies": [
-                  {
-                    "module": "@fortawesome/free-solid-svg-icons",
-                    "moduleSystem": "es6",
-                    "dynamic": false,
-                    "exoticallyRequired": false,
-                    "dependencyTypes": [
-                      "unknown"
-                    ],
-                    "resolved": "@fortawesome/free-solid-svg-icons",
-                    "coreModule": false,
-                    "followable": false,
-                    "couldNotResolve": true,
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
                   },
                   {
-                    "module": "@fortawesome/react-fontawesome",
-                    "moduleSystem": "es6",
-                    "dynamic": false,
-                    "exoticallyRequired": false,
-                    "dependencyTypes": [
-                      "unknown"
-                    ],
-                    "resolved": "@fortawesome/react-fontawesome",
-                    "coreModule": false,
-                    "followable": false,
-                    "couldNotResolve": true,
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                  }
-                ],
-                "isModule": true,
-                "exportedModules": [
-                  "SpeciesModal"
-                ]
-              },
-              "deepInfo": {
-                "orphan": false,
-                "funcDecName": [],
-                "funcExpressions": [],
-                "funcArrowExpressions": [
-                  {
-                    "arrowFuncName": "SpeciesModal"
-                  }
-                ],
-                "classDeclarations": [],
-                "funcCallExpressions": [],
-                "memberExpressions": [
-                  {
+                    "object": "document",
                     "property": [
-                      "catch"
+                      "querySelector"
                     ],
                     "property_access_notation": "dot"
                   },
@@ -329,13 +107,7 @@
                     "property_access_notation": "dot"
                   },
                   {
-                    "property": [
-                      "then"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "resp",
+                    "object": "data",
                     "property": [
                       "json"
                     ],
@@ -349,28 +121,188 @@
                     "property_access_notation": "dot"
                   },
                   {
+                    "object": "items",
                     "property": [
-                      "slice"
+                      "forEach"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "document",
+                    "property": [
+                      "createElement"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "desc",
+                    "property": [
+                      "innerText"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "el",
+                    "property": [
+                      "description"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "document",
+                    "property": [
+                      "createElement"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "price",
+                    "property": [
+                      "innerText"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "el",
+                    "property": [
+                      "price"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "document",
+                    "property": [
+                      "createElement"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "buyBTN",
+                    "property": [
+                      "innerText"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "buyBTN",
+                    "property": [
+                      "addEventListener"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "JSON",
+                    "property": [
+                      "stringify"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "el",
+                    "property": [
+                      "description"
                     ],
                     "property_access_notation": "dot"
                   },
                   {
                     "property": [
-                      "toDateString"
+                      "reload"
                     ],
                     "property_access_notation": "dot"
                   },
                   {
-                    "object": "details",
+                    "object": "window",
                     "property": [
-                      "name"
+                      "location"
                     ],
                     "property_access_notation": "dot"
                   },
                   {
-                    "object": "details",
+                    "object": "document",
                     "property": [
-                      "title"
+                      "createElement"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "add"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "itemDIV",
+                    "property": [
+                      "classList"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "itemDIV",
+                    "property": [
+                      "appendChild"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "itemDIV",
+                    "property": [
+                      "appendChild"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "itemDIV",
+                    "property": [
+                      "appendChild"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "itemsList",
+                    "property": [
+                      "appendChild"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "listBTN",
+                    "property": [
+                      "addEventListener"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "price",
+                    "property": [
+                      "value"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "item",
+                    "property": [
+                      "value"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "JSON",
+                    "property": [
+                      "stringify"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "reload"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "window",
+                    "property": [
+                      "location"
                     ],
                     "property_access_notation": "dot"
                   }
@@ -390,259 +322,45 @@
               }
             }
           ]
-        },
-        {
-          "name": "data",
-          "type": "directory",
-          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/data",
-          "children": [
-            {
-              "name": "films.json",
-              "type": "file",
-              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/data/films.json"
-            },
-            {
-              "name": "planets.json",
-              "type": "file",
-              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/data/planets.json"
-            },
-            {
-              "name": "species.json",
-              "type": "file",
-              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/data/species.json"
-            }
-          ]
-        },
-        {
-          "name": "index.html",
-          "type": "file",
-          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/index.html"
-        },
-        {
-          "name": "index.js",
-          "type": "file",
-          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/index.js",
-          "children": [],
-          "info": {
-            "fileSize": 234,
-            "linesOfCode": 9,
-            "complexity": 2,
-            "dependents": [],
-            "dependencies": [
-              {
-                "module": "./App",
-                "moduleSystem": "es6",
-                "dynamic": false,
-                "exoticallyRequired": false,
-                "dependencyTypes": [
-                  "local",
-                  "import"
-                ],
-                "resolved": "src/Server/temp-file-upload/unit-10-databases/client/App.jsx",
-                "coreModule": false,
-                "followable": true,
-                "couldNotResolve": false,
-                "matchesDoNotFollow": false,
-                "circular": false,
-                "valid": true
-              }
-            ],
-            "isModule": false,
-            "exportedModules": []
-          },
-          "deepInfo": {
-            "orphan": false,
-            "funcDecName": [],
-            "funcExpressions": [],
-            "funcArrowExpressions": [],
-            "classDeclarations": [],
-            "funcCallExpressions": [],
-            "memberExpressions": [
-              {
-                "object": "document",
-                "property": [
-                  "getElementById"
-                ],
-                "property_access_notation": "dot"
-              }
-            ]
-          },
-          "dbInfo": [
-            {
-              "dbInteraction": false,
-              "dbType": null,
-              "totalInteractions": 0,
-              "details": null
-            }
-          ],
-          "apiInfo": {
-            "totalInteractions": 0,
-            "details": []
-          }
-        },
-        {
-          "name": "stylesheets",
-          "type": "directory",
-          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/stylesheets",
-          "children": [
-            {
-              "log": "DataController.traverseHierarchy: ERROR: SyntaxError: /Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/stylesheets/styles.css: Unexpected token (2:0)\n\n\u001b[0m \u001b[90m 1 |\u001b[39m \u001b[90m/* reset default styles */\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 2 |\u001b[39m \u001b[33m*\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m   |\u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 3 |\u001b[39m \u001b[33m*\u001b[39m\u001b[33m:\u001b[39mbefore\u001b[33m,\u001b[39m\n \u001b[90m 4 |\u001b[39m \u001b[33m*\u001b[39m\u001b[33m:\u001b[39mafter {\n \u001b[90m 5 |\u001b[39m   box\u001b[33m-\u001b[39msizing\u001b[33m:\u001b[39m inherit\u001b[33m;\u001b[39m\u001b[0m",
-              "message": {
-                "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "docs",
-      "type": "directory",
-      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/docs",
-      "children": [
-        {
-          "name": "assets",
-          "type": "directory",
-          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/docs/assets",
-          "children": [
-            {
-              "name": "images",
-              "type": "directory",
-              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/docs/assets/images",
-              "children": [
-                {
-                  "name": "mongodb_atlas_connect.png",
-                  "type": "file",
-                  "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/docs/assets/images/mongodb_atlas_connect.png"
-                },
-                {
-                  "name": "schema.png",
-                  "type": "file",
-                  "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/docs/assets/images/schema.png"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "dump",
-      "type": "directory",
-      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump",
-      "children": [
-        {
-          "name": "starwars",
-          "type": "directory",
-          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump/starwars",
-          "children": [
-            {
-              "log": "DataController.traverseHierarchy: ERROR: SyntaxError: /Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump/starwars/films.bson: Unexpected character '�'. (1:0)\n\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 1 |\u001b[39m �\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39m_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�hچ��\u001b[37m\u001b[41m\u001b[1m\u0006\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0016\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mtitle\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u000b\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mA\u001b[39m \u001b[33mNew\u001b[39m \u001b[33mHope\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39mepisode_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mopening_crawl\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0001\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mIt\u001b[39m is a period \u001b[36mof\u001b[39m civil war\u001b[33m.\u001b[39m\n \u001b[90m   |\u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 2 |\u001b[39m \u001b[33mRebel\u001b[39m spaceships\u001b[33m,\u001b[39m striking\n \u001b[90m 3 |\u001b[39m \u001b[36mfrom\u001b[39m a hidden base\u001b[33m,\u001b[39m have won\n \u001b[90m 4 |\u001b[39m their first victory against\u001b[0m",
-              "message": {
-                "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
-              }
-            },
-            {
-              "name": "films.metadata.json",
-              "type": "file",
-              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump/starwars/films.metadata.json"
-            },
-            {
-              "log": "DataController.traverseHierarchy: ERROR: SyntaxError: /Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump/starwars/people.bson: Unexpected character '�'. (1:0)\n\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 1 |\u001b[39m �\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39m_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�M\u001b[33m*\u001b[39m\u001b[33mG\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0012\u001b[22m\u001b[49m\u001b[39m�\n \u001b[90m   |\u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 2 |\u001b[39m ���N\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mname\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u000f\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mLuke\u001b[39m \u001b[33mSkywalker\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mmass\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0003\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[35m77\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mhair_color\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0006\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mblond\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mskin_color\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0005\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mfair\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39meye_color\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0005\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mblue\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mbirth_year\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0006\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[35m19\u001b[39m\u001b[33mBBY\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mgender\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0005\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mmale\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mspecies\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0006\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mHuman\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mhomeworld\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\t\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mTatooine\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39mheight\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39mhomeworld_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�5���\t�)��\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39mspecies_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�\u001b[33m<\u001b[39m\u001b[33mv\u001b[39m\u001b[32m'=�\u001b[39m\n \u001b[90m 3 |\u001b[39m \u001b[33mB\u001b[39m\u001b[37m\u001b[41m\u001b[1m\\\u001b[22m\u001b[49m\u001b[39m��\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39mfilms\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39me\u001b[37m\u001b[41m\u001b[1m\u0001\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0003\u001b[22m\u001b[49m\u001b[39m\u001b[35m0\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33m<\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39m_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�M\u001b[33m*\u001b[39m\u001b[33mG\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0012\u001b[22m\u001b[49m\u001b[39m�\n \u001b[90m 4 |\u001b[39m ���S\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mtitle\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u000b\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mA\u001b[39m \u001b[33mNew\u001b[39m \u001b[33mHope\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39mid\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�hچ��\u001b[37m\u001b[41m\u001b[1m\u0006\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0016\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0003\u001b[22m\u001b[49m\u001b[39m\u001b[35m1\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mE\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39m_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�M\u001b[33m*\u001b[39m\u001b[33mG\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0012\u001b[22m\u001b[49m\u001b[39m�\u001b[0m",
-              "message": {
-                "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
-              }
-            },
-            {
-              "name": "people.metadata.json",
-              "type": "file",
-              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump/starwars/people.metadata.json"
-            },
-            {
-              "log": "DataController.traverseHierarchy: ERROR: SyntaxError: /Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump/starwars/planets.bson: Unexpected character '�'. (1:0)\n\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 1 |\u001b[39m �\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39m_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�5���\t�)��\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mname\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\t\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mAlderaan\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39mrotation_period\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0018\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39morbital_period\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39ml\u001b[37m\u001b[41m\u001b[1m\u0001\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39mdiameter\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�0\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mclimate\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\n \u001b[90m   |\u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 2 |\u001b[39m \u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mtemperate\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mgravity\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u000b\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[35m1\u001b[39m standard\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mterrain\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0016\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mgrasslands\u001b[33m,\u001b[39m mountains\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39msurface_water\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0003\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[35m40\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39mpopulation\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�5w\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39m__v\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39m_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�5���\t�)��\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mname\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\t\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mYavin\u001b[39m \u001b[33mIV\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39mrotation_period\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0018\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39morbital_period\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0012\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39mdiameter\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�\u001b[32m'\u0000\u0000\u0002climate\u0000\u0014\u0000\u0000\u0000temperate, tropical\u0000\u0002gravity\u0000\u000b\u0000\u0000\u00001 standard\u0000\u0002terrain\u0000\u0014\u0000\u0000\u0000jungle, rainforests\u0000\u0002surface_water\u0000\u0002\u0000\u0000\u00008\u0000\u0010population\u0000�\u0003\u0000\u0000\u0010__v\u0000\u0000\u0000\u0000\u0000\u0000�\u0000\u0000\u0000\u0007_id\u0000]�5���\t�)��\u0002name\u0000\u0005\u0000\u0000\u0000Hoth\u0000\u0010rotation_period\u0000\u0017\u0000\u0000\u0000\u0010orbital_period\u0000%\u0002\u0000\u0000\u0010diameter\u0000 \u001c\u0000\u0000\u0002climate\u0000\u0007\u0000\u0000\u0000frozen\u0000\u0002gravity\u0000\u001b[39m\n \u001b[90m 3 |\u001b[39m \u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[35m1.1\u001b[39m standard\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mterrain\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33m#\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mtundra\u001b[33m,\u001b[39m ice caves\u001b[33m,\u001b[39m mountain ranges\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39msurface_water\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[35m100\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\n \u001b[90m 4 |\u001b[39m population\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39m__v\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39m_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�5���\t�)��\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mname\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\b\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mDagobah\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39mrotation_period\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0017\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39morbital_period\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mU\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0001\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39mdiameter\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�\u001b[32m\"\u0000\u0000\u0002climate\u0000\u0006\u0000\u0000\u0000murky\u0000\u0002gravity\u0000\u0004\u0000\u0000\u0000N/A\u0000\u0002terrain\u0000\u000f\u0000\u0000\u0000swamp, jungles\u0000\u0002surface_water\u0000\u0002\u0000\u0000\u00008\u0000\u001b[39m\u001b[0m",
-              "message": {
-                "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
-              }
-            },
-            {
-              "name": "planets.metadata.json",
-              "type": "file",
-              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump/starwars/planets.metadata.json"
-            },
-            {
-              "log": "DataController.traverseHierarchy: ERROR: SyntaxError: /Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump/starwars/species.bson: Unexpected character '\u0000'. (1:0)\n\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 1 |\u001b[39m \u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0001\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39m_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�\u001b[33m<\u001b[39m\u001b[33mv\u001b[39m\u001b[32m'=�\u001b[39m\n \u001b[90m   |\u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 2 |\u001b[39m \u001b[33mB\u001b[39m\u001b[37m\u001b[41m\u001b[1m\\\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mname\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0005\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mHutt\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mclassification\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\n \u001b[90m 3 |\u001b[39m \u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mgastropod\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39maverage_height\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[35m300\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39maverage_lifespan\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0005\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[35m1000\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mhair_colors\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mn\u001b[33m/\u001b[39ma\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mskin_colors\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0012\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mgreen\u001b[33m,\u001b[39m brown\u001b[33m,\u001b[39m tan\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mlanguage\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\b\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mHuttese\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mhomeworld\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\n \u001b[90m 4 |\u001b[39m \u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mNal\u001b[39m \u001b[33mHutta\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39mhomeworld_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�5���\t�)��\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39m__v\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0003\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0001\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39m_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�\u001b[33m<\u001b[39m\u001b[33mv\u001b[39m\u001b[32m'=�\u001b[39m\u001b[0m",
-              "message": {
-                "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
-              }
-            },
-            {
-              "name": "species.metadata.json",
-              "type": "file",
-              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump/starwars/species.metadata.json"
-            }
-          ]
         }
       ]
     },
     {
       "name": "package-lock.json",
       "type": "file",
-      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/package-lock.json"
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e/package-lock.json"
     },
     {
       "name": "package.json",
       "type": "file",
-      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/package.json"
-    },
-    {
-      "name": "pull_request_template.md",
-      "type": "file",
-      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/pull_request_template.md"
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e/package.json"
     },
     {
       "name": "server",
       "type": "directory",
-      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/server",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e/server",
       "children": [
         {
           "name": "controllers",
           "type": "directory",
-          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/server/controllers",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e/server/controllers",
           "children": [
             {
-              "name": "starWarsController.js",
+              "name": "authController.js",
               "type": "file",
-              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/server/controllers/starWarsController.js",
+              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e/server/controllers/authController.js",
               "children": [],
               "info": {
-                "fileSize": 5379,
-                "linesOfCode": 552,
-                "complexity": 146,
+                "fileSize": 864,
+                "linesOfCode": 25,
+                "complexity": 3,
                 "dependents": [
-                  "src/Server/temp-file-upload/unit-10-databases/server/routes/api.js"
+                  "src/Server/temp-file-upload/grad-assessment-app-e/server/server.js"
                 ],
-                "dependencies": [
-                  {
-                    "module": "../models/starWarsModels",
-                    "moduleSystem": "cjs",
-                    "dynamic": false,
-                    "exoticallyRequired": false,
-                    "dependencyTypes": [
-                      "local",
-                      "require"
-                    ],
-                    "resolved": "src/Server/temp-file-upload/unit-10-databases/server/models/starWarsModels.js",
-                    "coreModule": false,
-                    "followable": true,
-                    "couldNotResolve": false,
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                  }
-                ],
+                "dependencies": [],
                 "isModule": true,
                 "exportedModules": [
-                  "starWarsController"
+                  "authController"
                 ]
               },
               "deepInfo": {
@@ -654,130 +372,77 @@
                 "funcCallExpressions": [],
                 "memberExpressions": [
                   {
-                    "object": "starWarsController",
+                    "object": "authController",
                     "property": [
-                      "getCharacters"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "db",
-                    "property": [
-                      "query"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "length"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "result",
-                    "property": [
-                      "rows"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "i"
-                    ],
-                    "property_access_notation": "bracket"
-                  },
-                  {
-                    "object": "result",
-                    "property": [
-                      "rows"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "char",
-                    "property": [
-                      "_id"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "db",
-                    "property": [
-                      "query"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "char",
-                    "property": [
-                      "films"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "result2",
-                    "property": [
-                      "rows"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "characters",
-                    "property": [
-                      "push"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "chars"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "locals"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "console",
-                    "property": [
-                      "log"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "console",
-                    "property": [
-                      "log"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "starWarsController",
-                    "property": [
-                      "getSpecies"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "id"
+                      "validateUser"
                     ],
                     "property_access_notation": "dot"
                   },
                   {
                     "object": "req",
                     "property": [
-                      "query"
+                      "body"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "buyer",
+                    "property": [
+                      "username"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "buyer",
+                    "property": [
+                      "password"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "cookie"
                     ],
                     "property_access_notation": "dot"
                   },
                   {
                     "property": [
-                      "species"
+                      "validUser"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "locals"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "seller",
+                    "property": [
+                      "username"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "seller",
+                    "property": [
+                      "password"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "cookie"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "validUser"
                     ],
                     "property_access_notation": "dot"
                   },
@@ -790,37 +455,7 @@
                   },
                   {
                     "property": [
-                      "then"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "then"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "db",
-                    "property": [
-                      "query"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": false,
-                    "property_access_notation": "bracket"
-                  },
-                  {
-                    "object": "data",
-                    "property": [
-                      "rows"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "species"
+                      "validUser"
                     ],
                     "property_access_notation": "dot"
                   },
@@ -832,104 +467,75 @@
                     "property_access_notation": "dot"
                   },
                   {
-                    "object": "starWarsController",
+                    "object": "module",
                     "property": [
-                      "getHomeworld"
+                      "exports"
                     ],
                     "property_access_notation": "dot"
-                  },
+                  }
+                ]
+              },
+              "dbInfo": [
+                {
+                  "dbInteraction": false,
+                  "dbType": null,
+                  "totalInteractions": 0,
+                  "details": null
+                }
+              ],
+              "apiInfo": {
+                "totalInteractions": 0,
+                "details": []
+              }
+            },
+            {
+              "name": "itemController.js",
+              "type": "file",
+              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e/server/controllers/itemController.js",
+              "children": [],
+              "info": {
+                "fileSize": 1654,
+                "linesOfCode": 377,
+                "complexity": 93,
+                "dependents": [
+                  "src/Server/temp-file-upload/grad-assessment-app-e/server/server.js"
+                ],
+                "dependencies": [
                   {
-                    "property": [
-                      "id"
+                    "module": "../models/ItemModel",
+                    "moduleSystem": "cjs",
+                    "dynamic": false,
+                    "exoticallyRequired": false,
+                    "dependencyTypes": [
+                      "local",
+                      "require"
                     ],
-                    "property_access_notation": "dot"
-                  },
+                    "resolved": "src/Server/temp-file-upload/grad-assessment-app-e/server/models/ItemModel.js",
+                    "coreModule": false,
+                    "followable": true,
+                    "couldNotResolve": false,
+                    "matchesDoNotFollow": false,
+                    "circular": false,
+                    "valid": true
+                  }
+                ],
+                "isModule": true,
+                "exportedModules": [
+                  "itemController"
+                ]
+              },
+              "deepInfo": {
+                "orphan": false,
+                "funcDecName": [],
+                "funcExpressions": [],
+                "funcArrowExpressions": [],
+                "classDeclarations": [],
+                "funcCallExpressions": [],
+                "memberExpressions": [
                   {
-                    "object": "req",
+                    "object": "itemController",
                     "property": [
-                      "query"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "db",
-                    "property": [
-                      "query"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": false,
-                    "property_access_notation": "bracket"
-                  },
-                  {
-                    "object": "result",
-                    "property": [
-                      "rows"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "homeworld"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "locals"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "starWarsController",
-                    "property": [
-                      "getFilm"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "id"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "req",
-                    "property": [
-                      "query"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "db",
-                    "property": [
-                      "query"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "films"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "locals"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": false,
-                    "property_access_notation": "bracket"
-                  },
-                  {
-                    "object": "result",
-                    "property": [
-                      "rows"
+                      "postItem"
                     ],
                     "property_access_notation": "dot"
                   },
@@ -941,15 +547,29 @@
                     "property_access_notation": "dot"
                   },
                   {
+                    "object": "req",
                     "property": [
-                      "films"
+                      "cookies"
                     ],
                     "property_access_notation": "dot"
                   },
                   {
-                    "object": "res",
                     "property": [
-                      "locals"
+                      "token"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "req",
+                    "property": [
+                      "cookies"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "req",
+                    "property": [
+                      "body"
                     ],
                     "property_access_notation": "dot"
                   },
@@ -961,9 +581,70 @@
                     "property_access_notation": "dot"
                   },
                   {
-                    "object": "starWarsController",
+                    "object": "console",
                     "property": [
-                      "addCharacter"
+                      "log"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "db",
+                    "property": [
+                      "query"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "itemController",
+                    "property": [
+                      "getItems"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "db",
+                    "property": [
+                      "query"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "results"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "res",
+                    "property": [
+                      "locals"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "dbResults",
+                    "property": [
+                      "rows"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "itemController",
+                    "property": [
+                      "updateItem"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "property": [
+                      "token"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "req",
+                    "property": [
+                      "cookies"
                     ],
                     "property_access_notation": "dot"
                   },
@@ -983,124 +664,7 @@
                   },
                   {
                     "property": [
-                      "name"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "req",
-                    "property": [
-                      "body"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "gender"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "req",
-                    "property": [
-                      "body"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "species_id"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "req",
-                    "property": [
-                      "body"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "birth_year"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "req",
-                    "property": [
-                      "body"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "eye_color"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "req",
-                    "property": [
-                      "body"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "skin_color"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "req",
-                    "property": [
-                      "body"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "hair_color"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "req",
-                    "property": [
-                      "body"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "mass"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "req",
-                    "property": [
-                      "body"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "height"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "req",
-                    "property": [
-                      "body"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "homeworld_id"
+                      "desc"
                     ],
                     "property_access_notation": "dot"
                   },
@@ -1115,37 +679,6 @@
                     "object": "db",
                     "property": [
                       "query"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "err",
-                    "property": [
-                      "message"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "newChar"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "locals"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": false,
-                    "property_access_notation": "bracket"
-                  },
-                  {
-                    "object": "result",
-                    "property": [
-                      "rows"
                     ],
                     "property_access_notation": "dot"
                   },
@@ -1176,19 +709,19 @@
         {
           "name": "models",
           "type": "directory",
-          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/server/models",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e/server/models",
           "children": [
             {
-              "name": "starWarsModels.js",
+              "name": "ItemModel.js",
               "type": "file",
-              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/server/models/starWarsModels.js",
+              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e/server/models/ItemModel.js",
               "children": [],
               "info": {
-                "fileSize": 887,
-                "linesOfCode": 10,
-                "complexity": 1,
+                "fileSize": 596,
+                "linesOfCode": 11,
+                "complexity": 2,
                 "dependents": [
-                  "src/Server/temp-file-upload/unit-10-databases/server/controllers/starWarsController.js"
+                  "src/Server/temp-file-upload/grad-assessment-app-e/server/controllers/itemController.js"
                 ],
                 "dependencies": [],
                 "isModule": true,
@@ -1204,6 +737,19 @@
                 "classDeclarations": [],
                 "funcCallExpressions": [],
                 "memberExpressions": [
+                  {
+                    "property": [
+                      "PG_URI"
+                    ],
+                    "property_access_notation": "dot"
+                  },
+                  {
+                    "object": "process",
+                    "property": [
+                      "env"
+                    ],
+                    "property_access_notation": "dot"
+                  },
                   {
                     "object": "module",
                     "property": [
@@ -1247,7 +793,11 @@
                     },
                     {
                       "keyword": "Pool",
-                      "line": 6
+                      "line": 11
+                    },
+                    {
+                      "keyword": "query",
+                      "line": 16
                     },
                     {
                       "keyword": "query",
@@ -1255,11 +805,7 @@
                     },
                     {
                       "keyword": "query",
-                      "line": 20
-                    },
-                    {
-                      "keyword": "query",
-                      "line": 20
+                      "line": 18
                     }
                   ]
                 }
@@ -1272,298 +818,18 @@
           ]
         },
         {
-          "name": "routes",
-          "type": "directory",
-          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/server/routes",
-          "children": [
-            {
-              "name": "api.js",
-              "type": "file",
-              "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/server/routes/api.js",
-              "children": [],
-              "info": {
-                "fileSize": 753,
-                "linesOfCode": 15,
-                "complexity": 1,
-                "dependents": [
-                  "src/Server/temp-file-upload/unit-10-databases/server/server.js"
-                ],
-                "dependencies": [
-                  {
-                    "module": "../controllers/starWarsController",
-                    "moduleSystem": "cjs",
-                    "dynamic": false,
-                    "exoticallyRequired": false,
-                    "dependencyTypes": [
-                      "local",
-                      "require"
-                    ],
-                    "resolved": "src/Server/temp-file-upload/unit-10-databases/server/controllers/starWarsController.js",
-                    "coreModule": false,
-                    "followable": true,
-                    "couldNotResolve": false,
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                  }
-                ],
-                "isModule": true,
-                "exportedModules": [
-                  "router"
-                ]
-              },
-              "deepInfo": {
-                "orphan": false,
-                "funcDecName": [],
-                "funcExpressions": [],
-                "funcArrowExpressions": [],
-                "classDeclarations": [],
-                "funcCallExpressions": [],
-                "memberExpressions": [
-                  {
-                    "object": "express",
-                    "property": [
-                      "Router"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "router",
-                    "property": [
-                      "get"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "starWarsController",
-                    "property": [
-                      "getCharacters"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "json"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "status"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "chars"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "locals"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "router",
-                    "property": [
-                      "get"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "starWarsController",
-                    "property": [
-                      "getSpecies"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "json"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "status"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "species"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "locals"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "router",
-                    "property": [
-                      "get"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "starWarsController",
-                    "property": [
-                      "getHomeworld"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "json"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "status"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "homeworld"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "locals"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "router",
-                    "property": [
-                      "get"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "starWarsController",
-                    "property": [
-                      "getFilm"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "json"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "status"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "films"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "locals"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "router",
-                    "property": [
-                      "post"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "starWarsController",
-                    "property": [
-                      "addCharacter"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "json"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "status"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "newChar"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "locals"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "module",
-                    "property": [
-                      "exports"
-                    ],
-                    "property_access_notation": "dot"
-                  }
-                ]
-              },
-              "dbInfo": [
-                {
-                  "dbInteraction": false,
-                  "dbType": null,
-                  "totalInteractions": 0,
-                  "details": null
-                }
-              ],
-              "apiInfo": {
-                "totalInteractions": 0,
-                "details": []
-              }
-            }
-          ]
-        },
-        {
           "name": "server.js",
           "type": "file",
-          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/server/server.js",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e/server/server.js",
           "children": [],
           "info": {
-            "fileSize": 1182,
-            "linesOfCode": 25,
-            "complexity": 1,
+            "fileSize": 1715,
+            "linesOfCode": 41,
+            "complexity": 2,
             "dependents": [],
             "dependencies": [
               {
-                "module": "./routes/api",
+                "module": "./controllers/authController.js",
                 "moduleSystem": "cjs",
                 "dynamic": false,
                 "exoticallyRequired": false,
@@ -1571,7 +837,24 @@
                   "local",
                   "require"
                 ],
-                "resolved": "src/Server/temp-file-upload/unit-10-databases/server/routes/api.js",
+                "resolved": "src/Server/temp-file-upload/grad-assessment-app-e/server/controllers/authController.js",
+                "coreModule": false,
+                "followable": true,
+                "couldNotResolve": false,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              },
+              {
+                "module": "./controllers/itemController.js",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "local",
+                  "require"
+                ],
+                "resolved": "src/Server/temp-file-upload/grad-assessment-app-e/server/controllers/itemController.js",
                 "coreModule": false,
                 "followable": true,
                 "couldNotResolve": false,
@@ -1597,10 +880,8 @@
                 "valid": true
               }
             ],
-            "isModule": true,
-            "exportedModules": [
-              "app"
-            ]
+            "isModule": false,
+            "exportedModules": []
           },
           "deepInfo": {
             "orphan": false,
@@ -1618,7 +899,7 @@
                 "property_access_notation": "dot"
               },
               {
-                "object": "express",
+                "object": "bodyParser",
                 "property": [
                   "json"
                 ],
@@ -1632,7 +913,7 @@
                 "property_access_notation": "dot"
               },
               {
-                "object": "express",
+                "object": "bodyParser",
                 "property": [
                   "urlencoded"
                 ],
@@ -1655,7 +936,7 @@
               {
                 "object": "path",
                 "property": [
-                  "resolve"
+                  "join"
                 ],
                 "property_access_notation": "dot"
               },
@@ -1663,6 +944,189 @@
                 "object": "app",
                 "property": [
                   "use"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "app",
+                "property": [
+                  "get"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "sendFile"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "path",
+                "property": [
+                  "join"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "app",
+                "property": [
+                  "get"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "sendFile"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "path",
+                "property": [
+                  "join"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "app",
+                "property": [
+                  "get"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "itemController",
+                "property": [
+                  "getItems"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "json"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "status"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "results"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "locals"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "app",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "itemController",
+                "property": [
+                  "postItem"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "status"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "app",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "itemController",
+                "property": [
+                  "updateItem"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "send"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "status"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "app",
+                "property": [
+                  "post"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "authController",
+                "property": [
+                  "validateUser"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "validUser"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "locals"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "redirect"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "status"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "send"
                 ],
                 "property_access_notation": "dot"
               },
@@ -1697,20 +1161,6 @@
                 "object": "Object",
                 "property": [
                   "assign"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "console",
-                "property": [
-                  "log"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "errorObj",
-                "property": [
-                  "log"
                 ],
                 "property_access_notation": "dot"
               },
@@ -1754,13 +1204,6 @@
                   "log"
                 ],
                 "property_access_notation": "dot"
-              },
-              {
-                "object": "module",
-                "property": [
-                  "exports"
-                ],
-                "property_access_notation": "dot"
               }
             ]
           },
@@ -1780,82 +1223,21 @@
       ]
     },
     {
-      "name": "webpack.config.js",
-      "type": "file",
-      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/webpack.config.js",
-      "children": [],
-      "info": {
-        "fileSize": 1818,
-        "linesOfCode": 42,
-        "complexity": 1,
-        "dependents": [],
-        "dependencies": [
-          {
-            "module": "path",
-            "moduleSystem": "cjs",
-            "dynamic": false,
-            "exoticallyRequired": false,
-            "dependencyTypes": [
-              "core",
-              "require"
-            ],
-            "resolved": "path",
-            "coreModule": true,
-            "followable": false,
-            "couldNotResolve": false,
-            "matchesDoNotFollow": false,
-            "circular": false,
-            "valid": true
-          }
-        ],
-        "isModule": true,
-        "exportedModules": [
-          null
-        ]
-      },
-      "deepInfo": {
-        "orphan": false,
-        "funcDecName": [],
-        "funcExpressions": [],
-        "funcArrowExpressions": [],
-        "classDeclarations": [],
-        "funcCallExpressions": [],
-        "memberExpressions": [
-          {
-            "object": "module",
-            "property": [
-              "exports"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "path",
-            "property": [
-              "resolve"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "path",
-            "property": [
-              "resolve"
-            ],
-            "property_access_notation": "dot"
-          }
-        ]
-      },
-      "dbInfo": [
+      "name": "views",
+      "type": "directory",
+      "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e/views",
+      "children": [
         {
-          "dbInteraction": false,
-          "dbType": null,
-          "totalInteractions": 0,
-          "details": null
+          "name": "index.html",
+          "type": "file",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e/views/index.html"
+        },
+        {
+          "name": "store.html",
+          "type": "file",
+          "path": "/Users/scottz/Code/Codesmith/FFSS-OSP/src/server/temp-file-upload/grad-assessment-app-e/views/store.html"
         }
-      ],
-      "apiInfo": {
-        "totalInteractions": 0,
-        "details": []
-      }
+      ]
     }
   ]
 }

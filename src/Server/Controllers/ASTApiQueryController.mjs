@@ -68,7 +68,7 @@ const { backendFileASTs } = res.locals;
 const apiHandlers = {
   'Fetch': {
     check: ast => {
-      console.log('Fetch API interactions...');
+      // console.log('Fetch API interactions...');
       const hasFetch = checkApiCalls(ast, ['fetch']);
       const hasNodeFetch = checkApiCalls(ast, ['node-fetch']);
       return hasFetch && !hasNodeFetch;
@@ -77,42 +77,42 @@ const apiHandlers = {
   },
   'Axios': {
     check: ast => {
-      console.log('Axios API interactions...');
+      // console.log('Axios API interactions...');
       return checkApiCalls(ast, ['axios']);
     },
     analyze: (ast, filePath) => analyzeAxiosCalls(ast, filePath),
   },
   'XMLHttpRequest': {
     check: ast => {
-      console.log('XMLHttpRequest API interactions...');
+      // console.log('XMLHttpRequest API interactions...');
       return checkApiCalls(ast, ['XMLHttpRequest']);
     },
     analyze: (ast, filePath) => analyzeXMLHttpRequestCalls(ast, filePath),
   },
   'Node Fetch': {
     check: ast => {
-      console.log('Node Fetch API interactions...');
+      // console.log('Node Fetch API interactions...');
       return checkApiCalls(ast, ['node-fetch']);
     },
     analyze: (ast, filePath) => analyzeNodeFetchInteractions(ast, filePath),
   },
   'Superagent': {
     check: ast => {
-      console.log('Superagent API interactions...');
+      // console.log('Superagent API interactions...');
       return checkApiCalls(ast, ['superagent']);
     },
     analyze: (ast, filePath) => analyzeSuperagentInteractions(ast, filePath),
   },
   'jQuery': {
     check: ast => {
-      console.log('jQuery API interactions...');
+      // console.log('jQuery API interactions...');
       return checkApiCalls(ast, ['$', 'jQuery']);
     },
     analyze: (ast, filePath) => analyzeJQueryInteractions(ast, filePath),
   },
   'Got': {
     check: ast => {
-      console.log('Got API interactions...');
+      // console.log('Got API interactions...');
       return checkApiCalls(ast, ['got']);
     },
     analyze: (ast, filePath) => analyzeGotCalls(ast, filePath),
@@ -124,7 +124,7 @@ const apiHandlers = {
 backendFileASTs.forEach(fileObject => {
   const ast = fileObject.ast;
   const filePath = fileObject.filePath;
-  console.log(`\x1b[34mChecking ${filePath} file for the following API interactions...\x1b[0m`);
+  // console.log(`\x1b[34mChecking ${filePath} file for the following API interactions...\x1b[0m`);
 
 
 // CHECK AND ANALYZE API CALLS
@@ -180,7 +180,7 @@ ASTApiQueryController.queryFunc = async (nodeAST,nodePath) => {
     },
     'Node Fetch': {
       check: ast => {
-        // console.log('Node Fetch API interactions...');
+        console.log('Node Fetch API interactions...');
         return checkApiCalls(ast, ['node-fetch']);
       },
       analyze: (ast, filePath) => analyzeNodeFetchInteractions(ast, filePath),
@@ -210,7 +210,6 @@ ASTApiQueryController.queryFunc = async (nodeAST,nodePath) => {
   
   
   // RUN EACH FILE THROUGH THE API HANDLERS
-  
     const ast = nodeAST;
     const filePath = nodePath;
 
@@ -246,7 +245,7 @@ ASTApiQueryController.queryFunc = async (nodeAST,nodePath) => {
 
 // ANALYZE FETCH CALLS
 function analyzeFetchCalls(ast, filePath) {
-  console.log(`\x1b[35mInside Fetch API Extended Analysis`);
+  // console.log(`\x1b[35mInside Fetch API Extended Analysis`);
 
   //V2
   const fetchCalls = esquery.query(ast,'Program > ExpressionStatement > CallExpression');
@@ -271,7 +270,6 @@ function analyzeFetchCalls(ast, filePath) {
 
     // find http method
     if (call.callee.object.arguments){
-
       let interactionDetail = {
         method: 'fetch',
         line: call.loc.start.line,
@@ -296,8 +294,11 @@ function analyzeFetchCalls(ast, filePath) {
       })
 
       return interactionDetail;
-    } else {
-      return;
+    } 
+
+    if (call.arguments.type === 'Literal') {
+      interactionDetail.url = call.arguments.value;
+      return interactionDetail;
     }
 
     // console.log('final result', call.callee.object.arguments[1].properties[0].value.value)
@@ -349,7 +350,7 @@ function analyzeFetchCalls(ast, filePath) {
 // ANALYZE AXIOS CALLS
 function analyzeAxiosCalls(ast, filePath) {
 
-  console.log(`\x1b[35mInside Axios API Extended Analysis`);
+  // console.log(`\x1b[35mInside Axios API Extended Analysis`);
 
   const axiosKeywords = ['axios', 'get', 'post', 'put', 'delete', 'patch', 'head', 'options', 'request'];
 
@@ -392,7 +393,7 @@ function analyzeAxiosCalls(ast, filePath) {
 
 // ANALYZE XMLHTTPREQUEST CALLS
 function analyzeXMLHttpRequestCalls(ast, filePath) {
-  console.log('\x1b[35mInside XMLHttpRequest Extended Analysis');
+  // console.log('\x1b[35mInside XMLHttpRequest Extended Analysis');
 
   // FIND XHR INSTANTIATIONS
   const xhrInstantiations = esquery.query(ast, 'NewExpression[callee.name="XMLHttpRequest"]');
@@ -461,9 +462,11 @@ function analyzeNodeFetchInteractions(ast, filePath) {
   let interactions = [];
 
   queries.forEach(query => {
+    // console.log('query:', query)
     // EXECUTE QUERY INDIVIDUALLY
     const results = esquery.query(ast, query);
     results.forEach(expr => {
+      // console.log('checking here right now: ', expr)
       // EXTRACT DETAILS
       let interactionDetail = {
         method: 'fetch',
@@ -487,7 +490,7 @@ function analyzeNodeFetchInteractions(ast, filePath) {
 // ANALYZE SUPERAGENT INTERACTIONS
 function analyzeSuperagentInteractions(ast, filePath) {
 
-  console.log(`\x1b[35mInside Superagent API Extended Analysis`);
+  // console.log(`\x1b[35mInside Superagent API Extended Analysis`);
   const superagentKeywords = ['superagent', 'get', 'post', 'put', 'delete', 'patch', 'head', 'options'];
   let interactions = [];
 
@@ -527,7 +530,7 @@ function analyzeSuperagentInteractions(ast, filePath) {
 // ANALYZE JQUERY INTERACTIONS
 function analyzeJQueryInteractions(ast, filePath) {
 
-  console.log(`\x1b[35mInside jQuery API Extended Analysis`);
+  // console.log(`\x1b[35mInside jQuery API Extended Analysis`);
   const jqueryKeywords = ['$', 'jQuery', 'ajax', 'get', 'post', 'put', 'delete', 'getJSON', 'getScript', 'load'];
 
   let interactions = [];

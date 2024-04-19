@@ -51,7 +51,7 @@ app.post('/api/fileupload',
     // ASTDbQueryController.query,
     // ASTApiQueryController.query,
     DataController.superStructure,
-    // S3Controller.upload,
+    S3Controller.upload,
     FileController.deleteDir,
     (req, res) => {
         // console.log(res.locals.parsedFiles);
@@ -59,6 +59,13 @@ app.post('/api/fileupload',
         // const astOfFirsObject = firstObject.ast;
         // console.log(astOfFirsObject);
         res.status(200).send(res.locals.hierarchy);
+    }
+);
+
+app.get('/api/getbucketitems',
+    S3Controller.getBucketItems,
+    (req, res) => {
+        res.status(200).send('i did it')
     }
 );
 

@@ -107,7 +107,7 @@ ASTParseController.parse = async (req, res, next) => {
     // ADD TO RES.LOCALS
     res.locals.backendFileASTs = backendFileASTs;
 
-    console.log("Backend Files in AST-Parse-Controller:", backendFilePaths);
+    // console.log("Backend Files in AST-Parse-Controller:", backendFilePaths);
 
 
 
