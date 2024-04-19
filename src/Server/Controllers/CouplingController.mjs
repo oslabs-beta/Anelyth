@@ -4,87 +4,6 @@ import path from "path";
 
 const couplingController = {};
 
-// /*====================Christian=========================== */
-
-// // function countDependencies(fileContent) {
-
-// // const dependencyCounts = {};
-
-// // try {
-
-// // const data = SuperStructure;
-
-// // function traverseHierarchy(node) {
-
-// // if (node.type === 'file') {
-
-// // const fileName = node.path.split('/').pop();
-
-// // dependencyCounts[fileName] = 0;
-
-// // if (node.info && node.info.dependencies) {
-
-// // const localDependencies = node.info.dependencies.filter(
-
-// // (dependency) => !dependency.couldNotResolve && dependency.resolved.includes('/')
-
-// // );
-
-// // dependencyCounts[fileName] = localDependencies.length;
-
-// // }
-
-// // } else if (node.type === 'directory') {
-
-// // node.children.forEach(traverseHierarchy);
-
-// // }
-
-// // }
-
-// // traverseHierarchy(data);
-
-// // } catch (error) {
-
-// // console.error('Error parsing file content:', error);
-
-// // }
-
-// // Object.keys(dependencyCounts).filter(file => {
-
-// // if (file.includes('.json') || file.includes('.md')){
-
-// // delete dependencyCounts[file]
-
-// // }
-
-// // })
-
-// // return dependencyCounts;
-
-// // }
-
-// // const dependencyCounts = countDependencies(SuperStructure);
-
-// // console.log(dependencyCounts);
-
-// // //dependencyCounts should look like this:
-
-// // // const arr = [
-
-// // // {fileName: ‘file1’, details: [{url: ‘endpoint1’}, {url: ‘endpoint2’}]},
-
-// // // {fileName: ‘file2’, details: [{url: ‘endpoint1’}, {url: ‘endpoint2’}, {url: ‘endpoint3’}]},
-
-// // // {fileName: ‘file5’, details: [{url: ‘endpoint6’}]},
-
-// // // {fileName: ‘file3’, details: [{url: ‘endpoint1’}, {url: ‘endpoint4’}]},
-
-// // // {fileName: ‘file4’, details: [{url: ‘endpoint3’}]}
-
-// // // ];
-
-
 
 couplingController.extractDetails = (req, res, next) => {
   console.log("In extract details middleware!!!");
@@ -187,6 +106,10 @@ try {
       "structure_for_ross.log",
       JSON.stringify(detailsArray, null, 2)
     );
+
+    //pass the result down to the middleware chain
+    res.locals.detailsArray = detailsArray;
+
   } catch (error) {
     console.error("Error processing structure data:", error);
 
@@ -196,11 +119,6 @@ try {
   return next();
 };
 
-// return detailsArray;
-
-// const resultDetails = extractDetails(SuperStructure);
-
-// console.log(resultDetails);
 
 /*[
 

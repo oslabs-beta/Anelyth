@@ -34,11 +34,13 @@ const CohesionController = {};
 //input: array of objects from superstructure, threshold
   // [{fileName: 'file1', details: [{url: 'value1'}, {url: 'value2'}]}, {fileName: 'file2', details: [{url: 'value1'}, {url: 'value3'}]}]
 //output: array of arrays of objects: grouped by potential microservice based on api cohesion metric
+
+
 CohesionController.calculateCohesion = (req, res, next) => {
   //declare output array
   const result = [];
   //declare remaining array of elements
-  const remaining = JSON.parse(JSON.stringify(res.locals.couplingOutput)); 
+  const remaining = JSON.parse(JSON.stringify(res.locals.detailsArray)); 
   //loop
   while (remaining.length > 0) {
     //declare subarray, initialize with 1st element left

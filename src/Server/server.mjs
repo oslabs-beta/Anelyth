@@ -54,8 +54,9 @@ app.post('/api/fileupload',
     // ASTApiQueryController.query,
     DataController.superStructure,
     couplingController.extractDetails,
+    CohesionController.calculateCohesion,
     FileController.deleteDir,
-    // CohesionController.calculateCohesion,
+    
     // S3Controller.upload,
     (req, res) => {
         // console.log(res.locals.parsedFiles);
