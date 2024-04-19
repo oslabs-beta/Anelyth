@@ -8,9 +8,10 @@ interface RepoUploadProps {
   popupShowing: boolean;
   setPopupShowing: (value: boolean) => void;
   setClickedNodeData: (value: any) => void;
+  setAnalyzeButton: (value: any) => void;
 }
 
-function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData }: RepoUploadProps) {
+function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnalyzeButton}) {
   const [hierarchyData, setHierarchyData] = useState(null);
 
   async function apiCall(event : any) {
@@ -50,6 +51,7 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData }: RepoU
 
         // for now to test //
         setHierarchyData(data.children[0]);
+        setAnalyzeButton(true); //setter function to render analyze button
 
       } else {
         console.error('Upload failed');
