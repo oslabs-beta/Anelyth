@@ -90,7 +90,7 @@ function printDirectoryTree(dir, depResult) {
 DCController.analyze = async (req, res, next) => {
   try {
     console.log('in dccontroller.analyze');
-    const uploadsPath = './Server/temp-file-upload';
+    const uploadsPath = './src/Server/temp-file-upload';
     const depResult = await cruise([uploadsPath], cruiseOptions);
     // console.log('checking hereeeee:',JSON.stringify(JSON.parse(depResult.output), null, 2));
 
@@ -102,7 +102,7 @@ DCController.analyze = async (req, res, next) => {
     return next();
   } catch (err) {
     return next({
-      log: 'error in DCController.analyze',
+      log: 'error in DCController.analyze: ' + err,
       message: err
     });
   }

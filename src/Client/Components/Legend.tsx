@@ -1,7 +1,7 @@
 import React from 'react';
 import '../Styles/legend.css';
 
-const Legend = () => {
+const Legend: React.FC = () => {
   return (
     <div className="legend">
       <div className="legend-item">
