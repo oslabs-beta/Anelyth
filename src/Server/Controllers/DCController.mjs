@@ -72,7 +72,7 @@ function printDirectoryTree(dir, depResult) {
 
 // DCController.getTree = (req, res, next) => {
 //   try {
-//     const uploadsPath = './Server/temp-file-upload';
+//     const uploadsPath = './src/Server/temp-file-upload';
 //     const hierarchy = printDirectoryTree(uploadsPath, res.locals.depResult);
 //     console.log('File Hierarchy with Dependencies:\n', hierarchy);
 //     res.locals.hierarchy = hierarchy;
