@@ -3,15 +3,9 @@ const path = require('path');
 
 const couplingController = {};
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+// const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
-const filePath = path.resolve(__dirname, "../../super-structure.log");
 
-console.log(filePath);
-
-const fileContent = fs.readFileSync(filePath, "utf8");
-
-const SuperStructure = JSON.parse(fileContent);
 
 /*====================Christian=========================== */
 
@@ -93,7 +87,16 @@ const SuperStructure = JSON.parse(fileContent);
 
 // // ];
 
-couplingController.extractDetails = (SuperStructure) => {
+couplingController.extractDetails = (req, res, next) => {
+
+const filePath = path.resolve(__dirname, "../../../super-structure.log");
+
+console.log(filePath);
+
+const fileContent = fs.readFileSync(filePath, "utf8");
+
+const SuperStructure = JSON.parse(fileContent);
+  
   let detailsArray = [];
 
   function traverseHierarchy(node) {
@@ -172,7 +175,10 @@ couplingController.extractDetails = (SuperStructure) => {
     JSON.stringify(detailsArray, null, 2)
   );
 
+  console.log(detailsArray);
+
   res.locals.couplingOutput = detailsArray;
+  return next();
 }
 // console.log(resultDetails);
 

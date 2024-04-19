@@ -17,6 +17,8 @@ import ASTDbQueryController from "./Controllers/ASTDbQueryController.mjs";
 import ASTApiQueryController from './Controllers/ASTApiQueryController.mjs';
 import SessionController from "./Controllers/SessionController.cjs";
 import DataController from "./Controllers/DataController.mjs";
+import CohesionController from './Controllers/CohesionController.cjs';
+import couplingController from './Controllers/CouplingController.cjs';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -47,11 +49,13 @@ app.post('/api/signup',
 app.post('/api/fileupload',
     FileController.upload,
     DCController.analyze,
-    // ASTParseController.parse,
-    // ASTDbQueryController.query,
-    // ASTApiQueryController.query,
+    ASTParseController.parse,
+    ASTDbQueryController.query,
+    ASTApiQueryController.query,
     DataController.superStructure,
     FileController.deleteDir,
+    couplingController.extractDetails,
+    CohesionController.calculateCohesion,
     // S3Controller.upload,
     (req, res) => {
         // console.log(res.locals.parsedFiles);
