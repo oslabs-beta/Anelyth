@@ -1,5 +1,5 @@
 
-import Legend from './Legend.jsx';
+import Legend from './Legend.tsx';
 
 //Last 9:18 pm 
 

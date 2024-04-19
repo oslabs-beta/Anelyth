@@ -1,16 +1,21 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
+// @ts-ignore
 import bgIMG from '../Assets/loginimg.png';
 import '../Styles/login.css';
-import Header from '../Components/Header.jsx';
+import Header from '../Components/Header';
 
+interface FormData {
+  userOrEmail: string;
+  password: string;
+}
 
-function LoginPage() {
+function LoginPage(): JSX.Element {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({});
-  console.log('formData:', formData)
+  const [formData, setFormData] = useState<FormData>({userOrEmail: '', password: ''});
+  // console.log('formData:', formData)
 
-  function handleChange(e) {
+  function handleChange(e: any) {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({...prevFormData, [name]: value}));
   }
