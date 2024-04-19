@@ -84,7 +84,12 @@ const couplingController = {};
 
 // // // ];
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+
+
+couplingController.extractDetails = (req, res, next) => {
+  console.log("In extract details middleware!!!");
+
+  const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 const filePath = path.resolve(__dirname, "../../../super-structure.log");
 
@@ -101,9 +106,6 @@ try {
 
   // Handle the error appropriately in your application context
 }
-
-couplingController.extractDetails = (req, res, next) => {
-  console.log("In extract details middleware!!!");
 
   let detailsArray = [];
 
