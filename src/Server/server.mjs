@@ -51,8 +51,8 @@ app.post('/api/fileupload',
     // ASTDbQueryController.query,
     // ASTApiQueryController.query,
     DataController.superStructure,
-    // FileController.deleteDir,
     // S3Controller.upload,
+    FileController.deleteDir,
     (req, res) => {
         // console.log(res.locals.parsedFiles);
         // const firstObject = res.locals.parsedFiles[3];

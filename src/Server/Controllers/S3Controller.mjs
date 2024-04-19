@@ -1,6 +1,13 @@
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import dotenv from 'dotenv';
 import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { json } from 'd3';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 
 dotenv.config();
@@ -26,18 +33,21 @@ const S3Controller = {};
 
 S3Controller.upload = async (req, res, next) => {
   try{
-    
+    // Read the file content
+    const filePath = path.resolve(__dirname, '../../../super-structure.log');
+    const fileContent = fs.readFileSync(filePath, 'utf-8');
+    const jsonObj = JSON.parse(fileContent);
+    const file = JSON.stringify(JSON.parse(fileContent));
+
+    //setting up S3 upload parameters
     const params = {
       Bucket: bucketName,
       // need to configure the key to be the name of the file
-      Key: res.locals.repoName + '.json',
+      Key: jsonObj.name,
       // need to configure the body to be the data from the file
       Body: file,
       ContentType: 'application/json'
     };
-    
-    // GET FILE FROM LOCAL STORAGE // 
-    const file = fs.readFileSync('Server/Controllers/DCController.mjs');
 
     const command = new PutObjectCommand(params);
     await s3.send(command);
@@ -45,7 +55,7 @@ S3Controller.upload = async (req, res, next) => {
 
   } catch (err) {
     return next({
-      log: 'S3Controller.upload: ERROR: Error in S3Controller.upload',
+      log: 'S3Controller.upload: ERROR: Error in S3Controller.upload' + err,
       message: err,
     })
   }

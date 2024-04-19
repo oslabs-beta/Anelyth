@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 
+
+
 const FileController = {};
 
 // INIT MULTER STORAGE TO DISK // 
@@ -25,7 +27,9 @@ const storage = multer.diskStorage({
 });
 
 // SET PATH TO TEMP FILE UPLOAD DIR //
-const folderPath = './Server/temp-file-upload';
+// const folderPath = './Server/temp-file-upload';
+const folderPath = path.join(__dirname, '..', 'temp-file-upload');
+
 
 // INTANCIATE MULTER UPLOAD/STORAGE //
 const upload = multer({ storage: storage });
@@ -34,86 +38,90 @@ const upload = multer({ storage: storage });
 
 // HELPER FUNC FOR RECURSIVE FILE TRAVERSAL AND DELETION OF FILES/DIRS //
 const deleteFolderRecursive = (folderPath, callback) => {
-  fs.readdir(folderPath, (err, files) => {
-    if (err) {
-      console.error('Error reading folder:', folderPath, err);
-      callback(err);
-      return;
-    }
-
-    let completed = 0;
-    const total = files.length;
-
-    if (total === 0) {
-      // If the directory is empty, remove it and callback
-      fs.rmdir(folderPath, (err) => {
-        if (err) {
-          console.error('Error deleting directory:', folderPath, err);
-          callback(err);
-        } else {
-          callback(null);
-        }
-      });
-      return;
-    }
-
-    files.forEach((file) => {
-      const filePath = path.join(folderPath, file);
-
-      fs.stat(filePath, (err, stats) => {
-        if (err) {
-          console.error('Error getting file stats:', filePath, err);
-          callback(err);
-          return;
-        }
-
-        if (stats.isDirectory()) {
-          // Recursively delete subdirectory
-          deleteFolderRecursive(filePath, (err) => {
-            if (err) {
-              callback(err);
-            } else {
-              // Check if all files and directories are deleted
-              completed++;
-              if (completed === total) {
-                // If all files and subdirectories are deleted, remove the empty directory
-                fs.rmdir(folderPath, (err) => {
-                  if (err) {
-                    console.error('Error deleting directory:', folderPath, err);
-                    callback(err);
-                  } else {
-                    callback(null);
-                  }
-                });
+  try{
+    fs.readdir(folderPath, (err, files) => {
+      if (err) {
+        console.error('Error reading folder:', folderPath, err);
+        callback(err);
+        return;
+      }
+  
+      let completed = 0;
+      const total = files.length;
+  
+      if (total === 0) {
+        // If the directory is empty, remove it and callback
+        fs.rmdir(folderPath, (err) => {
+          if (err) {
+            console.error('Error deleting directory:', folderPath, err);
+            callback(err);
+          } else {
+            callback(null);
+          }
+        });
+        return;
+      }
+  
+      files.forEach((file) => {
+        const filePath = path.join(folderPath, file);
+  
+        fs.stat(filePath, (err, stats) => {
+          if (err) {
+            console.error('Error getting file stats:', filePath, err);
+            callback(err);
+            return;
+          }
+  
+          if (stats.isDirectory()) {
+            // Recursively delete subdirectory
+            deleteFolderRecursive(filePath, (err) => {
+              if (err) {
+                callback(err);
+              } else {
+                // Check if all files and directories are deleted
+                completed++;
+                if (completed === total) {
+                  // If all files and subdirectories are deleted, remove the empty directory
+                  fs.rmdir(folderPath, (err) => {
+                    if (err) {
+                      console.error('Error deleting directory:', folderPath, err);
+                      callback(err);
+                    } else {
+                      callback(null);
+                    }
+                  });
+                }
               }
-            }
-          });
-        } else {
-          // Delete file
-          fs.unlink(filePath, (err) => {
-            if (err) {
-              console.error('Error deleting file:', filePath, err);
-              callback(err);
-            } else {
-              // Check if all files and directories are deleted
-              completed++;
-              if (completed === total) {
-                // If all files and subdirectories are deleted, remove the empty directory
-                fs.rmdir(folderPath, (err) => {
-                  if (err) {
-                    console.error('Error deleting directory:', folderPath, err);
-                    callback(err);
-                  } else {
-                    callback(null);
-                  }
-                });
+            });
+          } else {
+            // Delete file
+            fs.unlink(filePath, (err) => {
+              if (err) {
+                console.error('Error deleting file:', filePath, err);
+                callback(err);
+              } else {
+                // Check if all files and directories are deleted
+                completed++;
+                if (completed === total) {
+                  // If all files and subdirectories are deleted, remove the empty directory
+                  fs.rmdir(folderPath, (err) => {
+                    if (err) {
+                      console.error('Error deleting directory:', folderPath, err);
+                      callback(err);
+                    } else {
+                      callback(null);
+                    }
+                  });
+                }
               }
-            }
-          });
-        }
+            });
+          }
+        });
       });
     });
-  });
+  } catch (err) {
+    console.log('error in deleteFolderRecursive: ', err)
+  }
 };
 
 
@@ -150,6 +158,8 @@ FileController.deleteDir = (req, res, next) => {
   console.log('Directory Deleted Succsessfully')
   return next();
 };
+
+
 
 
 
