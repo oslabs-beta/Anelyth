@@ -45,13 +45,13 @@ CohesionController.calculateCohesion = (req, res, next) => {
   while (remaining.length > 0) {
     //declare subarray, initialize with 1st element left
     const potentialMicroservice = [remaining.shift()];
-    console.log('outer potentialMicroservice:', potentialMicroservice)
+    // console.log('outer potentialMicroservice:', potentialMicroservice)
     let j = 0;
     //element to compare
     let element = remaining[j];
     while (element) {
-      console.log('element:', element)
-      console.log('inner potentialMicroservice:', potentialMicroservice)
+      // console.log('element:', element)
+      // console.log('inner potentialMicroservice:', potentialMicroservice)
       //compare elements, if passes, combine. if combined, that becomes an element. if not, continue.
       //pass in threshold here
       if (shouldCombine(potentialMicroservice, element, 0.75)) {
@@ -63,12 +63,12 @@ CohesionController.calculateCohesion = (req, res, next) => {
       }
       //compare next element
       element = remaining[j];
-      console.log('remaining:', remaining)
+      // console.log('remaining:', remaining)
     }
     //once you get to the end of remaining array, you have any potentialMicroservice that remaining[i] would be part of, so push it to result
     result.push(potentialMicroservice);
   }
-  // console.log('result:', result)
+  console.log('result:', result)
   const logFilePath = path.join('..', '..', 'cohesionController.log');
   const logStream = fs.createWriteStream(logFilePath);
   logStream.write(JSON.stringify(result, null, 2));
