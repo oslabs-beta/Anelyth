@@ -6,7 +6,7 @@ const couplingController = {};
 
 
 couplingController.extractDetails = (req, res, next) => {
-  console.log("In extract details middleware!!!");
+  console.log('\x1b[36m%s\x1b[0m', 'In the coupling controller......');
 
   const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
@@ -15,7 +15,7 @@ const filePath = path.resolve(__dirname, "../../../super-structure.log");
 let SuperStructure = {};
 
 try {
-  console.log("READING SUPER STRUCTURE!!");
+  console.log('\x1b[36m%s\x1b[0m', 'Reading the super structure log file......');
 
   const fileContent = fs.readFileSync(filePath, "utf8");
 

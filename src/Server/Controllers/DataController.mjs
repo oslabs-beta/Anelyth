@@ -45,7 +45,7 @@ DataController.superStructure = async (req, res, next) => {
     const logFilePath = './super-structure.log';
     const logStream = fs.createWriteStream(logFilePath);
     logStream.on('finish', () => {
-      console.log('Super structure log file has been written.');
+      console.log('\x1b[36m%s\x1b[0m', 'Super structure log has finished writing!...');
       next(); // Only call next() once writing has completed
     });
 
