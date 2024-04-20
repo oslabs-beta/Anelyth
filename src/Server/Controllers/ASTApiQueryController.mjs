@@ -58,6 +58,10 @@ function checkApiCalls(fileAst, apiLibraries) {
 
 // ----------- API HANDLER OBJECT ----------- //
 
+//NOTE: THIS IS THE MIDDLEWARE BEING INVOKED IN SERVER.JS. CURRENTLY IT'S NOT PASSING ANY DATA ONTO THE NEXT PIECE OF 
+//MIDDLEWARE. ASTApiQueryController.queryFunc below is what is being invoked in DataController to add to superstructure.
+//Looks like these are the same function, except this one is analyzing backendFileASTs from res.locals and ASTApiQueryController.queryFunc
+//is being invoked from DataController with passed in argument
 ASTApiQueryController.query = (req, res, next) => {
 try {
 
@@ -131,6 +135,7 @@ backendFileASTs.forEach(fileObject => {
 Object.keys(apiHandlers).forEach(apiKey => {
   const handler = apiHandlers[apiKey];
   if (handler.check(ast)) {
+    //TODO: DO SOMETHING WITH ANALYSIS RESULTS?
     const analysisResults = handler.analyze(ast, filePath);
     // console.log(`${apiKey} API Analysis Results:`, analysisResults);
   }
@@ -149,87 +154,90 @@ next ();
 
 
 
-
+//NOTE: THIS IS BEING INVOKED IN DataController to add stuff to the superstructure. If superstructure apiDetails for each
+//file are not being populated correctly, the issue could be here, or it could be in DataController. Look like this function
+//only checks for the first api interaction in the file, returns details for it, and does not continue looking for other
+//api interactions of other types
 ASTApiQueryController.queryFunc = async (nodeAST,nodePath) => {
   try {
-  // console.log('Inside ASTApiQueryController.queryFunc')
-  // API HANDLERS
-  const apiHandlers = {
-    'Fetch': {
-      check: ast => {
-        // console.log('Fetch API interactions...');
-        const hasFetch = checkApiCalls(ast, ['fetch']);
-        const hasNodeFetch = checkApiCalls(ast, ['node-fetch']);
-        return hasFetch && !hasNodeFetch;
+    // console.log('Inside ASTApiQueryController.queryFunc')
+    // API HANDLERS
+    const apiHandlers = {
+      'Fetch': {
+        check: ast => {
+          // console.log('Fetch API interactions...');
+          const hasFetch = checkApiCalls(ast, ['fetch']);
+          const hasNodeFetch = checkApiCalls(ast, ['node-fetch']);
+          return hasFetch && !hasNodeFetch;
+        },
+        analyze: async (ast, filePath) => analyzeFetchCalls(ast, filePath),
       },
-      analyze: async (ast, filePath) => analyzeFetchCalls(ast, filePath),
-    },
-    'Axios': {
-      check: ast => {
-        // console.log('Axios API interactions...');
-        return checkApiCalls(ast, ['axios']);
+      'Axios': {
+        check: ast => {
+          // console.log('Axios API interactions...');
+          return checkApiCalls(ast, ['axios']);
+        },
+        analyze: (ast, filePath) => analyzeAxiosCalls(ast, filePath),
       },
-      analyze: (ast, filePath) => analyzeAxiosCalls(ast, filePath),
-    },
-    'XMLHttpRequest': {
-      check: ast => {
-        // console.log('XMLHttpRequest API interactions...');
-        return checkApiCalls(ast, ['XMLHttpRequest']);
+      'XMLHttpRequest': {
+        check: ast => {
+          // console.log('XMLHttpRequest API interactions...');
+          return checkApiCalls(ast, ['XMLHttpRequest']);
+        },
+        analyze: (ast, filePath) => analyzeXMLHttpRequestCalls(ast, filePath),
       },
-      analyze: (ast, filePath) => analyzeXMLHttpRequestCalls(ast, filePath),
-    },
-    'Node Fetch': {
-      check: ast => {
-        // console.log('Node Fetch API interactions...');
-        return checkApiCalls(ast, ['node-fetch']);
+      'Node Fetch': {
+        check: ast => {
+          // console.log('Node Fetch API interactions...');
+          return checkApiCalls(ast, ['node-fetch']);
+        },
+        analyze: (ast, filePath) => analyzeNodeFetchInteractions(ast, filePath),
       },
-      analyze: (ast, filePath) => analyzeNodeFetchInteractions(ast, filePath),
-    },
-    'Superagent': {
-      check: ast => {
-        // console.log('Superagent API interactions...');
-        return checkApiCalls(ast, ['superagent']);
+      'Superagent': {
+        check: ast => {
+          // console.log('Superagent API interactions...');
+          return checkApiCalls(ast, ['superagent']);
+        },
+        analyze: (ast, filePath) => analyzeSuperagentInteractions(ast, filePath),
       },
-      analyze: (ast, filePath) => analyzeSuperagentInteractions(ast, filePath),
-    },
-    'jQuery': {
-      check: ast => {
-        // console.log('jQuery API interactions...');
-        return checkApiCalls(ast, ['$', 'jQuery']);
+      'jQuery': {
+        check: ast => {
+          // console.log('jQuery API interactions...');
+          return checkApiCalls(ast, ['$', 'jQuery']);
+        },
+        analyze: (ast, filePath) => analyzeJQueryInteractions(ast, filePath),
       },
-      analyze: (ast, filePath) => analyzeJQueryInteractions(ast, filePath),
-    },
-    'Got': {
-      check: ast => {
-        // console.log('Got API interactions...');
-        return checkApiCalls(ast, ['got']);
+      'Got': {
+        check: ast => {
+          // console.log('Got API interactions...');
+          return checkApiCalls(ast, ['got']);
+        },
+        analyze: (ast, filePath) => analyzeGotCalls(ast, filePath),
       },
-      analyze: (ast, filePath) => analyzeGotCalls(ast, filePath),
-    },
-  };
-  
-  
-  // RUN EACH FILE THROUGH THE API HANDLERS
-  
+    };
+    
+    
+    // RUN EACH FILE THROUGH THE API HANDLERS
+    
     const ast = nodeAST;
     const filePath = nodePath;
 
-  // CHECK AND ANALYZE API CALLS
-  let analysisResults;
+    // CHECK AND ANALYZE API CALLS
+    let analysisResults;
 
-  for (const apiKey of Object.keys(apiHandlers)) {
-    const handler = apiHandlers[apiKey];
-    if (handler.check(ast)) {
-      // Use await inside an async function
-      analysisResults = await handler.analyze(ast, filePath);
-      // Once you have the analysis result, you can break out of the loop if needed
-      break;
+    for (const apiKey of Object.keys(apiHandlers)) {
+      const handler = apiHandlers[apiKey];
+      if (handler.check(ast)) {
+        // Use await inside an async function
+        analysisResults = await handler.analyze(ast, filePath);
+        // Once you have the analysis result, you can break out of the loop if needed
+        break;
+      }
     }
-  }
-  
+    
 
-  // console.log('analysisResults:',analysisResults)
-  return analysisResults;
+    // console.log('analysisResults:',analysisResults)
+    return analysisResults;
   } catch (err) {
     console.error('Error in ASTApiQueryController.queryFunc:', err);
     return ({
