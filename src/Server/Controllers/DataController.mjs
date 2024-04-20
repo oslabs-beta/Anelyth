@@ -44,16 +44,26 @@ DataController.superStructure = async (req, res, next) => {
     // temp log of super structure
     const logFilePath = './super-structure.log';
     const logStream = fs.createWriteStream(logFilePath);
-    logStream.write(JSON.stringify(superStructure, null, 2));
+    logStream.on('finish', () => {
+      console.log('\x1b[36m%s\x1b[0m', 'Super structure log has finished writing!...');
+      next(); // Only call next() once writing has completed
+    });
 
-    return next();
+    logStream.on('error', (err) => {
+      console.error('Error writing super structure log:', err);
+      next(err); // Pass the error to the next middleware
+    });
+
+    logStream.write(JSON.stringify(superStructure, null, 2));
+    logStream.end(); // Make sure to call end to trigger 'finish'
   } catch (err) {
-    return next({
+    console.error('DataController.superStructure: ERROR:', err);
+    next({
       log: 'DataController.superStructure: ERROR: ' + err,
       message: { err: 'DataController.superStructure: ERROR: Check server logs for details' },
-    })
+    });
   }
-}
+};
 
 
 

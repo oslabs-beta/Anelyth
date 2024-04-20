@@ -58,7 +58,7 @@ const parseFileToAST = (filePath) => {
 ASTParseController.parse = async (req, res, next) => {
   try {
     // CHECK IF REPO HAS BEEN UPLOADED
-    const uploadsPath = './Server/temp-file-upload';
+    const uploadsPath = './src/Server/temp-file-upload';
     if (!fs.existsSync(uploadsPath)) {
       throw new Error(`Directory ${uploadsPath} does not exist.`);
     }

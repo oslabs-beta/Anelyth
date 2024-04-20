@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
 });
 
 // SET PATH TO TEMP FILE UPLOAD DIR //
-const folderPath = './Server/temp-file-upload';
+const folderPath = './src/Server/temp-file-upload';
 
 // INTANCIATE MULTER UPLOAD/STORAGE //
 const upload = multer({ storage: storage });
