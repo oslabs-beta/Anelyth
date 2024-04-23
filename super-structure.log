@@ -1,1460 +1,338 @@
 {
-  "name": "unit-10-databases",
+  "name": "anotherTest",
   "type": "directory",
-  "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases",
+  "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/anotherTest",
   "children": [
     {
-      "log": "DataController.traverseHierarchy: ERROR: SyntaxError: /Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/.babelrc: Missing semicolon. (2:11)\n\n\u001b[0m \u001b[90m 1 |\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 2 |\u001b[39m   \u001b[32m\"presets\"\u001b[39m\u001b[33m:\u001b[39m [\u001b[32m\"@babel/preset-env\"\u001b[39m\u001b[33m,\u001b[39m \u001b[32m\"@babel/preset-react\"\u001b[39m]\n \u001b[90m   |\u001b[39m            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 3 |\u001b[39m }\u001b[0m",
-      "message": {
-        "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
+      "name": "code3.js",
+      "type": "file",
+      "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/anotherTest/code3.js",
+      "children": [],
+      "info": {
+        "fileSize": 1203,
+        "linesOfCode": 328,
+        "complexity": 86,
+        "dependents": [],
+        "dependencies": [
+          {
+            "module": "../models/models",
+            "moduleSystem": "cjs",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "dependencyTypes": [
+              "unknown"
+            ],
+            "resolved": "../models/models",
+            "coreModule": false,
+            "followable": false,
+            "couldNotResolve": true,
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "valid": true
+          }
+        ],
+        "isModule": true,
+        "exportedModules": [
+          "apiController"
+        ]
+      },
+      "deepInfo": {
+        "orphan": false,
+        "funcDecName": [],
+        "funcExpressions": [],
+        "funcArrowExpressions": [],
+        "classDeclarations": [],
+        "funcCallExpressions": [],
+        "memberExpressions": [
+          {
+            "object": "apiController",
+            "property": [
+              "checkApi"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "property": [
+              "title"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "res",
+            "property": [
+              "locals"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "property": [
+              "replaceAll"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "property": [
+              "title"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "res",
+            "property": [
+              "locals"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "response",
+            "property": [
+              "json"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "property": [
+              "map"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "property": [
+              "slice"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "data",
+            "property": [
+              "docs"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "property": [
+              "slice"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "doc",
+            "property": [
+              "key"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "doc",
+            "property": [
+              "title"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "doc",
+            "property": [
+              "author_name"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "property": false,
+            "property_access_notation": "bracket"
+          },
+          {
+            "object": "doc",
+            "property": [
+              "author_name"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "doc",
+            "property": [
+              "cover_edition_key"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "doc",
+            "property": [
+              "cover_edition_key"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "doc",
+            "property": [
+              "subject"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "doc",
+            "property": [
+              "subject"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "console",
+            "property": [
+              "log"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "property": [
+              "bookData"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "res",
+            "property": [
+              "locals"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "console",
+            "property": [
+              "log"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "property": [
+              "bookData"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "res",
+            "property": [
+              "locals"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "console",
+            "property": [
+              "log"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "module",
+            "property": [
+              "exports"
+            ],
+            "property_access_notation": "dot"
+          }
+        ]
+      },
+      "dbInfo": [
+        {
+          "dbInteraction": false,
+          "dbType": null,
+          "totalInteractions": 0,
+          "details": null
+        }
+      ],
+      "apiInfo": {
+        "totalInteractions": 12,
+        "details": [
+          {
+            "apiType": "fetch",
+            "apiURL": "../models/models",
+            "typeOfCall": "GET"
+          },
+          {
+            "apiType": "fetch",
+            "apiURL": "+",
+            "typeOfCall": "GET"
+          },
+          {
+            "apiType": "fetch",
+            "apiURL": null,
+            "typeOfCall": "GET"
+          },
+          {
+            "apiType": "fetch",
+            "apiURL": null,
+            "typeOfCall": "GET"
+          },
+          {
+            "apiType": "fetch",
+            "apiURL": null,
+            "typeOfCall": "GET"
+          },
+          {
+            "apiType": "fetch",
+            "apiURL": 5,
+            "typeOfCall": "GET"
+          },
+          {
+            "apiType": "fetch",
+            "apiURL": 7,
+            "typeOfCall": "GET"
+          },
+          {
+            "apiType": "fetch",
+            "apiURL": ">>> searched books: ",
+            "typeOfCall": "GET"
+          },
+          {
+            "apiType": "fetch",
+            "apiURL": null,
+            "typeOfCall": "GET"
+          },
+          {
+            "apiType": "fetch",
+            "apiURL": null,
+            "typeOfCall": "GET"
+          },
+          {
+            "apiType": "fetch",
+            "apiURL": null,
+            "typeOfCall": "GET"
+          },
+          {
+            "apiType": "fetch",
+            "apiURL": "Error in apiController fetch request",
+            "typeOfCall": "GET"
+          }
+        ]
       }
     },
     {
-      "name": ".eslintrc.json",
+      "name": "parser.js",
       "type": "file",
-      "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/.eslintrc.json"
-    },
-    {
-      "name": "README.md",
-      "type": "file",
-      "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/README.md"
-    },
-    {
-      "name": "client",
-      "type": "directory",
-      "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client",
-      "children": [
-        {
-          "name": "App.jsx",
-          "type": "file",
-          "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/App.jsx",
-          "children": [],
-          "info": {
-            "fileSize": 891,
-            "linesOfCode": 53,
-            "complexity": 14,
-            "dependents": [
-              "src/Server/temp-file-upload/unit-10-databases/client/index.js"
-            ],
-            "dependencies": [
-              {
-                "module": "./components/Characters",
-                "moduleSystem": "es6",
-                "dynamic": false,
-                "exoticallyRequired": false,
-                "dependencyTypes": [
-                  "local",
-                  "import"
-                ],
-                "resolved": "src/Server/temp-file-upload/unit-10-databases/client/components/Characters.jsx",
-                "coreModule": false,
-                "followable": true,
-                "couldNotResolve": false,
-                "matchesDoNotFollow": false,
-                "circular": false,
-                "valid": true
-              },
-              {
-                "module": "./components/CreateCharacter",
-                "moduleSystem": "es6",
-                "dynamic": false,
-                "exoticallyRequired": false,
-                "dependencyTypes": [
-                  "local",
-                  "import"
-                ],
-                "resolved": "src/Server/temp-file-upload/unit-10-databases/client/components/CreateCharacter.jsx",
-                "coreModule": false,
-                "followable": true,
-                "couldNotResolve": false,
-                "matchesDoNotFollow": false,
-                "circular": false,
-                "valid": true
-              },
-              {
-                "module": "./stylesheets/styles.css",
-                "moduleSystem": "es6",
-                "dynamic": false,
-                "exoticallyRequired": false,
-                "dependencyTypes": [
-                  "local",
-                  "import"
-                ],
-                "resolved": "src/Server/temp-file-upload/unit-10-databases/client/stylesheets/styles.css",
-                "coreModule": false,
-                "followable": false,
-                "couldNotResolve": false,
-                "matchesDoNotFollow": false,
-                "circular": false,
-                "valid": true
-              }
-            ],
-            "isModule": true,
-            "exportedModules": [
-              "App"
-            ]
-          },
-          "deepInfo": {
-            "orphan": false,
-            "funcDecName": [],
-            "funcExpressions": [],
-            "funcArrowExpressions": [
-              {
-                "arrowFuncName": "App"
-              }
-            ],
-            "classDeclarations": [],
-            "funcCallExpressions": [],
-            "memberExpressions": []
-          },
-          "dbInfo": [
-            {
-              "dbInteraction": false,
-              "dbType": null,
-              "totalInteractions": 0,
-              "details": null
-            }
-          ],
-          "apiInfo": {
-            "totalInteractions": 0,
-            "details": []
-          }
-        },
-        {
-          "name": "components",
-          "type": "directory",
-          "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/components",
-          "children": [
-            {
-              "name": "CharacterCard.jsx",
-              "type": "file",
-              "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/components/CharacterCard.jsx",
-              "children": [],
-              "info": {
-                "fileSize": 2043,
-                "linesOfCode": 75,
-                "complexity": 3,
-                "dependents": [
-                  "src/Server/temp-file-upload/unit-10-databases/client/components/Characters.jsx"
-                ],
-                "dependencies": [
-                  {
-                    "module": "@fortawesome/free-regular-svg-icons",
-                    "moduleSystem": "es6",
-                    "dynamic": false,
-                    "exoticallyRequired": false,
-                    "dependencyTypes": [
-                      "unknown"
-                    ],
-                    "resolved": "@fortawesome/free-regular-svg-icons",
-                    "coreModule": false,
-                    "followable": false,
-                    "couldNotResolve": true,
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                  },
-                  {
-                    "module": "@fortawesome/react-fontawesome",
-                    "moduleSystem": "es6",
-                    "dynamic": false,
-                    "exoticallyRequired": false,
-                    "dependencyTypes": [
-                      "unknown"
-                    ],
-                    "resolved": "@fortawesome/react-fontawesome",
-                    "coreModule": false,
-                    "followable": false,
-                    "couldNotResolve": true,
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                  }
-                ],
-                "isModule": true,
-                "exportedModules": [
-                  "CharacterCard"
-                ]
-              },
-              "deepInfo": {
-                "orphan": false,
-                "funcDecName": [],
-                "funcExpressions": [],
-                "funcArrowExpressions": [
-                  {
-                    "arrowFuncName": "CharacterCard"
-                  },
-                  {
-                    "arrowFuncName": "openDetailsModal"
-                  }
-                ],
-                "classDeclarations": [],
-                "funcCallExpressions": [],
-                "memberExpressions": [
-                  {
-                    "object": "films",
-                    "property": [
-                      "map"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "film",
-                    "property": [
-                      "title"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "film",
-                    "property": [
-                      "id"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "e",
-                    "property": [
-                      "pageY"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "e",
-                    "property": [
-                      "pageX"
-                    ],
-                    "property_access_notation": "dot"
-                  }
-                ]
-              },
-              "dbInfo": [
-                {
-                  "dbInteraction": false,
-                  "dbType": null,
-                  "totalInteractions": 0,
-                  "details": null
-                }
-              ],
-              "apiInfo": {
-                "totalInteractions": 0,
-                "details": []
-              }
-            },
-            {
-              "log": "DataController.traverseHierarchy: ERROR: TypeError: Cannot read properties of undefined (reading 'property')",
-              "message": {
-                "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
-              }
-            },
-            {
-              "log": "DataController.traverseHierarchy: ERROR: TypeError: Cannot read properties of undefined (reading 'forEach')",
-              "message": {
-                "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
-              }
-            },
-            {
-              "name": "DetailsModal.jsx",
-              "type": "file",
-              "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/components/DetailsModal.jsx",
-              "children": [],
-              "info": {
-                "fileSize": 3047,
-                "linesOfCode": 170,
-                "complexity": 40,
-                "dependents": [
-                  "src/Server/temp-file-upload/unit-10-databases/client/components/Characters.jsx"
-                ],
-                "dependencies": [
-                  {
-                    "module": "@fortawesome/free-solid-svg-icons",
-                    "moduleSystem": "es6",
-                    "dynamic": false,
-                    "exoticallyRequired": false,
-                    "dependencyTypes": [
-                      "unknown"
-                    ],
-                    "resolved": "@fortawesome/free-solid-svg-icons",
-                    "coreModule": false,
-                    "followable": false,
-                    "couldNotResolve": true,
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                  },
-                  {
-                    "module": "@fortawesome/react-fontawesome",
-                    "moduleSystem": "es6",
-                    "dynamic": false,
-                    "exoticallyRequired": false,
-                    "dependencyTypes": [
-                      "unknown"
-                    ],
-                    "resolved": "@fortawesome/react-fontawesome",
-                    "coreModule": false,
-                    "followable": false,
-                    "couldNotResolve": true,
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                  }
-                ],
-                "isModule": true,
-                "exportedModules": [
-                  "SpeciesModal"
-                ]
-              },
-              "deepInfo": {
-                "orphan": false,
-                "funcDecName": [],
-                "funcExpressions": [],
-                "funcArrowExpressions": [
-                  {
-                    "arrowFuncName": "SpeciesModal"
-                  }
-                ],
-                "classDeclarations": [],
-                "funcCallExpressions": [],
-                "memberExpressions": [
-                  {
-                    "property": [
-                      "catch"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "then"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "then"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "resp",
-                    "property": [
-                      "json"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "console",
-                    "property": [
-                      "log"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "slice"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "toDateString"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "details",
-                    "property": [
-                      "name"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "details",
-                    "property": [
-                      "title"
-                    ],
-                    "property_access_notation": "dot"
-                  }
-                ]
-              },
-              "dbInfo": [
-                {
-                  "dbInteraction": false,
-                  "dbType": null,
-                  "totalInteractions": 0,
-                  "details": null
-                }
-              ],
-              "apiInfo": {
-                "totalInteractions": 0,
-                "details": []
-              }
-            }
-          ]
-        },
-        {
-          "name": "data",
-          "type": "directory",
-          "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/data",
-          "children": [
-            {
-              "name": "films.json",
-              "type": "file",
-              "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/data/films.json"
-            },
-            {
-              "name": "planets.json",
-              "type": "file",
-              "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/data/planets.json"
-            },
-            {
-              "name": "species.json",
-              "type": "file",
-              "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/data/species.json"
-            }
-          ]
-        },
-        {
-          "name": "index.html",
-          "type": "file",
-          "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/index.html"
-        },
-        {
-          "name": "index.js",
-          "type": "file",
-          "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/index.js",
-          "children": [],
-          "info": {
-            "fileSize": 234,
-            "linesOfCode": 9,
-            "complexity": 2,
-            "dependents": [],
-            "dependencies": [
-              {
-                "module": "./App",
-                "moduleSystem": "es6",
-                "dynamic": false,
-                "exoticallyRequired": false,
-                "dependencyTypes": [
-                  "local",
-                  "import"
-                ],
-                "resolved": "src/Server/temp-file-upload/unit-10-databases/client/App.jsx",
-                "coreModule": false,
-                "followable": true,
-                "couldNotResolve": false,
-                "matchesDoNotFollow": false,
-                "circular": false,
-                "valid": true
-              }
-            ],
-            "isModule": false,
-            "exportedModules": []
-          },
-          "deepInfo": {
-            "orphan": false,
-            "funcDecName": [],
-            "funcExpressions": [],
-            "funcArrowExpressions": [],
-            "classDeclarations": [],
-            "funcCallExpressions": [],
-            "memberExpressions": [
-              {
-                "object": "document",
-                "property": [
-                  "getElementById"
-                ],
-                "property_access_notation": "dot"
-              }
-            ]
-          },
-          "dbInfo": [
-            {
-              "dbInteraction": false,
-              "dbType": null,
-              "totalInteractions": 0,
-              "details": null
-            }
-          ],
-          "apiInfo": {
-            "totalInteractions": 0,
-            "details": []
-          }
-        },
-        {
-          "name": "stylesheets",
-          "type": "directory",
-          "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/stylesheets",
-          "children": [
-            {
-              "log": "DataController.traverseHierarchy: ERROR: SyntaxError: /Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/client/stylesheets/styles.css: Unexpected token (2:0)\n\n\u001b[0m \u001b[90m 1 |\u001b[39m \u001b[90m/* reset default styles */\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 2 |\u001b[39m \u001b[33m*\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m   |\u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 3 |\u001b[39m \u001b[33m*\u001b[39m\u001b[33m:\u001b[39mbefore\u001b[33m,\u001b[39m\n \u001b[90m 4 |\u001b[39m \u001b[33m*\u001b[39m\u001b[33m:\u001b[39mafter {\n \u001b[90m 5 |\u001b[39m   box\u001b[33m-\u001b[39msizing\u001b[33m:\u001b[39m inherit\u001b[33m;\u001b[39m\u001b[0m",
-              "message": {
-                "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "docs",
-      "type": "directory",
-      "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/docs",
-      "children": [
-        {
-          "name": "assets",
-          "type": "directory",
-          "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/docs/assets",
-          "children": [
-            {
-              "name": "images",
-              "type": "directory",
-              "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/docs/assets/images",
-              "children": [
-                {
-                  "name": "mongodb_atlas_connect.png",
-                  "type": "file",
-                  "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/docs/assets/images/mongodb_atlas_connect.png"
-                },
-                {
-                  "name": "schema.png",
-                  "type": "file",
-                  "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/docs/assets/images/schema.png"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "dump",
-      "type": "directory",
-      "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump",
-      "children": [
-        {
-          "name": "starwars",
-          "type": "directory",
-          "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump/starwars",
-          "children": [
-            {
-              "log": "DataController.traverseHierarchy: ERROR: SyntaxError: /Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump/starwars/films.bson: Unexpected character '�'. (1:0)\n\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 1 |\u001b[39m �\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39m_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�hچ��\u001b[37m\u001b[41m\u001b[1m\u0006\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0016\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mtitle\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u000b\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mA\u001b[39m \u001b[33mNew\u001b[39m \u001b[33mHope\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39mepisode_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mopening_crawl\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0001\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mIt\u001b[39m is a period \u001b[36mof\u001b[39m civil war\u001b[33m.\u001b[39m\n \u001b[90m   |\u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 2 |\u001b[39m \u001b[33mRebel\u001b[39m spaceships\u001b[33m,\u001b[39m striking\n \u001b[90m 3 |\u001b[39m \u001b[36mfrom\u001b[39m a hidden base\u001b[33m,\u001b[39m have won\n \u001b[90m 4 |\u001b[39m their first victory against\u001b[0m",
-              "message": {
-                "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
-              }
-            },
-            {
-              "name": "films.metadata.json",
-              "type": "file",
-              "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump/starwars/films.metadata.json"
-            },
-            {
-              "log": "DataController.traverseHierarchy: ERROR: SyntaxError: /Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump/starwars/people.bson: Unexpected character '�'. (1:0)\n\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 1 |\u001b[39m �\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39m_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�M\u001b[33m*\u001b[39m\u001b[33mG\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0012\u001b[22m\u001b[49m\u001b[39m�\n \u001b[90m   |\u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 2 |\u001b[39m ���N\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mname\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u000f\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mLuke\u001b[39m \u001b[33mSkywalker\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mmass\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0003\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[35m77\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mhair_color\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0006\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mblond\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mskin_color\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0005\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mfair\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39meye_color\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0005\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mblue\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mbirth_year\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0006\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[35m19\u001b[39m\u001b[33mBBY\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mgender\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0005\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mmale\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mspecies\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0006\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mHuman\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mhomeworld\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\t\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mTatooine\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39mheight\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39mhomeworld_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�5���\t�)��\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39mspecies_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�\u001b[33m<\u001b[39m\u001b[33mv\u001b[39m\u001b[32m'=�\u001b[39m\n \u001b[90m 3 |\u001b[39m \u001b[33mB\u001b[39m\u001b[37m\u001b[41m\u001b[1m\\\u001b[22m\u001b[49m\u001b[39m��\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39mfilms\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39me\u001b[37m\u001b[41m\u001b[1m\u0001\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0003\u001b[22m\u001b[49m\u001b[39m\u001b[35m0\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33m<\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39m_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�M\u001b[33m*\u001b[39m\u001b[33mG\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0012\u001b[22m\u001b[49m\u001b[39m�\n \u001b[90m 4 |\u001b[39m ���S\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mtitle\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u000b\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mA\u001b[39m \u001b[33mNew\u001b[39m \u001b[33mHope\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39mid\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�hچ��\u001b[37m\u001b[41m\u001b[1m\u0006\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0016\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0003\u001b[22m\u001b[49m\u001b[39m\u001b[35m1\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mE\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39m_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�M\u001b[33m*\u001b[39m\u001b[33mG\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0012\u001b[22m\u001b[49m\u001b[39m�\u001b[0m",
-              "message": {
-                "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
-              }
-            },
-            {
-              "name": "people.metadata.json",
-              "type": "file",
-              "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump/starwars/people.metadata.json"
-            },
-            {
-              "log": "DataController.traverseHierarchy: ERROR: SyntaxError: /Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump/starwars/planets.bson: Unexpected character '�'. (1:0)\n\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 1 |\u001b[39m �\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39m_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�5���\t�)��\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mname\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\t\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mAlderaan\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39mrotation_period\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0018\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39morbital_period\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39ml\u001b[37m\u001b[41m\u001b[1m\u0001\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39mdiameter\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�0\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mclimate\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\n \u001b[90m   |\u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 2 |\u001b[39m \u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mtemperate\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mgravity\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u000b\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[35m1\u001b[39m standard\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mterrain\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0016\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mgrasslands\u001b[33m,\u001b[39m mountains\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39msurface_water\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0003\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[35m40\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39mpopulation\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�5w\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39m__v\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39m_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�5���\t�)��\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mname\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\t\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mYavin\u001b[39m \u001b[33mIV\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39mrotation_period\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0018\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39morbital_period\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0012\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39mdiameter\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�\u001b[32m'\u0000\u0000\u0002climate\u0000\u0014\u0000\u0000\u0000temperate, tropical\u0000\u0002gravity\u0000\u000b\u0000\u0000\u00001 standard\u0000\u0002terrain\u0000\u0014\u0000\u0000\u0000jungle, rainforests\u0000\u0002surface_water\u0000\u0002\u0000\u0000\u00008\u0000\u0010population\u0000�\u0003\u0000\u0000\u0010__v\u0000\u0000\u0000\u0000\u0000\u0000�\u0000\u0000\u0000\u0007_id\u0000]�5���\t�)��\u0002name\u0000\u0005\u0000\u0000\u0000Hoth\u0000\u0010rotation_period\u0000\u0017\u0000\u0000\u0000\u0010orbital_period\u0000%\u0002\u0000\u0000\u0010diameter\u0000 \u001c\u0000\u0000\u0002climate\u0000\u0007\u0000\u0000\u0000frozen\u0000\u0002gravity\u0000\u001b[39m\n \u001b[90m 3 |\u001b[39m \u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[35m1.1\u001b[39m standard\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mterrain\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33m#\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mtundra\u001b[33m,\u001b[39m ice caves\u001b[33m,\u001b[39m mountain ranges\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39msurface_water\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[35m100\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\n \u001b[90m 4 |\u001b[39m population\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39m__v\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39m_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�5���\t�)��\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mname\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\b\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mDagobah\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39mrotation_period\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0017\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39morbital_period\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mU\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0001\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39mdiameter\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m�\u001b[32m\"\u0000\u0000\u0002climate\u0000\u0006\u0000\u0000\u0000murky\u0000\u0002gravity\u0000\u0004\u0000\u0000\u0000N/A\u0000\u0002terrain\u0000\u000f\u0000\u0000\u0000swamp, jungles\u0000\u0002surface_water\u0000\u0002\u0000\u0000\u00008\u0000\u001b[39m\u001b[0m",
-              "message": {
-                "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
-              }
-            },
-            {
-              "name": "planets.metadata.json",
-              "type": "file",
-              "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump/starwars/planets.metadata.json"
-            },
-            {
-              "log": "DataController.traverseHierarchy: ERROR: SyntaxError: /Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump/starwars/species.bson: Unexpected character '\u0000'. (1:0)\n\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 1 |\u001b[39m \u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0001\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39m_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�\u001b[33m<\u001b[39m\u001b[33mv\u001b[39m\u001b[32m'=�\u001b[39m\n \u001b[90m   |\u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 2 |\u001b[39m \u001b[33mB\u001b[39m\u001b[37m\u001b[41m\u001b[1m\\\u001b[22m\u001b[49m\u001b[39m�\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mname\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0005\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mHutt\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mclassification\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\n \u001b[90m 3 |\u001b[39m \u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mgastropod\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39maverage_height\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[35m300\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39maverage_lifespan\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0005\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[35m1000\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mhair_colors\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0004\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mn\u001b[33m/\u001b[39ma\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mskin_colors\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0012\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39mgreen\u001b[33m,\u001b[39m brown\u001b[33m,\u001b[39m tan\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mlanguage\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\b\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mHuttese\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0002\u001b[22m\u001b[49m\u001b[39mhomeworld\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\n \u001b[90m 4 |\u001b[39m \u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[33mNal\u001b[39m \u001b[33mHutta\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39mhomeworld_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�5���\t�)��\u001b[37m\u001b[41m\u001b[1m\u0010\u001b[22m\u001b[49m\u001b[39m__v\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0003\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0001\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m\u001b[37m\u001b[41m\u001b[1m\u0007\u001b[22m\u001b[49m\u001b[39m_id\u001b[37m\u001b[41m\u001b[1m\u0000\u001b[22m\u001b[49m\u001b[39m]�\u001b[33m<\u001b[39m\u001b[33mv\u001b[39m\u001b[32m'=�\u001b[39m\u001b[0m",
-              "message": {
-                "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
-              }
-            },
-            {
-              "name": "species.metadata.json",
-              "type": "file",
-              "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/dump/starwars/species.metadata.json"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "package-lock.json",
-      "type": "file",
-      "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/package-lock.json"
-    },
-    {
-      "name": "package.json",
-      "type": "file",
-      "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/package.json"
-    },
-    {
-      "name": "pull_request_template.md",
-      "type": "file",
-      "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/pull_request_template.md"
-    },
-    {
-      "name": "server",
-      "type": "directory",
-      "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/server",
-      "children": [
-        {
-          "name": "controllers",
-          "type": "directory",
-          "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/server/controllers",
-          "children": [
-            {
-              "name": "starWarsController.js",
-              "type": "file",
-              "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/server/controllers/starWarsController.js",
-              "children": [],
-              "info": {
-                "fileSize": 2117,
-                "linesOfCode": 336,
-                "complexity": 79,
-                "dependents": [
-                  "src/Server/temp-file-upload/unit-10-databases/server/routes/api.js"
-                ],
-                "dependencies": [
-                  {
-                    "module": "../models/starWarsModels",
-                    "moduleSystem": "cjs",
-                    "dynamic": false,
-                    "exoticallyRequired": false,
-                    "dependencyTypes": [
-                      "local",
-                      "require"
-                    ],
-                    "resolved": "src/Server/temp-file-upload/unit-10-databases/server/models/starWarsModels.js",
-                    "coreModule": false,
-                    "followable": true,
-                    "couldNotResolve": false,
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                  }
-                ],
-                "isModule": true,
-                "exportedModules": [
-                  "starWarsController"
-                ]
-              },
-              "deepInfo": {
-                "orphan": false,
-                "funcDecName": [],
-                "funcExpressions": [],
-                "funcArrowExpressions": [],
-                "classDeclarations": [],
-                "funcCallExpressions": [],
-                "memberExpressions": [
-                  {
-                    "object": "starWarsController",
-                    "property": [
-                      "getCharacters"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "catch"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "then"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "then"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "db",
-                    "property": [
-                      "query"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "rows"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "locals"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "starWarsController",
-                    "property": [
-                      "getSpecies"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "id"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "req",
-                    "property": [
-                      "query"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "catch"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "then"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "then"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "then"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "db",
-                    "property": [
-                      "query"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "data",
-                    "property": [
-                      "rows"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "species"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "locals"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "data",
-                    "property": false,
-                    "property_access_notation": "bracket"
-                  },
-                  {
-                    "object": "console",
-                    "property": [
-                      "log"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "starWarsController",
-                    "property": [
-                      "getHomeworld"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "req",
-                    "property": [
-                      "query"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "db",
-                    "property": [
-                      "query"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "homeworld"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "locals"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": false,
-                    "property_access_notation": "bracket"
-                  },
-                  {
-                    "object": "result",
-                    "property": [
-                      "rows"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "starWarsController",
-                    "property": [
-                      "getFilm"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "starWarsController",
-                    "property": [
-                      "addCharacter"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "module",
-                    "property": [
-                      "exports"
-                    ],
-                    "property_access_notation": "dot"
-                  }
-                ]
-              },
-              "dbInfo": [
-                {
-                  "dbInteraction": false,
-                  "dbType": null,
-                  "totalInteractions": 0,
-                  "details": null
-                }
-              ],
-              "apiInfo": {
-                "totalInteractions": 0,
-                "details": []
-              }
-            }
-          ]
-        },
-        {
-          "name": "models",
-          "type": "directory",
-          "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/server/models",
-          "children": [
-            {
-              "name": "starWarsModels.js",
-              "type": "file",
-              "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/server/models/starWarsModels.js",
-              "children": [],
-              "info": {
-                "fileSize": 886,
-                "linesOfCode": 10,
-                "complexity": 1,
-                "dependents": [
-                  "src/Server/temp-file-upload/unit-10-databases/server/controllers/starWarsController.js"
-                ],
-                "dependencies": [],
-                "isModule": true,
-                "exportedModules": [
-                  null
-                ]
-              },
-              "deepInfo": {
-                "orphan": false,
-                "funcDecName": [],
-                "funcExpressions": [],
-                "funcArrowExpressions": [],
-                "classDeclarations": [],
-                "funcCallExpressions": [],
-                "memberExpressions": [
-                  {
-                    "object": "module",
-                    "property": [
-                      "exports"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "console",
-                    "property": [
-                      "log"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "pool",
-                    "property": [
-                      "query"
-                    ],
-                    "property_access_notation": "dot"
-                  }
-                ]
-              },
-              "dbInfo": [
-                {
-                  "dbInteraction": true,
-                  "dbType": "PostgreSQL",
-                  "totalInteractions": 7,
-                  "details": [
-                    {
-                      "keyword": "pg",
-                      "line": 1
-                    },
-                    {
-                      "keyword": "Pool",
-                      "line": 1
-                    },
-                    {
-                      "keyword": "Pool",
-                      "line": 1
-                    },
-                    {
-                      "keyword": "Pool",
-                      "line": 6
-                    },
-                    {
-                      "keyword": "query",
-                      "line": 18
-                    },
-                    {
-                      "keyword": "query",
-                      "line": 20
-                    },
-                    {
-                      "keyword": "query",
-                      "line": 20
-                    }
-                  ]
-                }
-              ],
-              "apiInfo": {
-                "totalInteractions": 0,
-                "details": []
-              }
-            }
-          ]
-        },
-        {
-          "name": "routes",
-          "type": "directory",
-          "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/server/routes",
-          "children": [
-            {
-              "name": "api.js",
-              "type": "file",
-              "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/server/routes/api.js",
-              "children": [],
-              "info": {
-                "fileSize": 723,
-                "linesOfCode": 15,
-                "complexity": 1,
-                "dependents": [
-                  "src/Server/temp-file-upload/unit-10-databases/server/server.js"
-                ],
-                "dependencies": [
-                  {
-                    "module": "../controllers/starWarsController",
-                    "moduleSystem": "cjs",
-                    "dynamic": false,
-                    "exoticallyRequired": false,
-                    "dependencyTypes": [
-                      "local",
-                      "require"
-                    ],
-                    "resolved": "src/Server/temp-file-upload/unit-10-databases/server/controllers/starWarsController.js",
-                    "coreModule": false,
-                    "followable": true,
-                    "couldNotResolve": false,
-                    "matchesDoNotFollow": false,
-                    "circular": false,
-                    "valid": true
-                  }
-                ],
-                "isModule": true,
-                "exportedModules": [
-                  "router"
-                ]
-              },
-              "deepInfo": {
-                "orphan": false,
-                "funcDecName": [],
-                "funcExpressions": [],
-                "funcArrowExpressions": [],
-                "classDeclarations": [],
-                "funcCallExpressions": [],
-                "memberExpressions": [
-                  {
-                    "object": "express",
-                    "property": [
-                      "Router"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "router",
-                    "property": [
-                      "get"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "starWarsController",
-                    "property": [
-                      "getCharacters"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "json"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "status"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "rows"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "locals"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "router",
-                    "property": [
-                      "get"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "starWarsController",
-                    "property": [
-                      "getSpecies"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "json"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "status"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "species"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "locals"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "router",
-                    "property": [
-                      "get"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "starWarsController",
-                    "property": [
-                      "getHomeworld"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "json"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "status"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "homeworld"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "locals"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "router",
-                    "property": [
-                      "get"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "starWarsController",
-                    "property": [
-                      "getFilm"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "json"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "status"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "router",
-                    "property": [
-                      "post"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "starWarsController",
-                    "property": [
-                      "addCharacter"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "property": [
-                      "json"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "res",
-                    "property": [
-                      "status"
-                    ],
-                    "property_access_notation": "dot"
-                  },
-                  {
-                    "object": "module",
-                    "property": [
-                      "exports"
-                    ],
-                    "property_access_notation": "dot"
-                  }
-                ]
-              },
-              "dbInfo": [
-                {
-                  "dbInteraction": false,
-                  "dbType": null,
-                  "totalInteractions": 0,
-                  "details": null
-                }
-              ],
-              "apiInfo": {
-                "totalInteractions": 0,
-                "details": []
-              }
-            }
-          ]
-        },
-        {
-          "name": "server.js",
-          "type": "file",
-          "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/server/server.js",
-          "children": [],
-          "info": {
-            "fileSize": 1182,
-            "linesOfCode": 25,
-            "complexity": 1,
-            "dependents": [],
-            "dependencies": [
-              {
-                "module": "./routes/api",
-                "moduleSystem": "cjs",
-                "dynamic": false,
-                "exoticallyRequired": false,
-                "dependencyTypes": [
-                  "local",
-                  "require"
-                ],
-                "resolved": "src/Server/temp-file-upload/unit-10-databases/server/routes/api.js",
-                "coreModule": false,
-                "followable": true,
-                "couldNotResolve": false,
-                "matchesDoNotFollow": false,
-                "circular": false,
-                "valid": true
-              },
-              {
-                "module": "path",
-                "moduleSystem": "cjs",
-                "dynamic": false,
-                "exoticallyRequired": false,
-                "dependencyTypes": [
-                  "core",
-                  "require"
-                ],
-                "resolved": "path",
-                "coreModule": true,
-                "followable": false,
-                "couldNotResolve": false,
-                "matchesDoNotFollow": false,
-                "circular": false,
-                "valid": true
-              }
-            ],
-            "isModule": true,
-            "exportedModules": [
-              "app"
-            ]
-          },
-          "deepInfo": {
-            "orphan": false,
-            "funcDecName": [],
-            "funcExpressions": [],
-            "funcArrowExpressions": [],
-            "classDeclarations": [],
-            "funcCallExpressions": [],
-            "memberExpressions": [
-              {
-                "object": "app",
-                "property": [
-                  "use"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "express",
-                "property": [
-                  "json"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "app",
-                "property": [
-                  "use"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "express",
-                "property": [
-                  "urlencoded"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "app",
-                "property": [
-                  "use"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "express",
-                "property": [
-                  "static"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "path",
-                "property": [
-                  "resolve"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "app",
-                "property": [
-                  "use"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "app",
-                "property": [
-                  "use"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "property": [
-                  "send"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "res",
-                "property": [
-                  "status"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "app",
-                "property": [
-                  "use"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "Object",
-                "property": [
-                  "assign"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "console",
-                "property": [
-                  "log"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "errorObj",
-                "property": [
-                  "log"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "property": [
-                  "json"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "res",
-                "property": [
-                  "status"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "errorObj",
-                "property": [
-                  "status"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "errorObj",
-                "property": [
-                  "message"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "app",
-                "property": [
-                  "listen"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "console",
-                "property": [
-                  "log"
-                ],
-                "property_access_notation": "dot"
-              },
-              {
-                "object": "module",
-                "property": [
-                  "exports"
-                ],
-                "property_access_notation": "dot"
-              }
-            ]
-          },
-          "dbInfo": [
-            {
-              "dbInteraction": false,
-              "dbType": null,
-              "totalInteractions": 0,
-              "details": null
-            }
-          ],
-          "apiInfo": {
-            "totalInteractions": 0,
-            "details": []
-          }
-        }
-      ]
-    },
-    {
-      "name": "webpack.config.js",
-      "type": "file",
-      "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/unit-10-databases/webpack.config.js",
+      "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/anotherTest/parser.js",
       "children": [],
       "info": {
-        "fileSize": 1818,
-        "linesOfCode": 42,
+        "fileSize": 317,
+        "linesOfCode": 9,
         "complexity": 1,
         "dependents": [],
         "dependencies": [
+          {
+            "module": "fs",
+            "moduleSystem": "cjs",
+            "dynamic": false,
+            "exoticallyRequired": false,
+            "dependencyTypes": [
+              "core",
+              "require"
+            ],
+            "resolved": "fs",
+            "coreModule": true,
+            "followable": false,
+            "couldNotResolve": false,
+            "matchesDoNotFollow": false,
+            "circular": false,
+            "valid": true
+          },
           {
             "module": "path",
             "moduleSystem": "cjs",
@@ -1473,10 +351,8 @@
             "valid": true
           }
         ],
-        "isModule": true,
-        "exportedModules": [
-          null
-        ]
+        "isModule": false,
+        "exportedModules": []
       },
       "deepInfo": {
         "orphan": false,
@@ -1487,23 +363,37 @@
         "funcCallExpressions": [],
         "memberExpressions": [
           {
-            "object": "module",
+            "object": "fs",
             "property": [
-              "exports"
+              "readFileSync"
             ],
             "property_access_notation": "dot"
           },
           {
             "object": "path",
             "property": [
-              "resolve"
+              "join"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "fs",
+            "property": [
+              "writeFileSync"
             ],
             "property_access_notation": "dot"
           },
           {
             "object": "path",
             "property": [
-              "resolve"
+              "join"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "JSON",
+            "property": [
+              "stringify"
             ],
             "property_access_notation": "dot"
           }

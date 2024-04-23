@@ -17,25 +17,29 @@ const ASTApiQueryController = {};
 
 function checkApiCalls(fileAst, apiLibraries) { 
 
-  // Check for libraries that need explicit import/require
-  const importRequired = apiLibraries.some(library => {
-    if (['node-fetch', 'axios', 'superagent', 'got'].includes(library)) {
-      const queryResult = esquery.query(
-        fileAst,
-        `VariableDeclarator[init.callee.name="require"][init.arguments.0.value="${library}"],
-         CallExpression[callee.name="require"][arguments.0.value="${library}"],
-         ImportDeclaration[source.value="${library}"]`
-      );
-      return queryResult.length > 0;
-    }
-    return false;
-  });
+  //COMMENTING THIS OUT FOR NOW TO SCOPE IT DOWN ===>
 
-  if (importRequired) return true;
+  // Check for libraries that need explicit import/require
+  // const importRequired = apiLibraries.some(library => {
+  //   if (['node-fetch', 'axios', 'superagent', 'got'].includes(library)) {
+  //     const queryResult = esquery.query(
+  //       fileAst,
+  //       `VariableDeclarator[init.callee.name="require"][init.arguments.0.value="${library}"],
+  //        CallExpression[callee.name="require"][arguments.0.value="${library}"],
+  //        ImportDeclaration[source.value="${library}"]`
+  //     );
+  //     return queryResult.length > 0;
+  //   }
+  //   return false;
+  // });
+  // if (importRequired) return true;
+
+  ///<========
 
   // console.log(fileAst)
   // Special checks for APIs that don't require import/require in a browser environment
-  const browserAPIs = ['fetch', 'XMLHttpRequest', '$', 'jQuery'];
+  // const browserAPIs = ['fetch', 'XMLHttpRequest', '$', 'jQuery'];
+  const browserAPIs = ['fetch'];
   const browserApiCheck = apiLibraries.some(library => {
     if (browserAPIs.includes(library)) {
       // v1 - 
@@ -44,7 +48,7 @@ function checkApiCalls(fileAst, apiLibraries) {
         `CallExpression[callee.name="${library}"],
          NewExpression[callee.name="${library}"]`
       );
-      // console.log('whats this look like?',queryResult)
+      console.log(`Matches for ${library}:`,queryResult)
 
         // console.log('what do i have:',queryResult)
 
@@ -228,6 +232,7 @@ ASTApiQueryController.queryFunc = async (nodeAST,nodePath) => {
     for (const apiKey of Object.keys(apiHandlers)) {
       const handler = apiHandlers[apiKey];
       if (handler.check(ast)) {
+        console.log('API: ', apiKey)
         // Use await inside an async function
         analysisResults = await handler.analyze(ast, filePath);
         // Once you have the analysis result, you can break out of the loop if needed
@@ -257,15 +262,17 @@ function analyzeFetchCalls(ast, filePath) {
   console.log(`\x1b[35mInside Fetch API Extended Analysis`);
 
   //V2
-  const fetchCalls = esquery.query(ast,'Program > ExpressionStatement > CallExpression');
-  const fetchCalls2 = esquery.query(ast,'Program > VariableDeclaration > VariableDeclarator > CallExpression')
+  //Searches for any CallExpression descendants of Program (not just direct children)
+  const fetchCalls = esquery.query(ast,'Program CallExpression');
+  // const fetchCalls = esquery.query(ast,'Program ExpressionStatement CallExpression');
+  // const fetchCalls2 = esquery.query(ast,'Program VariableDeclaration VariableDeclarator CallExpression')
 
-  const allCalls = [...fetchCalls, ...fetchCalls2];
-  // console.log('concated', allCalls)
-
+  const allCalls = [...fetchCalls];
   
-  
-  let interactions = allCalls.map(call => {
+  let interactions = allCalls.map((call, index) => {
+    // console.log(`call on element ${index + 1}:`, call)
+    console.log('callee name: ', call.callee.name)
+    if (call.callee.name) console.log('call: ', call)
     
 
     // let interactionDetail = {
@@ -275,10 +282,12 @@ function analyzeFetchCalls(ast, filePath) {
     //   httpMethod: 'GET' // DEFAULT
     // };
 
-    // console.log('call', call)
-
     // find http method
-    if (call.callee.object.arguments){
+    // if (call.callee.object.arguments){
+    if (call.arguments){
+
+      // console.log('call:', call)
+      // console.log('call.arguments:', call.arguments)
 
       let interactionDetail = {
         method: 'fetch',
@@ -287,7 +296,7 @@ function analyzeFetchCalls(ast, filePath) {
         httpMethod: 'GET' // DEFAULT
       };
 
-      call.callee.object.arguments.forEach(arg => {
+      call.arguments.forEach(arg => {
         if (arg.type === 'ObjectExpression') {
           arg.properties.forEach(prop => {
             if (prop.key.name === 'method') {
@@ -297,7 +306,7 @@ function analyzeFetchCalls(ast, filePath) {
         }
       })
 
-      call.callee.object.arguments.forEach(arg => {
+      call.arguments.forEach(arg => {
         if (arg.type === 'Literal') {
           interactionDetail.url = arg.value;
         }
