@@ -3,161 +3,77 @@ import fs from 'fs';
 
 const ASTApiQueryController = {};
 
-
-
 // --------------- CHECK API FUNCTION --------------- //
 
 function checkApiCalls(fileAst, apiLibraries) { 
-
-  //COMMENTING THIS OUT FOR NOW TO SCOPE IT DOWN ===>
-
+  const importedApiMatches = {};
   // Check for libraries that need explicit import/require
-  // const importRequired = apiLibraries.some(library => {
-  //   if (['node-fetch', 'axios', 'superagent', 'got'].includes(library)) {
-  //     const queryResult = esquery.query(
-  //       fileAst,
-  //       `VariableDeclarator[init.callee.name="require"][init.arguments.0.value="${library}"],
-  //        CallExpression[callee.name="require"][arguments.0.value="${library}"],
-  //        ImportDeclaration[source.value="${library}"]`
-  //     );
-  //     return queryResult.length > 0;
-  //   }
-  //   return false;
-  // });
-  // if (importRequired) return true;
+  const importedApis = ['axios'];
+  const libraries = [...apiLibraries];
 
-  ///<========
+  const importedApiQuery = 
+    `VariableDeclarator[init.callee.name="require"][init.arguments.0.value="${library}"],
+    CallExpression[callee.name="require"][arguments.0.value="${library}"],
+    ImportDeclaration[source.value="${library}"]`;
 
-  // console.log(fileAst)
+  let i = 0;
+  while (i < importedApis.length) {
+    const currApi = importedApis[i].toLowerCase();
+    for (let j = 0; j < libraries.length; j++) {
+      const currLibrary = libraries[j].toLowerCase();
+      if (currLibrary === currApi) {
+        importedApiMatches[currApi] = getNodes(fileAst, currApi, importedApiQuery);
+        libraries.splice(j, 1);
+      }
+    }
+    i++;
+  }
+
+  const nativeApiMatches = {};
   // Special checks for APIs that don't require import/require in a browser environment
   // const browserAPIs = ['fetch', 'XMLHttpRequest', '$', 'jQuery'];
-  const browserAPIs = ['fetch'];
-  const browserApiCheck = apiLibraries.some(library => {
-    if (browserAPIs.includes(library)) {
-      // v1 - 
-      const queryResult = esquery.query(
-        fileAst,
-        `CallExpression[callee.name="${library}"],
-         NewExpression[callee.name="${library}"]`
-      );
-      console.log(`Matches for ${library}:`,queryResult)
+  const nativeApis = ['fetch'];
 
-        // console.log('what do i have:',queryResult)
+  const nativeApiQuery = 
+    `CallExpression[callee.name="${library}"],
+    NewExpression[callee.name="${library}"]`;
 
-      return queryResult.length > 0;
+  let k = 0;
+  while (k < nativeApis.length) {
+    const currApi = nativeApis[k].toLowerCase();
+    for (let j = 0; j < libraries.length; j++) {
+      const currLibrary = libraries[j].toLowerCase();
+      if (currLibrary === currApi) {
+        nativeApiMatches[currApi] = getNodes(fileAst, currApi, nativeApiQuery);
+        libraries.splice(j, 1);
+      }
     }
-    return false;
-  });
-
-  return browserApiCheck;
-}
-
-// ----------- API HANDLER OBJECT ----------- //
-
-//NOTE: THIS IS THE MIDDLEWARE BEING INVOKED IN SERVER.JS. CURRENTLY IT'S NOT PASSING ANY DATA ONTO THE NEXT PIECE OF 
-//MIDDLEWARE. ASTApiQueryController.queryFunc below is what is being invoked in DataController to add to superstructure.
-//Looks like these are the same function, except this one is analyzing backendFileASTs from res.locals and ASTApiQueryController.queryFunc
-//is being invoked from DataController with passed in argument
-ASTApiQueryController.query = (req, res, next) => {
-try {
-
-// GET ASTs
-const { backendFileASTs } = res.locals;
-
-// API HANDLERS
-const apiHandlers = {
-  'Fetch': {
-    check: ast => {
-      console.log('Fetch API interactions...');
-      const hasFetch = checkApiCalls(ast, ['fetch']);
-      const hasNodeFetch = checkApiCalls(ast, ['node-fetch']);
-      return hasFetch && !hasNodeFetch;
-    },
-    analyze: (ast, filePath) => analyzeFetchCalls(ast, filePath),
-  },
-  'Axios': {
-    check: ast => {
-      console.log('Axios API interactions...');
-      return checkApiCalls(ast, ['axios']);
-    },
-    analyze: (ast, filePath) => analyzeAxiosCalls(ast, filePath),
-  },
-  'XMLHttpRequest': {
-    check: ast => {
-      console.log('XMLHttpRequest API interactions...');
-      return checkApiCalls(ast, ['XMLHttpRequest']);
-    },
-    analyze: (ast, filePath) => analyzeXMLHttpRequestCalls(ast, filePath),
-  },
-  'Node Fetch': {
-    check: ast => {
-      console.log('Node Fetch API interactions...');
-      return checkApiCalls(ast, ['node-fetch']);
-    },
-    analyze: (ast, filePath) => analyzeNodeFetchInteractions(ast, filePath),
-  },
-  'Superagent': {
-    check: ast => {
-      console.log('Superagent API interactions...');
-      return checkApiCalls(ast, ['superagent']);
-    },
-    analyze: (ast, filePath) => analyzeSuperagentInteractions(ast, filePath),
-  },
-  'jQuery': {
-    check: ast => {
-      console.log('jQuery API interactions...');
-      return checkApiCalls(ast, ['$', 'jQuery']);
-    },
-    analyze: (ast, filePath) => analyzeJQueryInteractions(ast, filePath),
-  },
-  'Got': {
-    check: ast => {
-      console.log('Got API interactions...');
-      return checkApiCalls(ast, ['got']);
-    },
-    analyze: (ast, filePath) => analyzeGotCalls(ast, filePath),
-  },
-};
-
-
-// RUN EACH FILE THROUGH THE API HANDLERS
-backendFileASTs.forEach(fileObject => {
-  const ast = fileObject.ast;
-  const filePath = fileObject.filePath;
-  console.log(`\x1b[34mChecking ${filePath} file for the following API interactions...\x1b[0m`);
-
-
-// CHECK AND ANALYZE API CALLS
-Object.keys(apiHandlers).forEach(apiKey => {
-  const handler = apiHandlers[apiKey];
-  if (handler.check(ast)) {
-    //TODO: DO SOMETHING WITH ANALYSIS RESULTS?
-    const analysisResults = handler.analyze(ast, filePath);
-    // console.log(`${apiKey} API Analysis Results:`, analysisResults);
+    k++;
   }
-});
-});
 
-next ();
-} catch (err) {
-  console.error('Error in ASTApiQueryController.query:', err);
-  return next({
-    log: 'error in ASTApiQueryController.query',
-    message: err,
-  });
+  function getQuery(strings, library) {
+    return (
+      `VariableDeclarator[init.callee.name="require"][init.arguments.0.value="${library}"],
+      CallExpression[callee.name="require"][arguments.0.value="${library}"],
+      ImportDeclaration[source.value="${library}"]`
+    );
+  }
+
+  function getNodes(fileAst, currApi, query) {
+    const nodes = esquery.query(
+      fileAst,
+      query
+    );
+    return ({
+      numNodes: nodes.length,
+      nodes
+    });
+  }
 }
-};
 
-
-
-//NOTE: THIS IS BEING INVOKED IN DataController to add stuff to the superstructure. If superstructure apiDetails for each
-//file are not being populated correctly, the issue could be here, or it could be in DataController. Look like this function
-//only checks for the first api interaction in the file, returns details for it, and does not continue looking for other
-//api interactions of other types
 ASTApiQueryController.queryFunc = async (nodeAST,nodePath) => {
+  console.log('Inside ASTApiQueryController.queryFunc')
   try {
-    // console.log('Inside ASTApiQueryController.queryFunc')
-    // API HANDLERS
     const apiHandlers = {
       'Fetch': {
         check: ast => {
@@ -211,14 +127,10 @@ ASTApiQueryController.queryFunc = async (nodeAST,nodePath) => {
         analyze: (ast, filePath) => analyzeGotCalls(ast, filePath),
       },
     };
-    
-    
-    // RUN EACH FILE THROUGH THE API HANDLERS
-    
+
     const ast = nodeAST;
     const filePath = nodePath;
 
-    // CHECK AND ANALYZE API CALLS
     let analysisResults;
 
     for (const apiKey of Object.keys(apiHandlers)) {
@@ -231,25 +143,17 @@ ASTApiQueryController.queryFunc = async (nodeAST,nodePath) => {
         break;
       }
     }
-    
-
-    // console.log('analysisResults:',analysisResults)
     return analysisResults;
   } catch (err) {
     console.error('Error in ASTApiQueryController.queryFunc:', err);
-    return ({
-      log: 'error in ASTApiQueryController.queryFunc',
-      message: err,
-    });
+    throw new Error(`'Error in ASTApiQueryController.queryFunc: ${err}`);
+    // return ({
+    //   log: 'error in ASTApiQueryController.queryFunc',
+    //   message: err,
+    // });
   }
 };
 
-
-
-
-// --------------- API ANALYSIS HELPER FUNCTIONS --------------- //
-
-// ANALYZE FETCH CALLS
 function analyzeFetchCalls(ast, filePath) {
   console.log(`\x1b[35mInside Fetch API Extended Analysis`);
 
@@ -358,7 +262,6 @@ function analyzeFetchCalls(ast, filePath) {
 
 }
 
-// ANALYZE AXIOS CALLS
 function analyzeAxiosCalls(ast, filePath) {
 
   console.log(`\x1b[35mInside Axios API Extended Analysis`);
@@ -402,7 +305,6 @@ function analyzeAxiosCalls(ast, filePath) {
   };
 }
 
-// ANALYZE XMLHTTPREQUEST CALLS
 function analyzeXMLHttpRequestCalls(ast, filePath) {
   console.log('\x1b[35mInside XMLHttpRequest Extended Analysis');
 
@@ -446,7 +348,6 @@ function analyzeXMLHttpRequestCalls(ast, filePath) {
   };
 }
 
-// ANALYZE NODE FETCH INTERACTIONS
 function analyzeNodeFetchInteractions(ast, filePath) {
   console.log(`\x1b[35mInside Node Fetch API Extended Analysis`);
 
@@ -496,7 +397,6 @@ function analyzeNodeFetchInteractions(ast, filePath) {
   };
 }
 
-// ANALYZE SUPERAGENT INTERACTIONS
 function analyzeSuperagentInteractions(ast, filePath) {
 
   console.log(`\x1b[35mInside Superagent API Extended Analysis`);
@@ -536,7 +436,6 @@ function analyzeSuperagentInteractions(ast, filePath) {
     };
   };
 
-// ANALYZE JQUERY INTERACTIONS
 function analyzeJQueryInteractions(ast, filePath) {
 
   console.log(`\x1b[35mInside jQuery API Extended Analysis`);
