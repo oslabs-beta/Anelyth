@@ -6,7 +6,7 @@ import esquery from 'esquery';
 import { Parser } from 'acorn';
 import jsx from 'acorn-jsx';
 import ASTDbQueryController from './ASTDbQueryController.mjs';
-import ASTApiQueryController from './ASTApiQueryController.mjs';
+import ASTApiQueryController from './AstApiQueryController2.mjs';
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -18,7 +18,7 @@ jsx(Parser);
 
 const DataController = {};
 
-
+;
 // ------- MIDDLEWARE FOR CREATING SUPER STRUCTURE ------- //
 
 //NOTE: this middleware is only writing superstructure to log right now. it's not passing it along in the middleware chain.
@@ -36,15 +36,12 @@ DataController.superStructure = async (req, res, next) => {
     const hierarchy = buildHierarchy(filePath);
     // CREATE NEW VARIABLE STARTING AT UPLOADED REPO ROOT DIRECTORY
     const codeHierarchy = hierarchy.children[0];
-
     // CREATE THE SUPER STRUCTURE WITH TRAVERSEHIERARCHY FUNCTION
     superStructure = await traverseHierarchy(codeHierarchy, dcdata);
-
     // temp log of super structure
     const logFilePath = './super-structure.log';
     const logStream = fs.createWriteStream(logFilePath);
     logStream.write(JSON.stringify(superStructure, null, 2));
-
     return next();
   } catch (err) {
     return next({
@@ -119,7 +116,9 @@ async function traverseHierarchy(node, dcdata) {
       const nodeAst = await parseFileToAST(node.path);
  
       const dbData = await ASTDbQueryController.query2(nodeAst, node.path);
+      // const apiData = await ASTApiQueryController.queryFunc(nodeAst, node.path);
       const apiData = await ASTApiQueryController.queryFunc(nodeAst, node.path);
+      console.log('apiData in superstructure:', apiData)
       const exportsData = getModuleDotExports(nodeAst);
       const exportsData2 = getES6DefaultExports(nodeAst);
       const exportsData3 = getES6Exports(nodeAst);

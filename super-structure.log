@@ -1,39 +1,495 @@
 {
-  "name": "anotherTest",
+  "name": "test",
   "type": "directory",
-  "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/anotherTest",
+  "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/test",
   "children": [
     {
-      "name": "code3.js",
+      "name": "anotherTest",
+      "type": "directory",
+      "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/test/anotherTest",
+      "children": [
+        {
+          "name": "code3.js",
+          "type": "file",
+          "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/test/anotherTest/code3.js",
+          "children": [],
+          "info": {
+            "fileSize": 1203,
+            "linesOfCode": 328,
+            "complexity": 86,
+            "dependents": [],
+            "dependencies": [
+              {
+                "module": "../models/models",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "unknown"
+                ],
+                "resolved": "../models/models",
+                "coreModule": false,
+                "followable": false,
+                "couldNotResolve": true,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              }
+            ],
+            "isModule": true,
+            "exportedModules": [
+              "apiController"
+            ]
+          },
+          "deepInfo": {
+            "orphan": false,
+            "funcDecName": [],
+            "funcExpressions": [],
+            "funcArrowExpressions": [],
+            "classDeclarations": [],
+            "funcCallExpressions": [],
+            "memberExpressions": [
+              {
+                "object": "apiController",
+                "property": [
+                  "checkApi"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "title"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "locals"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "replaceAll"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "title"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "locals"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "response",
+                "property": [
+                  "json"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "map"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "slice"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "data",
+                "property": [
+                  "docs"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "slice"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "doc",
+                "property": [
+                  "key"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "doc",
+                "property": [
+                  "title"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "doc",
+                "property": [
+                  "author_name"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": false,
+                "property_access_notation": "bracket"
+              },
+              {
+                "object": "doc",
+                "property": [
+                  "author_name"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "doc",
+                "property": [
+                  "cover_edition_key"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "doc",
+                "property": [
+                  "cover_edition_key"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "doc",
+                "property": [
+                  "subject"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "doc",
+                "property": [
+                  "subject"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "console",
+                "property": [
+                  "log"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "bookData"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "locals"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "console",
+                "property": [
+                  "log"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "property": [
+                  "bookData"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "res",
+                "property": [
+                  "locals"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "console",
+                "property": [
+                  "log"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "module",
+                "property": [
+                  "exports"
+                ],
+                "property_access_notation": "dot"
+              }
+            ]
+          },
+          "dbInfo": [
+            {
+              "dbInteraction": false,
+              "dbType": null,
+              "totalInteractions": 0,
+              "details": null
+            }
+          ],
+          "apiInfo": {
+            "totalInteractions": 0,
+            "details": []
+          }
+        },
+        {
+          "name": "parser.js",
+          "type": "file",
+          "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/test/anotherTest/parser.js",
+          "children": [],
+          "info": {
+            "fileSize": 397,
+            "linesOfCode": 10,
+            "complexity": 1,
+            "dependents": [],
+            "dependencies": [
+              {
+                "module": "fs",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "core",
+                  "require"
+                ],
+                "resolved": "fs",
+                "coreModule": true,
+                "followable": false,
+                "couldNotResolve": false,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              },
+              {
+                "module": "path",
+                "moduleSystem": "cjs",
+                "dynamic": false,
+                "exoticallyRequired": false,
+                "dependencyTypes": [
+                  "core",
+                  "require"
+                ],
+                "resolved": "path",
+                "coreModule": true,
+                "followable": false,
+                "couldNotResolve": false,
+                "matchesDoNotFollow": false,
+                "circular": false,
+                "valid": true
+              }
+            ],
+            "isModule": false,
+            "exportedModules": []
+          },
+          "deepInfo": {
+            "orphan": false,
+            "funcDecName": [],
+            "funcExpressions": [],
+            "funcArrowExpressions": [],
+            "classDeclarations": [],
+            "funcCallExpressions": [],
+            "memberExpressions": [
+              {
+                "object": "fs",
+                "property": [
+                  "readFileSync"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "path",
+                "property": [
+                  "join"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "fs",
+                "property": [
+                  "writeFileSync"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "path",
+                "property": [
+                  "join"
+                ],
+                "property_access_notation": "dot"
+              },
+              {
+                "object": "JSON",
+                "property": [
+                  "stringify"
+                ],
+                "property_access_notation": "dot"
+              }
+            ]
+          },
+          "dbInfo": [
+            {
+              "dbInteraction": false,
+              "dbType": null,
+              "totalInteractions": 0,
+              "details": null
+            }
+          ],
+          "apiInfo": {
+            "totalInteractions": 0,
+            "details": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "code.js",
       "type": "file",
-      "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/anotherTest/code3.js",
+      "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/test/code.js",
       "children": [],
       "info": {
-        "fileSize": 1203,
-        "linesOfCode": 328,
-        "complexity": 86,
-        "dependents": [],
-        "dependencies": [
+        "fileSize": 541,
+        "linesOfCode": 62,
+        "complexity": 16,
+        "dependents": [
+          "src/Server/temp-file-upload/test/anotherTest/parser.js",
+          "src/Server/temp-file-upload/test/test2/parser.js",
+          "src/Server/temp-file-upload/test2/parser.js"
+        ],
+        "dependencies": [],
+        "isModule": false,
+        "exportedModules": []
+      },
+      "deepInfo": {
+        "orphan": false,
+        "funcDecName": [
           {
-            "module": "../models/models",
-            "moduleSystem": "cjs",
-            "dynamic": false,
-            "exoticallyRequired": false,
-            "dependencyTypes": [
-              "unknown"
-            ],
-            "resolved": "../models/models",
-            "coreModule": false,
-            "followable": false,
-            "couldNotResolve": true,
-            "matchesDoNotFollow": false,
-            "circular": false,
-            "valid": true
+            "funcName": "a"
+          },
+          {
+            "funcName": "b"
           }
         ],
+        "funcExpressions": [],
+        "funcArrowExpressions": [],
+        "classDeclarations": [
+          {
+            "className": "Deps1",
+            "constructorArgs": [
+              "value"
+            ],
+            "constuctorProps": [
+              "value"
+            ],
+            "methods": [
+              "concat",
+              "getValue"
+            ]
+          }
+        ],
+        "funcCallExpressions": [],
+        "memberExpressions": [
+          {
+            "property": [
+              "value"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "property": [
+              "deps1Member1"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "property": [
+              "deps1Member2"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "property": [
+              "value"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "console",
+            "property": [
+              "log"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "deps2",
+            "property": [
+              "getValue"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "deps1",
+            "property": [
+              "concat"
+            ],
+            "property_access_notation": "dot"
+          },
+          {
+            "object": "console",
+            "property": [
+              "log"
+            ],
+            "property_access_notation": "dot"
+          }
+        ]
+      },
+      "dbInfo": [
+        {
+          "dbInteraction": false,
+          "dbType": null,
+          "totalInteractions": 0,
+          "details": null
+        }
+      ],
+      "apiInfo": {
+        "totalInteractions": 0,
+        "details": []
+      }
+    },
+    {
+      "name": "code2.js",
+      "type": "file",
+      "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/test/code2.js",
+      "children": [],
+      "info": {
+        "fileSize": 242,
+        "linesOfCode": 65,
+        "complexity": 17,
+        "dependents": [
+          "src/Server/temp-file-upload/test/anotherTest/parser.js",
+          "src/Server/temp-file-upload/test/test2/parser.js",
+          "src/Server/temp-file-upload/test2/parser.js"
+        ],
+        "dependencies": [],
         "isModule": true,
         "exportedModules": [
-          "apiController"
+          "Deps2"
         ]
       },
       "deepInfo": {
@@ -41,184 +497,44 @@
         "funcDecName": [],
         "funcExpressions": [],
         "funcArrowExpressions": [],
-        "classDeclarations": [],
+        "classDeclarations": [
+          {
+            "className": "Deps2",
+            "constructorArgs": [
+              "value"
+            ],
+            "constuctorProps": [
+              "value"
+            ],
+            "methods": [
+              "add",
+              "getValue"
+            ]
+          }
+        ],
         "funcCallExpressions": [],
         "memberExpressions": [
           {
-            "object": "apiController",
             "property": [
-              "checkApi"
+              "value"
             ],
             "property_access_notation": "dot"
           },
           {
             "property": [
-              "title"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "res",
-            "property": [
-              "locals"
+              "deps2Member1"
             ],
             "property_access_notation": "dot"
           },
           {
             "property": [
-              "replaceAll"
+              "deps2Member2"
             ],
             "property_access_notation": "dot"
           },
           {
             "property": [
-              "title"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "res",
-            "property": [
-              "locals"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "response",
-            "property": [
-              "json"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "property": [
-              "map"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "property": [
-              "slice"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "data",
-            "property": [
-              "docs"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "property": [
-              "slice"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "doc",
-            "property": [
-              "key"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "doc",
-            "property": [
-              "title"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "doc",
-            "property": [
-              "author_name"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "property": false,
-            "property_access_notation": "bracket"
-          },
-          {
-            "object": "doc",
-            "property": [
-              "author_name"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "doc",
-            "property": [
-              "cover_edition_key"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "doc",
-            "property": [
-              "cover_edition_key"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "doc",
-            "property": [
-              "subject"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "doc",
-            "property": [
-              "subject"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "console",
-            "property": [
-              "log"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "property": [
-              "bookData"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "res",
-            "property": [
-              "locals"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "console",
-            "property": [
-              "log"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "property": [
-              "bookData"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "res",
-            "property": [
-              "locals"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "console",
-            "property": [
-              "log"
+              "value"
             ],
             "property_access_notation": "dot"
           },
@@ -240,177 +556,22 @@
         }
       ],
       "apiInfo": {
-        "totalInteractions": 12,
-        "details": [
-          {
-            "apiType": "fetch",
-            "apiURL": "../models/models",
-            "typeOfCall": "GET"
-          },
-          {
-            "apiType": "fetch",
-            "apiURL": "+",
-            "typeOfCall": "GET"
-          },
-          {
-            "apiType": "fetch",
-            "apiURL": null,
-            "typeOfCall": "GET"
-          },
-          {
-            "apiType": "fetch",
-            "apiURL": null,
-            "typeOfCall": "GET"
-          },
-          {
-            "apiType": "fetch",
-            "apiURL": null,
-            "typeOfCall": "GET"
-          },
-          {
-            "apiType": "fetch",
-            "apiURL": 5,
-            "typeOfCall": "GET"
-          },
-          {
-            "apiType": "fetch",
-            "apiURL": 7,
-            "typeOfCall": "GET"
-          },
-          {
-            "apiType": "fetch",
-            "apiURL": ">>> searched books: ",
-            "typeOfCall": "GET"
-          },
-          {
-            "apiType": "fetch",
-            "apiURL": null,
-            "typeOfCall": "GET"
-          },
-          {
-            "apiType": "fetch",
-            "apiURL": null,
-            "typeOfCall": "GET"
-          },
-          {
-            "apiType": "fetch",
-            "apiURL": null,
-            "typeOfCall": "GET"
-          },
-          {
-            "apiType": "fetch",
-            "apiURL": "Error in apiController fetch request",
-            "typeOfCall": "GET"
-          }
-        ]
-      }
-    },
-    {
-      "name": "parser.js",
-      "type": "file",
-      "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/anotherTest/parser.js",
-      "children": [],
-      "info": {
-        "fileSize": 317,
-        "linesOfCode": 9,
-        "complexity": 1,
-        "dependents": [],
-        "dependencies": [
-          {
-            "module": "fs",
-            "moduleSystem": "cjs",
-            "dynamic": false,
-            "exoticallyRequired": false,
-            "dependencyTypes": [
-              "core",
-              "require"
-            ],
-            "resolved": "fs",
-            "coreModule": true,
-            "followable": false,
-            "couldNotResolve": false,
-            "matchesDoNotFollow": false,
-            "circular": false,
-            "valid": true
-          },
-          {
-            "module": "path",
-            "moduleSystem": "cjs",
-            "dynamic": false,
-            "exoticallyRequired": false,
-            "dependencyTypes": [
-              "core",
-              "require"
-            ],
-            "resolved": "path",
-            "coreModule": true,
-            "followable": false,
-            "couldNotResolve": false,
-            "matchesDoNotFollow": false,
-            "circular": false,
-            "valid": true
-          }
-        ],
-        "isModule": false,
-        "exportedModules": []
-      },
-      "deepInfo": {
-        "orphan": false,
-        "funcDecName": [],
-        "funcExpressions": [],
-        "funcArrowExpressions": [],
-        "classDeclarations": [],
-        "funcCallExpressions": [],
-        "memberExpressions": [
-          {
-            "object": "fs",
-            "property": [
-              "readFileSync"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "path",
-            "property": [
-              "join"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "fs",
-            "property": [
-              "writeFileSync"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "path",
-            "property": [
-              "join"
-            ],
-            "property_access_notation": "dot"
-          },
-          {
-            "object": "JSON",
-            "property": [
-              "stringify"
-            ],
-            "property_access_notation": "dot"
-          }
-        ]
-      },
-      "dbInfo": [
-        {
-          "dbInteraction": false,
-          "dbType": null,
-          "totalInteractions": 0,
-          "details": null
-        }
-      ],
-      "apiInfo": {
         "totalInteractions": 0,
         "details": []
       }
+    },
+    {
+      "name": "test2",
+      "type": "directory",
+      "path": "/Users/rossterker/Codesmith/projects/FFSS-OSP/src/server/temp-file-upload/test/test2",
+      "children": [
+        {
+          "log": "DataController.traverseHierarchy: ERROR: Error: Line 10: Unexpected identifier",
+          "message": {
+            "err": "DataController.traverseHierarchy: ERROR: Check server logs for details"
+          }
+        }
+      ]
     }
   ]
 }
