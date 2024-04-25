@@ -94,15 +94,15 @@ AstApiQueryController2.queryFunc = async (nodeAST, nodePath) => {
   console.log('Inside AstApiQueryController2.queryFunc')
   console.log(`analyzing file path ${nodePath}`);
   try {
-    const result = checkApiCalls(nodeAST, ['fetch']);
+    const result = checkApiCalls(nodeAST, ['fetch', 'axios']);
     console.log('result from checkApiCalls: ', result);
     if (!result) {
       return;
     } else {
-      console.log('result in AstApiQueryController2.queryFunc before analysis: ', result);
-      console.log('nodes in result: ', result.fetch.nodes);
-      console.log('arguments in node: ', result.fetch.nodes[0].arguments[0].quasis);
-
+      // console.log('result in AstApiQueryController2.queryFunc before analysis: ', result);
+      // console.log('nodes in result: ', result.fetch.nodes);
+      // console.log('arguments in node: ', result.fetch.nodes[0].arguments[0].quasis);
+      return analyze(result, nodePath);
     }
 
   } catch (err) {
@@ -115,86 +115,87 @@ AstApiQueryController2.queryFunc = async (nodeAST, nodePath) => {
   }
 };
 
+//input: apiInteractionsNodes (object where each key is an api and the value is an object with numNodes and nodes) and filePath
+//output: object with filePath, totalInteractions number, details: array of Objects (each object refers to an api)
 //TODO: need to handle template literals. argument value does not include the variable passed in to it. if we just want the url domain, 
 //can grab that from the argument value, unless it's passed in; then you'd have to jump through more hoops to determine what the url is
-function analyze(ast, filePath) {
+function analyze(apiInteractionsNodes, filePath) {
   console.log(`\x1b[35mInside Fetch API Extended Analysis`);
+  console.log('apiInteractionsNodes:', apiInteractionsNodes)
 
-  const memberExpressionFetchCalls = esquery.query(ast, 'CallExpression[callee.type="MemberExpression"][callee.property.name="fetch"]');
-  const regularFunctionFetchCalls = esquery.query(ast,'CallExpression[callee.type="Identifier"][callee.name="fetch"]');
+  let totalInteractions = 0;
+  let ApiArguments = {};
 
-  const regularFunctionRequireCalls = esquery.query(ast,'CallExpression[callee.type="Identifier"][callee.name="require"]');
-  const memberExpressionRequireCalls = esquery.query(ast, 'CallExpression[callee.type="MemberExpression"][callee.property.name="require"]');
-
-  const allCalls = [...memberExpressionFetchCalls, ...regularFunctionFetchCalls, ...regularFunctionRequireCalls, ...memberExpressionRequireCalls];
-
-  const stream = fs.createWriteStream('./api-query-testing.log')
-  
-  let interactions = allCalls.map((call, index) => {
-    console.log(`call on element ${index + 1}:`, call)
-    stream.write(JSON.stringify(call, null, 2));
-    
-    // if (call.callee.object.arguments){
-    if (call.arguments){
-      let interactionDetail = {
-        // method: 'fetch',
-        line: call.loc.start.line,
-        url: null, // PLACEHOLDER
-        // httpMethod: 'GET' // DEFAULT
-      };
-
-      call.arguments.forEach(arg => {
-        if (arg.type === 'ObjectExpression') {
-          arg.properties.forEach(prop => {
-            if (prop.key.name === 'method') {
-              interactionDetail.httpMethod = prop.value.value;
-            }
-          });
-        }
-      })
-
-      call.arguments.forEach(arg => {
-        if (arg.type === 'Literal') {
-          interactionDetail.url = arg.value;
-        }
-      })
-
-      return interactionDetail;
-    } else {
-      return;
+  for (const key in apiInteractionsNodes) {
+    //add up total api calls in each file
+    const numApiInteractions = apiInteractionsNodes[key].numNodes;
+    if (numApiInteractions > 0) {
+      totalInteractions += numApiInteractions;
     }
+    console.log('Key:', key)
+    console.log('Element in object: ', apiInteractionsNodes[key]);
+    //get arguments (data endpoints for each api call)
+    let nodes = apiInteractionsNodes[key].nodes;
+    const args = nodes.map((node) => {
+      const nodeArgs = node.arguments;
+      console.log('nodeArgs:', nodeArgs)
 
-    // console.log('final result', call.callee.object.arguments[1].properties[0].value.value)
+      const listOfArgs = [];
+      for (let i = 0; i < nodeArgs.length; i++) {
+        const arg = nodeArgs[i];
+        console.log('Arg type: ', arg.type);
+        let argValue;
+        switch (arg.type) {
+          case 'Literal':
+            console.log('Literal arg value: ', arg.value);
+            argValue = arg.value;
+            break;
+          case 'Identifier': 
+            console.log('Identifier arg name: ', arg.name);
+            argValue = arg.name;
+            break;
+          //TODO: handle all parts of template literal. just returning the first section of the string, ignoring the rest. Console logs can guide you.
+          case 'TemplateLiteral':
+            console.log('Template Literal Parts:');
+            arg.quasis.forEach((part, index) => console.log(`Text part ${index + 1} value:`, part.value.cooked));
+            arg.expressions.forEach((expr, index) => {
+                console.log(`Expression ${index + 1} type: ${expr.type}`);
+                console.log(`Expression ${index + 1} name: ${expr.name}`);
+            });
+            argValue = arg.quasis[0].value.cooked;
+            break;
+          default:
+            console.log('Argument is not a Literal, Identifier, or TemplateLiteral and was not handled in ApiQueryController');
+            break;
+        }
+        listOfArgs.push(argValue);
+      }
+      console.log('listOfArgs before return:', listOfArgs);
+      return listOfArgs;
+    });
+    ApiArguments[key] = args;
+  }
+  const stream = fs.createWriteStream('./api-query-testing.log', { flags: 'a' });
 
+  // const memberExpressionFetchCalls = esquery.query(ast, 'CallExpression[callee.type="MemberExpression"][callee.property.name="fetch"]');
+  // const regularFunctionFetchCalls = esquery.query(ast,'CallExpression[callee.type="Identifier"][callee.name="fetch"]');
 
-    // EXTRACT URL
-    // if (call.arguments && call.arguments[0] && call.arguments[0].type === 'Literal') {
-    //   interactionDetail.url = call.arguments[0].value;
-    // } else {
-    //   interactionDetail.url = 'dynamic';
-    // }
+  // const regularFunctionRequireCalls = esquery.query(ast,'CallExpression[callee.type="Identifier"][callee.name="require"]');
+  // const memberExpressionRequireCalls = esquery.query(ast, 'CallExpression[callee.type="MemberExpression"][callee.property.name="require"]');
 
+  // const allCalls = [...memberExpressionFetchCalls, ...regularFunctionFetchCalls, ...regularFunctionRequireCalls, ...memberExpressionRequireCalls];
 
-    // extract url 2
-      // console.log('looking here bitchhh: ', call.callee.object.arguments)
+  const fileDetails = {
+    filePath,
+    totalInteractions,
+    ApiArguments
+  };
 
-      // if (call.callee.object.arguments){
-      //   call.callee.object.arguments.forEach(arg => {
-      //     if (arg.type === 'Literal') {
-      //       interactionDetail.url = arg.value;
-      //     }
-      //   })
-      // }
-
-  });
+  stream.write(JSON.stringify(fileDetails, null, 2));
 
   stream.end();
 
-    return {
-      filePath,
-      totalInteractions: interactions.filter(el => el !== undefined).length,
-      details: interactions.filter(el => el !== undefined)
-    };
+  return fileDetails;
 
 }
 
