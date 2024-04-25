@@ -116,9 +116,8 @@ async function traverseHierarchy(node, dcdata) {
       const nodeAst = await parseFileToAST(node.path);
  
       const dbData = await ASTDbQueryController.query2(nodeAst, node.path);
-      // const apiData = await ASTApiQueryController.queryFunc(nodeAst, node.path);
       const apiData = await ASTApiQueryController.queryFunc(nodeAst, node.path);
-      console.log('apiData in superstructure:', apiData)
+      console.log('apiData in superstructure:', apiData);
       const exportsData = getModuleDotExports(nodeAst);
       const exportsData2 = getES6DefaultExports(nodeAst);
       const exportsData3 = getES6Exports(nodeAst);

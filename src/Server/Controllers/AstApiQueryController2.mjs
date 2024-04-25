@@ -6,11 +6,11 @@ const AstApiQueryController2 = {};
 // --------------- CHECK API FUNCTION --------------- //
 
 function checkApiCalls(fileAst, apiLibraries) { 
-  const importedApiMatches = {};
+
   // Check for libraries that need explicit import/require
+  const importedApiMatches = {};
   const importedApis = ['axios'];
   const libraries = [...apiLibraries];
-
   let i = 0;
   while (i < importedApis.length && libraries.length > 0) {
     const currApi = importedApis[i].toLowerCase();
@@ -30,11 +30,10 @@ function checkApiCalls(fileAst, apiLibraries) {
     i++;
   }
 
-  const nativeApiMatches = {};
   // Special checks for APIs that don't require import/require in a browser environment
   // const browserAPIs = ['fetch', 'XMLHttpRequest', '$', 'jQuery'];
+  const nativeApiMatches = {};
   const nativeApis = ['fetch'];
-
   let k = 0;
   while (k < nativeApis.length && libraries.length > 0) {
     const currApi = nativeApis[k].toLowerCase();
@@ -87,6 +86,7 @@ function checkApiCalls(fileAst, apiLibraries) {
       nodes
     });
   }
+
 }
 
 AstApiQueryController2.queryFunc = async (nodeAST, nodePath) => {
@@ -124,8 +124,7 @@ function analyze(apiInteractionsNodes, filePath) {
   console.log('apiInteractionsNodes:', apiInteractionsNodes)
 
   let totalInteractions = 0;
-  let ApiArguments = {};
-
+  let apiArguments = {};
   for (const key in apiInteractionsNodes) {
     //add up total api calls in each file
     const numApiInteractions = apiInteractionsNodes[key].numNodes;
@@ -136,14 +135,13 @@ function analyze(apiInteractionsNodes, filePath) {
     console.log('Element in object: ', apiInteractionsNodes[key]);
     //get arguments (data endpoints for each api call)
     let nodes = apiInteractionsNodes[key].nodes;
-    const args = nodes.map((node) => {
-      const nodeArgs = node.arguments;
-      console.log('nodeArgs:', nodeArgs)
+    const args = [];
+    nodes.forEach((node, index) => {
+      console.log(`node ${index + 1} arguments: ${node.arguments}`);
 
-      const listOfArgs = [];
-      for (let i = 0; i < nodeArgs.length; i++) {
-        const arg = nodeArgs[i];
-        console.log('Arg type: ', arg.type);
+      for (let i = 0; i < node.arguments.length; i++) {
+        const arg = node.arguments[i];
+        console.log('Argument type: ', arg.type);
         let argValue;
         switch (arg.type) {
           case 'Literal':
@@ -168,12 +166,12 @@ function analyze(apiInteractionsNodes, filePath) {
             console.log('Argument is not a Literal, Identifier, or TemplateLiteral and was not handled in ApiQueryController');
             break;
         }
-        listOfArgs.push(argValue);
+        args.push(argValue);
       }
-      console.log('listOfArgs before return:', listOfArgs);
-      return listOfArgs;
     });
-    ApiArguments[key] = args;
+
+    apiArguments[key] = args;
+
   }
   const stream = fs.createWriteStream('./api-query-testing.log', { flags: 'a' });
 
@@ -183,16 +181,13 @@ function analyze(apiInteractionsNodes, filePath) {
   // const regularFunctionRequireCalls = esquery.query(ast,'CallExpression[callee.type="Identifier"][callee.name="require"]');
   // const memberExpressionRequireCalls = esquery.query(ast, 'CallExpression[callee.type="MemberExpression"][callee.property.name="require"]');
 
-  // const allCalls = [...memberExpressionFetchCalls, ...regularFunctionFetchCalls, ...regularFunctionRequireCalls, ...memberExpressionRequireCalls];
-
   const fileDetails = {
     filePath,
     totalInteractions,
-    ApiArguments
+    apiArguments
   };
 
   stream.write(JSON.stringify(fileDetails, null, 2));
-
   stream.end();
 
   return fileDetails;
