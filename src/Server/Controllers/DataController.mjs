@@ -28,6 +28,10 @@ DataController.superStructure = async (req, res, next) => {
     const dcdata = res.locals.depResult;
     // const astData = res.locals.astData;
     // console.log('dcdata: ',dcdata)
+
+    const {modelRegistry , importRegistry} = res.locals;
+
+  
     
     const filePath = path.resolve(__dirname, '../temp-file-upload');
 
@@ -38,7 +42,7 @@ DataController.superStructure = async (req, res, next) => {
     // console.log('total hierarchy: ', codeHierarchy);
 
     // CREATE THE SUPER STRUCTURE WITH TRAVERSEHIERARCHY FUNCTION
-    superStructure = await traverseHierarchy(codeHierarchy, dcdata);
+    superStructure = await traverseHierarchy(codeHierarchy, dcdata, modelRegistry, importRegistry);
     // console.log('super structure: ',superStructure);
 
     // temp log of super structure
@@ -88,7 +92,7 @@ function buildHierarchy(filePath, level = 0) {
 
 
 // MAIN FUNCTION TO BUILD OUT SUPER STRUCTURE //
-async function traverseHierarchy(node, dcdata) {
+async function traverseHierarchy(node, dcdata, modelRegistry, importRegistry) {
   try{
     if (!node) {
       return;
@@ -111,7 +115,7 @@ async function traverseHierarchy(node, dcdata) {
     };
   
     if (node.children) {
-      newNode.children = await Promise.all(node.children.map(async child => await traverseHierarchy(child,dcdata)));
+      newNode.children = await Promise.all(node.children.map(async child => await traverseHierarchy(child,dcdata,modelRegistry,importRegistry)));
     } else {
   
       // CALL HELPER FUNCS TO GET DATA 
@@ -120,7 +124,7 @@ async function traverseHierarchy(node, dcdata) {
       const dependentsAndDependencies = await getDependenciesAndDependents(node.path, dcdata)
       const nodeAst = await parseFileToAST(node.path);
  
-      const dbData = await ASTDbQueryController.query2(nodeAst, node.path);
+      const dbData = await ASTDbQueryController.query2(nodeAst, node.path, modelRegistry, importRegistry);
       const apiData = await ASTApiQueryController.queryFunc(nodeAst, node.path);
       const exportsData = getModuleDotExports(nodeAst);
       const exportsData2 = getES6DefaultExports(nodeAst);

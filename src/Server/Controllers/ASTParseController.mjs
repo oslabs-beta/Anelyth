@@ -2,11 +2,18 @@ import fs from 'fs';
 import path from 'path';
 import { Parser } from 'acorn';
 import jsx from 'acorn-jsx';
+import esquery from 'esquery';
 
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
 const ASTParseController = {};
-
+// const modelRegistry = {};
+// const importRegistry = {};
+const baseDirectory = 'src/Server/temp-file-upload/'; // Common base directory for the project
 
 
 // -------- CHECK IF FILE IS FRONTEND FILE -------- //
@@ -30,7 +37,7 @@ function isFrontendFile(filePath) {
 
 // -------- PARSE FILE TO AST -------- //
 
-const parseFileToAST = (filePath) => {
+const parseFileToAST = (filePath, locals) => {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, 'utf8', (err, script) => {
       if (err) {
@@ -43,6 +50,48 @@ const parseFileToAST = (filePath) => {
             ecmaVersion: 'latest',
             locations: true
           });
+
+
+          // Check for mongoose.model usage
+          // const modelDeclarations = esquery(ast, `CallExpression[callee.object.name="mongoose"][callee.property.name="model"]`);
+          // modelDeclarations.forEach((dec) => {
+          //   const modelName = dec.arguments[0].value;  // Assuming first argument is the model name as a string
+          //   if (modelName) {
+          //     modelRegistry[modelName] = filePath;
+          //     console.log ('We found a model' , modelName)
+          //   }
+          // });
+         
+          const modelDeclarations = esquery(ast, `CallExpression[callee.object.name="mongoose"][callee.property.name="model"]`);
+          modelDeclarations.forEach((dec) => {
+            const modelName = dec.arguments[0].value;  // Assuming first argument is the model name as a string
+            if (modelName) {
+              const relativeModelPath = path.relative(baseDirectory, filePath); // Convert to relative path
+              locals.modelRegistry[modelName] = relativeModelPath;
+              console.log('We found a model', modelName, 'at', relativeModelPath);
+            }
+          });
+           
+          //Converting the filepath to lowercase for normalization
+          let lowerCaseFilePath = filePath.toLowerCase();
+           // Initialize an empty array to hold imports for the current file
+           locals.importRegistry[lowerCaseFilePath] = [];
+
+           // Extract import/require statements and normalize their paths
+           esquery.query(ast, `ImportDeclaration, CallExpression[callee.name="require"]`).forEach(node => {
+             const isImport = node.type === 'ImportDeclaration';
+             const sourceValue = isImport ? node.source.value : node.arguments[0].value;
+             const normalizedPath = path.normalize(path.join(path.dirname(filePath), sourceValue));
+             const relativePath = path.relative(baseDirectory, normalizedPath); // Convert to relative path
+
+             let lowerCasePath = relativePath.toLowerCase();
+               // Store relative path of import in the array for the current file
+             locals.importRegistry[lowerCaseFilePath].push(lowerCasePath);
+ 
+           
+           });
+
+
           resolve(ast);
         } catch (parseErr) {
           reject(parseErr);
@@ -57,6 +106,8 @@ const parseFileToAST = (filePath) => {
 
 ASTParseController.parse = async (req, res, next) => {
   try {
+    res.locals.modelRegistry = {};
+    res.locals.importRegistry = {};
     // CHECK IF REPO HAS BEEN UPLOADED
     const uploadsPath = './src/Server/temp-file-upload';
     if (!fs.existsSync(uploadsPath)) {
@@ -80,14 +131,14 @@ ASTParseController.parse = async (req, res, next) => {
 
         if (stat.isDirectory()) {
           // RECURSIVELY TRAVERSE SUBDIRECTORIES
-          const subAsts = await traverseAndParse(filePath);
+          const subAsts = await traverseAndParse(filePath); 
           asts.push(...subAsts);
           // CHECK AND PUSH INTO BACKEND ARRAY
         } else if (path.extname(filePath).toLowerCase() === '.js' && !isFrontendFile(filePath)) {
           backendFilePaths.push(filePath);
           try {
             // PARSE FILE TO AST
-            const ast = await parseFileToAST(filePath);
+            const ast = await parseFileToAST(filePath, res.locals);//passing res.locals to make it available to other functions
             asts.push({ filePath, ast });
           } catch (parseErr) {
             console.error(`Error parsing file ${filePath}:`, parseErr);
@@ -133,6 +184,9 @@ ASTParseController.parse = async (req, res, next) => {
     });
 
     // ------- CALL NEXT MIDDLEWARE ------- //
+
+    console.log ('What is model registry', res.locals.modelRegistry);
+    console.log ('What is import registry', res.locals.importRegistry);
     next();
   } catch (err) {
     console.error('Error in ASTController.parse:', err);
@@ -144,5 +198,6 @@ ASTParseController.parse = async (req, res, next) => {
 };
 
 
-
+// export {modelRegistry}
+// export {importRegistry}
 export default ASTParseController;
