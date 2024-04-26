@@ -145,17 +145,18 @@ async function traverseHierarchy(node, dcdata) {
 
       newNode.dbInfo = dbData;
 
-      if (apiData) {
-        newNode.apiInfo = {
-          totalInteractions: apiData.totalInteractions || 0,
-          details: getApiData(apiData)
-        }
-      } else {
-        newNode.apiInfo = {
-          totalInteractions: 0,
-          details: []
-        }
-      }
+      // if (apiData) {
+      //   newNode.apiInfo = {
+      //     totalInteractions: apiData.totalInteractions,
+      //     details: getApiData(apiData)
+      //   }
+      // } else {
+      //   newNode.apiInfo = {
+      //     totalInteractions: 0,
+      //     details: []
+      //   }
+      // }
+      newNode.apiInfo = apiData;
 
 
     }
