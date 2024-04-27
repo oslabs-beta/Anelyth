@@ -5,8 +5,6 @@ import ora from 'ora';
 
 
 const ASTDbQueryController = {};
-// import { modelRegistry } from './ASTParseController.mjs';
-// import {importRegistry} from './ASTParseController.mjs'
 
 
 
@@ -35,17 +33,17 @@ function checkDatabase(fileAst, importPaths) {
 
 
 //GOOD FUNCTION APR 26 5:58 PM
-function checkFileForModelImports(fileAst, importPaths, filePath, modelRegistry, importRegistry) {
+function checkFileForModelImports(filePath, modelRegistry, importRegistry) {
   
   
   if (!filePath || !modelRegistry || !importRegistry) {
       return false; // Exit early if filePath is not provided
   }
-//   const spinner = ora({
-//     text: 'Analyzing imports...',
-//     color: 'yellow',
-//     spinner: 'dots'
-// }).start();
+  const spinner = ora({
+    text: 'Analyzing imports...',
+    color: 'yellow',
+    spinner: 'dots'
+}).start();
 
   const basePath = 'FFSS-OSP/src/Server/temp-file-upload/';
   // Normalize the filePath to match the format used in the importRegistry and converting the whole string to Lowercase to achieve normalization
@@ -71,7 +69,7 @@ function checkFileForModelImports(fileAst, importPaths, filePath, modelRegistry,
   });
 
 
-  // spinner.succeed('Analysis complete.');
+  spinner.succeed('Analysis complete.');
   // console.log(chalk.green('The direct check of imports on ') + chalk.blue(normalizedFilePath) + chalk.green(' has found an import of a model: ') + chalk.yellow(directCheck));
   
 
@@ -248,7 +246,7 @@ ASTDbQueryController.query2 = (newAST, astFilePath, modelRegistry, importRegistr
     // DATABASE HANDLERS
     const databaseHandlers = {
       'MongoDB': {
-        check: (ast, path) => checkFileForModelImports(ast, ['mongoose', 'mongodb'], path, modelRegistry, importRegistry),
+        check: (ast, path) => checkFileForModelImports(path, modelRegistry, importRegistry),
         analyze: (ast, filePath) => analyzeMongoDBInteractions(ast, filePath, modelRegistry)
       },
       'PostgreSQL': {

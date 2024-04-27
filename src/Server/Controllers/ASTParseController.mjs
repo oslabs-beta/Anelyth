@@ -3,17 +3,37 @@ import path from 'path';
 import { Parser } from 'acorn';
 import jsx from 'acorn-jsx';
 import esquery from 'esquery';
-
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
+import chalk from 'chalk';
 
 const ASTParseController = {};
-// const modelRegistry = {};
-// const importRegistry = {};
+
 const baseDirectory = 'src/Server/temp-file-upload/'; // Common base directory for the project
+
+/* ==============================================================================================================================
+ * NOTHING IMPORTANT HERE JUST PLAYING AROUND WITH SOME CONSOLE LOG STYLING - moises
+ * ============================================================================================================================== */
+
+const logSuccess = message => console.log(chalk.green('\u2714 ' + message));
+const logError = (message, error) => console.error(chalk.red('\u2718 ' + message), chalk.yellow(error.toString()));
+
+const printModelRegistry = (modelRegistry) => {
+  console.group(chalk.bold('Model Registry'));
+  console.table(modelRegistry);
+  console.groupEnd();
+};
+
+const printImportRegistry = (importRegistry) => {
+  console.group(chalk.bold('Import Registry'));
+  Object.keys(importRegistry).forEach(file => {
+    console.log(chalk.green(`File: ${file}`));
+    importRegistry[file].forEach(importPath => {
+      console.log(chalk.blue(`- ${importPath}`));
+    });
+  });
+  console.groupEnd();
+};
+
+/* ============================================================================================================================== */
 
 
 // -------- CHECK IF FILE IS FRONTEND FILE -------- //
@@ -58,7 +78,7 @@ const parseFileToAST = (filePath, locals) => {
             if (modelName) {
               const relativeModelPath = path.relative(baseDirectory, filePath).toLocaleLowerCase(); // Convert to relative path and convert to lowercase for normalization
               locals.modelRegistry[modelName] = relativeModelPath;
-              // console.log('We found a model', modelName, 'at', relativeModelPath);
+              logSuccess(`Found a model ${modelName} at ${relativeModelPath}`);
             }
           });
 
@@ -179,10 +199,10 @@ ASTParseController.parse = async (req, res, next) => {
 
     // ------- CALL NEXT MIDDLEWARE ------- //
 
-    console.log ('We have found some mongoose models in your codebase.');
-    console.table (res.locals.modelRegistry);
-    console.log ('What is import registry.');
-    console.log (res.locals.importRegistry)
+    logSuccess(`We have found some mongoose models in your codebase.`);
+    console.log(chalk.yellow('Analysis of Mongoose models and imports complete.'));
+    printModelRegistry(res.locals.modelRegistry);
+    printImportRegistry(res.locals.importRegistry);
     next();
   } catch (err) {
     console.error('Error in ASTController.parse:', err);
@@ -193,7 +213,4 @@ ASTParseController.parse = async (req, res, next) => {
   }
 };
 
-
-// export {modelRegistry}
-// export {importRegistry}
 export default ASTParseController;
