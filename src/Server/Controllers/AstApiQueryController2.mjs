@@ -5,10 +5,10 @@ const AstApiQueryController2 = {};
 
 // --------------- CHECK API FUNCTION --------------- //
 
-function checkApiCalls(fileAst, apiLibraries) { 
+function getApiCalls(fileAst, apiLibraries) { 
 
   // Check for libraries that need explicit import/require
-  const importedApiMatches = {};
+  const importedApiMatches = [];
   const importedApis = ['axios'];
   const libraries = [...apiLibraries];
   let i = 0;
@@ -20,9 +20,10 @@ function checkApiCalls(fileAst, apiLibraries) {
         const query = getQuery`VariableDeclarator[init.callee.name="require"][init.arguments.0.value="${currApi}"],
           CallExpression[callee.name="require"][arguments.0.value="${currApi}"],
           ImportDeclaration[source.value="${currApi}"]`;
-        const result = getNodes(fileAst, query);
+        const result = getNodes(fileAst, query, currApi);
         if (result) {
-          importedApiMatches[currApi] = result;
+          //TODO: get variable being assigned, then look up call expressions based on that name
+          importedApiMatches.push(result);
         }
         libraries.splice(j, 1);
       }
@@ -32,7 +33,7 @@ function checkApiCalls(fileAst, apiLibraries) {
 
   // Special checks for APIs that don't require import/require in a browser environment
   // const browserAPIs = ['fetch', 'XMLHttpRequest', '$', 'jQuery'];
-  const nativeApiMatches = {};
+  const nativeApiMatches = [];
   const nativeApis = ['fetch'];
   let k = 0;
   while (k < nativeApis.length && libraries.length > 0) {
@@ -41,9 +42,9 @@ function checkApiCalls(fileAst, apiLibraries) {
       const currLibrary = libraries[j].toLowerCase();
       if (currLibrary === currApi) {
         const query = getQuery`CallExpression[callee.type="MemberExpression"][callee.property.name="${currApi}"], CallExpression[callee.type="Identifier"][callee.name="${currApi}"]`;
-        const result = getNodes(fileAst, query);
+        const result = getNodes(fileAst, query, currApi);
         if (result) {
-          nativeApiMatches[currApi] = result;
+          nativeApiMatches.push(result);
         }
         libraries.splice(j, 1);
       }
@@ -52,7 +53,7 @@ function checkApiCalls(fileAst, apiLibraries) {
   }
 
   //return matches or undefined
-  const result = {...importedApiMatches, ...nativeApiMatches};
+  const result = [...importedApiMatches, ...nativeApiMatches];
   if (Object.keys(result).length > 0) {
     return result;
   } else {
@@ -71,7 +72,7 @@ function checkApiCalls(fileAst, apiLibraries) {
     return result;
   }
 
-  function getNodes(fileAst, query) {
+  function getNodes(fileAst, query, api) {
     const nodes = esquery.query(
       fileAst,
       query
@@ -82,6 +83,7 @@ function checkApiCalls(fileAst, apiLibraries) {
     }
 
     return ({
+      apiName: api,
       numNodes: nodes.length,
       nodes
     });
@@ -94,8 +96,11 @@ AstApiQueryController2.queryFunc = async (nodeAST, nodePath) => {
   console.log('Inside AstApiQueryController2.queryFunc')
   console.log(`analyzing file path ${nodePath}`);
   try {
-    const result = checkApiCalls(nodeAST, ['fetch', 'axios']);
-    console.log('result from checkApiCalls: ', result);
+    const result = getApiCalls(nodeAST, ['fetch', 'axios']);
+    const stream = fs.createWriteStream('./api-query-testing-nodes.log');
+    console.log('result from getApiCalls: ', result);
+    stream.write(JSON.stringify(result, null, 2));
+    stream.end();
     if (!result) {
       return;
     } else {
@@ -115,31 +120,33 @@ AstApiQueryController2.queryFunc = async (nodeAST, nodePath) => {
   }
 };
 
-//input: apiInteractionsNodes (object where each key is an api and the value is an object with numNodes and nodes) and filePath
+//input: apiInteractions (object where each key is an api and the value is an object with numNodes and nodes) and filePath
 //output: object with filePath, totalInteractions number, details: array of Objects (each object refers to an api)
 //TODO: need to handle template literals. argument value does not include the variable passed in to it. if we just want the url domain, 
 //can grab that from the argument value, unless it's passed in; then you'd have to jump through more hoops to determine what the url is
-function analyze(apiInteractionsNodes, filePath) {
+function analyze(apiInteractions, filePath) {
   console.log(`\x1b[35mInside Fetch API Extended Analysis`);
-  console.log('apiInteractionsNodes:', apiInteractionsNodes)
+  console.log('apiInteractions:', apiInteractions)
 
   let totalInteractions = 0;
-  let apiArguments = {};
-  for (const key in apiInteractionsNodes) {
+  // // let apiArguments = {};
+  // for (const api of apiInteractions) {
+  const details = apiInteractions.map((api) => {
     //add up total api calls in each file
-    const numApiInteractions = apiInteractionsNodes[key].numNodes;
+    const numApiInteractions = api.numNodes;
     if (numApiInteractions > 0) {
       totalInteractions += numApiInteractions;
     }
-    console.log('Key:', key)
-    console.log('Element in object: ', apiInteractionsNodes[key]);
+    console.log('Api:', api.apiName)
+    console.log('Element in object: ', api);
     //get arguments (data endpoints for each api call)
-    let nodes = apiInteractionsNodes[key].nodes;
+    let nodes = api.nodes;
     const args = [];
     nodes.forEach((node, index) => {
       console.log(`node ${index + 1} arguments: ${node.arguments}`);
 
-      for (let i = 0; i < node.arguments.length; i++) {
+      //TODO: need to account for imported apis, where there is not arguments property directly on the node. need to grab the call expression then grab the arguments
+      for (let i = 0; i < node.arguments?.length; i++) {
         const arg = node.arguments[i];
         console.log('Argument type: ', arg.type);
         let argValue;
@@ -169,11 +176,13 @@ function analyze(apiInteractionsNodes, filePath) {
         args.push(argValue);
       }
     });
-
-    apiArguments[key] = args;
-
-  }
-  const stream = fs.createWriteStream('./api-query-testing.log', { flags: 'a' });
+    return ({
+      api: api.apiName,
+      numInteractions: api.numNodes,
+      args
+    });
+  });
+  const stream = fs.createWriteStream('./api-query-testing.log');
 
   // const memberExpressionFetchCalls = esquery.query(ast, 'CallExpression[callee.type="MemberExpression"][callee.property.name="fetch"]');
   // const regularFunctionFetchCalls = esquery.query(ast,'CallExpression[callee.type="Identifier"][callee.name="fetch"]');
@@ -184,7 +193,7 @@ function analyze(apiInteractionsNodes, filePath) {
   const fileDetails = {
     filePath,
     totalInteractions,
-    apiArguments
+    details
   };
 
   stream.write(JSON.stringify(fileDetails, null, 2));
