@@ -3,6 +3,7 @@ node_modules
 .DS_Store
 .vscode
 AST-parsing.log
-temp-file-upload/
+temp-file-upload
 super-structure.log
 cohesionController.log
+api-query-testing.log
