@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
+// @ts-ignore
 import D3 from './D3.jsx';
 import '../Styles/repoupload.css';
 
 
+interface RepoUploadProps {
+  popupShowing: boolean;
+  setPopupShowing: (value: boolean) => void;
+  setClickedNodeData: (value: any) => void;
+  setAnalyzeButton: (value: boolean) => void;
+}
 
-function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData }) {
+function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnalyzeButton} : RepoUploadProps) {
   const [hierarchyData, setHierarchyData] = useState(null);
 
-  async function apiCall(event) {
+  async function apiCall(event : any) {
 
     event.preventDefault();
     const files = event.target.elements.file.files;
@@ -44,6 +51,7 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData }) {
 
         // for now to test //
         setHierarchyData(data.children[0]);
+        setAnalyzeButton(true); //setter function to render analyze button
 
       } else {
         console.error('Upload failed');
@@ -72,6 +80,7 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData }) {
             <h1 className='upload-alert'>Upload A Repository</h1>
             <div className="form-example">
               <form onSubmit={apiCall}>
+                {/* @ts-expect-error */}
                 <input type="file" name="file" id="file" multiple webkitdirectory="true" />
                 <button type="submit" id="submit-btn">Submit</button>
               </form>

@@ -155,14 +155,14 @@ function checkDatabase(fileAst, importPaths) {
         backendFileASTs.forEach(fileObject => {
           const ast = fileObject.ast;
           const filePath = fileObject.filePath;
-          console.log(`\nAnalyzing file: ${filePath}`);
+          // console.log(`\nAnalyzing file: ${filePath}`);
         
           // CHECK AND ANALYZE DATABASE INTERACTIONS
           Object.keys(databaseHandlers).forEach(dbKey => {
             const handler = databaseHandlers[dbKey];
             if (handler.check(ast)) {
               const analysisResults = handler.analyze(ast, filePath); // Passing both AST and filePath
-              console.log(`${dbKey} Analysis Results:`, analysisResults);
+              // console.log(`${dbKey} Analysis Results:`, analysisResults);
             }
           });
         });
