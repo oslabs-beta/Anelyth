@@ -17,6 +17,8 @@ import ASTDbQueryController from "./Controllers/ASTDbQueryController.mjs";
 import ASTApiQueryController from './Controllers/ASTApiQueryController.mjs';
 import SessionController from "./Controllers/SessionController.cjs";
 import DataController from "./Controllers/DataController.mjs";
+import CohesionController from './Controllers/CohesionController.cjs';
+import couplingController from './Controllers/CouplingController.mjs';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -47,18 +49,21 @@ app.post('/api/signup',
 app.post('/api/fileupload',
     FileController.upload,
     DCController.analyze,
-    // ASTParseController.parse,
-    // ASTDbQueryController.query,
-    // ASTApiQueryController.query,
+    ASTParseController.parse,
+    ASTDbQueryController.query,
+    ASTApiQueryController.query,
     DataController.superStructure,
+    couplingController.extractDetails,
+    CohesionController.calculateCohesion,
     // FileController.deleteDir,
+    
     // S3Controller.upload,
     (req, res) => {
         // console.log(res.locals.parsedFiles);
         // const firstObject = res.locals.parsedFiles[3];
         // const astOfFirsObject = firstObject.ast;
         // console.log(astOfFirsObject);
-        res.status(200).send(res.locals.hierarchy);
+        res.status(200).send(res.locals)
     }
 );
 

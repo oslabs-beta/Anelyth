@@ -5,21 +5,21 @@ const path = require('path');
 const CohesionController = {};
 
 
-const arrOne = [
-  {fileName: 'file1', details: [{url: 'endpoint1'}, {url: 'endpoint2'}]}, 
-  {fileName: 'file2', details: [{url: 'endpoint1'}, {url: 'endpoint2'}, {url: 'endpoint3'}]}, 
-  {fileName: 'file5', details: [{url: 'endpoint6'}]},
-  {fileName: 'file3', details: [{url: 'endpoint1'}, {url: 'endpoint4'}]},
-  {fileName: 'file4', details: [{url: 'endpoint3'}]}
-];
+// const arrOne = [
+//   {fileName: 'file1', details: [{url: 'endpoint1'}, {url: 'endpoint2'}]}, 
+//   {fileName: 'file2', details: [{url: 'endpoint1'}, {url: 'endpoint2'}, {url: 'endpoint3'}]}, 
+//   {fileName: 'file5', details: [{url: 'endpoint6'}]},
+//   {fileName: 'file3', details: [{url: 'endpoint1'}, {url: 'endpoint4'}]},
+//   {fileName: 'file4', details: [{url: 'endpoint3'}]}
+// ];
 
-const arrTwo = [
-  {fileName: 'file1', apiDetails: [{url: 'endpoint1'}, {url: 'endpoint2'}], dbDetails: [{keyword: 'mongoose'}, {keyword: 'model'}], moduleDetails: [{module: './models.js'}]}, 
-  {fileName: 'file2', apiDetails: [{url: 'endpoint1'}, {url: 'endpoint2'}, {url: 'endpoint3'}], dbDetails: [{keyword: 'mongoose'}], moduleDetails: [{module: './controllers/controller1.js'}]}, 
-  {fileName: 'file5', apiDetails: [{url: 'endpoint6'}], dbDetails: [], moduleDetails: [{module: './routes.js'}, {module: './controllers/controllers2.js'}]},
-  {fileName: 'file3', apiDetails: [{url: 'endpoint1'}, {url: 'endpoint4'}], dbDetails: [], moduleDetails: [{module: './module1.js'}, {module: './controllers/controllers2.js'}]},
-  {fileName: 'file4', apiDetails: [{url: 'endpoint3'}], dbDetails: [], moduleDetails: [{module: './module1.js'}]}
-];
+// const arrTwo = [
+//   {fileName: 'file1', apiDetails: [{url: 'endpoint1'}, {url: 'endpoint2'}], dbDetails: [{keyword: 'mongoose'}, {keyword: 'model'}], moduleDetails: [{module: './models.js'}]}, 
+//   {fileName: 'file2', apiDetails: [{url: 'endpoint1'}, {url: 'endpoint2'}, {url: 'endpoint3'}], dbDetails: [{keyword: 'mongoose'}], moduleDetails: [{module: './controllers/controller1.js'}]}, 
+//   {fileName: 'file5', apiDetails: [{url: 'endpoint6'}], dbDetails: [], moduleDetails: [{module: './routes.js'}, {module: './controllers/controllers2.js'}]},
+//   {fileName: 'file3', apiDetails: [{url: 'endpoint1'}, {url: 'endpoint4'}], dbDetails: [], moduleDetails: [{module: './module1.js'}, {module: './controllers/controllers2.js'}]},
+//   {fileName: 'file4', apiDetails: [{url: 'endpoint3'}], dbDetails: [], moduleDetails: [{module: './module1.js'}]}
+// ];
 
 //approach 1: what percentage of unique endpoints do they have in common?
 //for each file: total unique endpoints, so if file1 has endpoint1, endpoint1, endpoint2, then there are 2 unique endpoints (endpoint1 & endpoint 2)
@@ -34,22 +34,24 @@ const arrTwo = [
 //input: array of objects from superstructure, threshold
   // [{fileName: 'file1', details: [{url: 'value1'}, {url: 'value2'}]}, {fileName: 'file2', details: [{url: 'value1'}, {url: 'value3'}]}]
 //output: array of arrays of objects: grouped by potential microservice based on api cohesion metric
-CohesionController.calculateApiCohesion = (arr) => {
+
+
+CohesionController.calculateCohesion = (req, res, next) => {
   //declare output array
   const result = [];
   //declare remaining array of elements
-  const remaining = JSON.parse(JSON.stringify(arr)); 
+  const remaining = JSON.parse(JSON.stringify(res.locals.detailsArray)); 
   //loop
   while (remaining.length > 0) {
     //declare subarray, initialize with 1st element left
     const potentialMicroservice = [remaining.shift()];
-    console.log('outer potentialMicroservice:', potentialMicroservice)
+    // console.log('outer potentialMicroservice:', potentialMicroservice)
     let j = 0;
     //element to compare
     let element = remaining[j];
     while (element) {
-      console.log('element:', element)
-      console.log('inner potentialMicroservice:', potentialMicroservice)
+      // console.log('element:', element)
+      // console.log('inner potentialMicroservice:', potentialMicroservice)
       //compare elements, if passes, combine. if combined, that becomes an element. if not, continue.
       //pass in threshold here
       if (shouldCombine(potentialMicroservice, element, 0.75)) {
@@ -61,16 +63,21 @@ CohesionController.calculateApiCohesion = (arr) => {
       }
       //compare next element
       element = remaining[j];
-      console.log('remaining:', remaining)
+      // console.log('remaining:', remaining)
     }
     //once you get to the end of remaining array, you have any potentialMicroservice that remaining[i] would be part of, so push it to result
     result.push(potentialMicroservice);
   }
+  console.log('result:', result)
+  res.locals.clusters = result
+  const logFilePath = path.join('..', '..', 'cohesionController.log');
+  const logStream = fs.createWriteStream(logFilePath);
+  logStream.write(JSON.stringify(result, null, 2));
 
-  return result;
+  return next();
 
   function shouldCombine (elementOne, elementTwo, threshold) {
-    console.log('entering shouldCombine');
+    // console.log('entering shouldCombine');
     const elOneApiEndpoints = new Set();
     const elTwoApiEndpoints = new Set();
 
@@ -142,10 +149,7 @@ CohesionController.calculateApiCohesion = (arr) => {
   };
 };
 
-const result = CohesionController.calculateApiCohesion(arrOne);
-// console.log('result:', result)
-const logFilePath = path.join('..', '..', 'cohesionController.log');
-const logStream = fs.createWriteStream(logFilePath);
-logStream.write(JSON.stringify(result, null, 2));
-// module.exports = CohesionController;
+
+
+module.exports = CohesionController;
 

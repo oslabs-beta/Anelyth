@@ -65,6 +65,7 @@ function buildHierarchy(filePath, depResult, level = 0) {
 
 function printDirectoryTree(dir, depResult) {
   const hierarchy = buildHierarchy(dir, depResult);
+  console.log('hierarchy.dependencies:=====>',hierarchy)
   return hierarchy;
 }
 
