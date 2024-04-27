@@ -99,7 +99,11 @@ AstApiQueryController2.queryFunc = async (nodeAST, nodePath) => {
     const result = getApiCalls(nodeAST, ['fetch', 'axios']);
     console.log('result from getApiCalls: ', result);
     if (!result) {
-      return;
+      return ({
+        filePath: nodePath,
+        totalInteractions: 0,
+        details: []
+      });
     } else {
       // console.log('result in AstApiQueryController2.queryFunc before analysis: ', result);
       // console.log('nodes in result: ', result.fetch.nodes);
