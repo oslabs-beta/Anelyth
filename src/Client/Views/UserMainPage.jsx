@@ -7,12 +7,14 @@ import icon4 from '../Assets/icons/icons8-pyramid-96.png';
 import icon5 from '../Assets/icons/icons8-logout-96.png';
 
 import RepoUpload from '../Components/RepoUpload.tsx';
+import ClustersDisplay from '../Components/ClustersDisplay';
 import NodeInfoModal from '../Components/NodeInfoModal.jsx';
 
 function UserMainPage() {
   const [popupShowing, setPopupShowing] = useState(false);
   const [clickedNodeData, setClickedNodeData] = useState(null);
   const [analyzeButtonShowing, setAnalyzeButton] = useState(false);
+  const [clusterData, setClusterData] = useState(null);
 
   return (
   <>
@@ -58,9 +60,21 @@ function UserMainPage() {
 
     <div className='main-content'>
       <div className='visual-container'>
-        <RepoUpload popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} setAnalyzeButton={setAnalyzeButton}/>
-        <div className='info-panel'>
-        {popupShowing && clickedNodeData.dependencies && <NodeInfoModal data={clickedNodeData}/>}
+      <RepoUpload
+              popupShowing={popupShowing}
+              setPopupShowing={setPopupShowing}
+              setClickedNodeData={setClickedNodeData}
+              setAnalyzeButton={setAnalyzeButton}
+              clusterData={clusterData}
+              setClusterData={setClusterData}
+            />
+        <div className='clusters-infopanel'>
+          <div className='info-panel'>
+            {popupShowing && clickedNodeData.dependencies && <NodeInfoModal data={clickedNodeData}/>}
+          </div>
+          <div className='clusters-display-container'>
+            {clusterData && <ClustersDisplay clusterData={clusterData} />} 
+          </div>
         </div>
       </div>
     </div>
