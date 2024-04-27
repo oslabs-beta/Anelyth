@@ -1,14 +1,9 @@
 [
   {
-    "fileName": "assets.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
     "fileName": "AddBook.js",
-    "apiDetails": [],
+    "apiDetails": [
+      {}
+    ],
     "dbDetails": [],
     "moduleDetails": [
       {
@@ -21,57 +16,10 @@
     "dependencyCount": 2
   },
   {
-    "fileName": "App.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [
-      {
-        "module": "src/Server/temp-file-upload/scratch project/client/components/Home.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/scratch project/client/components/HomeNavBar.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/scratch project/client/components/Login.jsx"
-      },
-      {
-        "module": "src/Server/temp-file-upload/scratch project/client/components/MyLibrary.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/scratch project/client/components/Profile.jsx"
-      },
-      {
-        "module": "src/Server/temp-file-upload/scratch project/client/components/ProtectedRoute.jsx"
-      },
-      {
-        "module": "src/Server/temp-file-upload/scratch project/client/components/SignUp.jsx"
-      },
-      {
-        "module": "src/Server/temp-file-upload/scratch project/client/components/SwapComponents/Notifications.jsx"
-      },
-      {
-        "module": "src/Server/temp-file-upload/scratch project/client/components/SwapComponents/Requests.jsx"
-      }
-    ],
-    "dependencyCount": 9
-  },
-  {
-    "fileName": "BorrowedBooks.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "CheckedOut.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
     "fileName": "GoogleMap.js",
-    "apiDetails": [],
+    "apiDetails": [
+      {}
+    ],
     "dbDetails": [],
     "moduleDetails": [
       {
@@ -81,25 +29,10 @@
     "dependencyCount": 1
   },
   {
-    "fileName": "Home.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [
-      {
-        "module": "src/Server/temp-file-upload/scratch project/client/components/GoogleMap.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/scratch project/client/components/HomeNavBar.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/scratch project/client/components/HomeSearchBar.js"
-      }
-    ],
-    "dependencyCount": 3
-  },
-  {
     "fileName": "HomeNavBar.js",
-    "apiDetails": [],
+    "apiDetails": [
+      {}
+    ],
     "dbDetails": [],
     "moduleDetails": [
       {
@@ -110,7 +43,9 @@
   },
   {
     "fileName": "HomeSearchBar.js",
-    "apiDetails": [],
+    "apiDetails": [
+      {}
+    ],
     "dbDetails": [],
     "moduleDetails": [
       {
@@ -121,7 +56,9 @@
   },
   {
     "fileName": "Login.jsx",
-    "apiDetails": [],
+    "apiDetails": [
+      {}
+    ],
     "dbDetails": [],
     "moduleDetails": [
       {
@@ -131,15 +68,10 @@
     "dependencyCount": 1
   },
   {
-    "fileName": "MyBooks.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
     "fileName": "MyLibrary.js",
-    "apiDetails": [],
+    "apiDetails": [
+      {}
+    ],
     "dbDetails": [],
     "moduleDetails": [
       {
@@ -156,7 +88,9 @@
   },
   {
     "fileName": "Profile.jsx",
-    "apiDetails": [],
+    "apiDetails": [
+      {}
+    ],
     "dbDetails": [],
     "moduleDetails": [
       {
@@ -170,14 +104,18 @@
   },
   {
     "fileName": "ProtectedRoute.jsx",
-    "apiDetails": [],
+    "apiDetails": [
+      {}
+    ],
     "dbDetails": [],
     "moduleDetails": [],
     "dependencyCount": 0
   },
   {
     "fileName": "SignUp.jsx",
-    "apiDetails": [],
+    "apiDetails": [
+      {}
+    ],
     "dbDetails": [],
     "moduleDetails": [
       {
@@ -187,15 +125,10 @@
     "dependencyCount": 1
   },
   {
-    "fileName": "Note.jsx",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
     "fileName": "Notifications.jsx",
-    "apiDetails": [],
+    "apiDetails": [
+      {}
+    ],
     "dbDetails": [],
     "moduleDetails": [
       {
@@ -211,15 +144,10 @@
     "dependencyCount": 3
   },
   {
-    "fileName": "RequestCard.jsx",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
     "fileName": "Requests.jsx",
-    "apiDetails": [],
+    "apiDetails": [
+      {}
+    ],
     "dbDetails": [],
     "moduleDetails": [
       {
@@ -232,26 +160,10 @@
     "dependencyCount": 2
   },
   {
-    "fileName": "modal.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "index.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [
-      {
-        "module": "src/Server/temp-file-upload/scratch project/client/components/App.js"
-      }
-    ],
-    "dependencyCount": 1
-  },
-  {
     "fileName": "apiController.js",
-    "apiDetails": [],
+    "apiDetails": [
+      {}
+    ],
     "dbDetails": [
       {
         "dbType": "MongoDB",
@@ -264,158 +176,5 @@
       }
     ],
     "dependencyCount": 1
-  },
-  {
-    "fileName": "authController.js",
-    "apiDetails": [],
-    "dbDetails": [
-      {
-        "dbType": "MongoDB",
-        "totalInteractions": 1
-      }
-    ],
-    "moduleDetails": [
-      {
-        "module": "src/Server/temp-file-upload/scratch project/server/models/models.js"
-      }
-    ],
-    "dependencyCount": 1
-  },
-  {
-    "fileName": "controllers.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "cookieController.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "jwtController.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "libraryController.js",
-    "apiDetails": [],
-    "dbDetails": [
-      {
-        "dbType": "MongoDB",
-        "totalInteractions": 8
-      }
-    ],
-    "moduleDetails": [
-      {
-        "module": "src/Server/temp-file-upload/scratch project/server/models/models.js"
-      }
-    ],
-    "dependencyCount": 1
-  },
-  {
-    "fileName": "sessionController.js",
-    "apiDetails": [],
-    "dbDetails": [
-      {
-        "dbType": "MongoDB",
-        "totalInteractions": 5
-      }
-    ],
-    "moduleDetails": [
-      {
-        "module": "src/Server/temp-file-upload/scratch project/server/models/models.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/scratch project/server/models/sessionModel.js"
-      }
-    ],
-    "dependencyCount": 2
-  },
-  {
-    "fileName": "userController.js",
-    "apiDetails": [],
-    "dbDetails": [
-      {
-        "dbType": "MongoDB",
-        "totalInteractions": 31
-      }
-    ],
-    "moduleDetails": [
-      {
-        "module": "src/Server/temp-file-upload/scratch project/server/models/models.js"
-      }
-    ],
-    "dependencyCount": 1
-  },
-  {
-    "fileName": "models.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "sessionModel.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "library.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [
-      {
-        "module": "src/Server/temp-file-upload/scratch project/server/controllers/apiController.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/scratch project/server/controllers/authController.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/scratch project/server/controllers/libraryController.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/scratch project/server/controllers/userController.js"
-      }
-    ],
-    "dependencyCount": 4
-  },
-  {
-    "fileName": "routes.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "server.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [
-      {
-        "module": "src/Server/temp-file-upload/scratch project/server/controllers/authController.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/scratch project/server/controllers/userController.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/scratch project/server/routes/library.js"
-      }
-    ],
-    "dependencyCount": 3
-  },
-  {
-    "fileName": "webpack.config.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
   }
 ]

@@ -55,7 +55,7 @@ app.post('/api/fileupload',
     DataController.superStructure,
     couplingController.extractDetails,
     CohesionController.calculateCohesion,
-    // FileController.deleteDir,
+    FileController.deleteDir,
     
     // S3Controller.upload,
     (req, res) => {
