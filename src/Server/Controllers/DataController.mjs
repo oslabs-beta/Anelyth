@@ -6,7 +6,7 @@ import esquery from 'esquery';
 import { Parser } from 'acorn';
 import jsx from 'acorn-jsx';
 import ASTDbQueryController from './ASTDbQueryController.mjs';
-import ASTApiQueryController from './ASTApiQueryController.mjs';
+import ASTApiQueryController from './AstApiQueryController2.mjs';
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -18,8 +18,10 @@ jsx(Parser);
 
 const DataController = {};
 
-
+;
 // ------- MIDDLEWARE FOR CREATING SUPER STRUCTURE ------- //
+
+//NOTE: this middleware is only writing superstructure to log right now. it's not passing it along in the middleware chain.
 DataController.superStructure = async (req, res, next) => {
   try{
     console.log('in DataController.superStructure')
@@ -27,20 +29,15 @@ DataController.superStructure = async (req, res, next) => {
     let superStructure = {};
     const dcdata = res.locals.depResult;
     // const astData = res.locals.astData;
-    // console.log('dcdata: ',dcdata)
     
     const filePath = path.resolve(__dirname, '../temp-file-upload');
 
     // SAVE RESULT OF BUILDHIERARCHY TO VARIABLE
-    const hierarchy = await buildHierarchy(filePath);
+    const hierarchy = buildHierarchy(filePath);
     // CREATE NEW VARIABLE STARTING AT UPLOADED REPO ROOT DIRECTORY
     const codeHierarchy = hierarchy.children[0];
-    // console.log('total hierarchy: ', codeHierarchy);
-
     // CREATE THE SUPER STRUCTURE WITH TRAVERSEHIERARCHY FUNCTION
     superStructure = await traverseHierarchy(codeHierarchy, dcdata);
-    // console.log('super structure: ',superStructure);
-
     // temp log of super structure
     const logFilePath = './super-structure.log';
     const logStream = fs.createWriteStream(logFilePath);
@@ -68,27 +65,27 @@ DataController.superStructure = async (req, res, next) => {
 
 
 // FUNCTION TO BUILD HIERARCHY OF FILES
-function buildHierarchy(filePath, level = 0) {
+function buildHierarchy(nodePath) {
 
-  const stat = fs.statSync(filePath);
+  const stat = fs.statSync(nodePath);
 
   if (stat.isDirectory()) {
-    // IF FILE IS A DIRECTORY
-    const files = fs.readdirSync(filePath);
+    // IF NODE PATH IS A DIRECTORY
+    const dirContents = fs.readdirSync(nodePath);
 
-    const children = files.map(file => buildHierarchy(path.join(filePath, file), level + 1)).filter(child => child); // Filter out null/undefined children
+    const children = dirContents.map(node => buildHierarchy(path.join(nodePath, node)))
 
     return {
-      name: path.basename(filePath),
-      path: path.resolve(filePath),
+      name: path.basename(nodePath),
+      path: path.resolve(nodePath),
       type: 'directory',
       children: children
     };
   } else {
     // IF FILE IS NOT A DIRECTORY
     return {
-      name: path.basename(filePath),
-      path: path.resolve(filePath),
+      name: path.basename(nodePath),
+      path: path.resolve(nodePath),
       type: 'file'
 
     };
@@ -99,7 +96,7 @@ function buildHierarchy(filePath, level = 0) {
 
 // MAIN FUNCTION TO BUILD OUT SUPER STRUCTURE //
 async function traverseHierarchy(node, dcdata) {
-  try{
+  try {
     if (!node) {
       return;
     }
@@ -111,7 +108,6 @@ async function traverseHierarchy(node, dcdata) {
         path: node.path,
       };
     }
-  
   
     const newNode = {
       name: node.name,
@@ -132,6 +128,7 @@ async function traverseHierarchy(node, dcdata) {
  
       const dbData = await ASTDbQueryController.query2(nodeAst, node.path);
       const apiData = await ASTApiQueryController.queryFunc(nodeAst, node.path);
+      console.log('apiData in superstructure:', apiData);
       const exportsData = getModuleDotExports(nodeAst);
       const exportsData2 = getES6DefaultExports(nodeAst);
       const exportsData3 = getES6Exports(nodeAst);
@@ -159,17 +156,18 @@ async function traverseHierarchy(node, dcdata) {
 
       newNode.dbInfo = dbData;
 
-      if (apiData) {
-        newNode.apiInfo = {
-          totalInteractions: apiData.totalInteractions || 0,
-          details: getApiData(apiData)
-        }
-      } else {
-        newNode.apiInfo = {
-          totalInteractions: 0,
-          details: []
-        }
-      }
+      // if (apiData) {
+      //   newNode.apiInfo = {
+      //     totalInteractions: apiData.totalInteractions,
+      //     details: getApiData(apiData)
+      //   }
+      // } else {
+      //   newNode.apiInfo = {
+      //     totalInteractions: 0,
+      //     details: []
+      //   }
+      // }
+      newNode.apiInfo = apiData;
 
 
     }
@@ -305,7 +303,7 @@ function getASTClassDecs(ast){
   classDeclarations.forEach(node => {
     let classObj = {};
 
-    console.log(node.body.body);
+    // console.log(node.body.body);
     // console.log('constutror shitt:  ', node.body.body[0].value.body.body[0].expression.left)
     // node.body.body[0].value.body.body.forEach(el => console.log('look here!!!!! : ',el.expression.left))
 
