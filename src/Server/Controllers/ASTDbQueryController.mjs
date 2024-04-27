@@ -1,5 +1,7 @@
 import esquery from 'esquery';
 import path from 'path';
+import chalk from 'chalk';
+import ora from 'ora';
 
 
 const ASTDbQueryController = {};
@@ -10,40 +12,40 @@ const ASTDbQueryController = {};
 
 // ------- CHECK DATABASE FUNCTION ------- //
 
-// function checkDatabase(fileAst, importPaths) {
-//   return importPaths.some(importPath => {
-//     const queryResult = esquery.query(
-//       fileAst,
-//       `VariableDeclarator[init.callee.name="require"][init.arguments.0.value="${importPath}"],
-//        CallExpression[callee.name="require"][arguments.0.value="${importPath}"],
-//        ImportDeclaration[source.value="${importPath}"][specifiers.0.local.name!="${importPath}"],
-//        CallExpression[callee.name="import"][arguments.0.type="Identifier"][arguments.0.value="${importPath}"],
-//        ImportDeclaration[source.value="${importPath}"][specifiers.length>1],
-//        ImportDeclaration[source.value="${importPath}"][specifiers.0.name!="${importPath}"],
-//        ImportDeclaration[source.value="${importPath}"][specifiers.0.type="ImportDefaultSpecifier"],
-//        ImportDeclaration[source.value="${importPath}"][specifiers.0.type="ImportNamespaceSpecifier"],
-//        CallExpression[callee.type="Import"][arguments.0.value="${importPath}"]`
-//     );
+function checkDatabase(fileAst, importPaths) {
+  return importPaths.some(importPath => {
+    const queryResult = esquery.query(
+      fileAst,
+      `VariableDeclarator[init.callee.name="require"][init.arguments.0.value="${importPath}"],
+       CallExpression[callee.name="require"][arguments.0.value="${importPath}"],
+       ImportDeclaration[source.value="${importPath}"][specifiers.0.local.name!="${importPath}"],
+       CallExpression[callee.name="import"][arguments.0.type="Identifier"][arguments.0.value="${importPath}"],
+       ImportDeclaration[source.value="${importPath}"][specifiers.length>1],
+       ImportDeclaration[source.value="${importPath}"][specifiers.0.name!="${importPath}"],
+       ImportDeclaration[source.value="${importPath}"][specifiers.0.type="ImportDefaultSpecifier"],
+       ImportDeclaration[source.value="${importPath}"][specifiers.0.type="ImportNamespaceSpecifier"],
+       CallExpression[callee.type="Import"][arguments.0.value="${importPath}"]`
+    );
 
-//     // console.log(`Checking for ${importPath}:`, queryResult.length > 0);
+    // console.log(`Checking for ${importPath}:`, queryResult.length > 0);
 
-//     return queryResult.length > 0;
-//   });
-// }   
+    return queryResult.length > 0;
+  });
+}   
 
 
 //GOOD FUNCTION APR 26 5:58 PM
-function checkDatabase(fileAst, importPaths, filePath, modelRegistry, importRegistry) {
-
+function checkFileForModelImports(fileAst, importPaths, filePath, modelRegistry, importRegistry) {
+  
   
   if (!filePath || !modelRegistry || !importRegistry) {
       return false; // Exit early if filePath is not provided
   }
-
-  // console.log ('What is model', modelRegistry);
-  // console.log ('import registry', importRegistry);
-
-  // console.log ('What is filepath', filePath);
+//   const spinner = ora({
+//     text: 'Analyzing imports...',
+//     color: 'yellow',
+//     spinner: 'dots'
+// }).start();
 
   const basePath = 'FFSS-OSP/src/Server/temp-file-upload/';
   // Normalize the filePath to match the format used in the importRegistry and converting the whole string to Lowercase to achieve normalization
@@ -69,8 +71,8 @@ function checkDatabase(fileAst, importPaths, filePath, modelRegistry, importRegi
   });
 
 
-  console.log ('The direct check of imports on ' + normalizedFilePath +' has found an import of a model', directCheck)
-
+  // spinner.succeed('Analysis complete.');
+  // console.log(chalk.green('The direct check of imports on ') + chalk.blue(normalizedFilePath) + chalk.green(' has found an import of a model: ') + chalk.yellow(directCheck));
   
 
   // // Recursive check for indirect model imports
@@ -246,7 +248,7 @@ ASTDbQueryController.query2 = (newAST, astFilePath, modelRegistry, importRegistr
     // DATABASE HANDLERS
     const databaseHandlers = {
       'MongoDB': {
-        check: (ast, path) => checkDatabase(ast, ['mongoose', 'mongodb'], path, modelRegistry, importRegistry),
+        check: (ast, path) => checkFileForModelImports(ast, ['mongoose', 'mongodb'], path, modelRegistry, importRegistry),
         analyze: (ast, filePath) => analyzeMongoDBInteractions(ast, filePath, modelRegistry)
       },
       'PostgreSQL': {
@@ -439,7 +441,7 @@ ASTDbQueryController.query2 = (newAST, astFilePath, modelRegistry, importRegistr
 //   return results;
 // }
 function analyzeMongoDBInteractions(fileAst, filePath, modelRegistry) {
-  console.log('Inside Mongoose Interaction Analysis');
+  console.log(`\x1b[35mInside Mongoose Interaction Analysis...`);
 
   // Mongoose methods we are interested in tracking
   const mongooseMethods = [

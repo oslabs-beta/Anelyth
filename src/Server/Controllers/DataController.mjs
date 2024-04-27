@@ -5,6 +5,7 @@ import babel from '@babel/core';
 import esquery from 'esquery';
 import { Parser } from 'acorn';
 import jsx from 'acorn-jsx';
+import ora from 'ora';
 import ASTDbQueryController from './ASTDbQueryController.mjs';
 import ASTApiQueryController from './ASTApiQueryController.mjs';
 
@@ -22,7 +23,12 @@ const DataController = {};
 // ------- MIDDLEWARE FOR CREATING SUPER STRUCTURE ------- //
 DataController.superStructure = async (req, res, next) => {
   try{
-    console.log('in DataController.superStructure')
+    
+    const spinner = ora({
+      text: 'Building super structure...',
+      color: 'yellow',
+      spinner: 'dots'
+    }).start();
 
     let superStructure = {};
     const dcdata = res.locals.depResult;
@@ -49,6 +55,8 @@ DataController.superStructure = async (req, res, next) => {
     const logFilePath = './super-structure.log';
     const logStream = fs.createWriteStream(logFilePath);
     logStream.write(JSON.stringify(superStructure, null, 2));
+
+    spinner.succeed('Super structure built successfully.');
 
     return next();
   } catch (err) {

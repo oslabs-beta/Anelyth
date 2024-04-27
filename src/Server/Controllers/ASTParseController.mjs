@@ -51,16 +51,6 @@ const parseFileToAST = (filePath, locals) => {
             locations: true
           });
 
-
-          // Check for mongoose.model usage
-          // const modelDeclarations = esquery(ast, `CallExpression[callee.object.name="mongoose"][callee.property.name="model"]`);
-          // modelDeclarations.forEach((dec) => {
-          //   const modelName = dec.arguments[0].value;  // Assuming first argument is the model name as a string
-          //   if (modelName) {
-          //     modelRegistry[modelName] = filePath;
-          //     console.log ('We found a model' , modelName)
-          //   }
-          // });
          
           const modelDeclarations = esquery(ast, `CallExpression[callee.object.name="mongoose"][callee.property.name="model"]`);
           modelDeclarations.forEach((dec) => {
@@ -68,7 +58,7 @@ const parseFileToAST = (filePath, locals) => {
             if (modelName) {
               const relativeModelPath = path.relative(baseDirectory, filePath).toLocaleLowerCase(); // Convert to relative path and convert to lowercase for normalization
               locals.modelRegistry[modelName] = relativeModelPath;
-              console.log('We found a model', modelName, 'at', relativeModelPath);
+              // console.log('We found a model', modelName, 'at', relativeModelPath);
             }
           });
 
@@ -189,8 +179,10 @@ ASTParseController.parse = async (req, res, next) => {
 
     // ------- CALL NEXT MIDDLEWARE ------- //
 
-    console.log ('What is model registry', res.locals.modelRegistry);
-    console.log ('What is import registry', res.locals.importRegistry);
+    console.log ('We have found some mongoose models in your codebase.');
+    console.table (res.locals.modelRegistry);
+    console.log ('What is import registry.');
+    console.log (res.locals.importRegistry)
     next();
   } catch (err) {
     console.error('Error in ASTController.parse:', err);
