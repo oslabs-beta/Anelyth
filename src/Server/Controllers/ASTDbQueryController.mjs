@@ -40,28 +40,28 @@ function checkDatabase(fileAst, importPaths, filePath, modelRegistry, importRegi
       return false; // Exit early if filePath is not provided
   }
 
-  console.log ('What is model', modelRegistry);
-  console.log ('import registry', importRegistry);
+  // console.log ('What is model', modelRegistry);
+  // console.log ('import registry', importRegistry);
 
-  console.log ('What is filepath', filePath);
+  // console.log ('What is filepath', filePath);
 
   const basePath = 'FFSS-OSP/src/Server/temp-file-upload/';
   // Normalize the filePath to match the format used in the importRegistry and converting the whole string to Lowercase to achieve normalization
   const normalizedFilePath = filePath.substring(filePath.indexOf(basePath) + basePath.length).toLowerCase();
 
-  console.log ('What is normalized file path', normalizedFilePath);
+  // console.log ('What is normalized file path', normalizedFilePath);
 
   // Extract the actual imports for the current file from the importRegistry
   const fileImports = importRegistry[normalizedFilePath] || [];
 
-  console.log ('fileImports of'+ normalizedFilePath+'!! --->', fileImports);
+  // console.log ('fileImports of'+ normalizedFilePath+'!! --->', fileImports);
 
   // Check direct model imports by mapping model file paths from modelRegistry
   const modelFilePaths = new Set(Object.values(modelRegistry).map(path => 
     path.replace(/\.js$/, '') // Remove .js if present
   ));
 
-  console.log ('These are the model file paths in a Set ', modelFilePaths);
+  // console.log ('These are the model file paths in a Set ', modelFilePaths);
 
   const directCheck = fileImports.some(importPath => {
     const path = importPath.replace(/\.js$/, ''); // Normalize import path

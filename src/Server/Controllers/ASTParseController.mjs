@@ -66,7 +66,7 @@ const parseFileToAST = (filePath, locals) => {
           modelDeclarations.forEach((dec) => {
             const modelName = dec.arguments[0].value;  // Assuming first argument is the model name as a string
             if (modelName) {
-              const relativeModelPath = path.relative(baseDirectory, filePath); // Convert to relative path
+              const relativeModelPath = path.relative(baseDirectory, filePath).toLocaleLowerCase(); // Convert to relative path and convert to lowercase for normalization
               locals.modelRegistry[modelName] = relativeModelPath;
               console.log('We found a model', modelName, 'at', relativeModelPath);
             }
