@@ -32,34 +32,7 @@ const ASTDbQueryController = {};
 // }   
 
 
-//GOOD FUNCTION APR 24 10:53 PM
-// function checkDatabase(fileAst, importPaths, filePath) {
-//    const basePath = 'src/Server/temp-file-upload/';
-//    // Extract and normalize import paths from the AST
-
-//   //  console.log ('What is import Registry', importRegistry);
-//   //  console.log ('What is model registry', modelRegistry);
-
-   
-
-
-//   return importPaths.some(importPath => {
-//       const queryResult = esquery.query(
-//               fileAst,
-//               `VariableDeclarator[init.callee.name="require"][init.arguments.0.value="${importPath}"],
-//                CallExpression[callee.name="require"][arguments.0.value="${importPath}"],
-//                ImportDeclaration[source.value="${importPath}"][specifiers.0.local.name!="${importPath}"],
-//                CallExpression[callee.name="import"][arguments.0.type="Identifier"][arguments.0.value="${importPath}"],
-//                ImportDeclaration[source.value="${importPath}"][specifiers.length>1],
-//                ImportDeclaration[source.value="${importPath}"][specifiers.0.name!="${importPath}"],
-//                ImportDeclaration[source.value="${importPath}"][specifiers.0.type="ImportDefaultSpecifier"],
-//                ImportDeclaration[source.value="${importPath}"][specifiers.0.type="ImportNamespaceSpecifier"],
-//                CallExpression[callee.type="Import"][arguments.0.value="${importPath}"]`
-//             );
-//       return queryResult.length > 0;
-//   });
-// }
-
+//GOOD FUNCTION APR 26 5:58 PM
 function checkDatabase(fileAst, importPaths, filePath, modelRegistry, importRegistry) {
 
   
@@ -70,7 +43,7 @@ function checkDatabase(fileAst, importPaths, filePath, modelRegistry, importRegi
   console.log ('What is model', modelRegistry);
   console.log ('import registry', importRegistry);
 
-  
+  console.log ('What is filepath', filePath);
 
   const basePath = 'FFSS-OSP/src/Server/temp-file-upload/';
   // Normalize the filePath to match the format used in the importRegistry and converting the whole string to Lowercase to achieve normalization

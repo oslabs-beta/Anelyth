@@ -71,6 +71,8 @@ const parseFileToAST = (filePath, locals) => {
               console.log('We found a model', modelName, 'at', relativeModelPath);
             }
           });
+
+          //{model: 'path'}
            
           //Converting the filepath to lowercase for normalization
           let lowerCaseFilePath = filePath.toLowerCase();
@@ -90,6 +92,8 @@ const parseFileToAST = (filePath, locals) => {
  
            
            });
+
+           //{'file': ['import', 'import']}  '../models/models.js' '../models/models/models.s'
 
 
           resolve(ast);
