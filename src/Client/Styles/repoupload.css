@@ -41,6 +41,23 @@
   /* align-items: center; */
 }
 
+.D3-and-clusters {
+  display: flex;
+  flex-direction: row; 
+}
+
+.D3-container {
+  height: 100%;
+  width: 990px;
+  flex: 1; 
+  padding: 10px; 
+}
+
+.ClustersDisplay-container {
+  flex: 1; 
+  padding: 10px; 
+}
+
 .upload-repo-container {
   display: flex;
   flex-direction: column;

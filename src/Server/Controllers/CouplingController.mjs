@@ -107,7 +107,7 @@ try {
       JSON.stringify(detailsArray, null, 2)
     );
 
-    console.log("detailsArray pre sorting======>", detailsArray)
+    detailsArray.sort((a, b) => a.dependencyCount - b.dependencyCount)
     //pass the result down to the middleware chain
     res.locals.detailsArray = detailsArray;
 

@@ -63,7 +63,7 @@ app.post('/api/fileupload',
         // const firstObject = res.locals.parsedFiles[3];
         // const astOfFirsObject = firstObject.ast;
         // console.log(astOfFirsObject);
-        res.status(200).send(res.locals.hierarchy);
+        res.status(200).send(res.locals)
     }
 );
 

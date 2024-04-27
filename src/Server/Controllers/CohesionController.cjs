@@ -69,6 +69,7 @@ CohesionController.calculateCohesion = (req, res, next) => {
     result.push(potentialMicroservice);
   }
   console.log('result:', result)
+  res.locals.clusters = result
   const logFilePath = path.join('..', '..', 'cohesionController.log');
   const logStream = fs.createWriteStream(logFilePath);
   logStream.write(JSON.stringify(result, null, 2));
@@ -76,7 +77,7 @@ CohesionController.calculateCohesion = (req, res, next) => {
   return next();
 
   function shouldCombine (elementOne, elementTwo, threshold) {
-    console.log('entering shouldCombine');
+    // console.log('entering shouldCombine');
     const elOneApiEndpoints = new Set();
     const elTwoApiEndpoints = new Set();
 
