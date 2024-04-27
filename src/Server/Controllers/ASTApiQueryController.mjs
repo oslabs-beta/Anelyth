@@ -270,7 +270,7 @@ function analyzeFetchCalls(ast, filePath) {
     // console.log('call', call)
 
     // find http method
-    if (call.callee.object.arguments){
+    if (call.callee.object?.arguments){
 
       let interactionDetail = {
         method: 'fetch',

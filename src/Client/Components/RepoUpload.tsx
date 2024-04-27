@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 // @ts-ignore
 import D3 from './D3.jsx';
 import '../Styles/repoupload.css';
-
+import ClustersDisplay from './ClustersDisplay';
 
 interface RepoUploadProps {
   popupShowing: boolean;
   setPopupShowing: (value: boolean) => void;
   setClickedNodeData: (value: any) => void;
   setAnalyzeButton: (value: boolean) => void;
+  clusterData: any; 
+  setClusterData: (value: any) => void; 
 }
 
-function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnalyzeButton} : RepoUploadProps) {
+function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnalyzeButton, clusterData, setClusterData} : RepoUploadProps) {
   const [hierarchyData, setHierarchyData] = useState(null);
 
   async function apiCall(event : any) {
@@ -42,15 +44,17 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnal
         body: formData,
       });
 
+
       if (response.ok) {
         console.log('upload complete');
         const data = await response.json();
-        console.log('Data that was sent from the backend to feed into the D3 component ',data.children[0]);
+        console.log('Data that was sent from the backend to feed into the D3 component - data array',data.clusters);
         // send the data to s3 bucket here // 
         // add here // 
 
         // for now to test //
-        setHierarchyData(data.children[0]);
+        setHierarchyData(data.hierarchy.children[0]);
+        setClusterData(data.clusters);
         setAnalyzeButton(true); //setter function to render analyze button
 
       } else {
@@ -88,7 +92,9 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnal
           </div>
           
         ) : (
-        <D3 hierarchyData={hierarchyData} popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} />
+          <div className='D3-container'>
+            <D3 hierarchyData={hierarchyData} popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} />
+          </div>
         )}
       </div>
 
