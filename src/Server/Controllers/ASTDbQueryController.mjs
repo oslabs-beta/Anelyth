@@ -247,7 +247,7 @@ ASTDbQueryController.query2 = (newAST, astFilePath, modelRegistry, importRegistr
     const databaseHandlers = {
       'MongoDB': {
         check: (ast, path) => checkDatabase(ast, ['mongoose', 'mongodb'], path, modelRegistry, importRegistry),
-        analyze: (ast, filePath) => analyzeMongoDBInteractions(ast, filePath)
+        analyze: (ast, filePath) => analyzeMongoDBInteractions(ast, filePath, modelRegistry)
       },
       'PostgreSQL': {
         check: (ast) => checkDatabase(ast, ['pg']),
@@ -403,29 +403,76 @@ ASTDbQueryController.query2 = (newAST, astFilePath, modelRegistry, importRegistr
 
 
 // ANALYZE MONGO-DB INTERACTIONS
-function analyzeMongoDBInteractions(fileAst, filePath) {
-  console.log('Inside Mongoose Extended Analysis');
+// function analyzeMongoDBInteractions(fileAst, filePath, importRegistry) {
+//   console.log('Inside Mongoose Extended Analysis');
 
-  // RELATED KEYWORDS
-  const mongooseKeywords = [
-    'mongoose', 'Schema', 'model', 'find', 'findOne', 'findById',
-    'create', 'update', 'delete', 'aggregate', 'connect'
+//   // RELATED KEYWORDS
+//   const mongooseKeywords = [
+//     'find', 'findOne', 'findById', 'findOneAndCreate',
+//     'create', 'update', 'delete', 'aggregate', 'connect'
+//   ];
+
+//   let interactions = [];
+
+//   mongooseKeywords.forEach(keyword => {
+//     // DYNAMICALLY QUERY FOR KEYWORDS
+//     const keywordExpressions = esquery.query(fileAst, [
+//       `Identifier[name="${keyword}"]`, 
+//       `Literal[value="${keyword}"]`,
+//       `MemberExpression[property.name="${keyword}"]`,
+//       `CallExpression[callee.name="${keyword}"]`
+//     ].join(','));
+
+//     keywordExpressions.forEach(expr => {
+//       const line = expr.loc.start.line; // LINE NUMBER
+//       interactions.push({ keyword, filePath, line });
+//     });
+//   });
+
+//   // RESULTS
+//   let results = {
+//     filePath,
+//     totalInteractions: interactions.length,
+//     details: interactions
+//   };
+
+//   return results;
+// }
+function analyzeMongoDBInteractions(fileAst, filePath, modelRegistry) {
+  console.log('Inside Mongoose Interaction Analysis');
+
+  // Mongoose methods we are interested in tracking
+  const mongooseMethods = [
+    'find', 'findOne', 'findById', 'findOneAndUpdate', 'findOneAndDelete',
+    'create', 'update', 'deleteOne', 'deleteMany', 'updateOne', 'updateMany',
+    'aggregate', 'connect'
   ];
 
   let interactions = [];
 
-  mongooseKeywords.forEach(keyword => {
-    // DYNAMICALLY QUERY FOR KEYWORDS
-    const keywordExpressions = esquery.query(fileAst, [
-      `Identifier[name="${keyword}"]`, 
-      `Literal[value="${keyword}"]`,
-      `MemberExpression[property.name="${keyword}"]`,
-      `CallExpression[callee.name="${keyword}"]`
-    ].join(','));
+  // Generate dynamic esquery selectors based on modelRegistry and mongoose methods
+  Object.keys(modelRegistry).forEach(modelName => {
+    mongooseMethods.forEach(method => {
+      // Query for model method interactions like modelName.method and ModelName.method
+      const lowerCaseModel = modelName.toLowerCase();
+      const upperCaseModel = modelName.charAt(0).toUpperCase() + modelName.slice(1);
 
-    keywordExpressions.forEach(expr => {
-      const line = expr.loc.start.line; // LINE NUMBER
-      interactions.push({ keyword, filePath, line });
+      const selectors = [
+        `CallExpression[callee.object.name="${lowerCaseModel}"][callee.property.name="${method}"]`,
+        `CallExpression[callee.object.name="${upperCaseModel}"][callee.property.name="${method}"]`
+      ];
+
+      const expressions = esquery.query(fileAst, selectors.join(','));
+
+      expressions.forEach(expr => {
+        const line = expr.loc.start.line; // LINE NUMBER
+        interactions.push({
+          model: expr.callee.object.name,
+          method: expr.callee.property.name,
+          filePath,
+          line
+        });
+      });
     });
   });
 
@@ -433,11 +480,12 @@ function analyzeMongoDBInteractions(fileAst, filePath) {
   let results = {
     filePath,
     totalInteractions: interactions.length,
-    details: interactions
+    details: interactions.map(interaction => `${interaction.model}.${interaction.method} on line ${interaction.line} in ${interaction.filePath}`)
   };
 
   return results;
 }
+
 
 // ANALYZE POSTGRESQL INTERACTIONS
 function analyzePostgreSQLInteractions(fileAst, filePath) {
