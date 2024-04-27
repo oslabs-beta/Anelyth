@@ -97,16 +97,16 @@ AstApiQueryController2.queryFunc = async (nodeAST, nodePath) => {
   console.log(`analyzing file path ${nodePath}`);
   try {
     const result = getApiCalls(nodeAST, ['fetch', 'axios']);
-    const stream = fs.createWriteStream('./api-query-testing-nodes.log');
     console.log('result from getApiCalls: ', result);
-    stream.write(JSON.stringify(result, null, 2));
-    stream.end();
     if (!result) {
       return;
     } else {
       // console.log('result in AstApiQueryController2.queryFunc before analysis: ', result);
       // console.log('nodes in result: ', result.fetch.nodes);
       // console.log('arguments in node: ', result.fetch.nodes[0].arguments[0].quasis);
+      const stream = fs.createWriteStream('./api-query-testing-nodes.log');
+      stream.write(JSON.stringify(result, null, 2));
+      stream.end();
       return analyze(result, nodePath);
     }
 
@@ -179,7 +179,7 @@ function analyze(apiInteractions, filePath) {
     return ({
       api: api.apiName,
       numInteractions: api.numNodes,
-      args
+      endpoints: args
     });
   });
   const stream = fs.createWriteStream('./api-query-testing.log');
