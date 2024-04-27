@@ -62,7 +62,7 @@ couplingController.extractDetails = (req, res, next) => {
 
       if (node.apiInfo && node.apiInfo.details.length > 0) {
         node.apiInfo.details.forEach((detail) => {
-          fileDetails.apiDetails.push({ url: detail.url });
+          fileDetails.apiDetails.push(detail);
         });
       }
 
