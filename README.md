@@ -2,6 +2,12 @@
 
 ###
 
+<div align="center">
+  <img height="200" src="https://live.staticflickr.com/65535/53693040038_a092839528_o.png"  />
+</div>
+
+###
+
 <p align="center">An automated, data-driven approach to identifying potential microservices.</p>
 
 ###
