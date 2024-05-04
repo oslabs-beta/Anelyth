@@ -60,7 +60,7 @@ try {
 
       // Extract API interaction details
 
-      if (node.apiInfo && node.apiInfo.details.length > 0) {
+      if (node.apiInfo && Array.isArray(node.apiInfo.details) && node.apiInfo.details.length > 0) {
         node.apiInfo.details.forEach((detail) => {
           fileDetails.apiDetails.push({ url: detail.url });
         });

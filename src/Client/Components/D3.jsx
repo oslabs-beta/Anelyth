@@ -10,7 +10,7 @@ import '../Styles/d3.css';
 
 
 
-const PackChart = ({ data, options }) => {
+const PackChart = ({ data, options, hoveredMicroservice }) => {
   /*Using the useRef hook. The useRef Hook allows you to persist values between renders. */
   const svgRef = useRef(null);
   
@@ -452,7 +452,7 @@ function dragended(event, d) {
 
 
 
-const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData }) => {
+const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData, hoveredMicroservice }) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {

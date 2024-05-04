@@ -15,6 +15,11 @@ function UserMainPage() {
   const [clickedNodeData, setClickedNodeData] = useState(null);
   const [analyzeButtonShowing, setAnalyzeButton] = useState(false);
   const [clusterData, setClusterData] = useState(null);
+  const [hoveredMicroservice, setHoveredMicroservice] = useState(null);
+
+  const handleHoverMicroservice = (microservice) => {
+    setHoveredMicroservice(microservice);
+  };
 
   return (
   <>
@@ -67,13 +72,14 @@ function UserMainPage() {
               setAnalyzeButton={setAnalyzeButton}
               clusterData={clusterData}
               setClusterData={setClusterData}
+              hoveredMicroservice={hoveredMicroservice}
             />
         <div className='clusters-infopanel'>
           <div className='info-panel'>
             {popupShowing && clickedNodeData.dependencies && <NodeInfoModal data={clickedNodeData}/>}
           </div>
           <div className='clusters-display-container'>
-            {clusterData && <ClustersDisplay clusterData={clusterData} />} 
+            {clusterData && <ClustersDisplay clusterData={clusterData} handleHoverMicroservice={handleHoverMicroservice}/>} 
           </div>
         </div>
       </div>
