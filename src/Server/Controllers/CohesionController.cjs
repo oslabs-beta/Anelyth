@@ -73,8 +73,8 @@ CohesionController.calculateCohesion = (req, res, next) => {
         });
       });
       //dbDetails
-      elementOne[i].dbDetails.forEach(({ keyword }) => {
-        elOneDbKeywords.add(keyword);
+      elementOne[i].dbDetails.forEach(({ dbType }) => {
+        elOneDbKeywords.add(dbType);
       });
       //moduleDetails
       elementOne[i].moduleDetails.forEach(({ module }) => {
@@ -88,8 +88,8 @@ CohesionController.calculateCohesion = (req, res, next) => {
       });
     });
     //dbDetails
-    elementTwo.dbDetails.forEach(({ keyword }) => {
-      elTwoDbKeywords.add(keyword);
+    elementTwo.dbDetails.forEach(({ dbType }) => {
+      elTwoDbKeywords.add(dbType);
     });
     //moduleDetails
     elementTwo.moduleDetails.forEach(({ module }) => {
