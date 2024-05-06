@@ -1,25 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-
 const CohesionController = {};
-
-
-// const arrOne = [
-//   {fileName: 'file1', details: [{url: 'endpoint1'}, {url: 'endpoint2'}]}, 
-//   {fileName: 'file2', details: [{url: 'endpoint1'}, {url: 'endpoint2'}, {url: 'endpoint3'}]}, 
-//   {fileName: 'file5', details: [{url: 'endpoint6'}]},
-//   {fileName: 'file3', details: [{url: 'endpoint1'}, {url: 'endpoint4'}]},
-//   {fileName: 'file4', details: [{url: 'endpoint3'}]}
-// ];
-
-// const arrTwo = [
-//   {fileName: 'file1', apiDetails: [{url: 'endpoint1'}, {url: 'endpoint2'}], dbDetails: [{keyword: 'mongoose'}, {keyword: 'model'}], moduleDetails: [{module: './models.js'}]}, 
-//   {fileName: 'file2', apiDetails: [{url: 'endpoint1'}, {url: 'endpoint2'}, {url: 'endpoint3'}], dbDetails: [{keyword: 'mongoose'}], moduleDetails: [{module: './controllers/controller1.js'}]}, 
-//   {fileName: 'file5', apiDetails: [{url: 'endpoint6'}], dbDetails: [], moduleDetails: [{module: './routes.js'}, {module: './controllers/controllers2.js'}]},
-//   {fileName: 'file3', apiDetails: [{url: 'endpoint1'}, {url: 'endpoint4'}], dbDetails: [], moduleDetails: [{module: './module1.js'}, {module: './controllers/controllers2.js'}]},
-//   {fileName: 'file4', apiDetails: [{url: 'endpoint3'}], dbDetails: [], moduleDetails: [{module: './module1.js'}]}
-// ];
 
 //approach 1: what percentage of unique endpoints do they have in common?
 //for each file: total unique endpoints, so if file1 has endpoint1, endpoint1, endpoint2, then there are 2 unique endpoints (endpoint1 & endpoint 2)
@@ -37,13 +19,10 @@ const CohesionController = {};
 
 
 CohesionController.calculateCohesion = (req, res, next) => {
-  //declare output array
   const result = [];
-  //declare remaining array of elements
   const remaining = JSON.parse(JSON.stringify(res.locals.detailsArray)); 
-  //loop
   while (remaining.length > 0) {
-    //declare subarray, initialize with 1st element left
+    //initialize subarray with 1st element left
     const potentialMicroservice = [remaining.shift()];
     // console.log('outer potentialMicroservice:', potentialMicroservice)
     let j = 0;
@@ -68,7 +47,6 @@ CohesionController.calculateCohesion = (req, res, next) => {
     //once you get to the end of remaining array, you have any potentialMicroservice that remaining[i] would be part of, so push it to result
     result.push(potentialMicroservice);
   }
-  console.log('result:', result)
   res.locals.clusters = result
   const logFilePath = path.join('..', '..', 'cohesionController.log');
   const logStream = fs.createWriteStream(logFilePath);
@@ -89,8 +67,10 @@ CohesionController.calculateCohesion = (req, res, next) => {
     //iterate over elementOne and elementTwo and push to set to create sets of unique endopints for each
     for (let i = 0; i < elementOne.length; i++) {
       //apiEndpoints
-      elementOne[i].apiDetails.forEach(({ url }) => {
-        elOneApiEndpoints.add(url);
+      elementOne[i].apiDetails.forEach(({ endpoints }) => {
+        endpoints.forEach((endpoint) => {
+          elOneApiEndpoints.add(endpoint);
+        });
       });
       //dbDetails
       elementOne[i].dbDetails.forEach(({ keyword }) => {
@@ -102,8 +82,10 @@ CohesionController.calculateCohesion = (req, res, next) => {
       });
     }
     //apiEndpoints
-    elementTwo.apiDetails.forEach(({ url }) => {
-      elTwoApiEndpoints.add(url);
+    elementTwo.apiDetails.forEach(({ endpoints }) => {
+      endpoints.forEach((endpoint) => {
+        elTwoApiEndpoints.add(endpoint);
+      });
     });
     //dbDetails
     elementTwo.dbDetails.forEach(({ keyword }) => {
