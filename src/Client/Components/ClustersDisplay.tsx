@@ -4,7 +4,7 @@ import '../Styles/clustersdisplay.css'
 
 interface ClustersDisplayProps {
   clusterData: FileData[][];
-  handleHoverMicroservice: (microservice: string | null) => void; // Update this line
+  handleHoverMicroservice: (microservice: string[] | null) => void;
 }
 
 interface GroupedData {
@@ -34,7 +34,9 @@ const ClustersDisplay: FC<ClustersDisplayProps> = ({ clusterData, handleHoverMic
   }, [clusterData]);
 
   const handleMouseEnter = (microservice: string) => {
-    handleHoverMicroservice(microservice);
+    console.log('this is the microservice being hovered===>', groupedData[microservice]);
+    const microserviceData = groupedData[microservice]; // Access the value using microservice as key
+    handleHoverMicroservice(microserviceData);
   };
 
   const handleMouseLeave = () => {

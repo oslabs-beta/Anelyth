@@ -1,168 +1,90 @@
 [
   {
-    "fileName": "bundle.js.LICENSE.txt",
+    "fileName": "main.js",
     "apiDetails": [],
     "dbDetails": [],
     "moduleDetails": [],
     "dependencyCount": 0
   },
   {
-    "fileName": "App.jsx",
+    "fileName": "main.js.LICENSE.txt",
+    "apiDetails": [],
+    "dbDetails": [],
+    "moduleDetails": [],
+    "dependencyCount": 0
+  },
+  {
+    "fileName": "App.js",
     "apiDetails": [],
     "dbDetails": [],
     "moduleDetails": [
       {
-        "module": "src/Server/temp-file-upload/TaxTurbo/client/src/Components/MainPageComponents/AuthWrapper.js"
+        "module": "src/Server/temp-file-upload/Whiskr/client/src/components/Navbar.js"
       },
       {
-        "module": "src/Server/temp-file-upload/TaxTurbo/client/src/Components/MainPageComponents/Plaid/Link.jsx"
+        "module": "src/Server/temp-file-upload/Whiskr/client/src/pages/About.js"
       },
       {
-        "module": "src/Server/temp-file-upload/TaxTurbo/client/src/Containers/LoginPageContainer.jsx"
+        "module": "src/Server/temp-file-upload/Whiskr/client/src/pages/AdopterCardsPage.js"
       },
       {
-        "module": "src/Server/temp-file-upload/TaxTurbo/client/src/Containers/MainPageContainer.jsx"
+        "module": "src/Server/temp-file-upload/Whiskr/client/src/pages/CatsCardsPage.js"
       },
       {
-        "module": "src/Server/temp-file-upload/TaxTurbo/client/src/Containers/SignupPageContainer.jsx"
+        "module": "src/Server/temp-file-upload/Whiskr/client/src/pages/CreateAccountAdopter.js"
       },
       {
-        "module": "src/Server/temp-file-upload/TaxTurbo/client/src/Containers/UserDashboardContainer.jsx"
+        "module": "src/Server/temp-file-upload/Whiskr/client/src/pages/CreateAccountCat.js"
+      },
+      {
+        "module": "src/Server/temp-file-upload/Whiskr/client/src/pages/Home.js"
+      },
+      {
+        "module": "src/Server/temp-file-upload/Whiskr/client/src/pages/Login.js"
+      },
+      {
+        "module": "src/Server/temp-file-upload/Whiskr/client/src/pages/signup.js"
+      },
+      {
+        "module": "src/Server/temp-file-upload/Whiskr/client/src/stylesheet.css"
       }
     ],
-    "dependencyCount": 6
+    "dependencyCount": 10
   },
   {
-    "fileName": "ImportedTransactions.jsx",
+    "fileName": "MatchesTab.js",
+    "apiDetails": [],
+    "dbDetails": [],
+    "moduleDetails": [],
+    "dependencyCount": 0
+  },
+  {
+    "fileName": "MessagesTab.js",
+    "apiDetails": [],
+    "dbDetails": [],
+    "moduleDetails": [],
+    "dependencyCount": 0
+  },
+  {
+    "fileName": "Navbar.js",
+    "apiDetails": [],
+    "dbDetails": [],
+    "moduleDetails": [],
+    "dependencyCount": 0
+  },
+  {
+    "fileName": "SideBar.js",
     "apiDetails": [],
     "dbDetails": [],
     "moduleDetails": [
       {
-        "module": "src/Server/temp-file-upload/TaxTurbo/client/src/apiSlice.js"
+        "module": "src/Server/temp-file-upload/Whiskr/client/src/components/MatchesTab.js"
+      },
+      {
+        "module": "src/Server/temp-file-upload/Whiskr/client/src/components/MessagesTab.js"
       }
     ],
-    "dependencyCount": 1
-  },
-  {
-    "fileName": "AuthWrapper.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "HeroSectionComponent.jsx",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "MainSectionComponent.jsx",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "NavigationInnerBar.jsx",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "Link.jsx",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "StayInformedComponent.jsx",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "LoginPageContainer.jsx",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "MainPageContainer.jsx",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/client/src/components/MainPageComponents/HeroSectionComponent.jsx"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/client/src/components/MainPageComponents/MainSectionComponent.jsx"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/client/src/components/MainPageComponents/NavigationInnerBar.jsx"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/client/src/components/MainPageComponents/StayInformedComponent.jsx"
-      }
-    ],
-    "dependencyCount": 4
-  },
-  {
-    "fileName": "SignupPageContainer.jsx",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "UserDashboardContainer.jsx",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/client/src/apiSlice.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/client/src/Components/ImportedTransactions.jsx"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/client/src/Components/MainPageComponents/Plaid/Link.jsx"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/client/src/styles.css"
-      }
-    ],
-    "dependencyCount": 4
-  },
-  {
-    "fileName": "apiSlice.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "store.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/client/src/apiSlice.js"
-      }
-    ],
-    "dependencyCount": 1
-  },
-  {
-    "fileName": "counterSlice.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
+    "dependencyCount": 2
   },
   {
     "fileName": "index.js",
@@ -170,78 +92,118 @@
     "dbDetails": [],
     "moduleDetails": [
       {
-        "module": "src/Server/temp-file-upload/TaxTurbo/client/src/App.jsx"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/client/src/app/store.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/client/src/styles.css"
+        "module": "src/Server/temp-file-upload/Whiskr/client/src/App.js"
       }
     ],
-    "dependencyCount": 3
+    "dependencyCount": 1
   },
   {
-    "fileName": "linenumber.js",
+    "fileName": "About.js",
     "apiDetails": [],
     "dbDetails": [],
     "moduleDetails": [],
     "dependencyCount": 0
   },
   {
-    "fileName": "lang-css.js",
+    "fileName": "AdopterCardsPage.js",
+    "apiDetails": [],
+    "dbDetails": [],
+    "moduleDetails": [
+      {
+        "module": "src/Server/temp-file-upload/Whiskr/client/src/components/SideBar.js"
+      }
+    ],
+    "dependencyCount": 1
+  },
+  {
+    "fileName": "CatsCardsPage.js",
+    "apiDetails": [],
+    "dbDetails": [],
+    "moduleDetails": [
+      {
+        "module": "src/Server/temp-file-upload/Whiskr/client/src/components/SideBar.js"
+      }
+    ],
+    "dependencyCount": 1
+  },
+  {
+    "fileName": "CreateAccountAdopter.js",
     "apiDetails": [],
     "dbDetails": [],
     "moduleDetails": [],
     "dependencyCount": 0
   },
   {
-    "fileName": "prettify.js",
+    "fileName": "CreateAccountCat.js",
     "apiDetails": [],
     "dbDetails": [],
     "moduleDetails": [],
     "dependencyCount": 0
   },
   {
-    "fileName": "CalcController.js",
+    "fileName": "Home.js",
+    "apiDetails": [],
+    "dbDetails": [],
+    "moduleDetails": [],
+    "dependencyCount": 0
+  },
+  {
+    "fileName": "Profile.js",
+    "apiDetails": [],
+    "dbDetails": [],
+    "moduleDetails": [],
+    "dependencyCount": 0
+  },
+  {
+    "fileName": "login.js",
+    "apiDetails": [],
+    "dbDetails": [],
+    "moduleDetails": [],
+    "dependencyCount": 0
+  },
+  {
+    "fileName": "signup.js",
+    "apiDetails": [],
+    "dbDetails": [],
+    "moduleDetails": [],
+    "dependencyCount": 0
+  },
+  {
+    "fileName": "webpack.config.js",
+    "apiDetails": [],
+    "dbDetails": [],
+    "moduleDetails": [],
+    "dependencyCount": 0
+  },
+  {
+    "fileName": "apiControllers.js",
     "apiDetails": [],
     "dbDetails": [],
     "moduleDetails": [
       {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/models/mongooseModels.js"
+        "module": "src/Server/temp-file-upload/Whiskr/server/models/models.js"
       }
     ],
     "dependencyCount": 1
   },
   {
-    "fileName": "DataRetrieval.js",
+    "fileName": "cookieControllers.js",
     "apiDetails": [],
     "dbDetails": [],
     "moduleDetails": [
       {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/models/pgModels.js"
+        "module": "src/Server/temp-file-upload/Whiskr/server/models/models.js"
       }
     ],
     "dependencyCount": 1
   },
   {
-    "fileName": "authController.js",
+    "fileName": "loginControllers.js",
     "apiDetails": [],
     "dbDetails": [],
     "moduleDetails": [
       {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/models/mongooseModels.js"
-      }
-    ],
-    "dependencyCount": 1
-  },
-  {
-    "fileName": "plaidController.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/models/mongooseModels.js"
+        "module": "src/Server/temp-file-upload/Whiskr/server/models/models.js"
       }
     ],
     "dependencyCount": 1
@@ -252,13 +214,13 @@
     "dbDetails": [],
     "moduleDetails": [
       {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/models/mongooseModels.js"
+        "module": "src/Server/temp-file-upload/Whiskr/server/models/models.js"
       }
     ],
     "dependencyCount": 1
   },
   {
-    "fileName": "mongooseModels.js",
+    "fileName": "models.js",
     "apiDetails": [],
     "dbDetails": [
       {
@@ -269,165 +231,73 @@
       },
       {
         "keyword": "model"
+      }
+    ],
+    "moduleDetails": [],
+    "dependencyCount": 0
+  },
+  {
+    "fileName": "apiRoutes.js",
+    "apiDetails": [],
+    "dbDetails": [],
+    "moduleDetails": [
+      {
+        "module": "src/Server/temp-file-upload/Whiskr/server/controllers/apiControllers.js"
+      }
+    ],
+    "dependencyCount": 1
+  },
+  {
+    "fileName": "loginRoutes.js",
+    "apiDetails": [],
+    "dbDetails": [],
+    "moduleDetails": [
+      {
+        "module": "src/Server/temp-file-upload/Whiskr/server/controllers/cookieControllers.js"
       },
       {
-        "keyword": "findOne"
+        "module": "src/Server/temp-file-upload/Whiskr/server/controllers/loginControllers.js"
+      }
+    ],
+    "dependencyCount": 2
+  },
+  {
+    "fileName": "signupRoutes.js",
+    "apiDetails": [],
+    "dbDetails": [],
+    "moduleDetails": [
+      {
+        "module": "src/Server/temp-file-upload/Whiskr/server/controllers/cookieControllers.js"
+      },
+      {
+        "module": "src/Server/temp-file-upload/Whiskr/server/controllers/userController.js"
+      }
+    ],
+    "dependencyCount": 2
+  },
+  {
+    "fileName": "server.js",
+    "apiDetails": [],
+    "dbDetails": [
+      {
+        "keyword": "mongoose"
       },
       {
         "keyword": "connect"
       }
     ],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "pgModels.js",
-    "apiDetails": [],
-    "dbDetails": [
-      {
-        "keyword": "pg"
-      },
-      {
-        "keyword": "Pool"
-      },
-      {
-        "keyword": "query"
-      }
-    ],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "apiRouter.js",
-    "apiDetails": [],
-    "dbDetails": [],
     "moduleDetails": [
       {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/Controllers/plaidController.js"
+        "module": "src/Server/temp-file-upload/Whiskr/server/routes/apiRoutes.js"
       },
       {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/routes/plaidRouter.js"
-      }
-    ],
-    "dependencyCount": 2
-  },
-  {
-    "fileName": "authRouter.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/controllers/authController.js"
+        "module": "src/Server/temp-file-upload/Whiskr/server/routes/loginRoutes.js"
       },
       {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/Controllers/CalcController.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/Controllers/DataRetrieval.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/controllers/userController.js"
-      }
-    ],
-    "dependencyCount": 4
-  },
-  {
-    "fileName": "dataRouter.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/controllers/authController.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/controllers/userController.js"
-      }
-    ],
-    "dependencyCount": 2
-  },
-  {
-    "fileName": "plaidRouter.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [],
-    "dependencyCount": 0
-  },
-  {
-    "fileName": "signupRouter.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/Controllers/authController.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/Controllers/CalcController.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/Controllers/DataRetrieval.js"
+        "module": "src/Server/temp-file-upload/Whiskr/server/routes/signupRoutes.js"
       }
     ],
     "dependencyCount": 3
-  },
-  {
-    "fileName": "transactionRouter.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/Controllers/authController.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/Controllers/CalcController.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/Controllers/DataRetrieval.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/Controllers/userController.js"
-      }
-    ],
-    "dependencyCount": 4
-  },
-  {
-    "fileName": "userRouter.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/Controllers/authController.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/Controllers/CalcController.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/Controllers/DataRetrieval.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/Controllers/userController.js"
-      }
-    ],
-    "dependencyCount": 4
-  },
-  {
-    "fileName": "server.js",
-    "apiDetails": [],
-    "dbDetails": [],
-    "moduleDetails": [
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/routes/apiRouter.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/Routes/authRouter.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/routes/dataRouter.js"
-      },
-      {
-        "module": "src/Server/temp-file-upload/TaxTurbo/server/routes/transactionRouter.js"
-      }
-    ],
-    "dependencyCount": 4
   },
   {
     "fileName": "webpack.config.js",

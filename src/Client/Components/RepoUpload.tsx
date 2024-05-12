@@ -11,15 +11,13 @@ interface RepoUploadProps {
   setAnalyzeButton: (value: boolean) => void;
   clusterData: any; 
   setClusterData: (value: any) => void; 
+  hoveredMicroservice: (value: any) => void; 
 }
 
-function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnalyzeButton, clusterData, setClusterData} : RepoUploadProps) {
+function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnalyzeButton, clusterData, setClusterData, hoveredMicroservice} : RepoUploadProps) {
   const [hierarchyData, setHierarchyData] = useState(null);
-  const [hoveredMicroservice, setHoveredMicroservice] = useState(null);
 
-  const handleHoverMicroservice = (microservice: any) => {
-    setHoveredMicroservice(microservice);
-  };
+
   async function apiCall(event : any) {
 
     event.preventDefault();
