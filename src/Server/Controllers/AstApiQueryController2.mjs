@@ -1,113 +1,29 @@
-import esquery from 'esquery';
 import fs from 'fs';
+import ApiAnalyzer from '../utils/ApiAnalyzer.mjs';
 
 const AstApiQueryController2 = {};
 
 // --------------- CHECK API FUNCTION --------------- //
 
-function getApiCalls(fileAst, apiLibraries) { 
-
-  // Check for libraries that need explicit import/require
-  const importedApiMatches = [];
-  const importedApis = ['axios'];
-  const libraries = [...apiLibraries];
-  let i = 0;
-  while (i < importedApis.length && libraries.length > 0) {
-    const currApi = importedApis[i].toLowerCase();
-    for (let j = 0; j < libraries.length; j++) {
-      const currLibrary = libraries[j].toLowerCase();
-      if (currLibrary === currApi) {
-        const query = getQuery`VariableDeclarator[init.callee.name="require"][init.arguments.0.value="${currApi}"],
-          CallExpression[callee.name="require"][arguments.0.value="${currApi}"],
-          ImportDeclaration[source.value="${currApi}"]`;
-        const result = getNodes(fileAst, query, currApi);
-        if (result) {
-          //TODO: get variable being assigned, then look up call expressions based on that name
-          importedApiMatches.push(result);
-        }
-        libraries.splice(j, 1);
-      }
-    }
-    i++;
-  }
-
-  // Special checks for APIs that don't require import/require in a browser environment
-  // const browserAPIs = ['fetch', 'XMLHttpRequest', '$', 'jQuery'];
-  const nativeApiMatches = [];
-  const nativeApis = ['fetch'];
-  let k = 0;
-  while (k < nativeApis.length && libraries.length > 0) {
-    const currApi = nativeApis[k].toLowerCase();
-    for (let j = 0; j < libraries.length; j++) {
-      const currLibrary = libraries[j].toLowerCase();
-      if (currLibrary === currApi) {
-        const query = getQuery`CallExpression[callee.type="MemberExpression"][callee.property.name="${currApi}"], CallExpression[callee.type="Identifier"][callee.name="${currApi}"]`;
-        const result = getNodes(fileAst, query, currApi);
-        if (result) {
-          nativeApiMatches.push(result);
-        }
-        libraries.splice(j, 1);
-      }
-    }
-    k++;
-  }
-
-  //return matches or undefined
-  const result = [...importedApiMatches, ...nativeApiMatches];
-  if (Object.keys(result).length > 0) {
-    return result;
-  } else {
-    return;
-  }
-
-  function getQuery(strings, library) {
-    let result = ``;
-    for (let i = 0; i < strings.length; i++) {
-      if (i === strings.length - 1) {
-        result += `${strings[i]}`;
-      } else {
-        result += `${strings[i]}${library}`;
-      }
-    }
-    return result;
-  }
-
-  function getNodes(fileAst, query, api) {
-    const nodes = esquery.query(
-      fileAst,
-      query
-    );
-
-    if (!nodes.length) {
-      return null;
-    }
-
-    return ({
-      apiName: api,
-      numNodes: nodes.length,
-      nodes
-    });
-  }
-
-}
-
 AstApiQueryController2.queryFunc = async (nodeAST, nodePath) => {
   console.log('\n');
   console.log('Inside AstApiQueryController2.queryFunc')
   console.log(`analyzing file path ${nodePath}`);
+  const apiAnalyzer = new ApiAnalyzer();
   try {
-    const result = getApiCalls(nodeAST, ['fetch', 'axios']);
+    apiAnalyzer.setApiType('native');
+    const nativeMatches = apiAnalyzer.getApiCalls(nodeAST, ['fetch']);
+    apiAnalyzer.setApiType('imported');
+    const importedMatches = apiAnalyzer.getApiCalls(nodeAST, ['axios']);
+    const result = [...nativeMatches, ...importedMatches];
     console.log('result from getApiCalls: ', result);
-    if (!result) {
+    if (result.length === 0) {
       return ({
         filePath: nodePath,
         totalInteractions: 0,
         details: []
       });
     } else {
-      // console.log('result in AstApiQueryController2.queryFunc before analysis: ', result);
-      // console.log('nodes in result: ', result.fetch.nodes);
-      // console.log('arguments in node: ', result.fetch.nodes[0].arguments[0].quasis);
       const stream = fs.createWriteStream('./api-query-testing-nodes.log');
       stream.write(JSON.stringify(result, null, 2));
       stream.end();
