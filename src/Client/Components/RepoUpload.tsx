@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import D3 from './D3.jsx';
 import '../Styles/repoupload.css';
 import ClustersDisplay from './ClustersDisplay';
+import FileLoader from './FileLoader';
 
 interface RepoUploadProps {
   popupShowing: boolean;
@@ -97,7 +98,7 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnal
                 {/* @ts-expect-error */}
                 <input type="file" name="file" id="file" multiple webkitdirectory="true" />
                 <button type="submit" id="submit-btn" disabled={isUploading}>Submit</button>
-                {isUploading}
+                {isUploading && <FileLoader/>}
               </form>
             </div>
           </div>
