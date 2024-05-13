@@ -1,0 +1,88 @@
+/* Styles for the navigation modal */
+
+.navigationModal {
+
+    position: sticky;
+    
+    /* top: 3%; */
+    
+    width: 350px;
+    
+    overflow-y: auto;
+    
+    padding: 25px;
+    
+    }
+    
+      
+    
+    /* Styles for the content wrapper */
+    
+    .content-wrapper {
+    
+    margin-top: 6%;
+    
+    display: flex;
+    
+    width: 100%;
+    
+    flex-grow: 1;
+    
+    overflow-y: auto;
+    
+    }
+    
+      
+      
+    
+    .navigationModal li{
+    
+    padding: 0.9rem;
+    
+    width: 100%;
+    
+    text-align: start;
+    
+    display: flex;
+    
+    align-items: center;
+    
+    justify-content: space-between;
+    
+    font-size: 1rem;
+    
+    position: relative;
+    
+    border-radius: 0;
+    
+    }
+    
+      
+    
+    .navigationModal li:hover {
+    
+    background-color: #484848; /* Light gray background on hover */
+    
+    cursor: pointer; /* Changes the mouse cursor to a pointer to indicate it's clickable */
+    
+    }
+    
+      
+    
+    .navigationModal a, .navigationModal a:visited, .navigationModal a:hover, .navigationModal a:active {
+    
+    text-decoration: none; /* Removes the underline for all states */
+    
+    color: inherit; /* Keeps the color the same for all states */
+    
+    }
+    
+      
+      
+      
+    
+    .navigationModal ul{
+    
+    padding-top: 10%;
+    
+    }
