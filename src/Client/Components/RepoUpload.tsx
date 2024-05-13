@@ -34,9 +34,14 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnal
     // -------  File Filtering -------- //
     for (let i = 0; i < files.length; i++) {
       const filePath = files[i].webkitRelativePath;
-      if (!filePath.includes('node_modules') && !filePath.includes('.git') && !filePath.includes('.DS_Store')) {
-        formData.append(filePath, files[i], files[i].name);
-        console.log('array: ', filePath.split('/'));
+      const fileExt = filePath.slice(-4).toLowerCase();
+      //only loading typescript or javascript files
+      if (fileExt === '.jsx' || fileExt === '.tsx' || fileExt.slice(1) === '.js' || fileExt.slice(1) === '.ts') {
+        const pathElements = filePath.split('/');
+        //don't upload files in certain directories and don't upload .DS_Store
+        if (!filePath.includes('node_modules') && !filePath.includes('.git') && !filePath.includes('.DS_Store')) {
+          formData.append(filePath, files[i], files[i].name);
+        }
       }
     }
     // ------- Need to refactor fetch to also save the data to AWS S3 -------- //
