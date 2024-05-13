@@ -1,5 +1,5 @@
 import fs from 'fs';
-import ApiAnalyzer from '../utils/ApiAnalyzer.mjs';
+import { ImportedApiAnalyzer, NativeApiAnalyzer } from '../utils/ApiAnalyzer.mjs';
 import chalk from 'chalk';
 
 const AstApiQueryController2 = {};
@@ -11,13 +11,15 @@ AstApiQueryController2.queryFunc = async (nodeAST, nodePath) => {
   console.log('Inside AstApiQueryController2.queryFunc')
   console.log(`analyzing file path ${nodePath}`);
   try {
-    const apiAnalyzer = new ApiAnalyzer();
-    apiAnalyzer.setApiType('native');
-    apiAnalyzer.getApiCalls(nodeAST, ['fetch']);
-    apiAnalyzer.setApiType('imported');
-    apiAnalyzer.getApiCalls(nodeAST, ['axios']);
-    const result = apiAnalyzer.getMatches();
-    console.log('result from getApiCalls: ', result);
+    const nativeApiAnalyzer = new NativeApiAnalyzer();
+    nativeApiAnalyzer.getApiCalls(nodeAST, ['fetch']);
+    const importedApiAnalyzer = new ImportedApiAnalyzer();
+    importedApiAnalyzer.getApiCalls(nodeAST, ['axios']);
+    const importedApiAnalyzerResult = importedApiAnalyzer.getMatches();
+    const nativeApiAnalyzerResult = nativeApiAnalyzer.getMatches();
+    console.log('result from importedApiAnalyzer: ', importedApiAnalyzerResult);
+    console.log('result from nativeApiAnalyzer: ', nativeApiAnalyzerResult);
+    const result = [...importedApiAnalyzerResult, ...nativeApiAnalyzerResult];
     if (result.length === 0) {
       return ({
         filePath: nodePath,
