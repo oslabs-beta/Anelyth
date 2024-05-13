@@ -17,10 +17,11 @@ interface RepoUploadProps {
 function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnalyzeButton, clusterData, setClusterData, hoveredMicroservice} : RepoUploadProps) {
   const [hierarchyData, setHierarchyData] = useState(null);
 
-
+  const [isUploading, setIsUploading] = useState(false);
   async function apiCall(event : any) {
 
     event.preventDefault();
+    setIsUploading(true); // Set uploading to true when starting
     const files = event.target.elements.file.files;
     console.log(files);
     console.log('hit apiCall');
@@ -62,10 +63,12 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnal
         // for now to test //
         setHierarchyData(data.hierarchy.children[0]);
         setClusterData(data.clusters);
+        setIsUploading(false);
         setAnalyzeButton(true); //setter function to render analyze button
 
       } else {
         console.error('Upload failed');
+        setIsUploading(false);
       }
     } catch (err) {
       console.error('Error uploading file: ', err);
@@ -93,7 +96,8 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnal
               <form onSubmit={apiCall}>
                 {/* @ts-expect-error */}
                 <input type="file" name="file" id="file" multiple webkitdirectory="true" />
-                <button type="submit" id="submit-btn">Submit</button>
+                <button type="submit" id="submit-btn" disabled={isUploading}>Submit</button>
+                {isUploading}
               </form>
             </div>
           </div>
