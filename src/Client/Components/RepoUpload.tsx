@@ -11,10 +11,12 @@ interface RepoUploadProps {
   setAnalyzeButton: (value: boolean) => void;
   clusterData: any; 
   setClusterData: (value: any) => void; 
+  hoveredMicroservice: (value: any) => void; 
 }
 
-function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnalyzeButton, clusterData, setClusterData} : RepoUploadProps) {
+function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnalyzeButton, clusterData, setClusterData, hoveredMicroservice} : RepoUploadProps) {
   const [hierarchyData, setHierarchyData] = useState(null);
+
 
   async function apiCall(event : any) {
 
@@ -98,7 +100,7 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnal
           
         ) : (
           <div className='D3-container'>
-            <D3 hierarchyData={hierarchyData} popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} />
+            <D3 hierarchyData={hierarchyData} popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} hoveredMicroservice={hoveredMicroservice} />
           </div>
         )}
       </div>

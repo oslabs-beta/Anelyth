@@ -10,37 +10,43 @@ import '../Styles/d3.css';
 
 
 
-const PackChart = ({ data, options }) => {
+const PackChart = ({ data, options, hoveredMicroservice }) => {
   /*Using the useRef hook. The useRef Hook allows you to persist values between renders. */
   const svgRef = useRef(null);
   
-
- 
-  
   useEffect(() => {
-  const svg = Pack(data, { ...options, value: (d) => d.size });
-  let zoom = d3.zoom()
-	.on('zoom', handleZoom)
-  .scaleExtent([.5,4])
-  .translateExtent([[0, 0], [2000, 2000]]);
-
-  function handleZoom(e) {
-    d3.select('svg g')
-      .attr('transform', e.transform);
-  }
-
+    const svg = Pack(data, { ...options, value: (d) => d.size });
+    let zoom = d3.zoom()
+    .on('zoom', handleZoom)
+    .scaleExtent([.5,4])
+    .translateExtent([[0, 0], [2000, 2000]]);
+  
+    function handleZoom(e) {
+      d3.select('svg g')
+        .attr('transform', e.transform);
+    }
 
     d3.select('svg')
     .call(zoom);
+    
+    svgRef.current.innerHTML = ''; // Clear existing SVG content
+    svgRef.current.appendChild(svg.node()); // Append the SVG to the ref element
+  }, [data, options]);
 
+  useEffect(() => {
+    const svg = d3.select(svgRef.current);
+    const nodes = svg.selectAll('circle');
 
-  svgRef.current.innerHTML = ''; // Clear existing SVG content
-  svgRef.current.appendChild(svg.node()); // Append the SVG to the ref element
-}, [data, options]);
+    // Update node color or highlight based on hoveredMicroservice
+    nodes.each(function(d) {
+      if (d && d.data && hoveredMicroservice !== null && hoveredMicroservice.includes(d.data.name)) {
+        d3.select(this).attr('fill', 'yellow'); // Highlight color
+      } 
+    });
+  }, [hoveredMicroservice]);
 
   return <svg ref={svgRef}></svg>;
 };
-
 const Pack = (data, options) => { //data and options are props passed down from App
   const { 
     value,
@@ -379,7 +385,13 @@ function dragended(event, d) {
 };
 
 
-const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData }) => {
+
+
+
+
+
+
+const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData, hoveredMicroservice }) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -407,7 +419,7 @@ const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData }
         <h1>Repository Overview</h1>
         <Legend /> {/* Include the Legend component */}
       </div>
-      {data && <PackChart data={data} options={options} />}
+      {data && <PackChart data={data} options={options} hoveredMicroservice={hoveredMicroservice} />}
     </div>
   );
 };
