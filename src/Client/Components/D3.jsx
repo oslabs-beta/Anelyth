@@ -16,7 +16,19 @@ const PackChart = ({ data, options, hoveredMicroservice }) => {
   
   useEffect(() => {
     const svg = Pack(data, { ...options, value: (d) => d.size });
+    let zoom = d3.zoom()
+    .on('zoom', handleZoom)
+    .scaleExtent([.5,4])
+    .translateExtent([[0, 0], [2000, 2000]]);
+  
+    function handleZoom(e) {
+      d3.select('svg g')
+        .attr('transform', e.transform);
+    }
 
+    d3.select('svg')
+    .call(zoom);
+    
     svgRef.current.innerHTML = ''; // Clear existing SVG content
     svgRef.current.appendChild(svg.node()); // Append the SVG to the ref element
   }, [data, options]);
