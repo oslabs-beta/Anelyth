@@ -111,7 +111,7 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, cluster
                 {/* @ts-expect-error */}
                 <input type="file" name="file" id="file" multiple webkitdirectory="true" onChange={handleFileChange} />
                 {/* <button type="submit" id="submit-btn" disabled={isFileLoading || isAnalyzing}>Submit</button> */}
-                {analyzeButtonShowing && (
+                {analyzeButtonShowing && !isAnalyzing && (
                     <div className='btn-container-main-page'>
                       <button type="submit" className='btn btn-secondary btn-pulse'>Analyze</button>
                     </div>
