@@ -42,8 +42,14 @@ class Analyzer {
     });
   }
 
-  //TODO: we may want to grab just the url domain. this works fine for strings, but we need to handle cases for template literals where the url value is stored in a variable
   getCallArgs(nodes) {
+  /*
+   TODO: handle cases where the url value or part of it is stored in a variable, like in a template literal. 
+   
+   Currently, these are being transformed into strings here, e.g. fetch(url) => url would turn into 'url', and
+   fetch(`${url}`) => would turn into 'url'
+  */
+
     const args = [];
     nodes.forEach((node, index) => {
       for (let i = 0; i < node.arguments?.length; i++) {
@@ -96,6 +102,34 @@ class Analyzer {
     //filter out undefined (unhandled) args for now
     //TODO: handle the undefined args
     return args.filter(arg => arg);
+  }
+
+  getUrlDomain(url) {
+  /*
+    Currently handles:
+      'http://url1.com/test',
+      '/url2.com',
+      '/url3.com/',
+      'https://url4.com/test2',
+      'url5.com/' 
+
+      and outputs:
+
+      url1.com,
+      url2.com
+      url3.com
+      url4.com
+      url5.com
+  */
+
+    const regex = /^(?:https?:\/\/)?(?:\/)?([^\/]+)(?:\/|$)/;
+    const match = url.match(regex);
+    if (match) {
+      //return capturing group
+      return match[1];
+    } else {
+      return url;
+    }
   }
 }
 
@@ -194,6 +228,11 @@ class ImportedApiAnalyzer extends Analyzer {
   getApiDetails() {
     this.setImportRefs();
     this.analyzeApiCalls();
+    this.apiDetails.forEach((apiDetail) => {
+      apiDetail.endpoints = apiDetail.endpoints.map(endpoint => {
+        return this.getUrlDomain(endpoint);
+      });
+    });
     return this.apiDetails;
   }
 }
@@ -251,6 +290,11 @@ class NativeApiAnalyzer extends Analyzer {
 
   getApiDetails() {
     this.analyzeApiCalls();
+    this.apiDetails.forEach((apiDetail) => {
+      apiDetail.endpoints = apiDetail.endpoints.map(endpoint => {
+        return this.getUrlDomain(endpoint);
+      });
+    });
     return this.apiDetails;
   }
 }
