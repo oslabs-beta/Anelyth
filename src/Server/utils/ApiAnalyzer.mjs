@@ -9,10 +9,6 @@ class Analyzer {
     this.apiDetails = [];
   }
 
-  getApiDetails() {
-    return this.apiDetails;
-  }
-
   setQuery(strings, api) {
     let result = ``;
     for (let i = 0; i < strings.length; i++) {
@@ -43,25 +39,21 @@ class Analyzer {
     });
   }
 
+  //TODO: we may want to grab just the url domain. this works fine for strings, but we need to handle cases for template literals where the url value is stored in a variable
   getCallArgs(nodes) {
     const args = [];
     nodes.forEach((node, index) => {
-      console.log(`node ${index + 1} arguments: ${node.arguments}`);
       for (let i = 0; i < node.arguments?.length; i++) {
         const arg = node.arguments[i];
-        console.log('Argument type: ', arg.type);
         let argValue = '';
         switch (arg.type) {
           case 'Literal':
-            console.log('Literal arg value: ', arg.value);
             argValue = arg.value;
             break;
           case 'Identifier': 
-            console.log('Identifier arg name: ', arg.name);
             argValue = arg.name;
             break;
           case 'TemplateLiteral':
-            console.log('Template Literal Parts:');
             const quasisEls = arg.quasis.map(({ start, value }) => {
               return ({
                 start,
@@ -130,10 +122,6 @@ class ImportedApiAnalyzer extends Analyzer {
   }
 
   setImportRefs() {
-    if (this.nodeMatches.length === 0) {
-      console.log('There are 0 api nodeMatches. This could be for 2 reasons: 1) there are no nodeMatches 2) you need to populate nodeMatches.' +
-      'Make sure you populate api nodeMatches first by invoking setApiNodeMatches. Then invoke setImportRefs.');
-    }
     this.nodeMatches.forEach(({ apiName, type, nodes }) => {
       if (type === 'requireVariableDeclarators') {
         nodes.forEach(({ id }) => {
@@ -158,10 +146,6 @@ class ImportedApiAnalyzer extends Analyzer {
   }
 
   analyzeApiCalls() {
-    if (Object.keys(this.refs).length === 0) {
-      console.log('There are 0 importRefs. This could be for 2 reasons: 1) there are no importRefs in the current file 2) you need to populate imporRefs.' +
-      'Make sure you populate importRefs first by invoking setImportRefs. Then invoke analyzeApiCalls.');
-    }
     for (let api in this.refs) {
       const apiArgs = [];
       this.refs[api].forEach((ref) => {
@@ -182,6 +166,12 @@ class ImportedApiAnalyzer extends Analyzer {
         }
       );
     }
+  }
+
+  getApiDetails() {
+    this.setImportRefs();
+    this.analyzeApiCalls();
+    return this.apiDetails;
   }
 }
 
@@ -221,18 +211,24 @@ class NativeApiAnalyzer extends Analyzer {
   //get arguments (data endpoints for each api call)
   analyzeApiCalls() {
     if (this.nodeMatches.length > 0) {
-      this.nodeMatches.forEach((api) => {
-        let nodes = api.nodes;
+      this.nodeMatches.forEach((apiNode) => {
+        const apiName = apiNode.apiName;
+        let nodes = apiNode.nodes;
         const args = this.getCallArgs(nodes);
         this.apiDetails.push(
           {
-            api,
+            api: apiName,
             numInteractions: args.length,
             endpoints: args
           }
         );
       });
     }
+  }
+
+  getApiDetails() {
+    this.analyzeApiCalls();
+    return this.apiDetails;
   }
 }
 
