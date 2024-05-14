@@ -1,9 +1,11 @@
 import esquery from 'esquery';
 import chalk from 'chalk';
+import fs from 'fs';
 
 class Analyzer {
-  constructor(ast) {
+  constructor(ast, filePath) {
     this.ast = ast;
+    this.filePath = filePath;
     this.currQuery = null;
     this.nodeMatches = [];
     this.apiDetails = [];
@@ -74,7 +76,17 @@ class Analyzer {
             });
             break;
           default:
-            console.log('Argument is not a Literal, Identifier, or TemplateLiteral and was not handled in ApiQueryController');
+            console.log(chalk.red('Argument is not a Literal, Identifier, or TemplateLiteral and was not handled correctly in Analyzer.getCallArgs.' + 
+            'Sending node to getCallArgs-error.log.' + 
+            'Use error log entry to determine best way to get args from this node.'
+            ));
+            const errorStream = fs.createWriteStream('./getCallArgs-error.log', { flags: 'a' });
+            errorStream.write(JSON.stringify({
+              filePath: this.filePath,
+              node
+            }, null, 2));
+            errorStream.write('\n\n');
+            errorStream.end();
             argValue = undefined;
             break;
         }
@@ -89,8 +101,8 @@ class Analyzer {
 
 //i want api, number interfactions, endpoints
 class ImportedApiAnalyzer extends Analyzer {
-  constructor(ast) {
-    super(ast);
+  constructor(ast, filePath) {
+    super(ast, filePath);
     this.refs = {};
   }
 
@@ -187,8 +199,8 @@ class ImportedApiAnalyzer extends Analyzer {
 }
 
 class NativeApiAnalyzer extends Analyzer {
-  constructor(ast) {
-    super(ast);
+  constructor(ast, filePath) {
+    super(ast, filePath);
   }
   
   setApiNodeMatches(apiLibraries) {

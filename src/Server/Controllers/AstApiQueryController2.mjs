@@ -13,10 +13,10 @@ AstApiQueryController2.queryFunc = async (nodeAST, nodePath) => {
 
   try {
     // const stream = fs.createWriteStream('./api-query-testing-nodes.log', {flags: 'a'});
-    const nativeApiAnalyzer = new NativeApiAnalyzer(nodeAST);
+    const nativeApiAnalyzer = new NativeApiAnalyzer(nodeAST, nodePath);
     nativeApiAnalyzer.setApiNodeMatches(['fetch']);
     const nativeApiDetails = nativeApiAnalyzer.getApiDetails();
-    const importedApiAnalyzer = new ImportedApiAnalyzer(nodeAST);
+    const importedApiAnalyzer = new ImportedApiAnalyzer(nodeAST, nodePath);
     importedApiAnalyzer.setApiNodeMatches(['axios']);
     const importedApiDetails = importedApiAnalyzer.getApiDetails();
     const details = [...nativeApiDetails, ...importedApiDetails];
