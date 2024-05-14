@@ -11,10 +11,18 @@ AstApiQueryController2.queryFunc = async (nodeAST, nodePath) => {
   console.log('Inside AstApiQueryController2.queryFunc')
   console.log(`analyzing file path ${nodePath}`);
   try {
+    const stream = fs.createWriteStream('./api-query-testing-nodes.log', {flags: 'a'});
     const nativeApiAnalyzer = new NativeApiAnalyzer();
     nativeApiAnalyzer.getApiCalls(nodeAST, ['fetch']);
+    nativeApiAnalyzer.setArgs();
     const importedApiAnalyzer = new ImportedApiAnalyzer();
     importedApiAnalyzer.getApiCalls(nodeAST, ['axios']);
+    importedApiAnalyzer.setImportRefs();
+    importedApiAnalyzer.setArgs(nodeAST);
+    stream.write(JSON.stringify(nativeApiAnalyzer.args, null, 2));
+    stream.write(JSON.stringify(importedApiAnalyzer.refs, null, 2));
+    stream.write(JSON.stringify(importedApiAnalyzer.args, null, 2));
+    stream.end();
     const importedApiAnalyzerResult = importedApiAnalyzer.getMatches();
     const nativeApiAnalyzerResult = nativeApiAnalyzer.getMatches();
     console.log('result from importedApiAnalyzer: ', importedApiAnalyzerResult);
@@ -27,9 +35,6 @@ AstApiQueryController2.queryFunc = async (nodeAST, nodePath) => {
         details: []
       });
     } else {
-      const stream = fs.createWriteStream('./api-query-testing-nodes.log', {flags: 'a'});
-      stream.write(JSON.stringify(result, null, 2));
-      stream.end();
       return analyze(result, nodePath);
     }
 

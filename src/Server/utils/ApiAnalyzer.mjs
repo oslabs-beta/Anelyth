@@ -4,8 +4,7 @@ import chalk from 'chalk';
 class Analyzer {
   constructor() {
     this.currQuery = null;
-    this.args = null;
-    this.importRefs = {};
+    this.args = [];
     this.matches = [];
   }
 
@@ -99,16 +98,13 @@ class Analyzer {
   //     }
   //   }
   // }
-
-  setImportRefs() {
-    
-  }
 }
 
 
 class ImportedApiAnalyzer extends Analyzer {
   constructor() {
     super();
+    this.refs = {};
   }
 
   getApiCalls(ast, apiLibraries) {
@@ -126,21 +122,107 @@ class ImportedApiAnalyzer extends Analyzer {
       for (let j = 0; j < libraries.length; j++) {
         const currLibrary = libraries[j].toLowerCase();
         if (currLibrary === currApi) {
-          // may not need VariableDeclarator query
-          // this.setQuery`VariableDeclarator[init.callee.name="require"][init.arguments.0.value="${currApi}"]`;
-          // const requireVariableDeclarators = this.getNodes(ast, 'requireVariableDeclarators', currApi);
+          this.setQuery`VariableDeclarator[init.callee.name="require"][init.arguments.0.value="${currApi}"]`;
+          const requireVariableDeclarators = this.getNodes(ast, 'requireVariableDeclarators', currApi);
           this.setQuery`CallExpression[callee.name="require"][arguments.0.value="${currApi}"]`; 
           const requireCallExpressions = this.getNodes(ast, 'requireCallExpressions', currApi);
           this.setQuery`ImportDeclaration[source.value="${currApi}"]`;
           const importDeclarations = this.getNodes(ast, 'importDeclarations', currApi);
-          if (requireCallExpressions || importDeclarations) {
-            this.matches.push(requireCallExpressions, importDeclarations);
+          if (requireVariableDeclarators || requireCallExpressions || importDeclarations) {
+            this.matches.push(requireVariableDeclarators, requireCallExpressions, importDeclarations);
           }
           libraries.splice(j, 1);
         }
       }
       i++;
+    }
+  }
+
+  setImportRefs() {
+    if (this.matches.length === 0) {
+      console.log('There are 0 api matches. This could be for 2 reasons: 1) there are no matches 2) you need to populate matches.' +
+      'Make sure you populate api matches first by invoking getApiCalls. Then invoke setRefs.');
+    }
+    this.matches.forEach(({ type, nodes }) => {
+      if (type === 'requireVariableDeclarators') {
+        nodes.forEach(({ id }, idx) => {
+          if (idx === 0) {
+            this.refs[type] = [id.name];
+          } else {
+            this.refs[type].push(id.name);
+          }
+        });
+      } else if (type === 'importDeclarations') {
+        nodes.forEach(({ specifiers }) => {
+          specifiers.forEach(({ local }, idx) => {
+            if (idx === 0) {
+              this.refs[type] = [local.name];
+            } else {
+              this.refs[type].push(local.name);
+            }
+          });
+        });
       }
+    });
+  }
+
+  setArgs(ast) {
+    if (Object.keys(this.refs).length === 0) {
+      console.log('There are 0 importRefs. This could be for 2 reasons: 1) there are no importRefs in the current file 2) you need to populate imporRefs.' +
+      'Make sure you populate importRefs first by invoking setImportRefs. Then invoke getArgs.');
+    }
+    for (let key in this.refs) {
+      this.refs[key].forEach((ref) => {
+        this.setQuery`CallExpression[callee.type="MemberExpression"][callee.property.name="${ref}"], CallExpression[callee.type="Identifier"][callee.name="${ref}"]`;
+        const importRefCallNodes = this.getNodes(ast, 'importRefCallExpressions');
+        if (importRefCallNodes) {
+          //get arguments (data endpoints for each api call)
+          let nodes = importRefCallNodes.nodes;
+          nodes.forEach((node, index) => {
+            console.log(`node ${index + 1} arguments: ${node.arguments}`);
+            for (let i = 0; i < node.arguments?.length; i++) {
+              const arg = node.arguments[i];
+              console.log('Argument type: ', arg.type);
+              let argValue = '';
+              switch (arg.type) {
+                case 'Literal':
+                  console.log('Literal arg value: ', arg.value);
+                  argValue = arg.value;
+                  break;
+                case 'Identifier': 
+                  console.log('Identifier arg name: ', arg.name);
+                  argValue = arg.name;
+                  break;
+                case 'TemplateLiteral':
+                  console.log('Template Literal Parts:');
+                  const quasisEls = arg.quasis.map(({ start, value }) => {
+                    return ({
+                      start,
+                      value: value.cooked
+                    });
+                  });
+                  //name is the variable name for the reference
+                  const expressionEls = arg.expressions.map(({ start, name }) => {
+                    return ({
+                      start,
+                      value: name
+                    });
+                  });
+                  const els = quasisEls.concat(expressionEls).sort((a, b) => a.start - b.start);
+                  els.forEach(({ value }) => {
+                    argValue += value;
+                  });
+                  break;
+                default:
+                  console.log('Argument is not a Literal, Identifier, or TemplateLiteral and was not handled in ApiQueryController');
+                  break;
+              }
+              this.args.push(argValue);
+            }
+          });
+        }
+      });
+    }
   }
 }
 
@@ -176,6 +258,57 @@ class NativeApiAnalyzer extends Analyzer {
       }
       i++;
     }
+  }
+
+  setArgs() {
+    this.matches.map((api) => {
+      //get arguments (data endpoints for each api call)
+      let nodes = api.nodes;
+      nodes.forEach((node, index) => {
+        console.log(`node ${index + 1} arguments: ${node.arguments}`);
+
+        //TODO: need to account for imported apis
+        for (let i = 0; i < node.arguments?.length; i++) {
+          const arg = node.arguments[i];
+          console.log('Argument type: ', arg.type);
+          let argValue = '';
+          switch (arg.type) {
+            case 'Literal':
+              console.log('Literal arg value: ', arg.value);
+              argValue = arg.value;
+              break;
+            case 'Identifier': 
+              console.log('Identifier arg name: ', arg.name);
+              argValue = arg.name;
+              break;
+            case 'TemplateLiteral':
+              console.log('Template Literal Parts:');
+              const quasisEls = arg.quasis.map(({ start, value }) => {
+                return ({
+                  start,
+                  value: value.cooked
+                });
+              });
+              //name is the variable name for the reference
+              const expressionEls = arg.expressions.map(({ start, name }) => {
+                return ({
+                  start,
+                  value: name
+                });
+              });
+              const els = quasisEls.concat(expressionEls).sort((a, b) => a.start - b.start);
+              els.forEach(({ value }) => {
+                argValue += value;
+              });
+              break;
+            default:
+              console.log('Argument is not a Literal, Identifier, or TemplateLiteral and was not handled in ApiQueryController');
+              break;
+          }
+          this.args.push(argValue);
+        }
+      });
+    });
   }
 }
 
