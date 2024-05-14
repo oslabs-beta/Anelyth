@@ -9,24 +9,26 @@ interface RepoUploadProps {
   popupShowing: boolean;
   setPopupShowing: (value: boolean) => void;
   setClickedNodeData: (value: any) => void;
-  setAnalyzeButton: (value: boolean) => void;
   clusterData: any; 
   setClusterData: (value: any) => void; 
   hoveredMicroservice: (value: any) => void; 
 }
 
-function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnalyzeButton, clusterData, setClusterData, hoveredMicroservice} : RepoUploadProps) {
+function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, clusterData, setClusterData, hoveredMicroservice} : RepoUploadProps) {
   const [hierarchyData, setHierarchyData] = useState(null);
 
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   const [isFileLoading ,setIsFileLoading] = useState(false);
 
+  const [analyzeButtonShowing, setAnalyzeButton] = useState(false);
+
   const handleFileChange = (event: any) => {
     if (event.target.files.length > 0) {
       setIsFileLoading(true); // Assume browser is handling files
       setTimeout(() => {
         setIsFileLoading(false); //going to have to ask the team about this setTimeout, lets see if they like this. 
+        setAnalyzeButton(true); //setter function to render analyze button
       }, 2000); 
     }
   };
@@ -77,7 +79,6 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnal
         setHierarchyData(data.hierarchy.children[0]);
         setClusterData(data.clusters);
         setIsAnalyzing(false);
-        setAnalyzeButton(true); //setter function to render analyze button
 
       } else {
         console.error('Upload failed');
@@ -109,7 +110,12 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnal
               <form onSubmit={apiCall}>
                 {/* @ts-expect-error */}
                 <input type="file" name="file" id="file" multiple webkitdirectory="true" onChange={handleFileChange} />
-                <button type="submit" id="submit-btn" disabled={isFileLoading || isAnalyzing}>Submit</button>
+                {/* <button type="submit" id="submit-btn" disabled={isFileLoading || isAnalyzing}>Submit</button> */}
+                {analyzeButtonShowing && (
+                    <div className='btn-container-main-page'>
+                      <button type="submit" className='btn btn-secondary btn-pulse'>Analyze</button>
+                    </div>
+                  )}
                 {(isFileLoading || isAnalyzing) && <FileLoader/>}
               </form>
             </div>
