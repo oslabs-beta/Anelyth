@@ -74,12 +74,15 @@ class Analyzer {
             break;
           default:
             console.log('Argument is not a Literal, Identifier, or TemplateLiteral and was not handled in ApiQueryController');
+            argValue = undefined;
             break;
         }
         args.push(argValue);
       }
     });
-    return args;
+    //filter out undefined (unhandled) args for now
+    //TODO: handle the undefined args
+    return args.filter(arg => arg);
   }
 }
 
@@ -122,6 +125,8 @@ class ImportedApiAnalyzer extends Analyzer {
   }
 
   setImportRefs() {
+    //filtering out null to handle cases where this.getNodes returns null. 
+    this.nodeMatches = this.nodeMatches.filter(node => node !== null);
     this.nodeMatches.forEach(({ apiName, type, nodes }) => {
       if (type === 'requireVariableDeclarators') {
         nodes.forEach(({ id }) => {
