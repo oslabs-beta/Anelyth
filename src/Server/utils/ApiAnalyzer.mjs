@@ -26,8 +26,9 @@ class Analyzer {
       this.ast,
       this.currQuery
     );
-
+  
     if (!nodes.length) {
+      //this means that no nodes returned using current ast query
       return null;
     }
 
@@ -114,8 +115,15 @@ class ImportedApiAnalyzer extends Analyzer {
           const requireCallExpressions = this.getNodes('requireCallExpressions', currApi);
           this.setQuery`ImportDeclaration[source.value="${currApi}"]`;
           const importDeclarations = this.getNodes('importDeclarations', currApi);
-          if (requireVariableDeclarators || requireCallExpressions || importDeclarations) {
-            this.nodeMatches.push(requireVariableDeclarators, requireCallExpressions, importDeclarations);
+
+          if (requireVariableDeclarators) {
+            this.nodeMatches.push(requireVariableDeclarators);
+          }
+          if (requireCallExpressions) {
+            this.nodeMatches.push(requireCallExpressions);
+          }
+          if (importDeclarations) {
+            this.nodeMatches.push(importDeclarations);
           }
           libraries.splice(j, 1);
         }
@@ -125,8 +133,6 @@ class ImportedApiAnalyzer extends Analyzer {
   }
 
   setImportRefs() {
-    //filtering out null to handle cases where this.getNodes returns null. 
-    this.nodeMatches = this.nodeMatches.filter(node => node !== null);
     this.nodeMatches.forEach(({ apiName, type, nodes }) => {
       if (type === 'requireVariableDeclarators') {
         nodes.forEach(({ id }) => {
