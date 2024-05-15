@@ -48,16 +48,20 @@ CohesionController.calculateCohesion = (req, res, next) => {
     result.push(potentialMicroservice);
   }
   res.locals.clusters = result;
-  const logFilePath = path.join('..', '..', 'cohesionController.log');
+  const logFilePath = path.join(__dirname, '..', '..', 'cohesionController.log');
   const logStream = fs.createWriteStream(logFilePath);
   logStream.write(JSON.stringify(result, null, 2));
+  logStream.end();
   logStream.on('finish', () => {
     console.log('\x1b[36m%s\x1b[0m', 'cohesionController.log has finished writing!...');
     return next(); // Only call next() once writing has completed
   });
 
   function shouldCombine (elementOne, elementTwo, threshold) {
-    // console.log('entering shouldCombine');
+    console.log('\x1b[36m%s\x1b[0m', 'entering shouldCombine');
+    // console.log('elementOne:', elementOne)
+    // console.log('elementTwo:', elementTwo)
+
     const elOneApiEndpoints = { total: 0 };
     const elTwoApiEndpoints = { total: 0 };
 
@@ -78,7 +82,7 @@ CohesionController.calculateCohesion = (req, res, next) => {
           } else {
             elOneApiEndpoints[endpoint] = 1;
           }
-          total += 1;
+          elOneApiEndpoints.total += 1;
         });
       });
       //dbDetails
@@ -89,7 +93,7 @@ CohesionController.calculateCohesion = (req, res, next) => {
           } else {
             elOneDbModels[model] = 1;
           }
-          total += 1;
+          elOneDbModels.total += 1;
         })
       });
       //moduleDetails
@@ -99,7 +103,7 @@ CohesionController.calculateCohesion = (req, res, next) => {
         } else {
           elOneModuleDetails[module] = 1;
         }
-        total += 1;
+        elOneModuleDetails.total += 1;
       });
     }
 
@@ -111,10 +115,11 @@ CohesionController.calculateCohesion = (req, res, next) => {
           elTwoApiEndpoints[endpoint] += 1;
         } else {
           elTwoApiEndpoints[endpoint] = 1;
-        }   
-        total += 1;   
+        }  
+        elTwoApiEndpoints.total += 1;   
       });
     });
+
     //dbDetails
     elementTwo.dbDetails.forEach(({ details }) => {
       details.forEach((model) => {
@@ -123,7 +128,7 @@ CohesionController.calculateCohesion = (req, res, next) => {
         } else {
           elTwoDbModels[model] = 1;
         }   
-        total += 1;     
+        elTwoDbModels.total += 1;     
       });
     });
     //moduleDetails
@@ -133,8 +138,15 @@ CohesionController.calculateCohesion = (req, res, next) => {
       } else {
         elTwoModuleDetails[module] = 1;
       }   
-      total += 1;
+      elTwoModuleDetails.total += 1;
     });
+
+    // console.log('elOneApiEndpoints:', elOneApiEndpoints)
+    // console.log('elTwoApiEndpoints:', elTwoApiEndpoints)
+    // console.log('elOneDbModels:', elOneDbModels)
+    // console.log('elTwoDbModels:', elTwoDbModels)
+    // console.log('elOneModuleDetails:', elOneModuleDetails)
+    // console.log('elTwoModuleDetails:', elTwoModuleDetails)
 
     const totalOne = elOneApiEndpoints.total + elOneDbModels.total + elOneModuleDetails.total;
     const totalTwo = elTwoApiEndpoints.total + elTwoDbModels.total + elTwoModuleDetails.total;
@@ -169,7 +181,9 @@ CohesionController.calculateCohesion = (req, res, next) => {
       }
     });
    
-    const percentInCommon = inCommon / totalEndpoints;
+    const percentInCommon = totalEndpoints === 0 ? 0 : inCommon / totalEndpoints;
+    console.log('inCommon:', inCommon)
+    console.log('percentInCommon:', percentInCommon)
 
     if (percentInCommon >= threshold) return true;
     else return false;
