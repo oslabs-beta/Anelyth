@@ -71,10 +71,9 @@ couplingController.extractDetails = (req, res, next) => {
       if (node.dbInfo && node.dbInfo.length > 0) {
         node.dbInfo.forEach((dbEntry) => {
           if (dbEntry.dbInteraction) {
-            fileDetails.dbDetails.push({
-              dbType: dbEntry.dbType,
-              totalInteractions: dbEntry.totalInteractions,
-            });
+            fileDetails.dbDetails.push(
+              dbEntry
+            );
           }
         });
       }

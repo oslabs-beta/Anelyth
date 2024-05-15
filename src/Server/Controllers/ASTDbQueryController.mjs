@@ -476,7 +476,8 @@ function analyzeMongoDBInteractions(fileAst, filePath, modelRegistry) {
   let results = {
     filePath,
     totalInteractions: interactions.length,
-    details: interactions.map(interaction => `${interaction.model}.${interaction.method} on line ${interaction.line} in ${interaction.filePath}`)
+    // details: interactions.map(interaction => `${interaction.model}.${interaction.method} on line ${interaction.line} in ${interaction.filePath}`)
+    details: interactions.map(interaction => interaction.model)
   };
 
   return results;

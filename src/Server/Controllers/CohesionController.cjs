@@ -33,7 +33,7 @@ CohesionController.calculateCohesion = (req, res, next) => {
       // console.log('inner potentialMicroservice:', potentialMicroservice)
       //compare elements, if passes, combine. if combined, that becomes an element. if not, continue.
       //pass in threshold here
-      if (shouldCombine(potentialMicroservice, element, 0.75)) {
+      if (shouldCombine(potentialMicroservice, element, 0.1)) {
         const deleted = remaining.splice(j, 1);
         potentialMicroservice.push(...deleted);
       } else {
@@ -56,6 +56,7 @@ CohesionController.calculateCohesion = (req, res, next) => {
 
   function shouldCombine (elementOne, elementTwo, threshold) {
     // console.log('entering shouldCombine');
+    //TODO: make these arrays so you're not filtering out dupes
     const elOneApiEndpoints = new Set();
     const elTwoApiEndpoints = new Set();
 
@@ -73,8 +74,10 @@ CohesionController.calculateCohesion = (req, res, next) => {
         });
       });
       //dbDetails
-      elementOne[i].dbDetails.forEach(({ dbType }) => {
-        elOneDbKeywords.add(dbType);
+      elementOne[i].dbDetails.forEach(({ details }) => {
+        details.forEach((detail) => {
+          elOneDbKeywords.add(detail);
+        })
       });
       //moduleDetails
       elementOne[i].moduleDetails.forEach(({ module }) => {
@@ -88,8 +91,10 @@ CohesionController.calculateCohesion = (req, res, next) => {
       });
     });
     //dbDetails
-    elementTwo.dbDetails.forEach(({ dbType }) => {
-      elTwoDbKeywords.add(dbType);
+    elementTwo.dbDetails.forEach(({ details }) => {
+      details.forEach((detail) => {
+        elTwoDbKeywords.add(detail);
+      });
     });
     //moduleDetails
     elementTwo.moduleDetails.forEach(({ module }) => {
