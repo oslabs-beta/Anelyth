@@ -13,7 +13,6 @@ import NodeInfoModal from '../Components/NodeInfoModal.jsx';
 function UserMainPage() {
   const [popupShowing, setPopupShowing] = useState(false);
   const [clickedNodeData, setClickedNodeData] = useState(null);
-  const [analyzeButtonShowing, setAnalyzeButton] = useState(false);
   const [clusterData, setClusterData] = useState(null);
   const [hoveredMicroservice, setHoveredMicroservice] = useState(null);
 
@@ -48,12 +47,12 @@ function UserMainPage() {
         
       </div>
       
-      {analyzeButtonShowing && (
+      {/* {analyzeButtonShowing && (
       <div className='btn-container-main-page'>
         <button className='btn btn-secondary btn-pulse'><a className='btn-link'>Analyze</a></button>
 
 
-        </div>)}
+        </div>)} */}
 
 
       <div className='side-bottom-container'>
@@ -70,7 +69,6 @@ function UserMainPage() {
               popupShowing={popupShowing}
               setPopupShowing={setPopupShowing}
               setClickedNodeData={setClickedNodeData}
-              setAnalyzeButton={setAnalyzeButton}
               clusterData={clusterData}
               setClusterData={setClusterData}
               hoveredMicroservice={hoveredMicroservice}
