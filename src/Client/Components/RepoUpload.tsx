@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import D3 from './D3.jsx';
 import '../Styles/repoupload.css';
 import ClustersDisplay from './ClustersDisplay';
+import FileLoader from './FileLoader';
 
 interface RepoUploadProps {
   popupShowing: boolean;
@@ -11,14 +12,29 @@ interface RepoUploadProps {
   setAnalyzeButton: (value: boolean) => void;
   clusterData: any; 
   setClusterData: (value: any) => void; 
+  hoveredMicroservice: (value: any) => void; 
 }
 
-function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnalyzeButton, clusterData, setClusterData} : RepoUploadProps) {
+function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnalyzeButton, clusterData, setClusterData, hoveredMicroservice} : RepoUploadProps) {
   const [hierarchyData, setHierarchyData] = useState(null);
+
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+  const [isFileLoading ,setIsFileLoading] = useState(false);
+
+  const handleFileChange = (event: any) => {
+    if (event.target.files.length > 0) {
+      setIsFileLoading(true); // Assume browser is handling files
+      setTimeout(() => {
+        setIsFileLoading(false); //going to have to ask the team about this setTimeout, lets see if they like this. 
+      }, 2000); 
+    }
+  };
 
   async function apiCall(event : any) {
 
     event.preventDefault();
+    setIsAnalyzing(true); // Set uploading to true when starting
     const files = event.target.elements.file.files;
     console.log(files);
     console.log('hit apiCall');
@@ -32,9 +48,14 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnal
     // -------  File Filtering -------- //
     for (let i = 0; i < files.length; i++) {
       const filePath = files[i].webkitRelativePath;
-      if (!filePath.includes('node_modules') && !filePath.includes('.git') && !filePath.includes('.DS_Store')) {
-        formData.append(filePath, files[i], files[i].name);
-        console.log('array: ', filePath.split('/'));
+      const fileExt = filePath.slice(-4).toLowerCase();
+      //only loading typescript or javascript files
+      if (fileExt === '.jsx' || fileExt === '.tsx' || fileExt.slice(1) === '.js' || fileExt.slice(1) === '.ts') {
+        const pathElements = filePath.split('/');
+        //don't upload files in certain directories and don't upload .DS_Store
+        if (!filePath.includes('node_modules') && !filePath.includes('.git') && !filePath.includes('.DS_Store')) {
+          formData.append(filePath, files[i], files[i].name);
+        }
       }
     }
     // ------- Need to refactor fetch to also save the data to AWS S3 -------- //
@@ -55,10 +76,12 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnal
         // for now to test //
         setHierarchyData(data.hierarchy.children[0]);
         setClusterData(data.clusters);
+        setIsAnalyzing(false);
         setAnalyzeButton(true); //setter function to render analyze button
 
       } else {
         console.error('Upload failed');
+        setIsAnalyzing(false);
       }
     } catch (err) {
       console.error('Error uploading file: ', err);
@@ -85,15 +108,16 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, setAnal
             <div className="form-example">
               <form onSubmit={apiCall}>
                 {/* @ts-expect-error */}
-                <input type="file" name="file" id="file" multiple webkitdirectory="true" />
-                <button type="submit" id="submit-btn">Submit</button>
+                <input type="file" name="file" id="file" multiple webkitdirectory="true" onChange={handleFileChange} />
+                <button type="submit" id="submit-btn" disabled={isFileLoading || isAnalyzing}>Submit</button>
+                {(isFileLoading || isAnalyzing) && <FileLoader/>}
               </form>
             </div>
           </div>
           
         ) : (
           <div className='D3-container'>
-            <D3 hierarchyData={hierarchyData} popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} />
+            <D3 hierarchyData={hierarchyData} popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} hoveredMicroservice={hoveredMicroservice} />
           </div>
         )}
       </div>

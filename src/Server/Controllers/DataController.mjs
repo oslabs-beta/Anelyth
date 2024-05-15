@@ -5,6 +5,7 @@ import babel from '@babel/core';
 import esquery from 'esquery';
 import { Parser } from 'acorn';
 import jsx from 'acorn-jsx';
+import ora from 'ora';
 import ASTDbQueryController from './ASTDbQueryController.mjs';
 import ASTApiQueryController from './AstApiQueryController2.mjs';
 
@@ -24,11 +25,21 @@ const DataController = {};
 //NOTE: this middleware is only writing superstructure to log right now. it's not passing it along in the middleware chain.
 DataController.superStructure = async (req, res, next) => {
   try{
-    console.log('in DataController.superStructure')
+    
+    const spinner = ora({
+      text: 'Building super structure...',
+      color: 'yellow',
+      spinner: 'dots'
+    }).start();
 
     let superStructure = {};
     const dcdata = res.locals.depResult;
     // const astData = res.locals.astData;
+    // console.log('dcdata: ',dcdata)
+
+    const {modelRegistry , importRegistry} = res.locals;
+
+  
     
     const filePath = path.resolve(__dirname, '../temp-file-upload');
 
@@ -37,7 +48,9 @@ DataController.superStructure = async (req, res, next) => {
     // CREATE NEW VARIABLE STARTING AT UPLOADED REPO ROOT DIRECTORY
     const codeHierarchy = hierarchy.children[0];
     // CREATE THE SUPER STRUCTURE WITH TRAVERSEHIERARCHY FUNCTION
-    superStructure = await traverseHierarchy(codeHierarchy, dcdata);
+    superStructure = await traverseHierarchy(codeHierarchy, dcdata, modelRegistry, importRegistry);
+    // console.log('super structure: ',superStructure);
+
     // temp log of super structure
     const logFilePath = './super-structure.log';
     const logStream = fs.createWriteStream(logFilePath);
@@ -52,6 +65,9 @@ DataController.superStructure = async (req, res, next) => {
     });
 
     logStream.write(JSON.stringify(superStructure, null, 2));
+
+    spinner.succeed('Super structure built successfully.');
+
     logStream.end(); // Make sure to call end to trigger 'finish'
   } catch (err) {
     console.error('DataController.superStructure: ERROR:', err);
@@ -95,8 +111,8 @@ function buildHierarchy(nodePath) {
 
 
 // MAIN FUNCTION TO BUILD OUT SUPER STRUCTURE //
-async function traverseHierarchy(node, dcdata) {
-  try {
+async function traverseHierarchy(node, dcdata, modelRegistry, importRegistry) {
+  try{
     if (!node) {
       return;
     }
@@ -117,7 +133,7 @@ async function traverseHierarchy(node, dcdata) {
     };
   
     if (node.children) {
-      newNode.children = await Promise.all(node.children.map(async child => await traverseHierarchy(child,dcdata)));
+      newNode.children = await Promise.all(node.children.map(async child => await traverseHierarchy(child,dcdata,modelRegistry,importRegistry)));
     } else {
   
       // CALL HELPER FUNCS TO GET DATA 
@@ -126,7 +142,7 @@ async function traverseHierarchy(node, dcdata) {
       const dependentsAndDependencies = await getDependenciesAndDependents(node.path, dcdata)
       const nodeAst = await parseFileToAST(node.path);
  
-      const dbData = await ASTDbQueryController.query2(nodeAst, node.path);
+      const dbData = await ASTDbQueryController.query2(nodeAst, node.path, modelRegistry, importRegistry);
       const apiData = await ASTApiQueryController.queryFunc(nodeAst, node.path);
       console.log('apiData in superstructure:', apiData);
       const exportsData = getModuleDotExports(nodeAst);

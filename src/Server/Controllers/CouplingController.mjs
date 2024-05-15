@@ -4,27 +4,27 @@ import path from "path";
 
 const couplingController = {};
 
-
 couplingController.extractDetails = (req, res, next) => {
-  console.log('\x1b[36m%s\x1b[0m', 'In the coupling controller......');
+  console.log("\x1b[36m%s\x1b[0m", "In the coupling controller......");
 
   const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
-const filePath = path.resolve(__dirname, "../../../super-structure.log");
+  const filePath = path.resolve(__dirname, "../../../super-structure.log");
 
-let SuperStructure = {};
+  let SuperStructure = {};
 
-try {
-  console.log('\x1b[36m%s\x1b[0m', 'Reading the super structure log file......');
+  try {
+    console.log(
+      "\x1b[36m%s\x1b[0m",
+      "Reading the super structure log file......"
+    );
 
-  const fileContent = fs.readFileSync(filePath, "utf8");
+    const fileContent = fs.readFileSync(filePath, "utf8");
 
-  SuperStructure = JSON.parse(fileContent);
-} catch (error) {
-  console.error("Failed to read or parse the super-structure.log:", error);
-
-  // Handle the error appropriately in your application context
-}
+    SuperStructure = JSON.parse(fileContent);
+  } catch (error) {
+    console.error("Failed to read or parse the super-structure.log:", error);
+  }
 
   let detailsArray = [];
 
@@ -60,25 +60,20 @@ try {
 
       // Extract API interaction details
 
-      if (node.apiInfo && node.apiInfo.details.length > 0) {
+      if (node.apiInfo && Array.isArray(node.apiInfo.details) && node.apiInfo.details.length > 0) {
         node.apiInfo.details.forEach((detail) => {
-          fileDetails.apiDetails.push({ url: detail.url });
+          fileDetails.apiDetails.push(detail);
         });
       }
 
-      // Extract DB interaction details
 
+      // Extract DB interaction details
       if (node.dbInfo && node.dbInfo.length > 0) {
         node.dbInfo.forEach((dbEntry) => {
-          if (dbEntry.dbInteraction && dbEntry.details) {
-            const keywords = new Set(); // Use a Set to avoid duplicate keywords
-
-            dbEntry.details.forEach((detail) => {
-              keywords.add(detail.keyword);
-            });
-
-            keywords.forEach((keyword) => {
-              fileDetails.dbDetails.push({ keyword });
+          if (dbEntry.dbInteraction) {
+            fileDetails.dbDetails.push({
+              dbType: dbEntry.dbType,
+              totalInteractions: dbEntry.totalInteractions,
             });
           }
         });
@@ -107,10 +102,9 @@ try {
       JSON.stringify(detailsArray, null, 2)
     );
 
-    detailsArray.sort((a, b) => a.dependencyCount - b.dependencyCount)
+    detailsArray.sort((a, b) => a.dependencyCount - b.dependencyCount);
     //pass the result down to the middleware chain
     res.locals.detailsArray = detailsArray;
-
   } catch (error) {
     console.error("Error processing structure data:", error);
 
@@ -119,7 +113,6 @@ try {
 
   return next();
 };
-
 
 /*[
 

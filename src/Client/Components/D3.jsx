@@ -10,37 +10,43 @@ import '../Styles/d3.css';
 
 
 
-const PackChart = ({ data, options }) => {
+const PackChart = ({ data, options, hoveredMicroservice }) => {
   /*Using the useRef hook. The useRef Hook allows you to persist values between renders. */
   const svgRef = useRef(null);
   
-
- 
-  
   useEffect(() => {
-  const svg = Pack(data, { ...options, value: (d) => d.size });
-  let zoom = d3.zoom()
-	.on('zoom', handleZoom)
-  .scaleExtent([.5,4])
-  .translateExtent([[0, 0], [2000, 2000]]);
-
-  function handleZoom(e) {
-    d3.select('svg g')
-      .attr('transform', e.transform);
-  }
-
+    const svg = Pack(data, { ...options, value: (d) => d.size });
+    let zoom = d3.zoom()
+    .on('zoom', handleZoom)
+    .scaleExtent([.5,4])
+    .translateExtent([[0, 0], [2000, 2000]]);
+  
+    function handleZoom(e) {
+      d3.select('svg g')
+        .attr('transform', e.transform);
+    }
 
     d3.select('svg')
     .call(zoom);
+    
+    svgRef.current.innerHTML = ''; // Clear existing SVG content
+    svgRef.current.appendChild(svg.node()); // Append the SVG to the ref element
+  }, [data, options]);
 
+  useEffect(() => {
+    const svg = d3.select(svgRef.current);
+    const nodes = svg.selectAll('circle');
 
-  svgRef.current.innerHTML = ''; // Clear existing SVG content
-  svgRef.current.appendChild(svg.node()); // Append the SVG to the ref element
-}, [data, options]);
+    // Update node color or highlight based on hoveredMicroservice
+    nodes.each(function(d) {
+      if (d && d.data && hoveredMicroservice !== null && hoveredMicroservice.includes(d.data.name)) {
+        d3.select(this).attr('fill', 'yellow'); // Highlight color
+      } 
+    });
+  }, [hoveredMicroservice]);
 
   return <svg ref={svgRef}></svg>;
 };
-
 const Pack = (data, options) => { //data and options are props passed down from App
   const { 
     value,
@@ -126,18 +132,6 @@ const Pack = (data, options) => { //data and options are props passed down from 
 
   if (sort != null) root.sort(sort);
 
-  // const links = data.children.flatMap(parent => {
-  //   return parent.dependencies.flatMap(dependency => {
-  //     const source = descendants.find(d => d.data.name === parent.name);
-  //     const target = descendants.find(d => d.data.name === dependency.source);
-  //       console.log('source', source, 'target', target)
-  //     if (source && target) {
-  //         return { source, target };
-  //       }
-  //       return null;
-  //   });
-  // }).filter(link => link !== null);
-
   const links = generateLinks(data);
 
   function generateLinks(node) {
@@ -175,32 +169,6 @@ const Pack = (data, options) => { //data and options are props passed down from 
     .attr("text-anchor", "middle"); //more styling 
 
 
-
-//   svg.append("defs").append("marker")
-//     .attr("id", "arrowhead")
-//     .attr("viewBox", "-10 -10 25 25")
-//     .attr("refX", 0)
-//     .attr("refY", 0)
-//     .attr("orient", "auto")
-//     .attr("markerWidth", 5)
-//     .attr("markerHeight", 5)
-//     .append("path")
-//     .attr("d", "M0,5L-10,0L0,-5")
-//     .attr("fill", "#ccc");
-// svg.append("defs")
-//   .append("marker")
-//   .attr("id", "circle-marker")
-//   .attr("markerWidth", 12) // Enlarge the marker width
-//   .attr("markerHeight", 12) // Enlarge the marker height
-//   .attr("refX", 6) // Position the marker at the end of the line
-//   .attr("refY", 6)
-//   .append("circle")
-//   .attr("cx", 6)
-//   .attr("cy", 6)
-//   .attr("r", 3) // Radius of the circle
-//   .style("fill", "yellow") // Color of the circle
-//   .style("filter", "drop-shadow(0 0 5px rgba(255, 255, 0, 0.7))"); // Glow effect
-
   const g = svg.append("g")
   .attr("id", "pack");
 
@@ -228,34 +196,6 @@ g.append("defs")
       console.log (`These are the filtered links from ${hoveredNode}`, result);
       return result;
     };
-
-    // const hoverIn = (event, node) => {
-    //     const filteredLinks = filterLinks(links, node);
-      
-    //     // Select all existing links and remove them
-    //     svg.selectAll(".link").remove();
-      
-    //     // Append new lines for the filtered links with animation
-    //     svg.selectAll(".link")
-    //       .data(filteredLinks)
-    //       .enter()
-    //       .append("line")
-    //       .attr("class", "link")
-    //       .style("stroke", "black") // Set the color of the links to black
-    //       .style("stroke-width", 2) // Set the width of the lines
-    //       .attr("marker-start", "url(#arrowhead)") // Add a circle marker
-
-    //       .attr("x1", d => d.target.x) // Set initial positions to target node
-    //       .attr("y1", d => d.target.y) // Set initial positions to target node
-    //       .attr("x2", d => d.target.x) // Set initial positions to target node
-    //       .attr("y2", d => d.target.y) // Set initial positions to target node
-    //       .transition()
-    //       .duration(1000) // Set the duration of the transition in milliseconds
-    //       .ease(d3.easeLinear)
-    //       .attr("x2", d => d.source.x) // Transition to source node positions
-    //       .attr("y2", d => d.source.y); // Transition to source node positions
-    // };
-    
     
     
   let isDragging = false;
@@ -403,19 +343,19 @@ function dragended(event, d) {
   if (T) node.append("title").text((d, i) => T[i]);
 
   if (L) {
-    // const uid = `O-${Math.random().toString(16).slice(2)}`;
+    const uid = `O-${Math.random().toString(16).slice(2)}`;
 
     const leaf = node.filter(
       (d) => !d.children && d.r > 10 && L[d.index] != null
     );
 
-    // leaf.append("clipPath")
-    //   .attr("id", d => `${uid}-clip-${d.index}`)
-    //   .append("circle")
-    //   .attr("r", d => d.r);
+    leaf.append("clipPath")
+      .attr("id", d => `${uid}-clip-${d.index}`)
+      .append("circle")
+      .attr("r", d => d.r);
 
     leaf.append("text")
-      // .attr("clip-path", d => `url(${new URL(`#${uid}-clip-${d.index}`, location)})`)
+      .attr("clip-path", d => `url(${new URL(`#${uid}-clip-${d.index}`, location)})`)
       .selectAll("tspan")
       .data((d) => `${L[d.index]}`.split(/\n/g))
       .join("tspan")
@@ -451,8 +391,7 @@ function dragended(event, d) {
 
 
 
-
-const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData }) => {
+const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData, hoveredMicroservice }) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -480,7 +419,7 @@ const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData }
         <h1>Repository Overview</h1>
         <Legend /> {/* Include the Legend component */}
       </div>
-      {data && <PackChart data={data} options={options} />}
+      {data && <PackChart data={data} options={options} hoveredMicroservice={hoveredMicroservice} />}
     </div>
   );
 };
