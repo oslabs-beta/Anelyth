@@ -47,96 +47,133 @@ CohesionController.calculateCohesion = (req, res, next) => {
     //once you get to the end of remaining array, you have any potentialMicroservice that remaining[i] would be part of, so push it to result
     result.push(potentialMicroservice);
   }
-  res.locals.clusters = result
+  res.locals.clusters = result;
   const logFilePath = path.join('..', '..', 'cohesionController.log');
   const logStream = fs.createWriteStream(logFilePath);
   logStream.write(JSON.stringify(result, null, 2));
-
-  return next();
+  logStream.on('finish', () => {
+    console.log('\x1b[36m%s\x1b[0m', 'cohesionController.log has finished writing!...');
+    return next(); // Only call next() once writing has completed
+  });
 
   function shouldCombine (elementOne, elementTwo, threshold) {
     // console.log('entering shouldCombine');
-    //TODO: make these arrays so you're not filtering out dupes
-    const elOneApiEndpoints = new Set();
-    const elTwoApiEndpoints = new Set();
+    const elOneApiEndpoints = { total: 0 };
+    const elTwoApiEndpoints = { total: 0 };
 
-    const elOneDbKeywords = new Set();
-    const elTwoDbKeywords = new Set();
+    const elOneDbModels = { total: 0 };
+    const elTwoDbModels = { total: 0 };
 
-    const elOneModuleDetails = new Set();
-    const elTwoModuleDetails = new Set();
-    //iterate over elementOne and elementTwo and push to set to create sets of unique endopints for each
+    const elOneModuleDetails = { total: 0 };
+    const elTwoModuleDetails = { total: 0 };
+
+    //iterate over elementOne, which is an array of objects and push to array to create endpoints
     for (let i = 0; i < elementOne.length; i++) {
+      //push to set to create sets of unique endopints for each
       //apiEndpoints
       elementOne[i].apiDetails.forEach(({ endpoints }) => {
         endpoints.forEach((endpoint) => {
-          elOneApiEndpoints.add(endpoint);
+          if (elOneApiEndpoints[endpoint]) {
+            elOneApiEndpoints[endpoint] += 1;
+          } else {
+            elOneApiEndpoints[endpoint] = 1;
+          }
+          total += 1;
         });
       });
       //dbDetails
       elementOne[i].dbDetails.forEach(({ details }) => {
-        details.forEach((detail) => {
-          elOneDbKeywords.add(detail);
+        details.forEach((model) => {
+          if (elOneDbModels[model]) {
+            elOneDbModels[model] += 1;
+          } else {
+            elOneDbModels[model] = 1;
+          }
+          total += 1;
         })
       });
       //moduleDetails
       elementOne[i].moduleDetails.forEach(({ module }) => {
-        elOneModuleDetails.add(module);
+        if (elOneModuleDetails[module]) {
+          elOneModuleDetails[module] += 1;
+        } else {
+          elOneModuleDetails[module] = 1;
+        }
+        total += 1;
       });
     }
+
+    //iterate over elementTwo, which is an object and push to array to create endpoints
     //apiEndpoints
     elementTwo.apiDetails.forEach(({ endpoints }) => {
       endpoints.forEach((endpoint) => {
-        elTwoApiEndpoints.add(endpoint);
+        if (elTwoApiEndpoints[endpoint]) {
+          elTwoApiEndpoints[endpoint] += 1;
+        } else {
+          elTwoApiEndpoints[endpoint] = 1;
+        }   
+        total += 1;   
       });
     });
     //dbDetails
     elementTwo.dbDetails.forEach(({ details }) => {
-      details.forEach((detail) => {
-        elTwoDbKeywords.add(detail);
+      details.forEach((model) => {
+        if (elTwoDbModels[model]) {
+          elTwoDbModels[model] += 1;
+        } else {
+          elTwoDbModels[model] = 1;
+        }   
+        total += 1;     
       });
     });
     //moduleDetails
     elementTwo.moduleDetails.forEach(({ module }) => {
-      elTwoModuleDetails.add(module);
+      if (elTwoModuleDetails[module]) {
+        elTwoModuleDetails[module] += 1;
+      } else {
+        elTwoModuleDetails[module] = 1;
+      }   
+      total += 1;
     });
 
-    const lengthOne = elOneApiEndpoints.size + elOneDbKeywords.size + elOneModuleDetails.size;
-    const lengthTwo = elTwoApiEndpoints.size + elTwoDbKeywords.size + elTwoModuleDetails.size;
+    const totalOne = elOneApiEndpoints.total + elOneDbModels.total + elOneModuleDetails.total;
+    const totalTwo = elTwoApiEndpoints.total + elTwoDbModels.total + elTwoModuleDetails.total;
 
-    const elOne = {
-      api: elOneApiEndpoints,
-      db: elOneDbKeywords,
-      module: elOneModuleDetails
-    };
+    const totalEndpoints = totalOne + totalTwo;
 
-    const elTwo = {
-      api: elTwoApiEndpoints,
-      db: elTwoDbKeywords,
-      module: elTwoModuleDetails
-    };
+    const elOneApiEndpointsSet = new Set(Object.keys(elOneApiEndpoints));
+    elOneApiEndpointsSet.delete('total');
+    const elOneDbModelsSet = new Set(Object.keys(elOneDbModels));
+    elOneDbModelsSet.delete('total');
+    const elOneModuleDetailsSet = new Set(Object.keys(elOneModuleDetails));
+    elOneModuleDetailsSet.delete('total');
+    
+    let inCommon = 0;
 
-    const smallerElement = lengthTwo < lengthOne ? elTwo : elOne;
-    const largerElement = lengthTwo < lengthOne ? elOne : elTwo;
-
-    const inCommon = [];
-
-    for (let key in smallerElement) {
-      smallerElement[key].forEach((val) => {
-        if (largerElement[key].has(val)) inCommon.push(val);
-      });
-    }
-
-    // console.log('inCommon:', inCommon)
-
-    const percentInCommon = inCommon.length / (smallerElement.api.size + smallerElement.db.size + smallerElement.module.size);
+    elOneApiEndpointsSet.forEach(endpoint => {
+      if (elTwoApiEndpoints[endpoint]) {
+        inCommon += elOneApiEndpoints[endpoint];
+        inCommon += elTwoApiEndpoints[endpoint];
+      }
+    });
+    elOneDbModelsSet.forEach(model => {
+      if (elTwoDbModels[model]) {
+        inCommon += elOneDbModels[model];
+        inCommon += elTwoDbModels[model];
+      }
+    });
+    elOneModuleDetailsSet.forEach(module => {
+      if (elTwoModuleDetails[module]) {
+        inCommon += elOneModuleDetails[module];
+        inCommon += elTwoModuleDetails[module];
+      }
+    });
+   
+    const percentInCommon = inCommon / totalEndpoints;
 
     if (percentInCommon >= threshold) return true;
     else return false;
   };
 };
 
-
-
 module.exports = CohesionController;
-
