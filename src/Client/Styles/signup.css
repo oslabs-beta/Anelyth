@@ -4,7 +4,7 @@
   overflow: hidden;
 }
 
-.form-container {
+.form-container-signup {
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
@@ -13,7 +13,7 @@
   left: 15%;
   top: 20%;
   width: 400px;
-  height: 600px;
+  height: 800px;
   position: absolute;
   z-index: 2;
   /* border: 3px solid #7c7c7c97; */
@@ -23,12 +23,16 @@
 }
 
 .input-title {
-  color: black;
+  color: whitesmoke;
   margin-bottom: 10px;
   font-weight: bold;
 }
 
 .bg-img {
-  object-fit: cover;
+  position: absolute;
+  height: 700px;
+  width: auto;
+  left: 52%;
+  top: 14%;
 }
 

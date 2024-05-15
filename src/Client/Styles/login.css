@@ -23,12 +23,16 @@
 }
 
 .bg-img {
-  object-fit: cover;
+  position: absolute;
+  height: 700px;
+  width: auto;
+  left: 52%;
+  top: 14%;
 }
 
 .login-title {
   font-size: 46px;
-  color: black;
+  color: whitesmoke;
   font-family: "Roboto", sans-serif;
   margin-bottom: 50px;
 }
@@ -50,7 +54,7 @@
 }
 
 .input-title {
-  color: black;
+  color: whitesmoke;
   margin-bottom: 10px;
   font-weight: bold;
 }
@@ -77,15 +81,16 @@
   border-radius: 4px;
   margin-top: 5px;
   margin-bottom: 15px;
-  color: whitesmoke;
-  background-color: black;
+  color: black;
+  background-color: #D9F334;
   font-family: "Roboto", sans-serif;
 }
 
 .login-button:hover {
   cursor: pointer;
-  background-color: #D9F334;
-  color: black;
+  background-color: black;
+  color: whitesmoke;
+  border: 1px solid #D9F334;
 }
 
 .no-acc-container {
@@ -103,11 +108,12 @@
 .no-acc-link {
   margin-left: 10px;
   font-size: 18px;
-  color: #D9F334;
+  color: whitesmoke;
 }
 
 .no-acc-link:hover {
   cursor: pointer;
   /* text-decoration: underline; */
-  color: black;
+  color: #D9F334;
 }
+
