@@ -218,7 +218,7 @@ g.append("defs")
           .attr("class", "link")
           .style("stroke", "yellow") // Set the color of the links to black
           // .style("stroke-dasharray", "5,5") // Define the dashed pattern
-          .style("stroke-width", 6) // Set the width of the lines
+          .style("stroke-width", 2) // Set the width of the lines
           .style("opacity", .6)
           .attr("x1", d => d.target.x) // Set initial positions to target node
           .attr("y1", d => d.target.y) // Set initial positions to target node
@@ -231,7 +231,7 @@ g.append("defs")
           .attr("y2", d => d.source.y) // Transition to source node positions
           svg.selectAll("circle")
     .filter(d => filteredLinks.some(link => link.source === d || link.target === d))
-    .attr("stroke-width", 3) // Set thicker stroke
+    .attr("stroke-width", 2) // Set thicker stroke
     .attr("stroke", "yellow"); // Set highlight color
 
     };
@@ -294,7 +294,7 @@ function dragended(event, d) {
     various attributes (such as fill color, stroke color, etc.) of these circle elements based on the data associated with
      each node (d). */
   node.append("circle")
-    .attr("fill", d => d.children ? "#016e91" : (d.data.color || fill)) //this is changing the color based on the color being passed in on the node data
+    .attr("fill", d => d.children ? "#c7c5b9" : (d.data.color || fill)) //this is changing the color based on the color being passed in on the node data
     .attr("fill-opacity", d => calculateOpacity(d.depth)) // Calculate opacity based on depth
     .attr("stroke", stroke)
     .attr("stroke-width", strokeWidth)
@@ -416,8 +416,8 @@ const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData, 
   return (
     <div className="d3">
       <div className='d3-title-container'>
-        <h1>Repository Overview</h1>
-        <Legend /> {/* Include the Legend component */}
+        <h1 className='repo-overview-title'>Repository Overview</h1>
+        {/* <Legend /> Include the Legend component */}
       </div>
       {data && <PackChart data={data} options={options} hoveredMicroservice={hoveredMicroservice} />}
     </div>

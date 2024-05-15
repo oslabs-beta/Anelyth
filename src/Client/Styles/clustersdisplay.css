@@ -5,5 +5,9 @@
 }
 
 .cluster:hover {
-    background-color: rgb(208, 176, 201);
+    background-color: #daf334d6;
   }
+
+li {
+    list-style-type: none;
+}
