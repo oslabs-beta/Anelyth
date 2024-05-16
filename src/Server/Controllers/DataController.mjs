@@ -482,7 +482,7 @@ function getASTMethodDefNames(ast) {
   const methodNames = methodDefNames.map(node => node.name);
   return methodNames;
 }
-//needs refactoring, not returning exactly what we expect in all cases
+//needs refactoring, not returning exactly what we expect in all cases. not handling destructuring assignment properly either. returns null
 function getASTVariableDecNames(ast) {
   const variableDecNames = esquery(ast, 
     `VariableDeclaration`

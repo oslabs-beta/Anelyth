@@ -54,7 +54,7 @@ app.post('/api/fileupload',
     DataController.superStructure,
     couplingController.extractDetails,
     CohesionController.analyzeCohesion,
-    // SemanticController.analyzeSemantics,
+    SemanticController.analyzeSemantics,
     FinalAnalysisController.analyze,
     FileController.deleteDir,
     
