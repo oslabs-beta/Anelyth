@@ -40,7 +40,7 @@ CohesionController.analyzeCohesion = (req, res, next) => {
   });
 
   function shouldCombine (elementOne, elementTwo, threshold) {
-    console.log('\x1b[36m%s\x1b[0m', 'entering shouldCombine');
+    // console.log('\x1b[36m%s\x1b[0m', 'entering shouldCombine');
 
     const elOneApiEndpoints = { total: 0 };
     const elTwoApiEndpoints = { total: 0 };
@@ -155,8 +155,8 @@ CohesionController.analyzeCohesion = (req, res, next) => {
     });
    
     const percentInCommon = totalEndpoints === 0 ? 0 : inCommon / totalEndpoints;
-    console.log('inCommon:', inCommon)
-    console.log('percentInCommon:', percentInCommon)
+    // console.log('inCommon:', inCommon)
+    // console.log('percentInCommon:', percentInCommon)
 
     if (percentInCommon >= threshold) return true;
     else return false;

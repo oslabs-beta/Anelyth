@@ -3,13 +3,6 @@ const path = require('path');
 
 const SemanticController = {};
 
-// const string1 = 'abcTestingWord2.js';
-// const string2 = 'bdcTestjkWord.js';
-
-const string1 = 'adapterWord';
-const string2 = 'adaptSenteWordnce';
-
-
 SemanticController.analyzeSemantics = (req, res, next) => {
   const result = [];
   let remaining = JSON.parse(JSON.stringify(res.locals.clusters)); 
@@ -102,8 +95,24 @@ function shouldCombine(elementOne, elementTwo, commonNameThreshold, subStringThr
   return false;
 }
 
-// sliding window
+// const string1 = 'abcTestingWord2.js';
+// const string2 = 'bdcTestjkWord.js';
 
+const string1 = 'zdzpterWord';
+const string2 = 'ddaptSenteWordnce';
+
+//while i < firstString.length
+//case 1: letters match
+  //add letter to substring
+  //check if substring.length is big enough and return true if it is
+  //increment i and j
+//case 2: letters don't match
+  //set substring back to ''
+  //increment j
+
+//if you get to the end of j, reset it and increment i
+
+// sliding window
 function hasCommonSubstring(minLength, firstString, secondString) {
   firstString = firstString.toLowerCase();
   secondString = secondString.toLowerCase();
@@ -128,26 +137,25 @@ function hasCommonSubstring(minLength, firstString, secondString) {
       if (firstEl === secondEl) {
         console.log('inside match block');
         subString += firstEl;
+        if (subString.length >= minLength) return true;
         i++;
+        j++;
       } else {
         console.log('inside did NOT match block');
         subString = '';
-      }
-
-      if (subString.length >= minLength) {
-        console.log('subString: ', subString);
-        console.log('reached minLenght, resetting subString');
-        subStrings.push(subString);
-        subString = '';
         k = i;
+        j = 0;
       }
-      j++;
     }
+    i++;
+    k = i;
     j = 0;
-    i = k;
   }
-  return;
+
+  return false;
 }
+
+// console.log(hasCommonSubstring(4, string1, string2));
 
 function getSubstring(firstString, secondString) {
 

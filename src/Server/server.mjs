@@ -17,6 +17,7 @@ import DataController from "./Controllers/DataController.mjs";
 import CohesionController from './Controllers/CohesionController.cjs';
 import couplingController from './Controllers/CouplingController.mjs';
 import SemanticController from './Controllers/SemanticController.cjs';
+import FinalAnalysisController from './Controllers/FinalAnalysisController.cjs';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -53,7 +54,8 @@ app.post('/api/fileupload',
     DataController.superStructure,
     couplingController.extractDetails,
     CohesionController.analyzeCohesion,
-    SemanticController.analyzeSemantics,
+    // SemanticController.analyzeSemantics,
+    FinalAnalysisController.analyze,
     FileController.deleteDir,
     
     // S3Controller.upload,
