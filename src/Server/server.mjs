@@ -1,6 +1,3 @@
-import fs from 'fs';
-import esprima from 'esprima';
-import path from 'path';
 import express, { application } from 'express';
 import cookieParser from 'cookie-parser';
 
@@ -19,6 +16,8 @@ import SessionController from "./Controllers/SessionController.cjs";
 import DataController from "./Controllers/DataController.mjs";
 import CohesionController from './Controllers/CohesionController.cjs';
 import couplingController from './Controllers/CouplingController.mjs';
+import SemanticController from './Controllers/SemanticController.cjs';
+import FinalAnalysisController from './Controllers/FinalAnalysisController.cjs';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -54,7 +53,9 @@ app.post('/api/fileupload',
     // ASTApiQueryController.query,
     DataController.superStructure,
     couplingController.extractDetails,
-    CohesionController.calculateCohesion,
+    CohesionController.analyzeCohesion,
+    // SemanticController.analyzeSemantics,
+    FinalAnalysisController.analyze,
     FileController.deleteDir,
     
     // S3Controller.upload,

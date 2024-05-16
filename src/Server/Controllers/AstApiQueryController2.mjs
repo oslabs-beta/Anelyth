@@ -6,7 +6,7 @@ const AstApiQueryController2 = {};
 
 // --------------- CHECK API FUNCTION --------------- //
 
-AstApiQueryController2.queryFunc = async (nodeAST, nodePath) => {
+AstApiQueryController2.queryFunc = (nodeAST, nodePath) => {
   console.log('\n');
   console.log('Inside AstApiQueryController2.queryFunc')
   console.log(chalk.blue(`analyzing file path ${nodePath}`));

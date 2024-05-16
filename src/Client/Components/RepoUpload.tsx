@@ -50,9 +50,9 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, cluster
     // -------  File Filtering -------- //
     for (let i = 0; i < files.length; i++) {
       const filePath = files[i].webkitRelativePath;
-      const fileExt = filePath.slice(-4).toLowerCase();
-      //only loading typescript or javascript files
-      if (fileExt === '.jsx' || fileExt === '.tsx' || fileExt.slice(1) === '.js' || fileExt.slice(1) === '.ts') {
+      const fileExt = filePath.slice(-3).toLowerCase();
+      //only loading typescript or javascript files, just ts and js for now. leaving out tsx and jsx
+      if (fileExt === '.js' || fileExt === '.ts') {
         const pathElements = filePath.split('/');
         //don't upload files in certain directories and don't upload .DS_Store
         if (!filePath.includes('node_modules') && !filePath.includes('.git') && !filePath.includes('.DS_Store')) {
