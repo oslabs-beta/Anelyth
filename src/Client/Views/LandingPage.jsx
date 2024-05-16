@@ -147,7 +147,7 @@ Identifying potential microservices at different levels. From larger modules tha
       </div>
       <div className='hz-rule'></div>
       <footer className='main-foot'>
-        <div>Contact</div>
+        
       </footer>
     </div>
   </>

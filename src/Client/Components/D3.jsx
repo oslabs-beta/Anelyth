@@ -40,7 +40,9 @@ const PackChart = ({ data, options, hoveredMicroservice }) => {
     // Update node color or highlight based on hoveredMicroservice
     nodes.each(function(d) {
       if (d && d.data && hoveredMicroservice !== null && hoveredMicroservice.includes(d.data.name)) {
-        d3.select(this).attr('fill', 'yellow'); // Highlight color
+        d3.select(this).attr('fill', 'rgb(218, 243, 52)')// Highlight color
+        .attr('fill-opacity', 1) // overide the opacity
+        .attr('stroke', 'none');
       } 
     });
   }, [hoveredMicroservice]);
@@ -88,8 +90,8 @@ const Pack = (data, options) => { //data and options are props passed down from 
 
   const calculateOpacity = (depth) => {
     const maxOpacity = 1; // Maximum opacity
-  const minOpacity = 0.025; // Minimum opacity (increased from 0.2)
-  const opacityIncrement = 0.1; // Increment value for opacity
+  const minOpacity = 0.10; // Minimum opacity (increased from 0.2)
+  const opacityIncrement = 0.150; // Increment value for opacity
   // Calculate the opacity based on a linear scale with an increment
   return Math.min(minOpacity + opacityIncrement * depth, maxOpacity);
   };
@@ -105,14 +107,14 @@ const Pack = (data, options) => { //data and options are props passed down from 
   structure and collects all nodes into an array, including the root node itself. */
   const descendants = root.descendants();
 
-  console.log('Calling descendants', descendants);
+  // console.log('Calling descendants', descendants);
   
   /*filtering the array of descendant nodes (descendants) to only include nodes that do not have children.
   !d.children evaluates to true if d.children is falsy or an empty array */
 
   const leaves = descendants.filter(d => !d.children);
   
-  console.log ('Loggin the leaves', leaves);
+  // console.log ('Loggin the leaves', leaves);
   /* iterates through each leaf node in the leaves array and assigns an index to each leaf node. */
   leaves.forEach((d, i) => d.index = i);
 
@@ -191,9 +193,9 @@ g.append("defs")
 
 
     const filterLinks = (links, hoveredNode) => {
-      console.log('What is Hovered Node in filterLinks?', hoveredNode);
+      // console.log('What is Hovered Node in filterLinks?', hoveredNode);
       const result = links.filter(link => link.source === hoveredNode || link.target === hoveredNode);
-      console.log (`These are the filtered links from ${hoveredNode}`, result);
+      // console.log (`These are the filtered links from ${hoveredNode}`, result);
       return result;
     };
     
@@ -318,8 +320,8 @@ function dragended(event, d) {
       const centerX = d.x; // Get the x-coordinate of the node
       const centerY = d.y; // Get the y-coordinate of the node
     
-      console.log('d=========>', d)
-      console.log('event=========>', event)
+      // console.log('d=========>', d)
+      // console.log('event=========>', event)
       // Create a new zoom transformation with the desired zoom level and center
       const newTransform = d3.zoomIdentity
         .translate((width / 2 - centerX * zoomLevel),(height / 2 - centerY * zoomLevel))

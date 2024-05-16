@@ -60,6 +60,10 @@ svg {
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  h2 {
+    color: rgb(41, 41, 41);
+  }
 }
 
 .node.highlighted circle {
@@ -103,7 +107,8 @@ svg {
   margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 10px;
-  background-color: rgba(245, 245, 245, 0.937);
+  /* background-color: rgba(245, 245, 245, 0.937); */
+  background: linear-gradient(45deg,#ffffff,#d6d6d6);
   border-radius: 8px;
   height: 42px;
 }
@@ -116,7 +121,7 @@ svg {
 .items {
   font-size: 18px;
   /* color: rgb(146, 146, 146); */
-  color: black;
+  color: rgb(36, 36, 36);
   text-decoration: none;
 }
 
@@ -153,6 +158,7 @@ svg {
 
   h2 {
     font-size: 30px;
+    color: rgb(41, 41, 41);
   }
 }
 

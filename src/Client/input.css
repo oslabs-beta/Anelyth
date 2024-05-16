@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Matter-Light';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./Assets/Fonts/Matter-Light.ttf') format('woff2'),
+       url('./Assets/Fonts/Matter-Light.ttf') format('woff');
+}
+
+@font-face {
+  font-family: 'Matter-Medium';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./Assets/Fonts/Matter-Medium.ttf') format('woff2'),
+       url('./Assets/Fonts/Matter-Medium.ttf') format('woff');
+}
+
+@font-face {
+  font-family: 'Matter-SemiBold';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./Assets/Fonts/Matter-SemiBold.ttf') format('woff2'),
+       url('./Assets/Fonts/Matter-SemiBold.ttf') format('woff');
+}

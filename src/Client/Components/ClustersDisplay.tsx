@@ -34,7 +34,7 @@ const ClustersDisplay: FC<ClustersDisplayProps> = ({ clusterData, handleHoverMic
   }, [clusterData]);
 
   const handleMouseEnter = (microservice: string) => {
-    console.log('this is the microservice being hovered===>', groupedData[microservice]);
+    // console.log('this is the microservice being hovered===>', groupedData[microservice]);
     const microserviceData = groupedData[microservice]; // Access the value using microservice as key
     handleHoverMicroservice(microserviceData);
   };
