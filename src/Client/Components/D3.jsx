@@ -102,16 +102,13 @@ const PackChart = ({ data, options, hoveredMicroservice }) => {
 
     const nodes = svg.selectAll("circle");
 
-    nodes.each(function (d) {
-      if (d && d.data) {
-        d3.select(this).attr("fill", (d) =>
-          hoveredMicroservice && hoveredMicroservice.includes(d.data.name)
-            ? "yellow"
-            : d.children
-            ? "#016e91"
-            : d.data.color || options.fill
-        );
-      }
+    // Update node color or highlight based on hoveredMicroservice
+    nodes.each(function(d) {
+      if (d && d.data && hoveredMicroservice !== null && hoveredMicroservice.includes(d.data.name)) {
+        d3.select(this).attr('fill', 'rgb(218, 243, 52)')// Highlight color
+        .attr('fill-opacity', 1) // overide the opacity
+        .attr('stroke', 'none');
+      } 
     });
   }, [hoveredMicroservice, options.fill]);
 
@@ -168,13 +165,11 @@ const Pack = (data, options) => {
   const maxDepth = getMaxDepth(root);
 
   const calculateOpacity = (depth) => {
-    const maxOpacity = 1;
-
-    const minOpacity = 0.025;
-
-    const opacityIncrement = 0.1;
-
-    return Math.min(minOpacity + opacityIncrement * depth, maxOpacity);
+    const maxOpacity = 1; // Maximum opacity
+  const minOpacity = 0.10; // Minimum opacity (increased from 0.2)
+  const opacityIncrement = 0.150; // Increment value for opacity
+  // Calculate the opacity based on a linear scale with an increment
+  return Math.min(minOpacity + opacityIncrement * depth, maxOpacity);
   };
 
   function getMaxDepth(node) {
@@ -185,13 +180,30 @@ const Pack = (data, options) => {
 
   const descendants = root.descendants();
 
-  const leaves = descendants.filter((d) => !d.children);
+  // console.log('Calling descendants', descendants);
+  
+  /*filtering the array of descendant nodes (descendants) to only include nodes that do not have children.
+  !d.children evaluates to true if d.children is falsy or an empty array */
 
-  leaves.forEach((d, i) => (d.index = i));
+  const leaves = descendants.filter(d => !d.children);
+  
+  // console.log ('Loggin the leaves', leaves);
+  /* iterates through each leaf node in the leaves array and assigns an index to each leaf node. */
+  leaves.forEach((d, i) => d.index = i);
 
-  const L = label == null ? null : leaves.map((l) => label(l.data, l));
+  /*L is an array containing labels generated for each leaf node in the leaves array based on the provided 
+  label function. If no label function is provided (i.e., label is null or undefined), L is assigned the value null. In this case
+  the value of label is null so L is null */
 
-  const T = title == null ? null : descendants.map((d) => title(d.data, d));
+  const L = label == null ? null : leaves.map(l => label(l.data, l));
+
+
+  /* T is an array containing titles generated for each descendant node in the descendants array based on the provided title function. 
+  sIf no title function is provided (i.e., title is null or undefined), T is assigned the value null.*/
+  const T = title == null ? null : descendants.map(d => title(d.data, d));
+
+  /* Checks if a sorting function (sort) is provided in the options object. If a sorting function is provided, it sorts the descendant 
+  nodes of the root node (root) using that sorting function. In this case we are providing a sort function which is using d3.descending */
 
   if (sort != null) root.sort(sort);
 
@@ -281,74 +293,47 @@ const Pack = (data, options) => {
 
     .style("filter", "drop-shadow(0 0 5px rgba(255, 255, 0, 0.7))");
 
-  const filterLinks = (links, hoveredNode) => {
-    console.log("What is Hovered Node in filterLinks?", hoveredNode);
-
-    const result = links.filter(
-      (link) => link.source === hoveredNode || link.target === hoveredNode
-    );
-
-    console.log(`These are the filtered links from ${hoveredNode}`, result);
-
-    return result;
-  };
-
+    const filterLinks = (links, hoveredNode) => {
+      // console.log('What is Hovered Node in filterLinks?', hoveredNode);
+      const result = links.filter(link => link.source === hoveredNode || link.target === hoveredNode);
+      // console.log (`These are the filtered links from ${hoveredNode}`, result);
+      return result;
+    };
+    
+    
   let isDragging = false;
 
-  const hoverIn = (event, node) => {
-    if (isDragging) return;
+    const hoverIn = (event, node) => {
 
-    const filteredLinks = filterLinks(links, node);
-
-    // Select all existing links and remove them
-
-    g.selectAll(".link").remove();
-
-    // Append new lines for the filtered links with animation
-
-    g.selectAll(".link")
-
-      .data(filteredLinks)
-
-      .enter()
-
-      .append("line")
-
-      .attr("class", "link")
-
-      .style("stroke", "yellow")
-
-      .style("stroke-width", 6)
-
-      .style("opacity", 0.6)
-
-      .attr("x1", (d) => d.target.x)
-
-      .attr("y1", (d) => d.target.y)
-
-      .attr("x2", (d) => d.target.x)
-
-      .attr("y2", (d) => d.target.y)
-
-      .transition()
-
-      .duration(500)
-
-      .ease(d3.easeLinear)
-
-      .attr("x2", (d) => d.source.x)
-
-      .attr("y2", (d) => d.source.y);
-
-    svg
-
-      .selectAll("circle")
-
-      .filter((d) =>
-        filteredLinks.some((link) => link.source === d || link.target === d)
-      )
-
-      .attr("stroke-width", 3)
+      if (isDragging) return;
+      const filteredLinks = filterLinks(links, node);
+      
+        // Select all existing links and remove them
+        g.selectAll(".link").remove();
+      
+        // Append new lines for the filtered links with animation
+        g.selectAll(".link")
+          .data(filteredLinks)
+          .enter()
+          .append("line")
+          .attr("class", "link")
+          .style("stroke", "yellow") // Set the color of the links to black
+          // .style("stroke-dasharray", "5,5") // Define the dashed pattern
+          .style("stroke-width", 2) // Set the width of the lines
+          .style("opacity", .6)
+          .attr("x1", d => d.target.x) // Set initial positions to target node
+          .attr("y1", d => d.target.y) // Set initial positions to target node
+          .attr("x2", d => d.target.x) // Set initial positions to target node
+          .attr("y2", d => d.target.y) // Set initial positions to target node
+          .transition()
+          .duration(500) // Set the duration of the transition in milliseconds
+          .ease(d3.easeLinear)
+          .attr("x2", d => d.source.x) // Transition to source node positions
+          .attr("y2", d => d.source.y) // Transition to source node positions
+          svg.selectAll("circle")
+    .filter(d => filteredLinks.some(link => link.source === d || link.target === d))
+    .attr("stroke-width", 2) // Set thicker stroke
+    .attr("stroke", "yellow"); // Set highlight color
 
       .attr("stroke", "yellow");
   };
@@ -461,14 +446,12 @@ const Pack = (data, options) => {
     d3.select(this).attr("cursor", "grab");
   }
 
-  node
-
-    .append("circle")
-
-    .attr("fill", (d) => (d.children ? "#016e91" : d.data.color || fill))
-
-    .attr("fill-opacity", (d) => calculateOpacity(d.depth))
-
+    /*responsible for appending circle elements (<circle>) to the anchor elements (<a>) created earlier, and then setting 
+    various attributes (such as fill color, stroke color, etc.) of these circle elements based on the data associated with
+     each node (d). */
+  node.append("circle")
+    .attr("fill", d => d.children ? "#c7c5b9" : (d.data.color || fill)) //this is changing the color based on the color being passed in on the node data
+    .attr("fill-opacity", d => calculateOpacity(d.depth)) // Calculate opacity based on depth
     .attr("stroke", stroke)
 
     .attr("stroke-width", strokeWidth)
@@ -673,9 +656,9 @@ const D3 = ({
 
   return (
     <div className="d3">
-      <div className="d3-title-container">
-        <h1>Repository Overview</h1>
-        <Legend /> {/* Include the Legend component */}
+      <div className='d3-title-container'>
+        <h1 className='repo-overview-title'>Repository Overview</h1>
+        {/* <Legend /> Include the Legend component */}
       </div>
 
       {data && (

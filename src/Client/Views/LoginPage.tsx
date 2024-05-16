@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
 // @ts-ignore
-import bgIMG from '../Assets/loginimg.png';
+import bgIMG from '../Assets/block3.png';
 import '../Styles/login.css';
 import Header from '../Components/Header';
 

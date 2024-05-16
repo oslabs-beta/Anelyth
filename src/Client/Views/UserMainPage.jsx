@@ -5,6 +5,7 @@ import icon2 from '../Assets/icons/icons8-molecule-100.png';
 import icon3 from '../Assets/icons/icons8-dificulty-64.png';
 import icon4 from '../Assets/icons/icons8-pyramid-96.png';
 import icon5 from '../Assets/icons/icons8-logout-96.png';
+import icon6 from '../Assets/icons/icons8-circles-100.png'
 
 import RepoUpload from '../Components/RepoUpload.tsx';
 import ClustersDisplay from '../Components/ClustersDisplay';
@@ -29,32 +30,33 @@ function UserMainPage() {
     <div className='side-panel'>
       <div className='app-title'><a className='app-title-link' href="/">Anelyth.</a></div>
       <hr />
-      <div className='side-items-container'>
-        <div className='item-container'>
-          <img className='icon-inv' src={icon1} alt="" />
-          <a className='items' href="/repos">Projects</a>
+      <div className='side-items-top-bot-container'>
+        <div className='side-items-container'>
+          <div className='item-container'>
+              <img className='icon-inv' src={icon2} alt="" />
+              <a className='items' href="/usermain">Workbench</a>
+          </div>
+          <div className='item-container'>
+            <img className='icon-inv' src={icon1} alt="" />
+            <a className='items' href="/repos">Projects</a>
+          </div>
         </div>
-        <div className='item-container'>
-          <img className='icon-inv' src={icon4} alt="" />
-          <a className='items' href="/">Heiarchy</a>
+        <div className='side-items-bot-container'>
+          <div className='item-container'>
+            <img className='icon-inv' src={icon6} alt="" />
+            <a className='items' href="/repos">Download Visual</a>
+          </div>
+          <div className='item-container'>
+            <img className='icon-inv' src={icon4} alt="" />
+            <a className='items' href="/repos">Download AST</a>
+          </div>
+          <div className='item-container'>
+            <img className='icon-inv' src={icon1} alt="" />
+            <a className='items' href="/repos">Help</a>
+          </div>
         </div>
-        <div className='item-container'>
-          <img className='icon-inv' src={icon2} alt="" />
-          <a  className='items' href="/">Dependencies</a>
-        </div>
-        <div className='item-container'>
-          <img className='icon-inv' src={icon3} alt="" />
-          <a className='items' href="/">Complexity</a>
-        </div>
-        
+
       </div>
-      
-      {/* {analyzeButtonShowing && (
-      <div className='btn-container-main-page'>
-        <button className='btn btn-secondary btn-pulse'><a className='btn-link'>Analyze</a></button>
-
-
-        </div>)} */}
 
 
       <div className='side-bottom-container'>
@@ -80,8 +82,14 @@ function UserMainPage() {
             />
         <div className='clusters-infopanel'>
           <div className='info-panel'>
+            <div className='side-section-title-container'>
+              <h2>File Overview</h2>
+            </div>
             {popupShowing && clickedNodeData.dependencies && <NodeInfoModal data={clickedNodeData}/>}
           </div>
+            <div className='side-section-title-container'>
+              <h2>Microservices Overview</h2>
+            </div>
           <div className='clusters-display-container'>
             {clusterData && <ClustersDisplay clusterData={clusterData} handleHoverMicroservice={handleHoverMicroservice}/>} 
           </div>

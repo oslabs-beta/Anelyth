@@ -41,6 +41,10 @@ couplingController.extractDetails = (req, res, next) => {
 
         moduleDetails: [],
 
+        funcDecNames: [],
+
+        varDecNames: [],
+
         dependencyCount: 0,
       };
 
@@ -71,12 +75,19 @@ couplingController.extractDetails = (req, res, next) => {
       if (node.dbInfo && node.dbInfo.length > 0) {
         node.dbInfo.forEach((dbEntry) => {
           if (dbEntry.dbInteraction) {
-            fileDetails.dbDetails.push({
-              dbType: dbEntry.dbType,
-              totalInteractions: dbEntry.totalInteractions,
-            });
+            fileDetails.dbDetails.push(
+              dbEntry
+            );
           }
         });
+      }
+
+      if (node.deepInfo.funcDecName.length > 0) {
+        fileDetails.funcDecNames = node.deepInfo.funcDecName;
+      }
+
+      if (node.deepInfo.variableDecNames.length > 0) {
+        fileDetails.varDecNames = node.deepInfo.variableDecNames;
       }
 
       detailsArray.push(fileDetails);
