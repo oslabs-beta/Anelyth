@@ -723,7 +723,7 @@ const Pack = (data, options) => {
   //function to zoom deepr 
   function zoomToNode(event, d) {
     const minZoomLevel = 10; // Minimum zoom level to ensure deep zoom
-    const zoomLevel = Math.max(minZoomLevel, width / (2 * d.r + 20)); // Adjusted padding value
+    const zoomLevel = Math.max(minZoomLevel, width / (2 * d.r + 50)); // Adjusted padding value
     const centerX = d.x;
     const centerY = d.y;
   
