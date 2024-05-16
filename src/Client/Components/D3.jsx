@@ -67,50 +67,44 @@ const PackChart = ({ data, options, hoveredMicroservice }) => {
     adjustTextSize(initialZoomLevel);
   }, []);
 
-  // useEffect(() => {
-
-  // const svg = d3.select(svgRef.current);
-
-  // const nodes = svg.selectAll("circle");
-
-  // nodes.each(function (d) {
-
-  // if (
-
-  // d &&
-
-  // d.data &&
-
-  // hoveredMicroservice !== null &&
-
-  // hoveredMicroservice.includes(d.data.name)
-
-  // ) {
-
-  // d3.select(this).attr("fill", "yellow"); // Highlight color
-
-  // }
-
-  // });
-
-  // }, []);
-
   // Update node highlighting based on hoveredMicroservice prop
+  //scotts styling 
+  // useEffect(() => { //scott
+  //   const svg = d3.select(svgRef.current);
 
+  //   const nodes = svg.selectAll("circle");
+
+  //   // Update node color or highlight based on hoveredMicroservice
+  //   nodes.each(function(d) {
+  //     if (d && d.data && hoveredMicroservice !== null && hoveredMicroservice.includes(d.data.name)) {
+  //       d3.select(this).attr('fill', 'rgb(218, 243, 52)')// Highlight color
+  //       .attr('fill-opacity', 1) // overide the opacity
+  //       .attr('stroke', 'none');
+  //     } 
+  //   });
+  // }, [hoveredMicroservice, options.fill]);
+
+  // //christian styling (stays true to the original colors and opacity)
   useEffect(() => {
     const svg = d3.select(svgRef.current);
 
     const nodes = svg.selectAll("circle");
 
-    // Update node color or highlight based on hoveredMicroservice
-    nodes.each(function(d) {
-      if (d && d.data && hoveredMicroservice !== null && hoveredMicroservice.includes(d.data.name)) {
-        d3.select(this).attr('fill', 'rgb(218, 243, 52)')// Highlight color
-        .attr('fill-opacity', 1) // overide the opacity
-        .attr('stroke', 'none');
-      } 
+    nodes.each(function (d) {
+      if (d && d.data) { //good
+        d3.select(this).attr("fill", (d) =>
+          hoveredMicroservice && hoveredMicroservice.includes(d.data.name)
+            ? "rgb(255, 255, 0)"
+            : d.children
+            ? "#016e91"
+            : d.data.color || options.fill
+        );
+      }
     });
   }, [hoveredMicroservice, options.fill]);
+
+  
+
 
   return <svg ref={svgRef}></svg>;
 };
@@ -334,23 +328,7 @@ const Pack = (data, options) => {
     .filter(d => filteredLinks.some(link => link.source === d || link.target === d))
     .attr("stroke-width", 2) // Set thicker stroke
     .attr("stroke", "yellow"); // Set highlight color
-
-      .attr("stroke", "yellow");
   };
-
-  // const hoverOut = () => {
-
-  // // Remove all links
-
-  // svg.selectAll(".link").remove();
-
-  // svg.selectAll("circle")
-
-  // .attr("stroke-width", strokeWidth)
-
-  // .attr("stroke", stroke);
-
-  // };
 
   const hoverOut = (event, node) => {
     if (isDragging) return;
