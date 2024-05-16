@@ -18,7 +18,7 @@ const CohesionController = {};
 //output: array of arrays of objects: grouped by potential microservice based on api cohesion metric
 
 
-CohesionController.calculateCohesion = (req, res, next) => {
+CohesionController.analyzeCohesion = (req, res, next) => {
   const result = [];
   const remaining = JSON.parse(JSON.stringify(res.locals.detailsArray)); 
   while (remaining.length > 0) {

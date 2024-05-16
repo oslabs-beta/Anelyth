@@ -16,6 +16,7 @@ import SessionController from "./Controllers/SessionController.cjs";
 import DataController from "./Controllers/DataController.mjs";
 import CohesionController from './Controllers/CohesionController.cjs';
 import couplingController from './Controllers/CouplingController.mjs';
+import SemanticController from './Controllers/SemanticController.cjs';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -51,7 +52,8 @@ app.post('/api/fileupload',
     // ASTApiQueryController.query,
     DataController.superStructure,
     couplingController.extractDetails,
-    CohesionController.calculateCohesion,
+    CohesionController.analyzeCohesion,
+    SemanticController.analyzeSemantics,
     FileController.deleteDir,
     
     // S3Controller.upload,
