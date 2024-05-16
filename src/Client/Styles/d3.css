@@ -49,4 +49,8 @@ svg{
   align-items: center;
 }
 
+.text-label {
+  pointer-events: none;
+}
+
   

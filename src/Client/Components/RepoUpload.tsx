@@ -12,9 +12,11 @@ interface RepoUploadProps {
   clusterData: any; 
   setClusterData: (value: any) => void; 
   hoveredMicroservice: (value: any) => void; 
+  setIsZoomedIn: (value: any) => void; 
+  isZoomedIn: (value: any) => void; 
 }
 
-function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, clusterData, setClusterData, hoveredMicroservice} : RepoUploadProps) {
+function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, clusterData, setClusterData, hoveredMicroservice, setIsZoomedIn, isZoomedIn} : RepoUploadProps) {
   const [hierarchyData, setHierarchyData] = useState(null);
 
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -123,7 +125,7 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, cluster
           
         ) : (
           <div className='D3-container'>
-            <D3 hierarchyData={hierarchyData} popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} hoveredMicroservice={hoveredMicroservice} />
+            <D3 hierarchyData={hierarchyData} popupShowing={popupShowing} setPopupShowing={setPopupShowing} setClickedNodeData={setClickedNodeData} hoveredMicroservice={hoveredMicroservice} setIsZoomedIn={setIsZoomedIn} isZoomedIn={isZoomedIn} />
           </div>
         )}
       </div>
