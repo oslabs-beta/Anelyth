@@ -5,6 +5,11 @@ svg{
     width: 100%;
 }
 
+.repo-overview-title {
+  margin-bottom: 12px;
+  color: rgb(41, 41, 41);
+}
+
 .legend {
     display: flex;
     justify-content: center;
@@ -36,7 +41,7 @@ svg{
   }
 
 .d3-title-container {
-  border: 1px solid rgb(218, 218, 218);
+  border-bottom: 1px solid rgb(218, 218, 218);
   width: 100%;
   display: flex;
   flex-direction: column;
