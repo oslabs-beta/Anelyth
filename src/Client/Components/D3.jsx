@@ -463,65 +463,38 @@ const PackChart = ({ data, options, hoveredMicroservice }) => {
 };
 
 const Pack = (data, options) => {
-  //data and options are props passed down from App
 
   const {
     value,
-
     sort = (a, b) => d3.descending(a.value, b.value),
-
     label = (nodeData, node) => nodeData.name,
-
     title = (nodeData, node) => nodeData.name,
-
     link,
-
     linkTarget = "_blank",
-
     width,
-
     height,
-
     margin = 1,
-
     marginTop = margin,
-
     marginRight = margin,
-
     marginBottom = margin,
-
     marginLeft = margin,
-
     padding = 3,
-
     fill,
-
     fillOpacity,
-
     stroke,
-
     strokeWidth,
-
     strokeOpacity,
-
     onNodeClick,
   } = options;
 
-  /* This part constructs the root node of the hierarchical data structure to be visualized. It uses the provided
-
-path, id, and parentId properties from the options object, or defaults to using d3.hierarchy() if those properties
-
-are not provided. Seems like we are not providing any of that data so its defaulting to d3.hierachy. Note; look up d3.hierarchy*/
-
+  /* This part constructs the root node of the hierarchical data structure to be visualized. 
+     It uses the provided path, id, and parentId properties from the options object, 
+     or defaults to using d3.hierarchy() if those properties are not provided. */
+  
   const root = d3.hierarchy(data);
 
-  /* This line dynamically chooses whether to count the nodes or calculate the sum of values for the nodes based
-
-on the presence of the value property in the options object. In our case we are not setting a value to the value variable so
-
-it is null */
-
-  // value == null ? root.count() : root.sum(d => Math.max(0, value(d)));
+  /* This line dynamically chooses whether to count the nodes or calculate the sum of values 
+     for the nodes based on the presence of the value property in the options object. */
 
   root.sum((d) => d.value || 0); // Sum the file sizes
 
@@ -529,61 +502,46 @@ it is null */
 
   const calculateOpacity = (depth) => {
     const maxOpacity = 1; // Maximum opacity
-
     const minOpacity = 0.025; // Minimum opacity (increased from 0.2)
-
     const opacityIncrement = 0.1; // Increment value for opacity
 
     // Calculate the opacity based on a linear scale with an increment
-
     return Math.min(minOpacity + opacityIncrement * depth, maxOpacity);
   };
 
   // Function to calculate the maximum depth of the hierarchy
-
   function getMaxDepth(node) {
     if (!node.children) return 0;
-
     return 1 + Math.max(...node.children.map(getMaxDepth));
   }
 
-  /*This method, provided by D3.js, returns an array containing all descendant nodes of the root node. It traverses the hierarchical
-
-structure and collects all nodes into an array, including the root node itself. */
+  /* This method, provided by D3.js, returns an array containing all descendant nodes of the root node. 
+     It traverses the hierarchical structure and collects all nodes into an array, including the root node itself. */
 
   const descendants = root.descendants();
-
   console.log("Calling descendants", descendants);
 
-  /*filtering the array of descendant nodes (descendants) to only include nodes that do not have children.
-
-!d.children evaluates to true if d.children is falsy or an empty array */
+  /* Filtering the array of descendant nodes (descendants) to only include nodes that do not have children. 
+     !d.children evaluates to true if d.children is falsy or an empty array */
 
   const leaves = descendants.filter((d) => !d.children);
+  console.log("Logging the leaves", leaves);
 
-  console.log("Loggin the leaves", leaves);
-
-  /* iterates through each leaf node in the leaves array and assigns an index to each leaf node. */
-
+  /* Iterates through each leaf node in the leaves array and assigns an index to each leaf node. */
   leaves.forEach((d, i) => (d.index = i));
 
-  /*L is an array containing labels generated for each leaf node in the leaves array based on the provided
-
-label function. If no label function is provided (i.e., label is null or undefined), L is assigned the value null. In this case
-
-the value of label is null so L is null */
+  /* L is an array containing labels generated for each leaf node in the leaves array based on the provided 
+     label function. If no label function is provided (i.e., label is null or undefined), L is assigned the value null. */
 
   const L = label == null ? null : leaves.map((l) => label(l.data, l));
 
-  /* T is an array containing titles generated for each descendant node in the descendants array based on the provided title function.
-
-sIf no title function is provided (i.e., title is null or undefined), T is assigned the value null.*/
+  /* T is an array containing titles generated for each descendant node in the descendants array based on the 
+     provided title function. If no title function is provided (i.e., title is null or undefined), T is assigned the value null. */
 
   const T = title == null ? null : descendants.map((d) => title(d.data, d));
 
-  /* Checks if a sorting function (sort) is provided in the options object. If a sorting function is provided, it sorts the descendant
-
-nodes of the root node (root) using that sorting function. In this case we are providing a sort function which is using d3.descending */
+  /* Checks if a sorting function (sort) is provided in the options object. If a sorting function is provided, 
+     it sorts the descendant nodes of the root node (root) using that sorting function. */
 
   if (sort != null) root.sort(sort);
 
@@ -591,98 +549,60 @@ nodes of the root node (root) using that sorting function. In this case we are p
 
   function generateLinks(node) {
     const links = [];
-
     if (node.children) {
       node.children.forEach((child) => {
         if (child.dependencies) {
           child.dependencies.forEach((dependency) => {
-            const sourceNode = descendants.find(
-              (d) => d.data.name === child.name
-            );
-
-            const targetNode = descendants.find(
-              (d) => d.data.name === dependency.source
-            );
-
+            const sourceNode = descendants.find((d) => d.data.name === child.name);
+            const targetNode = descendants.find((d) => d.data.name === dependency.source);
             if (sourceNode && targetNode) {
               links.push({ source: sourceNode, target: targetNode });
             }
           });
         }
-
         links.push(...generateLinks(child));
       });
     }
-
     return links;
   }
 
-  d3
-    .pack()
-
+  d3.pack()
     .size([width - marginLeft - marginRight, height - marginTop - marginBottom])
-
     .padding(padding)(root);
 
-  const svg = d3
-    .create("svg") // creates a new SVG element with the specified tag name, in this case, "svg".
-
-    .attr("viewBox", [-marginLeft, -marginTop, width, height]) //This sets the viewBox attribute of the SVG element.
-
-    .attr("width", width) // This sets the width attribute of the SVG element to the specified width (width), which was provided in the options object.
-
-    .attr("height", height) //This sets the height attribute of the SVG element
-
-    .attr("style", "max-width: 100%; height: auto; height: intrinsic;") //more styling
-
-    .attr("font-family", "sans-serif") //more styling
-
-    .attr("font-size", 10) //more styling
-
-    .attr("text-anchor", "middle"); //more styling
+  const svg = d3.create("svg")
+    .attr("viewBox", [-marginLeft, -marginTop, width, height])
+    .attr("width", width)
+    .attr("height", height)
+    .attr("style", "max-width: 100%; height: auto; height: intrinsic;")
+    .attr("font-family", "sans-serif")
+    .attr("font-size", 10)
+    .attr("text-anchor", "middle");
 
   svg.on("dblclick", (event) => zoomToNode(event, root));
 
-  const g = svg
-    .append("g")
-
-    .attr("id", "pack");
+  const g = svg.append("g").attr("id", "pack");
 
   g.append("defs")
-
     .append("marker")
-
     .attr("id", "circle-marker")
-
-    .attr("markerWidth", 12) // Enlarge the marker width
-
-    .attr("markerHeight", 12) // Enlarge the marker height
-
-    .attr("refX", 6) // Position the marker at the end of the line
-
+    .attr("markerWidth", 12)
+    .attr("markerHeight", 12)
+    .attr("refX", 6)
     .attr("refY", 6)
-
     .append("circle")
-
     .attr("cx", 6)
-
     .attr("cy", 6)
-
-    .attr("r", 3) // Radius of the circle
-
-    .style("fill", "yellow") // Color of the circle
-
-    .style("filter", "drop-shadow(0 0 5px rgba(255, 255, 0, 0.7))"); // Glow effect
+    .attr("r", 3)
+    .style("fill", "yellow")
+    .style("filter", "drop-shadow(0 0 5px rgba(255, 255, 0, 0.7))");
 
   const filterLinks = (links, hoveredNode) => {
     console.log("What is Hovered Node in filterLinks?", hoveredNode);
-
     const result = links.filter(
       (link) => link.source === hoveredNode || link.target === hoveredNode
     );
-
     console.log(`These are the filtered links from ${hoveredNode}`, result);
-
     return result;
   };
 
@@ -694,263 +614,94 @@ nodes of the root node (root) using that sorting function. In this case we are p
     const filteredLinks = filterLinks(links, node);
 
     // Select all existing links and remove them
-
     g.selectAll(".link").remove();
 
     // Append new lines for the filtered links with animation
-
     g.selectAll(".link")
-
       .data(filteredLinks)
-
       .enter()
-
       .append("line")
-
       .attr("class", "link")
-
-      .style("stroke", "yellow") // Set the color of the links to black
-
-      // .style("stroke-dasharray", "5,5") // Define the dashed pattern
-
-      .style("stroke-width", 6) // Set the width of the lines
-
+      .style("stroke", "yellow")
+      .style("stroke-width", 6)
       .style("opacity", 0.6)
-
-      .attr("x1", (d) => d.target.x) // Set initial positions to target node
-
-      .attr("y1", (d) => d.target.y) // Set initial positions to target node
-
-      .attr("x2", (d) => d.target.x) // Set initial positions to target node
-
-      .attr("y2", (d) => d.target.y) // Set initial positions to target node
-
+      .attr("x1", (d) => d.target.x)
+      .attr("y1", (d) => d.target.y)
+      .attr("x2", (d) => d.target.x)
+      .attr("y2", (d) => d.target.y)
       .transition()
-
-      .duration(500) // Set the duration of the transition in milliseconds
-
+      .duration(500)
       .ease(d3.easeLinear)
+      .attr("x2", (d) => d.source.x)
+      .attr("y2", (d) => d.source.y);
 
-      .attr("x2", (d) => d.source.x) // Transition to source node positions
-
-      .attr("y2", (d) => d.source.y); // Transition to source node positions
-
-    svg
-      .selectAll("circle")
-
-      .filter((d) =>
-        filteredLinks.some((link) => link.source === d || link.target === d)
-      )
-
-      .attr("stroke-width", 3) // Set thicker stroke
-
-      .attr("stroke", "yellow"); // Set highlight color
+    svg.selectAll("circle")
+      .filter((d) => filteredLinks.some((link) => link.source === d || link.target === d))
+      .attr("stroke-width", 3)
+      .attr("stroke", "yellow");
   };
 
   const hoverOut = () => {
     // Remove all links
-
     svg.selectAll(".link").remove();
-
-    svg
-      .selectAll("circle")
-
-      .attr("stroke-width", strokeWidth) // Restore original stroke width
-
-      .attr("stroke", stroke); // Restore original stroke color
+    svg.selectAll("circle")
+      .attr("stroke-width", strokeWidth)
+      .attr("stroke", stroke);
   };
 
-  const node = g
-    .selectAll("g") //
-
+  const node = g.selectAll("g")
     .data(descendants)
-
     .join("g")
-
     .attr("transform", (d) => `translate(${d.x},${d.y})`)
-
     .call(
-      d3
-        .drag()
-
+      d3.drag()
         .on("start", dragstarted)
-
         .on("drag", dragged)
-
         .on("end", dragended)
     )
-
     .on("mouseover", hoverIn)
-
     .on("mouseout", hoverOut)
+    .on("dblclick", (event, d) => root !== d && (zoomToNode(event, d), event.stopPropagation()));
 
-    // .on("dblclick", (event, d) => zoomToNode(event, d));
-
-    .on(
-      "dblclick",
-      (event, d) =>
-        root !== d && (zoomToNode(event, d), event.stopPropagation())
-    );
-
-  //we want node have the zoom functionality as well
-
+  // Drag event handlers
   function dragstarted(event, d) {
     isDragging = true;
-
     if (!event.active) root.fx = d.x;
-
     if (!event.active) root.fy = d.y;
-
-    if (!d.children) {
-      // If it's a leaf node, initiate the drag behavior
-
-      d3.select(this).attr("cursor", "grabbing").raise();
-    } else {
-      d3.select(this).attr("cursor", "grabbing");
-    }
+    d3.select(this).attr("cursor", "grabbing");
   }
 
   function dragged(event, d) {
-    // Update the position of the dragged node
-
     root.fx = event.x;
-
     root.fy = event.y;
-
-    d3.select(this).attr(
-      "transform",
-      `translate(${(d.x = event.x)},${(d.y = event.y)})`
-    );
+    d3.select(this).attr("transform", `translate(${(d.x = event.x)},${(d.y = event.y)})`);
   }
 
   function dragended(event, d) {
     isDragging = false;
-
     if (!event.active) root.fx = null;
-
     if (!event.active) root.fy = null;
-
     d3.select(this).attr("cursor", "grab");
   }
 
-  /*responsible for appending circle elements (<circle>) to the anchor elements (<a>) created earlier, and then setting
+  /* Responsible for appending circle elements (<circle>) to the anchor elements (<a>) created earlier, 
+     and then setting various attributes (such as fill color, stroke color, etc.) of these circle elements based on the data associated 
+     with each node (d). */
 
-various attributes (such as fill color, stroke color, etc.) of these circle elements based on the data associated with
-
-each node (d). */
-
-  node
-    .append("circle")
-
-    .attr("fill", (d) => (d.children ? "#016e91" : d.data.color || fill)) //this is changing the color based on the color being passed in on the node data
-
-    .attr("fill-opacity", (d) => calculateOpacity(d.depth)) // Calculate opacity based on depth
-
+  node.append("circle")
+    .attr("fill", (d) => (d.children ? "#016e91" : d.data.color || fill))
+    .attr("fill-opacity", (d) => calculateOpacity(d.depth))
     .attr("stroke", stroke)
-
     .attr("stroke-width", strokeWidth)
-
     .attr("stroke-opacity", strokeOpacity)
-
     .attr("r", (d) => d.r)
+    .style("cursor", "grab")
+    .on("mouseover", (event) => d3.select(event.currentTarget).attr("stroke-width", 5))
+    .on("mouseout", (event) => d3.select(event.currentTarget).attr("stroke-width", (d) => d.children ? strokeWidth : null));
 
-    .style("cursor", "grab") // Set cursor style to grab
-
-    .on("mouseover", (event) => {
-      d3.select(event.currentTarget).attr("stroke-width", 5);
-    })
-
-    .on("mouseout", (event) => {
-      d3.select(event.currentTarget).attr("stroke-width", (d) =>
-        d.children ? strokeWidth : null
-      );
-    });
-
-  // .on("click", (event, d) => {
-
-  // //take the data in this node and pass it to the state of D3 parent component to render the node data modal
-
-  // onNodeClick(d.data);
-
-  // })
-
-  // function zoomToNode(event, d) {
-  //   const zoomLevel = width / (2 * d.r + 40); // Adjust this value to control the zoom level
-
-  //   const centerX = d.x; // Get the x-coordinate of the node
-
-  //   const centerY = d.y; // Get the y-coordinate of the node
-
-  //   console.log("d=========>", d);
-
-  //   console.log("event=========>", event);
-
-  //   // Create a new zoom transformation with the desired zoom level and center
-
-  //   const newTransform = d3.zoomIdentity
-
-  //     .translate(
-  //       width / 2 - centerX * zoomLevel,
-  //       height / 2 - centerY * zoomLevel
-  //     )
-
-  //     .scale(zoomLevel);
-
-  //   // .translate(d.x-event.x,d.y-event.y);
-
-  //   // Apply the new zoom transformation to the svg element
-
-  //   d3.select("svg g")
-
-  //     .transition()
-
-  //     .duration(1500) // Adjust the duration for a smoother animation
-
-  //     .attr("transform", newTransform);
-  // }
-
-  // function zoomToNode(event, d) {
-  //   const zoomLevel = width / (2 * d.r + 40); // Adjust this value to control the zoom level
-  //   const centerX = d.x;
-  //   const centerY = d.y;
-
-  //   const newTransform = d3.zoomIdentity
-  //     .translate(width / 2 - centerX * zoomLevel, height / 2 - centerY * zoomLevel)
-  //     .scale(zoomLevel);
-
-  //   d3.select("svg g")
-  //     .transition()
-  //     .duration(1500)
-  //     .attr("transform", newTransform)
-  // }
-
-  // function zoomToNode(event, d) {
-  //   const zoomLevel = width / (2 * d.r + 40);
-  //   const centerX = d.x;
-  //   const centerY = d.y;
-
-  //   const newTransform = d3.zoomIdentity
-  //     .translate(width / 2 - centerX * zoomLevel, height / 2 - centerY * zoomLevel)
-  //     .scale(zoomLevel);
-
-  //   d3.select("svg g")
-  //     .transition()
-  //     .duration(1100)
-  //     .attr("transform", newTransform);
-
-  //   adjustTextSize(zoomLevel);
-  // }
-
-  // function adjustTextSize(zoomLevel) {
-  //   const baseFontSize = 8; // Adjust this as necessary
-  //   const newFontSize = baseFontSize / zoomLevel;
-
-  //   svg.selectAll("text")
-  //     .attr("font-size", newFontSize);
-  // }
 
   function zoomToNode(event, d) {
-    const zoomLevel = width / (2 * d.r + 100);
+    const zoomLevel = width / (2 * d.r + 50);
     const centerX = d.x;
     const centerY = d.y;
   
@@ -960,19 +711,28 @@ each node (d). */
   
     d3.select("svg g")
       .transition()
-      .duration(1500)
+      .duration(1800)
       .attr("transform", newTransform);
   
     adjustTextSize(zoomLevel);
-  }
+  } 
+
+
   
+  // Adjust text size based on zoom level
   function adjustTextSize(zoomLevel) {
-    const baseFontSize = 8; // Adjust this as necessary
-    const newFontSize = baseFontSize / zoomLevel;
+    const baseFontSize = 7;
+    const minFontSize = 0.5; // Minimum font size
+    const maxFontSize = 9; // Maximum font size
+  
+    const newFontSize = Math.max(
+      minFontSize,
+      Math.min(maxFontSize, baseFontSize / zoomLevel)
+    );
   
     svg.selectAll("text")
       .transition()
-      .duration(800)
+      .duration(700)
       .ease(d3.easeLinear)
       .attr("font-size", newFontSize)
       .each(function() {
@@ -985,84 +745,336 @@ each node (d). */
           text.attr("font-size", newFontSize * textScale);
         }
       });
-  }
+ }
+
+
+
+
+
+  
   
 
-  /* This line of code dynamically creates and sets the title text for each node in the hierarchical structure based
-
-on the generated array of title texts (T). If T contains title texts for the nodes, they are appended to the corresponding
-
-title elements within each node's anchor element, providing additional information or context when hovering over the nodes
-
-in the visualization. */
+  /* This line of code dynamically creates and sets the title text for each node in the hierarchical structure based 
+     on the generated array of title texts (T). If T contains title texts for the nodes, they are appended to the corresponding 
+     title elements within each node's anchor element, providing additional information or context when hovering over the nodes 
+     in the visualization. */
 
   if (T) node.append("title").text((d, i) => T[i]);
 
-    const uid = `O-${Math.random().toString(16).slice(2)}`;
+  const uid = `O-${Math.random().toString(16).slice(2)}`;
 
-    const leaf = node.filter(
-      (d) => !d.children && d.r > 2 && L[d.index] != null
-    );
+  const leaf = node.filter(
+    (d) => !d.children && d.r > 0.3 && L[d.index] != null
+  );
 
-    leaf
-      .append("clipPath")
+  leaf.append("clipPath")
+    .attr("id", (d) => `${uid}-clip-${d.index}`)
+    .append("circle")
+    .attr("r", (d) => d.r);
 
-      .attr("id", (d) => `${uid}-clip-${d.index}`)
+  leaf.append("text")
+    .attr("clip-path", (d) => `url(${new URL(`#${uid}-clip-${d.index}`, location)})`)
+    .selectAll("tspan")
+    .data((d) => `${L[d.index]}`.split(/\n/g))
+    .join("tspan")
+    .attr("x", 0)
+    .attr("y", (d, i, D) => `${i - D.length / 2 + 0.85}em`)
+    .attr("fill-opacity", (d, i, D) => (i === D.length - 1 ? 0.7 : null))
+    .text((d) => d);
 
-      .append("circle")
+  const simulation = d3.forceSimulation()
+    .force("collide", d3.forceCollide().strength(0.1).radius(2))
+    .alphaDecay(0)
+    .alpha(1);
 
-      .attr("r", (d) => d.r);
-
-    leaf
-      .append("text")
-
-      .attr(
-        "clip-path",
-        (d) => `url(${new URL(`#${uid}-clip-${d.index}`, location)})`
-      )
-
-      .selectAll("tspan")
-
-      .data((d) => `${L[d.index]}`.split(/\n/g))
-
-      .join("tspan")
-
-      .attr("x", 0)
-
-      .attr("y", (d, i, D) => `${i - D.length / 2 + 0.85}em`)
-
-      .attr("fill-opacity", (d, i, D) => (i === D.length - 1 ? 0.7 : null))
-
-      .text((d) => d);
-
-  const simulation = d3
-    .forceSimulation()
-
-    // .force("charge", d3.forceManyBody().strength(1)) // Nodes are attracted to each other if value is > 0
-
-    .force("collide", d3.forceCollide().strength(0.1).radius(2)) // Force that avoids circle overlapping
-
-    .alphaDecay(0) // Disable alpha decay
-
-    .alpha(1); // Set initial alpha value
-
-  // Apply these forces to the nodes
-
-  simulation
-    .nodes(leaves)
-
+  simulation.nodes(leaves)
     .on("tick", () => {
-      // Update node positions on each tick
-
       node.attr("transform", (d) => `translate(${d.x},${d.y})`);
     });
 
-  // return svg.node();
-
-  //returning the svg without rendering it, this solves the double render issue
-
   return svg;
 };
+
+
+// const Pack = (data, options) => {
+//   const {
+//     value,
+//     sort = (a, b) => d3.descending(a.value, b.value),
+//     label = (nodeData, node) => nodeData.name,
+//     title = (nodeData, node) => nodeData.name,
+//     link,
+//     linkTarget = "_blank",
+//     width,
+//     height,
+//     margin = 1,
+//     marginTop = margin,
+//     marginRight = margin,
+//     marginBottom = margin,
+//     marginLeft = margin,
+//     padding = 3,
+//     fill,
+//     fillOpacity,
+//     stroke,
+//     strokeWidth,
+//     strokeOpacity,
+//     onNodeClick,
+//   } = options;
+
+//   const root = d3.hierarchy(data);
+//   root.sum((d) => d.value || 0);
+
+//   if (sort) root.sort(sort);
+
+//   const descendants = root.descendants();
+//   const leaves = descendants.filter((d) => !d.children);
+//   leaves.forEach((d, i) => (d.index = i));
+
+//   const L = label ? leaves.map((l) => label(l.data, l)) : null;
+//   const T = title ? descendants.map((d) => title(d.data, d)) : null;
+
+//   const generateLinks = (node) => {
+//     const links = [];
+//     if (node.children) {
+//       node.children.forEach((child) => {
+//         if (child.dependencies) {
+//           child.dependencies.forEach((dependency) => {
+//             const sourceNode = descendants.find((d) => d.data.name === child.name);
+//             const targetNode = descendants.find((d) => d.data.name === dependency.source);
+//             if (sourceNode && targetNode) {
+//               links.push({ source: sourceNode, target: targetNode });
+//             }
+//           });
+//         }
+//         links.push(...generateLinks(child));
+//       });
+//     }
+//     return links;
+//   };
+
+//   const links = generateLinks(data);
+
+//   d3.pack()
+//     .size([width - marginLeft - marginRight, height - marginTop - marginBottom])
+//     .padding(padding)(root);
+
+//   const svg = d3.create("svg")
+//     .attr("viewBox", [-marginLeft, -marginTop, width, height])
+//     .attr("width", width)
+//     .attr("height", height)
+//     .attr("style", "max-width: 100%; height: auto; height: intrinsic;")
+//     .attr("font-family", "sans-serif")
+//     .attr("font-size", 10)
+//     .attr("text-anchor", "middle");
+
+//   const g = svg.append("g").attr("id", "pack");
+
+//   g.append("defs")
+//     .append("marker")
+//     .attr("id", "circle-marker")
+//     .attr("markerWidth", 12)
+//     .attr("markerHeight", 12)
+//     .attr("refX", 6)
+//     .attr("refY", 6)
+//     .append("circle")
+//     .attr("cx", 6)
+//     .attr("cy", 6)
+//     .attr("r", 3)
+//     .style("fill", "yellow")
+//     .style("filter", "drop-shadow(0 0 5px rgba(255, 255, 0, 0.7))");
+
+//   let isDragging = false;
+
+//   const hoverIn = debounce((event, node) => {
+//     if (isDragging) return;
+
+//     const filteredLinks = filterLinks(links, node);
+//     g.selectAll(".link").remove();
+//     g.selectAll(".link")
+//       .data(filteredLinks)
+//       .enter()
+//       .append("line")
+//       .attr("class", "link")
+//       .style("stroke", "yellow")
+//       .style("stroke-width", 6)
+//       .style("opacity", 0.6)
+//       .attr("x1", (d) => d.target.x)
+//       .attr("y1", (d) => d.target.y)
+//       .attr("x2", (d) => d.target.x)
+//       .attr("y2", (d) => d.target.y)
+//       .transition()
+//       .duration(500)
+//       .ease(d3.easeLinear)
+//       .attr("x2", (d) => d.source.x)
+//       .attr("y2", (d) => d.source.y);
+
+//     svg.selectAll("circle")
+//       .filter((d) => filteredLinks.some((link) => link.source === d || link.target === d))
+//       .attr("stroke-width", 3)
+//       .attr("stroke", "yellow");
+//   }, 100);
+
+//   const hoverOut = debounce(() => {
+//     svg.selectAll(".link").remove();
+//     svg.selectAll("circle")
+//       .attr("stroke-width", strokeWidth)
+//       .attr("stroke", stroke);
+//   }, 100);
+
+//   const node = g.selectAll("g")
+//     .data(descendants)
+//     .join("g")
+//     .attr("transform", (d) => `translate(${d.x},${d.y})`)
+//     .call(
+//       d3.drag()
+//         .on("start", dragstarted)
+//         .on("drag", dragged)
+//         .on("end", dragended)
+//     )
+//     .on("mouseover", hoverIn)
+//     .on("mouseout", hoverOut)
+//     .on("dblclick", (event, d) => {
+//       if (root !== d) {
+//         zoomToNode(event, d);
+//         event.stopPropagation();
+//       }
+//     });
+
+//   function dragstarted(event, d) {
+//     isDragging = true;
+//     if (!event.active) root.fx = d.x;
+//     if (!event.active) root.fy = d.y;
+//     if (!d.children) {
+//       d3.select(this).attr("cursor", "grabbing").raise();
+//     } else {
+//       d3.select(this).attr("cursor", "grabbing");
+//     }
+//   }
+
+//   function dragged(event, d) {
+//     root.fx = event.x;
+//     root.fy = event.y;
+//     d3.select(this).attr("transform", `translate(${(d.x = event.x)},${(d.y = event.y)})`);
+//   }
+
+//   function dragended(event, d) {
+//     isDragging = false;
+//     if (!event.active) root.fx = null;
+//     if (!event.active) root.fy = null;
+//     d3.select(this).attr("cursor", "grab");
+//   }
+
+//   node.append("circle")
+//     .attr("fill", (d) => (d.children ? "#016e91" : d.data.color || fill))
+//     .attr("fill-opacity", (d) => calculateOpacity(d.depth))
+//     .attr("stroke", stroke)
+//     .attr("stroke-width", strokeWidth)
+//     .attr("stroke-opacity", strokeOpacity)
+//     .attr("r", (d) => d.r)
+//     .style("cursor", "grab")
+//     .on("mouseover", (event) => {
+//       d3.select(event.currentTarget).attr("stroke-width", 5);
+//     })
+//     .on("mouseout", (event) => {
+//       d3.select(event.currentTarget).attr("stroke-width", (d) => (d.children ? strokeWidth : null));
+//     });
+
+//   if (T) node.append("title").text((d, i) => T[i]);
+
+//   const uid = `O-${Math.random().toString(16).slice(2)}`;
+
+//   const leaf = node.filter((d) => !d.children && d.r > 2 && L[d.index] != null);
+
+//   leaf.append("clipPath")
+//     .attr("id", (d) => `${uid}-clip-${d.index}`)
+//     .append("circle")
+//     .attr("r", (d) => d.r);
+
+//   leaf.append("text")
+//     .attr("clip-path", (d) => `url(${new URL(`#${uid}-clip-${d.index}`, location)})`)
+//     .selectAll("tspan")
+//     .data((d) => `${L[d.index]}`.split(/\n/g))
+//     .join("tspan")
+//     .attr("x", 0)
+//     .attr("y", (d, i, D) => `${i - D.length / 2 + 0.85}em`)
+//     .attr("fill-opacity", (d, i, D) => (i === D.length - 1 ? 0.7 : null))
+//     .text((d) => d);
+
+//   const simulation = d3.forceSimulation()
+//     .force("collide", d3.forceCollide().strength(0.1).radius(2))
+//     .alphaDecay(0)
+//     .alpha(1);
+
+//   simulation
+//     .nodes(leaves)
+//     .on("tick", () => {
+//       node.attr("transform", (d) => `translate(${d.x},${d.y})`);
+//     });
+
+//   function calculateOpacity(depth) {
+//     const maxOpacity = 1;
+//     const minOpacity = 0.025;
+//     const opacityIncrement = 0.1;
+//     return Math.min(minOpacity + opacityIncrement * depth, maxOpacity);
+//   }
+
+//   function filterLinks(links, hoveredNode) {
+//     return links.filter(
+//       (link) => link.source === hoveredNode || link.target === hoveredNode
+//     );
+//   }
+
+//   function zoomToNode(event, d) {
+//     const zoomLevel = width / (2 * d.r + 100);
+//     const centerX = d.x;
+//     const centerY = d.y;
+  
+//     const newTransform = d3.zoomIdentity
+//       .translate(width / 2 - centerX * zoomLevel, height / 2 - centerY * zoomLevel)
+//       .scale(zoomLevel);
+  
+//     d3.select("svg g")
+//       .transition()
+//       .duration(1500)
+//       .attr("transform", newTransform);
+  
+//     adjustTextSize(zoomLevel);
+//   }
+  
+//   function adjustTextSize(zoomLevel) {
+//     const baseFontSize = 8;
+//     const newFontSize = baseFontSize / zoomLevel;
+  
+//     svg.selectAll("text")
+//       .transition()
+//       .duration(850)
+//       .ease(d3.easeLinear)
+//       .attr("font-size", newFontSize)
+//       .each(function() {
+//         const text = d3.select(this);
+//         const circleRadius = text.datum().r;
+//         const textLength = text.node().getComputedTextLength();
+//         const textScale = circleRadius * 2 / textLength;
+  
+//         if (textScale < 1) {
+//           text.attr("font-size", newFontSize * textScale);
+//         }
+//       });
+//   }
+
+//   function debounce(func, wait) {
+//     let timeout;
+//     return (...args) => {
+//       clearTimeout(timeout);
+//       timeout = setTimeout(() => func.apply(this, args), wait);
+//     };
+//   }
+
+//   return svg;
+// }; //will look into this later, has debouncing methods for the rendering of the links 
+
+
+
+
 
 const D3 = ({
   hierarchyData,
