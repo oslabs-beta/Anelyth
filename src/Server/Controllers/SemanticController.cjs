@@ -3,14 +3,6 @@ const path = require('path');
 
 const SemanticController = {};
 
-/*
-  3. Get all unique variable and function names for element one and element two, use sets
-  4. Should combine function should determine if greater than [threshold] of the unique names are in both element one and element two
-    a. For each name in element two set (smaller element), iterate over element one set and compare each to see if it is a common string/substring (greater than [num letters - 4 or 5]).
-      If so, add 1 to tally of common elements. 
-    b. If common elements tally exceeds [threshold], combine element two into element one microservice
-*/
-
 // const string1 = 'abcTestingWord2.js';
 // const string2 = 'bdcTestjkWord.js';
 
@@ -23,8 +15,6 @@ SemanticController.analyzeSemantics = (req, res, next) => {
   let remaining = JSON.parse(JSON.stringify(res.locals.clusters)); 
   //sort microservices array, so microservices with the most elements come first
   remaining = remaining.sort((subArrayA, subArrayB) => {
-    console.log('subArrayALength: ', subArrayA.length);
-    console.log('subArrayBLength: ', subArrayB.length);
     return subArrayB.length - subArrayA.length
   });
 
@@ -62,67 +52,99 @@ SemanticController.analyzeSemantics = (req, res, next) => {
   });
 }
 
-function shouldCombine(elementOne, elementTwo) {
+/*
+  4. Should combine function should determine if greater than [threshold] of the unique names are in both element one and element two
+    a. For each name in element two set (smaller element), iterate over element one set and compare each to see if it is a common string/substring (greater than [num letters - 4 or 5]).
+      If so, add 1 to tally of common elements. 
+    b. If common elements tally exceeds [threshold], combine element two into element one microservice
+*/
 
+//elementOne and elementTwo will be arrays
+function shouldCombine(elementOne, elementTwo, commonNameThreshold, subStringThreshold) {
+  const elOneNames = new Set();
+  const elTwoNames = new Set();
+
+  elementOne.forEach(({ funcDecNames, varDecNames }) => {
+    funcDecNames.forEach(name => {
+      elOneNames.add(name);
+    });
+    varDecNames.forEach(name => {
+      elOneNames.add(name);
+    });
+  });
+
+  elementTwo.forEach(({ funcDecNames, varDecNames }) => {
+    funcDecNames.forEach(name => {
+      elTwoNames.add(name);
+    });
+    varDecNames.forEach(name => {
+      elTwoNames.add(name);
+    });
+  });
+
+  let commonNamesCount = 0;
+
+  elTwoNames.forEach(elOneName => {
+    elOneNames.forEach(elTwoName => {
+      if (hasCommonSubstring(subStringThreshold, elOneName, elTwoName)) {
+        commonNamesCount += 1;
+      }
+      if (commonNames >= commonNameThreshold) return true;
+    });
+  });
+
+  return false;
 }
 
-//sliding window
+// sliding window
 
-// function hasCommonSubstring(minLength, firstString, secondString) {
-//   firstString = firstString.toLowerCase();
-//   secondString = secondString.toLowerCase();
+function hasCommonSubstring(minLength, firstString, secondString) {
+  firstString = firstString.toLowerCase();
+  secondString = secondString.toLowerCase();
 
-//   let subString = '';
+  let subString = '';
 
-//   let i = 0;
-//   let j = 0;
-//   let k = 0;
-//   while (i < firstString.length) {
-//     while (j < secondString.length) {
-//       const firstEl = firstString[i];
-//       const secondEl = secondString[j];
+  let i = 0;
+  let j = 0;
+  let k = 0;
+  while (i < firstString.length) {
+    while (j < secondString.length) {
+      const firstEl = firstString[i];
+      const secondEl = secondString[j];
 
-//       console.log('\n');
-//       console.log('subString: ', subString);
-//       console.log('firstEl:', firstEl)
-//       console.log('secondEl:', secondEl)
-//       console.log('k: ', k);
-//       console.log('el at k: ', firstString[k]);
+      console.log('\n');
+      console.log('subString: ', subString);
+      console.log('firstEl:', firstEl)
+      console.log('secondEl:', secondEl)
+      console.log('k: ', k);
+      console.log('el at k: ', firstString[k]);
 
-//       if (firstEl === secondEl) {
-//         console.log('inside match block');
-//         subString += firstEl;
-//         i++;
-//       } else {
-//         console.log('inside did NOT match block');
-//         subString = '';
-//       }
+      if (firstEl === secondEl) {
+        console.log('inside match block');
+        subString += firstEl;
+        i++;
+      } else {
+        console.log('inside did NOT match block');
+        subString = '';
+      }
 
-//       if (subString.length >= minLength) {
-//         console.log('subString: ', subString);
-//         console.log('reached minLenght, resetting subString');
-//         subStrings.push(subString);
-//         subString = '';
-//         k = i;
-//       }
-//       j++;
-//     }
-//     j = 0;
-//     i = k;
-//   }
-//   return;
-// }
+      if (subString.length >= minLength) {
+        console.log('subString: ', subString);
+        console.log('reached minLenght, resetting subString');
+        subStrings.push(subString);
+        subString = '';
+        k = i;
+      }
+      j++;
+    }
+    j = 0;
+    i = k;
+  }
+  return;
+}
 
 function getSubstring(firstString, secondString) {
 
 }
-
-
-
-function getCommonSubstrings() {
-
-}
-
-
 
 module.exports = SemanticController;
