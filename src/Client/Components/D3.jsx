@@ -1,92 +1,162 @@
+import Legend from "./Legend.tsx";
 
-import Legend from './Legend.tsx';
+import * as d3 from "d3";
 
-//Last 9:18 pm 
+import React, { useEffect, useRef, useState } from "react";
 
-
-import * as d3 from 'd3';
-import React, { useEffect, useRef, useState } from 'react';
-import '../Styles/d3.css';
-
-
+import "../Styles/d3.css";
 
 const PackChart = ({ data, options, hoveredMicroservice }) => {
-  /*Using the useRef hook. The useRef Hook allows you to persist values between renders. */
   const svgRef = useRef(null);
-  
-  useEffect(() => {
-    const svg = Pack(data, { ...options, value: (d) => d.size });
-    let zoom = d3.zoom()
-    .on('zoom', handleZoom)
-    .scaleExtent([.5,4])
-    .translateExtent([[0, 0], [2000, 2000]]);
-  
-    function handleZoom(e) {
-      d3.select('svg g')
-        .attr('transform', e.transform);
+
+  const adjustTextSizeRef = useRef(null);
+
+  let clickCount = 0;
+
+  let clickTimer = null;
+
+  const resetZoom = () => {
+    d3.select(svgRef.current)
+
+      .select("g")
+
+      .transition()
+
+      .duration(1800)
+
+      .attr("transform", d3.zoomIdentity);
+
+    if (adjustTextSizeRef.current) {
+      adjustTextSizeRef.current(1); // Adjust text size to the default zoom level
+    }
+  };
+
+  const handleTripleClick = () => {
+    clickCount++;
+
+    if (clickCount === 3) {
+      resetZoom();
+
+      clickCount = 0;
     }
 
-    d3.select('svg')
-    .call(zoom);
-    
-    svgRef.current.innerHTML = ''; // Clear existing SVG content
-    svgRef.current.appendChild(svg.node()); // Append the SVG to the ref element
-  }, [data, options]);
+    clearTimeout(clickTimer);
+
+    clickTimer = setTimeout(() => {
+      clickCount = 0;
+    }, 500);
+  };
 
   useEffect(() => {
-    const svg = d3.select(svgRef.current);
-    const nodes = svg.selectAll('circle');
+    const { svg, adjustTextSize, initialZoomLevel } = Pack(data, {
+      ...options,
 
-    // Update node color or highlight based on hoveredMicroservice
-    nodes.each(function(d) {
-      if (d && d.data && hoveredMicroservice !== null && hoveredMicroservice.includes(d.data.name)) {
-        d3.select(this).attr('fill', 'rgb(218, 243, 52)')// Highlight color
-        .attr('fill-opacity', 1) // overide the opacity
-        .attr('stroke', 'none');
-      } 
+      value: (d) => d.size,
     });
-  }, [hoveredMicroservice]);
+
+    svg.on("click", handleTripleClick);
+
+    adjustTextSizeRef.current = adjustTextSize;
+
+    svgRef.current.innerHTML = ""; // Clear existing SVG content
+
+    svgRef.current.appendChild(svg.node()); // Append the SVG to the ref element
+
+    // Set initial text visibility based on the initial zoom level
+
+    adjustTextSize(initialZoomLevel);
+  }, []);
+
+  // Update node highlighting based on hoveredMicroservice prop
+  //scotts styling 
+  // useEffect(() => { //scott
+  //   const svg = d3.select(svgRef.current);
+
+  //   const nodes = svg.selectAll("circle");
+
+  //   // Update node color or highlight based on hoveredMicroservice
+  //   nodes.each(function(d) {
+  //     if (d && d.data && hoveredMicroservice !== null && hoveredMicroservice.includes(d.data.name)) {
+  //       d3.select(this).attr('fill', 'rgb(218, 243, 52)')// Highlight color
+  //       .attr('fill-opacity', 1) // overide the opacity
+  //       .attr('stroke', 'none');
+  //     } 
+  //   });
+  // }, [hoveredMicroservice, options.fill]);
+
+  // //christian styling (stays true to the original colors and opacity)
+  useEffect(() => {
+    const svg = d3.select(svgRef.current);
+
+    const nodes = svg.selectAll("circle");
+
+    nodes.each(function (d) {
+      if (d && d.data) { //good
+        d3.select(this).attr("fill", (d) =>
+          hoveredMicroservice && hoveredMicroservice.includes(d.data.name)
+            ? "rgb(255, 255, 0)"
+            : d.children
+            ? "#016e91"
+            : d.data.color || options.fill
+        );
+      }
+    });
+  }, [hoveredMicroservice, options.fill]);
+
+  
+
 
   return <svg ref={svgRef}></svg>;
 };
-const Pack = (data, options) => { //data and options are props passed down from App
-  const { 
+
+const Pack = (data, options) => {
+  const {
     value,
+
     sort = (a, b) => d3.descending(a.value, b.value),
+
     label = (nodeData, node) => nodeData.name,
+
     title = (nodeData, node) => nodeData.name,
+
     link,
+
     linkTarget = "_blank",
+
     width,
+
     height,
+
     margin = 1,
+
     marginTop = margin,
+
     marginRight = margin,
+
     marginBottom = margin,
+
     marginLeft = margin,
+
     padding = 3,
+
     fill,
+
     fillOpacity,
+
     stroke,
+
     strokeWidth,
+
     strokeOpacity,
-    onNodeClick
+
+    onNodeClick,
   } = options;
 
-  /* This part constructs the root node of the hierarchical data structure to be visualized. It uses the provided 
-  path, id, and parentId properties from the options object, or defaults to using d3.hierarchy() if those properties 
-  are not provided. Seems like we are not providing any of that data so its defaulting to d3.hierachy. Note; look up d3.hierarchy*/
-  
   const root = d3.hierarchy(data);
 
-  /* This line dynamically chooses whether to count the nodes or calculate the sum of values for the nodes based
-   on the presence of the value property in the options object. In our case we are not setting a value to the value variable so 
-   it is null */
+  root.sum((d) => d.value || 0);
 
-  //  value == null ? root.count() : root.sum(d => Math.max(0, value(d)));
-  root.sum((d) => d.value || 0); // Sum the file sizes
-
-  const maxDepth = getMaxDepth(root); // Calculate the maximum depth of the hierarchy
+  const maxDepth = getMaxDepth(root);
 
   const calculateOpacity = (depth) => {
     const maxOpacity = 1; // Maximum opacity
@@ -96,15 +166,12 @@ const Pack = (data, options) => { //data and options are props passed down from 
   return Math.min(minOpacity + opacityIncrement * depth, maxOpacity);
   };
 
-  // Function to calculate the maximum depth of the hierarchy
   function getMaxDepth(node) {
     if (!node.children) return 0;
+
     return 1 + Math.max(...node.children.map(getMaxDepth));
   }
 
-  
-  /*This method, provided by D3.js, returns an array containing all descendant nodes of the root node. It traverses the hierarchical 
-  structure and collects all nodes into an array, including the root node itself. */
   const descendants = root.descendants();
 
   // console.log('Calling descendants', descendants);
@@ -138,59 +205,87 @@ const Pack = (data, options) => { //data and options are props passed down from 
 
   function generateLinks(node) {
     const links = [];
+
     if (node.children) {
-      node.children.forEach(child => {
+      node.children.forEach((child) => {
         if (child.dependencies) {
-          child.dependencies.forEach(dependency => {
-            const sourceNode = descendants.find(d => d.data.name === child.name);
-            const targetNode = descendants.find(d => d.data.name === dependency.source);
+          child.dependencies.forEach((dependency) => {
+            const sourceNode = descendants.find(
+              (d) => d.data.name === child.name
+            );
+
+            const targetNode = descendants.find(
+              (d) => d.data.name === dependency.source
+            );
+
             if (sourceNode && targetNode) {
               links.push({ source: sourceNode, target: targetNode });
             }
           });
         }
+
         links.push(...generateLinks(child));
       });
     }
+
     return links;
   }
 
-  d3.pack()
+  d3
+
+    .pack()
+
     .size([width - marginLeft - marginRight, height - marginTop - marginBottom])
-    .padding(padding)
-    (root);
 
+    .padding(padding)(root);
 
-  const svg = d3.create("svg") // creates a new SVG element with the specified tag name, in this case, "svg".
-    .attr("viewBox", [-marginLeft, -marginTop, width, height]) //This sets the viewBox attribute of the SVG element.
-    .attr("width", width) // This sets the width attribute of the SVG element to the specified width (width), which was provided in the options object.
-    .attr("height", height) //This sets the height attribute of the SVG element 
-    .attr("style", "max-width: 100%; height: auto; height: intrinsic;") //more styling 
-    .attr("font-family", "sans-serif") //more styling 
-    .attr("font-size", 10) //more styling 
-    .attr("text-anchor", "middle"); //more styling 
+  const svg = d3
 
+    .create("svg")
 
-  const g = svg.append("g")
-  .attr("id", "pack");
+    .attr("viewBox", [-marginLeft, -marginTop, width, height])
 
+    .attr("width", width)
 
-g.append("defs")
-.append("marker")
-  .attr("id", "circle-marker")
-  .attr("markerWidth", 12) // Enlarge the marker width
-  .attr("markerHeight", 12) // Enlarge the marker height
-  .attr("refX", 6) // Position the marker at the end of the line
-  .attr("refY", 6)
-  .append("circle")
-  .attr("cx", 6)
-  .attr("cy", 6)
-  .attr("r", 3) // Radius of the circle
-  .style("fill", "yellow") // Color of the circle
-  .style("filter", "drop-shadow(0 0 5px rgba(255, 255, 0, 0.7))"); // Glow effect
+    .attr("height", height)
 
+    .attr("style", "max-width: 100%; height: auto; height: intrinsic;")
 
+    .attr("font-family", "sans-serif")
 
+    .attr("font-size", 10)
+
+    .attr("text-anchor", "middle");
+
+  svg.on("dblclick", (event) => zoomToNode(event, root));
+
+  const g = svg.append("g").attr("id", "pack");
+
+  g.append("defs")
+
+    .append("marker")
+
+    .attr("id", "circle-marker")
+
+    .attr("markerWidth", 12)
+
+    .attr("markerHeight", 12)
+
+    .attr("refX", 6)
+
+    .attr("refY", 6)
+
+    .append("circle")
+
+    .attr("cx", 6)
+
+    .attr("cy", 6)
+
+    .attr("r", 3)
+
+    .style("fill", "yellow")
+
+    .style("filter", "drop-shadow(0 0 5px rgba(255, 255, 0, 0.7))");
 
     const filterLinks = (links, hoveredNode) => {
       // console.log('What is Hovered Node in filterLinks?', hoveredNode);
@@ -201,8 +296,6 @@ g.append("defs")
     
     
   let isDragging = false;
-    
-      
 
     const hoverIn = (event, node) => {
 
@@ -235,62 +328,101 @@ g.append("defs")
     .filter(d => filteredLinks.some(link => link.source === d || link.target === d))
     .attr("stroke-width", 2) // Set thicker stroke
     .attr("stroke", "yellow"); // Set highlight color
+  };
 
-    };
+  const hoverOut = (event, node) => {
+    if (isDragging) return;
 
-    const hoverOut = () => {
+    const target = event.target;
+
+    const relatedTarget = event.relatedTarget;
+
+    // Check if the mouse is still within the circle or the link
+
+    const isStillOnCircle = node && target === node;
+
+    const isStillOnLink =
+      relatedTarget && relatedTarget.classList.contains("link");
+
+    if (!isStillOnCircle && !isStillOnLink) {
       // Remove all links
+
       svg.selectAll(".link").remove();
-      svg.selectAll("circle")
-    .attr("stroke-width", strokeWidth) // Restore original stroke width
-    .attr("stroke", stroke); // Restore original stroke color
-    };
 
-    
-   
-  
-/*this block of code dynamically creates and configures anchor elements within the SVG to represent each node in the 
-hierarchical structure. It sets the href, target, and transform attributes of each anchor element based on the provided data 
-and options. */
-  const node = g.selectAll("g") //
+      svg
+
+        .selectAll("circle")
+
+        .attr("stroke-width", strokeWidth)
+
+        .attr("stroke", stroke);
+    }
+  };
+
+  const node = g
+
+    .selectAll("g")
+
     .data(descendants)
+
     .join("g")
-    .attr("transform", d => `translate(${d.x},${d.y})`)
-    .call(d3.drag()
-    .on("start", dragstarted)
-    .on("drag", dragged)
-    .on("end", dragended))
+
+    .attr("transform", (d) => `translate(${d.x},${d.y})`)
+
+    // .call(
+
+    // d3.drag()
+
+    // .on("start", dragstarted)
+
+    // .on("drag", dragged) //these lines add the drag functionality to the nodes
+
+    // .on("end", dragended)
+
+    // )
+
     .on("mouseover", hoverIn)
-    .on("mouseout", hoverOut);
 
+    .on("mouseout", (event) => hoverOut(event, node)) //new
 
-function dragstarted(event, d) {
-  isDragging = true;
-  if (!event.active) root.fx = d.x;
-  if (!event.active) root.fy = d.y;
-  if (!d.children) {
-    // If it's a leaf node, initiate the drag behavior
-    d3.select(this).attr("cursor", "grabbing").raise();
-  } else {
-    d3.select(this).attr("cursor", "grabbing")
-    
+    .on(
+      "dblclick",
+
+      (event, d) =>
+        root !== d && (zoomToNode(event, d), event.stopPropagation())
+    );
+
+  function dragstarted(event, d) {
+    isDragging = true;
+
+    if (!event.active) root.fx = d.x;
+
+    if (!event.active) root.fy = d.y;
+
+    d3.select(this).attr("cursor", "grabbing");
   }
-}
 
-function dragged(event, d) {
-  // Update the position of the dragged node
-  root.fx = event.x;
-  root.fy = event.y;
-  d3.select(this).attr("transform", `translate(${d.x = event.x},${d.y = event.y})`);
-}
+  function dragged(event, d) {
+    root.fx = event.x;
 
+    root.fy = event.y;
 
-function dragended(event, d) {
-  isDragging = false;
-  if (!event.active) root.fx = null;
-  if (!event.active) root.fy = null;
-  d3.select(this).attr("cursor", "grab");
-}
+    d3.select(this).attr(
+      "transform",
+
+      `translate(${(d.x = event.x)},${(d.y = event.y)})`
+    );
+  }
+
+  function dragended(event, d) {
+    isDragging = false;
+
+    if (!event.active) root.fx = null;
+
+    if (!event.active) root.fy = null;
+
+    d3.select(this).attr("cursor", "grab");
+  }
 
     /*responsible for appending circle elements (<circle>) to the anchor elements (<a>) created earlier, and then setting 
     various attributes (such as fill color, stroke color, etc.) of these circle elements based on the data associated with
@@ -299,101 +431,181 @@ function dragended(event, d) {
     .attr("fill", d => d.children ? "#c7c5b9" : (d.data.color || fill)) //this is changing the color based on the color being passed in on the node data
     .attr("fill-opacity", d => calculateOpacity(d.depth)) // Calculate opacity based on depth
     .attr("stroke", stroke)
+
     .attr("stroke-width", strokeWidth)
+
     .attr("stroke-opacity", strokeOpacity)
-    .attr("r", d => d.r)
-    .style("cursor", "grab") // Set cursor style to grab
-    .on("mouseover", (event) => {
-      d3.select(event.currentTarget).attr("stroke-width", 5);
-    })
-    .on("mouseout", (event) => {
-      d3.select(event.currentTarget).attr("stroke-width", d => d.children ? strokeWidth : null);
-    })
+
+    .attr("r", (d) => d.r)
+
+    .style("cursor", "pointer") //previously "grab"
+
+    .on("mouseover", (event) =>
+      d3.select(event.currentTarget).attr("stroke-width", 5)
+    )
+
+    .on("mouseout", (event) =>
+      d3
+
+        .select(event.currentTarget)
+
+        .attr("stroke-width", (d) => (d.children ? strokeWidth : null))
+    )
+
     .on("click", (event, d) => {
       //take the data in this node and pass it to the state of D3 parent component to render the node data modal
+
       onNodeClick(d.data);
-    })
-    .on("dblclick", (event, d) => zoomToNode(event, d));    
-  
-    function zoomToNode(event, d) {
-      const zoomLevel = width/(2*d.r + 40); // Adjust this value to control the zoom level
-      const centerX = d.x; // Get the x-coordinate of the node
-      const centerY = d.y; // Get the y-coordinate of the node
-    
-      // console.log('d=========>', d)
-      // console.log('event=========>', event)
-      // Create a new zoom transformation with the desired zoom level and center
-      const newTransform = d3.zoomIdentity
-        .translate((width / 2 - centerX * zoomLevel),(height / 2 - centerY * zoomLevel))
-        .scale(zoomLevel)
-        // .translate(d.x-event.x,d.y-event.y);
-    
-      // Apply the new zoom transformation to the svg element
-      d3.select('svg g')
-        .transition()
-        .duration(1500) // Adjust the duration for a smoother animation
-        .attr('transform', newTransform);
-    }    
-  
+    });
 
+  function zoomToNode(event, d) {
+    const minZoomLevel = 5;
 
-    /* This line of code dynamically creates and sets the title text for each node in the hierarchical structure based
-     on the generated array of title texts (T). If T contains title texts for the nodes, they are appended to the corresponding
-      title elements within each node's anchor element, providing additional information or context when hovering over the nodes 
-      in the visualization. */ 
+    const zoomLevel = Math.max(minZoomLevel, width / (2 * d.r + 50));
+
+    const centerX = d.x;
+
+    const centerY = d.y;
+
+    const newTransform = d3.zoomIdentity
+
+      .translate(
+        width / 2 - centerX * zoomLevel,
+
+        height / 2 - centerY * zoomLevel
+      )
+
+      .scale(zoomLevel);
+
+    d3.select("svg g")
+
+      .transition()
+
+      .duration(1800)
+
+      .attr("transform", newTransform);
+
+    adjustTextSize(zoomLevel);
+  }
+
+  function adjustTextSize(zoomLevel) {
+    const baseFontSize = 7;
+
+    const minFontSize = 0.9;
+
+    const maxFontSize = 9;
+
+    const newFontSize = Math.max(
+      minFontSize,
+
+      Math.min(maxFontSize, baseFontSize / zoomLevel)
+    );
+
+    svg
+
+      .selectAll("text")
+
+      .transition()
+
+      .duration(700)
+
+      .ease(d3.easeLinear)
+
+      .attr("font-size", newFontSize)
+
+      .style("visibility", zoomLevel > 1 ? "visible" : "hidden")
+
+      .each(function () {
+        const text = d3.select(this);
+
+        const circleRadius = text.datum().r;
+
+        const textLength = text.node().getComputedTextLength();
+
+        const textScale = (circleRadius * 2) / textLength;
+
+        if (textScale < 1) {
+          text.attr("font-size", newFontSize * textScale);
+        }
+      });
+  }
 
   if (T) node.append("title").text((d, i) => T[i]);
 
-  if (L) {
-    const uid = `O-${Math.random().toString(16).slice(2)}`;
+  const uid = `O-${Math.random().toString(16).slice(2)}`;
 
-    const leaf = node.filter(
-      (d) => !d.children && d.r > 10 && L[d.index] != null
-    );
+  const leaf = node.filter(
+    (d) => !d.children && d.r > 0.3 && L[d.index] != null
+  );
 
-    leaf.append("clipPath")
-      .attr("id", d => `${uid}-clip-${d.index}`)
-      .append("circle")
-      .attr("r", d => d.r);
+  leaf
 
-    leaf.append("text")
-      .attr("clip-path", d => `url(${new URL(`#${uid}-clip-${d.index}`, location)})`)
-      .selectAll("tspan")
-      .data((d) => `${L[d.index]}`.split(/\n/g))
-      .join("tspan")
-      .attr("x", 0)
-      .attr("y", (d, i, D) => `${i - D.length / 2 + 0.85}em`)
-      .attr("fill-opacity", (d, i, D) => (i === D.length - 1 ? 0.7 : null))
-      .text((d) => d);
-  }
+    .append("clipPath")
 
-  const simulation = d3.forceSimulation()
-    // .force("charge", d3.forceManyBody().strength(1)) // Nodes are attracted to each other if value is > 0
-    .force("collide", d3.forceCollide().strength(.1).radius(2)) // Force that avoids circle overlapping
-    .alphaDecay(0) // Disable alpha decay
-    .alpha(1); // Set initial alpha value
+    .attr("id", (d) => `${uid}-clip-${d.index}`)
 
-  // Apply these forces to the nodes
-  simulation.nodes(leaves)
+    .append("circle")
+
+    .attr("r", (d) => d.r);
+
+  leaf
+
+    .append("text")
+
+    .attr("class", "text-label") // Add this line
+
+    .attr(
+      "clip-path",
+
+      (d) => `url(${new URL(`#${uid}-clip-${d.index}`, location)})`
+    )
+
+    .selectAll("tspan")
+
+    .data((d) => `${L[d.index]}`.split(/\n/g))
+
+    .join("tspan")
+
+    .attr("x", 0)
+
+    .attr("y", (d, i, D) => `${i - D.length / 2 + 0.85}em`)
+
+    .attr("fill-opacity", (d, i, D) => (i === D.length - 1 ? 0.7 : null))
+
+    .text((d) => d);
+
+  const simulation = d3
+
+    .forceSimulation()
+
+    .force("collide", d3.forceCollide().strength(0.1).radius(2))
+
+    .alphaDecay(0)
+
+    .alpha(1);
+
+  simulation
+
+    .nodes(leaves)
+
     .on("tick", () => {
-      // Update node positions on each tick
-      node.attr("transform", d => `translate(${d.x},${d.y})`);
+      node.attr("transform", (d) => `translate(${d.x},${d.y})`);
     });
 
-
-  // return svg.node();
-  //returning the svg without rendering it, this solves the double render issue
-  return svg; 
+  return { svg, adjustTextSize, initialZoomLevel: 1 };
 };
 
+const D3 = ({
+  hierarchyData,
 
+  popupShowing,
 
+  setPopupShowing,
 
+  setClickedNodeData,
 
-
-
-
-const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData, hoveredMicroservice }) => {
+  hoveredMicroservice,
+}) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -404,15 +616,20 @@ const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData, 
 
   function handleNodeClick(nodeData) {
     setClickedNodeData(nodeData);
+
     setPopupShowing(!popupShowing);
   }
 
   const options = {
     width: 1000,
+
     height: 820,
+
     fill: "#ddd",
-    stroke: "#bbb",
-    onNodeClick: handleNodeClick
+
+    stroke: "#000000",
+
+    onNodeClick: handleNodeClick,
   };
 
   return (
@@ -421,11 +638,16 @@ const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData, 
         <h1 className='repo-overview-title'>Repository Overview</h1>
         {/* <Legend /> Include the Legend component */}
       </div>
-      {data && <PackChart data={data} options={options} hoveredMicroservice={hoveredMicroservice} />}
+
+      {data && (
+        <PackChart
+          data={data}
+          options={options}
+          hoveredMicroservice={hoveredMicroservice}
+        />
+      )}
     </div>
   );
 };
 
 export default D3;
-
-
