@@ -142,9 +142,8 @@ async function traverseHierarchy(node, dcdata, modelRegistry, importRegistry) {
       const dependentsAndDependencies = await getDependenciesAndDependents(node.path, dcdata)
       const nodeAst = await parseFileToAST(node.path);
  
-      const dbData = await ASTDbQueryController.query2(nodeAst, node.path, modelRegistry, importRegistry);
-      const apiData = await ASTApiQueryController.queryFunc(nodeAst, node.path);
-      console.log('apiData in superstructure:', apiData);
+      const dbData = ASTDbQueryController.query2(nodeAst, node.path, modelRegistry, importRegistry);
+      const apiData = ASTApiQueryController.queryFunc(nodeAst, node.path);
       const exportsData = getModuleDotExports(nodeAst);
       const exportsData2 = getES6DefaultExports(nodeAst);
       const exportsData3 = getES6Exports(nodeAst);
@@ -168,6 +167,8 @@ async function traverseHierarchy(node, dcdata, modelRegistry, importRegistry) {
         classDeclarations: getASTClassDecs(nodeAst),
         funcCallExpressions: getASTCallExps(nodeAst),
         memberExpressions: getASTMemberExps(nodeAst),
+        methodDefNames: getASTMethodDefNames(nodeAst),
+        variableDecNames: getASTVariableDecNames(nodeAst)
       }
 
       newNode.dbInfo = dbData;
@@ -284,8 +285,8 @@ function getASTFuncDecs(ast){
     let funcObj = {
       funcName: node.id.name
     };
-
-    resultArr.push(funcObj);
+    //TODO: do more wth funcObj. only pushing name for now
+    resultArr.push(funcObj.funcName);
   })
   return resultArr;
 }
@@ -354,8 +355,8 @@ function getASTClassDecs(ast){
       });
 
 
-
-    resultArr.push(classObj);
+    //TODO: do stuff with the rest of classObj. only pushing class name for now
+    resultArr.push(classObj.className);
   })
   return resultArr;
 }
@@ -469,6 +470,25 @@ function getES6Exports(ast){
     })
   })
   return moduleNames;
+}
+
+//needs refactoring, not returning exactly what we expect in all cases
+function getASTMethodDefNames(ast) {
+  const methodDefNames = esquery(ast,
+    `MethodDefinition > Identifier,
+    Property[key.type="Identifier"][value.type="FunctionExpression"] > Identifier,
+    Property[key.type="Identifier"][value.type="ArrowFunctionExpression"] > Identifier`
+  );
+  const methodNames = methodDefNames.map(node => node.name);
+  return methodNames;
+}
+//needs refactoring, not returning exactly what we expect in all cases
+function getASTVariableDecNames(ast) {
+  const variableDecNames = esquery(ast, 
+    `VariableDeclaration`
+  );
+  const varDecNames = variableDecNames.map(node => node.declarations[0].id.name);
+  return varDecNames;
 }
 
 

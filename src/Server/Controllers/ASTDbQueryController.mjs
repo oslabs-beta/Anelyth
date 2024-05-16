@@ -3,10 +3,7 @@ import path from 'path';
 import chalk from 'chalk';
 import ora from 'ora';
 
-
 const ASTDbQueryController = {};
-
-
 
 // ------- CHECK DATABASE FUNCTION ------- //
 
@@ -34,8 +31,7 @@ function checkDatabase(fileAst, importPaths) {
 
 //GOOD FUNCTION APR 26 5:58 PM
 function checkFileForModelImports(filePath, modelRegistry, importRegistry) {
-  
-  
+
   if (!filePath || !modelRegistry || !importRegistry) {
       return false; // Exit early if filePath is not provided
   }
@@ -45,11 +41,11 @@ function checkFileForModelImports(filePath, modelRegistry, importRegistry) {
     spinner: 'dots'
 }).start();
 
-  const basePath = 'FFSS-OSP/src/Server/temp-file-upload/';
-  // Normalize the filePath to match the format used in the importRegistry and converting the whole string to Lowercase to achieve normalization
-  const normalizedFilePath = filePath.substring(filePath.indexOf(basePath) + basePath.length).toLowerCase();
+  const basePath = 'src';
 
-  // console.log ('What is normalized file path', normalizedFilePath);
+  // Normalize the filePath to match the format used in the importRegistry and converting the whole string to Lowercase to achieve normalization
+
+  const normalizedFilePath = filePath.substring(filePath.indexOf(basePath)).toLowerCase();
 
   // Extract the actual imports for the current file from the importRegistry
   const fileImports = importRegistry[normalizedFilePath] || [];
@@ -480,7 +476,8 @@ function analyzeMongoDBInteractions(fileAst, filePath, modelRegistry) {
   let results = {
     filePath,
     totalInteractions: interactions.length,
-    details: interactions.map(interaction => `${interaction.model}.${interaction.method} on line ${interaction.line} in ${interaction.filePath}`)
+    // details: interactions.map(interaction => `${interaction.model}.${interaction.method} on line ${interaction.line} in ${interaction.filePath}`)
+    details: interactions.map(interaction => interaction.model)
   };
 
   return results;
