@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
 import '../Styles/signup.css';
 // @ts-ignore
-import bgIMG from '../Assets/loginimg.png';
+import bgIMG from '../Assets/block3.png';
 import Header from '../Components/Header';
 
 interface FormData {
@@ -47,7 +47,7 @@ function SignupPage(): JSX.Element {
     <>
     <Header />
     <div className='signup-container'>
-      <div className='form-container'>
+      <div className='form-container-signup'>
         <div className='login-title'>Sign Up</div>
         <div className='enter-info'>
           <label className='input-title'>Username:</label>
