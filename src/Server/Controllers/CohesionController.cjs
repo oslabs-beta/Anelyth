@@ -3,21 +3,6 @@ const path = require('path');
 
 const CohesionController = {};
 
-//approach 1: what percentage of unique endpoints do they have in common?
-//for each file: total unique endpoints, so if file1 has endpoint1, endpoint1, endpoint2, then there are 2 unique endpoints (endpoint1 & endpoint 2)
-//when comparing 2 files: of the total unique endpoints (sum endpoints for both to get total), what percentage do they have in common?
-  //example: file1 and file2 have 66% in common, file 2 and file 4 have 33% in common
-
-//approach 2: take the file with the smaller number of unique endpoints. what percentage of that files endpoints does file 2 also have?
-  //example: file1 and file2 = 100% because file1 has 2 endpoints vs file2 have 3 endpoints, so of file2's 2 endpoints, file3 has 100% of them
-
-//using approach 2
-
-//input: array of objects from superstructure, threshold
-  // [{fileName: 'file1', details: [{url: 'value1'}, {url: 'value2'}]}, {fileName: 'file2', details: [{url: 'value1'}, {url: 'value3'}]}]
-//output: array of arrays of objects: grouped by potential microservice based on api cohesion metric
-
-
 CohesionController.analyzeCohesion = (req, res, next) => {
   const result = [];
   const remaining = JSON.parse(JSON.stringify(res.locals.detailsArray)); 
@@ -29,10 +14,8 @@ CohesionController.analyzeCohesion = (req, res, next) => {
     //element to compare
     let element = remaining[j];
     while (element) {
-      // console.log('element:', element)
-      // console.log('inner potentialMicroservice:', potentialMicroservice)
       //compare elements, if passes, combine. if combined, that becomes an element. if not, continue.
-      //pass in threshold here
+      //TODO: allow user to pass in threshold from UI rather than hardcode it
       if (shouldCombine(potentialMicroservice, element, 0.1)) {
         const deleted = remaining.splice(j, 1);
         potentialMicroservice.push(...deleted);
@@ -42,7 +25,6 @@ CohesionController.analyzeCohesion = (req, res, next) => {
       }
       //compare next element
       element = remaining[j];
-      // console.log('remaining:', remaining)
     }
     //once you get to the end of remaining array, you have any potentialMicroservice that remaining[i] would be part of, so push it to result
     result.push(potentialMicroservice);
@@ -59,8 +41,6 @@ CohesionController.analyzeCohesion = (req, res, next) => {
 
   function shouldCombine (elementOne, elementTwo, threshold) {
     console.log('\x1b[36m%s\x1b[0m', 'entering shouldCombine');
-    // console.log('elementOne:', elementOne)
-    // console.log('elementTwo:', elementTwo)
 
     const elOneApiEndpoints = { total: 0 };
     const elTwoApiEndpoints = { total: 0 };
@@ -140,13 +120,6 @@ CohesionController.analyzeCohesion = (req, res, next) => {
       }   
       elTwoModuleDetails.total += 1;
     });
-
-    // console.log('elOneApiEndpoints:', elOneApiEndpoints)
-    // console.log('elTwoApiEndpoints:', elTwoApiEndpoints)
-    // console.log('elOneDbModels:', elOneDbModels)
-    // console.log('elTwoDbModels:', elTwoDbModels)
-    // console.log('elOneModuleDetails:', elOneModuleDetails)
-    // console.log('elTwoModuleDetails:', elTwoModuleDetails)
 
     const totalOne = elOneApiEndpoints.total + elOneDbModels.total + elOneModuleDetails.total;
     const totalTwo = elTwoApiEndpoints.total + elTwoDbModels.total + elTwoModuleDetails.total;

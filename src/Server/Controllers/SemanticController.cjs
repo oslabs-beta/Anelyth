@@ -17,31 +17,32 @@ SemanticController.analyzeSemantics = (req, res, next) => {
   remaining = remaining.sort((subArrayA, subArrayB) => {
     return subArrayB.length - subArrayA.length
   });
-
-  console.log('remaining: ', remaining);
-  // while (remaining.length > 0) {
-  //   //initialize subarray with 1st element left
-    
-  //   const potentialMicroservice = [remaining.shift()];
-  //   // console.log('outer potentialMicroservice:', potentialMicroservice)
-  //   let j = 0;
-  //   let element = remaining[j];
-  //   while (element) {
-  //     if (shouldCombine(potentialMicroservice, element, 2)) {
-  //       const deleted = remaining.splice(j, 1);
-  //       potentialMicroservice.push(...deleted);
-  //     } else {
-  //       //if not combined, increment pointer to next element
-  //       j++;
-  //     }
-  //     //compare next element
-  //     element = remaining[j];
-  //     // console.log('remaining:', remaining)
-  //   }
-  //   //once you get to the end of remaining array, you have any potentialMicroservice that remaining[i] would be part of, so push it to result
-  //   result.push(potentialMicroservice);
-  // }
-  // res.locals.clusters = result;
+  while (remaining.length > 0) {
+    //microservice is an array
+    const microservice = remaining.shift();
+    console.log('microservice:', microservice)
+    let j = 0;
+    let microserviceToPotentiallyAdd = remaining[j];
+    while (microserviceToPotentiallyAdd) {
+      //TODO: allow user to pass in thresholds from UI rather than hardcode it
+      if (shouldCombine(microservice, microserviceToPotentiallyAdd, 2, 4)) {
+        const deleted = remaining.splice(j, 1);
+        microservice.concat(...deleted);
+      } else {
+        //if not combined, increment pointer to next element
+        j++;
+      }
+      //compare next element
+      microserviceToPotentiallyAdd = remaining[j];
+      console.log('remaining:', remaining)
+    }
+    //once you get to the end of remaining array, you have any potentialMicroservice that remaining[i] would be part of, so push it to result
+    result.push(microservice);
+    console.log('result:', result);
+    console.log('\n');
+  }
+  //overwriting clusters created in CohesionController. may want to create separate properties on res.locals later
+  res.locals.clusters = result;
   const logFilePath = path.join(__dirname, '..', '..', 'SemanticController.log');
   const logStream = fs.createWriteStream(logFilePath);
   logStream.write(JSON.stringify(remaining, null, 2));
@@ -82,10 +83,15 @@ function shouldCombine(elementOne, elementTwo, commonNameThreshold, subStringThr
     });
   });
 
+  console.log('elOneNames:', elOneNames)
+  console.log('elTwoNames:', elTwoNames)
+
   let commonNamesCount = 0;
 
   elTwoNames.forEach(elOneName => {
+    console.log('elOneName:', elOneName)
     elOneNames.forEach(elTwoName => {
+      console.log('elTwoName:', elTwoName)
       if (hasCommonSubstring(subStringThreshold, elOneName, elTwoName)) {
         commonNamesCount += 1;
       }
