@@ -1,9 +1,21 @@
 .cluster {
-    border: 1px solid black;
+    border: 1px solid rgba(198, 198, 198, 0.823);
     padding: 10px;
     margin: 10px;
+    background-color: #f0f0f0;
+
+    h3 {
+        margin-bottom: 4px;
+    }
 }
 
 .cluster:hover {
-    background-color: rgb(208, 176, 201);
+    background-color: #daf334d6;
   }
+
+li {
+    list-style-type: none;
+    color: #393939;
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 2px;
+}

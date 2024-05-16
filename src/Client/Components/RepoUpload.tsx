@@ -113,7 +113,7 @@ function RepoUpload({ popupShowing, setPopupShowing, setClickedNodeData, cluster
                 {/* <button type="submit" id="submit-btn" disabled={isFileLoading || isAnalyzing}>Submit</button> */}
                 {analyzeButtonShowing && !isAnalyzing && (
                     <div className='btn-container-main-page'>
-                      <button type="submit" className='btn btn-secondary btn-pulse'>Analyze</button>
+                      <button type="submit" id='btn-pulse'>Analyze</button>
                     </div>
                   )}
                 {(isFileLoading || isAnalyzing) && <FileLoader/>}
