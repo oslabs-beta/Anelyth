@@ -124,6 +124,11 @@ function DocPage() {
               Each microservice candidate is listed, along with the files and
               components it encompasses.
             </li>
+
+            <li>
+              Hover over a microservice suggestion and you will see that the nodes belonging to that microservice cluster
+              will be highlighted for you to visualize.
+            </li>
           </ul>
 
           <h3>Interact with the Visualization</h3>
