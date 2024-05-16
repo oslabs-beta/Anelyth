@@ -17,14 +17,7 @@ FinalAnalysisController.analyze = (req, res, next) => {
   });
   result.push(newMicroService);
   res.locals.clusters = result;
-  const logFilePath = path.join(__dirname, '..', '..', 'final-test.log.log');
-  const stream = fs.createWriteStream(logFilePath);
-  stream.write(JSON.stringify(res.locals.clusters, null, 2));
-  stream.end();
-  stream.on('finish', () => {
-    console.log('\x1b[36m%s\x1b[0m', 'SemanticController.log has finished writing!...');
-    return next(); // Only call next() once writing has completed
-  });
+  return next();
 }
 
 module.exports = FinalAnalysisController;

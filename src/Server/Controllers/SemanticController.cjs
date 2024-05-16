@@ -11,47 +11,38 @@ SemanticController.analyzeSemantics = (req, res, next) => {
     return subArrayB.length - subArrayA.length
   });
   while (remaining.length > 0) {
-    //microservice is an array
-    const microservice = remaining.shift();
-    console.log('microservice:', microservice)
+    //microservice is an array of objects
+    let microservice = remaining.shift();
+
     let j = 0;
+    //microserviceToPotentiallyAdd is an array of objects
     let microserviceToPotentiallyAdd = remaining[j];
     while (microserviceToPotentiallyAdd) {
       //TODO: allow user to pass in thresholds from UI rather than hardcode it
       if (shouldCombine(microservice, microserviceToPotentiallyAdd, 2, 4)) {
         const deleted = remaining.splice(j, 1);
-        microservice.concat(...deleted);
+        microservice = microservice.concat(...deleted);
       } else {
         //if not combined, increment pointer to next element
         j++;
       }
       //compare next element
       microserviceToPotentiallyAdd = remaining[j];
-      console.log('remaining:', remaining)
     }
     //once you get to the end of remaining array, you have any potentialMicroservice that remaining[i] would be part of, so push it to result
     result.push(microservice);
-    console.log('result:', result);
-    console.log('\n');
   }
   //overwriting clusters created in CohesionController. may want to create separate properties on res.locals later
   res.locals.clusters = result;
   const logFilePath = path.join(__dirname, '..', '..', 'SemanticController.log');
   const logStream = fs.createWriteStream(logFilePath);
-  logStream.write(JSON.stringify(remaining, null, 2));
+  logStream.write(JSON.stringify(result, null, 2));
   logStream.end();
   logStream.on('finish', () => {
     console.log('\x1b[36m%s\x1b[0m', 'SemanticController.log has finished writing!...');
     return next(); // Only call next() once writing has completed
   });
 }
-
-/*
-  4. Should combine function should determine if greater than [threshold] of the unique names are in both element one and element two
-    a. For each name in element two set (smaller element), iterate over element one set and compare each to see if it is a common string/substring (greater than [num letters - 4 or 5]).
-      If so, add 1 to tally of common elements. 
-    b. If common elements tally exceeds [threshold], combine element two into element one microservice
-*/
 
 //elementOne and elementTwo will be arrays
 function shouldCombine(elementOne, elementTwo, commonNameThreshold, subStringThreshold) {
@@ -76,23 +67,26 @@ function shouldCombine(elementOne, elementTwo, commonNameThreshold, subStringThr
     });
   });
 
-  console.log('elOneNames:', elOneNames)
-  console.log('elTwoNames:', elTwoNames)
+  //remove null values
+  if (elOneNames.has(null)) {
+    elOneNames.delete(null);
+  }
+  if (elTwoNames.has(null)) {
+    elTwoNames.delete(null);
+  }
 
   let commonNamesCount = 0;
 
-  elTwoNames.forEach(elOneName => {
-    console.log('elOneName:', elOneName)
-    elOneNames.forEach(elTwoName => {
-      console.log('elTwoName:', elTwoName)
+  elTwoNames.forEach(elTwoName => {
+    elOneNames.forEach(elOneName => {
       if (hasCommonSubstring(subStringThreshold, elOneName, elTwoName)) {
         commonNamesCount += 1;
       }
-      if (commonNames >= commonNameThreshold) return true;
     });
   });
 
-  return false;
+  if (commonNamesCount >= commonNameThreshold) return true;
+  else return false;
 }
 
 // const string1 = 'abcTestingWord2.js';
@@ -101,7 +95,7 @@ function shouldCombine(elementOne, elementTwo, commonNameThreshold, subStringThr
 // const string1 = 'zdzpterWord';
 // const string2 = 'ddaptSenteWordnce';
 
-function hasCommonSubstring(minLengthThreshold, firstString, secondString) {
+function hasCommonSubstring(subStringThreshold, firstString, secondString) {
   firstString = firstString.toLowerCase();
   secondString = secondString.toLowerCase();
 
@@ -117,12 +111,10 @@ function hasCommonSubstring(minLengthThreshold, firstString, secondString) {
       // console.log('secondEl:', secondEl)
 
       if (firstEl === secondEl) {
-        // console.log('inside match block');
-        if (checkForMatch(i, j, firstString, secondString, minLengthThreshold)) {
+        if (checkForMatch(i, j, firstString, secondString, subStringThreshold)) {
           return true;
         } 
       } 
-      // console.log('did NOT match block');
       j++;
     }
     i++;
