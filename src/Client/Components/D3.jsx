@@ -713,26 +713,48 @@ const Pack = (data, options) => {
       .attr("stroke", "yellow");
   };
 
-  const hoverOut = () => {
-    // Remove all links
-    svg.selectAll(".link").remove();
-    svg.selectAll("circle")
-      .attr("stroke-width", strokeWidth)
-      .attr("stroke", stroke);
+  
+  
+
+  // const hoverOut = () => {
+  //   // Remove all links
+  //   svg.selectAll(".link").remove();
+  //   svg.selectAll("circle")
+  //     .attr("stroke-width", strokeWidth)
+  //     .attr("stroke", stroke);
+  // };
+
+  const hoverOut = (event, node) => {
+    if (isDragging) return;
+  
+    const target = event.target;
+    const relatedTarget = event.relatedTarget;
+  
+    // Check if the mouse is still within the circle or the link
+    const isStillOnCircle = node && target === node;
+    const isStillOnLink = relatedTarget && relatedTarget.classList.contains("link");
+  
+    if (!isStillOnCircle && !isStillOnLink) {
+      // Remove all links
+      svg.selectAll(".link").remove();
+      svg.selectAll("circle")
+        .attr("stroke-width", strokeWidth)
+        .attr("stroke", stroke);
+    }
   };
 
   const node = g.selectAll("g")
     .data(descendants)
     .join("g")
     .attr("transform", (d) => `translate(${d.x},${d.y})`)
-    .call(
-      d3.drag()
-        .on("start", dragstarted)
-        .on("drag", dragged)
-        .on("end", dragended)
-    )
+    // .call(
+    //   d3.drag()
+    //     .on("start", dragstarted)
+    //     .on("drag", dragged)           //these lines add the drag functionality to the nodes
+    //     .on("end", dragended)
+    // )
     .on("mouseover", hoverIn)
-    .on("mouseout", hoverOut)
+    .on("mouseout", (event) => hoverOut(event, node)) //new
     .on("dblclick", (event, d) => root !== d && (zoomToNode(event, d), event.stopPropagation()));
 
   function dragstarted(event, d) {
@@ -762,7 +784,7 @@ const Pack = (data, options) => {
     .attr("stroke-width", strokeWidth)
     .attr("stroke-opacity", strokeOpacity)
     .attr("r", (d) => d.r)
-    .style("cursor", "grab");
+    .style("cursor", "pointer"); //previously "grab"
 
   function zoomToNode(event, d) {
     const minZoomLevel = 5;
@@ -824,6 +846,7 @@ const Pack = (data, options) => {
     .attr("r", (d) => d.r);
 
   leaf.append("text")
+    .attr("class", "text-label") // Add this line
     .attr("clip-path", (d) => `url(${new URL(`#${uid}-clip-${d.index}`, location)})`)
     .selectAll("tspan")
     .data((d) => `${L[d.index]}`.split(/\n/g))
