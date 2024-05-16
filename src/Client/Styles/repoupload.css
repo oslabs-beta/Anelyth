@@ -67,18 +67,17 @@
   height: 100%;
 }
 
-.btn-container-main-page {
-  position: relative;
-  top: 100%;
-  margin-bottom: 150px;
-  display: flex;
+/* .btn-container-main-page { */
+  /* top: 100%; */
+  /* margin-bottom: 150px; */
+  /* display: flex;
   justify-content: center;
-  align-items: center;
-}
+  align-items: center; */
+/* } */
 
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+    box-shadow: 0 0 0 0 #daf334ce;
   }
   70% {
     box-shadow: 0 0 0 15px rgba(0, 123, 255, 0);
@@ -88,26 +87,31 @@
   }
 }
 
-.btn-pulse {
+#btn-pulse {
   animation: pulse 1.5s infinite;
-  background: linear-gradient(45deg, #444, #777);
+  background: linear-gradient(45deg, #050505, #3f3f3f);
   border: none;
   border-radius: 25px;
+  height: 34px;
   color: white;
   font-size: 16px;
+  font-family: "Arial", sans-serif;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.75);
+  box-shadow: 0 4px 15px #daf334;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .btn-pulse:hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.85);
+  background-color: #daf334;
+  color: black;
+  cursor: pointer;
+  box-shadow: 0 6px 20px #daf334;
 }
 
 .btn-pulse:active {
   transform: scale(0.95);
-  box-shadow: 0 2px 10px rgba(0, 123, 255, 0.7);
+  box-shadow: 0 2px 10px #daf334;
 }
 
 

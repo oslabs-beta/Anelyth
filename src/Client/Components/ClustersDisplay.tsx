@@ -34,7 +34,7 @@ const ClustersDisplay: FC<ClustersDisplayProps> = ({ clusterData, handleHoverMic
   }, [clusterData]);
 
   const handleMouseEnter = (microservice: string) => {
-    console.log('this is the microservice being hovered===>', groupedData[microservice]);
+    // console.log('this is the microservice being hovered===>', groupedData[microservice]);
     const microserviceData = groupedData[microservice]; // Access the value using microservice as key
     handleHoverMicroservice(microserviceData);
   };
@@ -46,7 +46,7 @@ const ClustersDisplay: FC<ClustersDisplayProps> = ({ clusterData, handleHoverMic
   // Render the grouped data
   return (
     <div>
-      <h2>Repository Overview</h2>
+
       {Object.entries(groupedData).map(([microservice, files]) => (
          <div key={microservice} className='cluster' onMouseEnter={() => handleMouseEnter(microservice)} onMouseLeave={handleMouseLeave}>
           <h3>{microservice}</h3>

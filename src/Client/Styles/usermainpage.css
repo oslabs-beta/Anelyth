@@ -51,14 +51,19 @@ svg {
 
 .clusters-display-container {
   flex: 1; 
-  padding: 10px; 
   height: 50%;
+  width: 100%;
   overflow-y: auto;
 }
 
 .clusters-infopanel {
   display: flex;
   flex-direction: column;
+  width: 100%;
+
+  h2 {
+    color: rgb(41, 41, 41);
+  }
 }
 
 .node.highlighted circle {
@@ -66,15 +71,26 @@ svg {
   stroke-width: 2; /* Highlighted outline width */
 }
 
-.side-items-container {
-  /* border: 1px solid red; */
-  margin-top: 100px;
-  height: 50%;
+.side-items-top-bot-container {
   display: flex;
   flex-direction: column;
+  height: 81%;
   justify-content: space-between;
+}
+
+.side-items-container {
+  /* border: 1px solid red; */
+  margin-top: 30px;
+  /* height: 11%; */
+  /* flex-grow: 1; */
+  /* display: flex;
+  flex-direction: column; */
+  /* justify-content: space-between; */
   /* background-color: rgb(15, 15, 15); */
 }
+
+/* .side-items-bot-container {
+} */
 
 .side-bottom-container {
   position: sticky;
@@ -87,24 +103,39 @@ svg {
 .item-container {
   display: flex;
   align-items: center;
+  justify-content: left;
   margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  /* background-color: rgba(245, 245, 245, 0.937); */
+  background: linear-gradient(45deg,#ffffff,#d6d6d6);
+  border-radius: 8px;
+  height: 42px;
+}
+
+.item-container:hover {
+  background-color: #D9f334;
+  cursor: pointer;
 }
 
 .items {
-  font-size: 20px;
+  font-size: 18px;
   /* color: rgb(146, 146, 146); */
-  color: white;
+  color: rgb(36, 36, 36);
   text-decoration: none;
 }
 
-.items:hover {
+/* .items:hover {
   color: #D9F334;
-}
+  cursor: pointer;
+} */
+
 
 .icon-inv {
-  height: 35px;
-  filter: invert();
-  margin-right: 12px
+  height: 29px;
+  /* filter: invert(); */
+  margin-right: 8px;
+  margin-left: 14px;
 }
 
 .main-content {
@@ -117,10 +148,19 @@ svg {
 .visual-container {
   height: 100vh;
   display: flex;
-
 }
 
+.side-section-title-container {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid rgb(218, 218, 218);
+  
 
+  h2 {
+    font-size: 30px;
+    color: rgb(41, 41, 41);
+  }
+}
 
 
 

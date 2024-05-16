@@ -40,7 +40,9 @@ const PackChart = ({ data, options, hoveredMicroservice }) => {
     // Update node color or highlight based on hoveredMicroservice
     nodes.each(function(d) {
       if (d && d.data && hoveredMicroservice !== null && hoveredMicroservice.includes(d.data.name)) {
-        d3.select(this).attr('fill', 'yellow'); // Highlight color
+        d3.select(this).attr('fill', 'rgb(218, 243, 52)')// Highlight color
+        .attr('fill-opacity', 1) // overide the opacity
+        .attr('stroke', 'none');
       } 
     });
   }, [hoveredMicroservice]);
@@ -88,8 +90,8 @@ const Pack = (data, options) => { //data and options are props passed down from 
 
   const calculateOpacity = (depth) => {
     const maxOpacity = 1; // Maximum opacity
-  const minOpacity = 0.025; // Minimum opacity (increased from 0.2)
-  const opacityIncrement = 0.1; // Increment value for opacity
+  const minOpacity = 0.10; // Minimum opacity (increased from 0.2)
+  const opacityIncrement = 0.150; // Increment value for opacity
   // Calculate the opacity based on a linear scale with an increment
   return Math.min(minOpacity + opacityIncrement * depth, maxOpacity);
   };
@@ -105,14 +107,14 @@ const Pack = (data, options) => { //data and options are props passed down from 
   structure and collects all nodes into an array, including the root node itself. */
   const descendants = root.descendants();
 
-  console.log('Calling descendants', descendants);
+  // console.log('Calling descendants', descendants);
   
   /*filtering the array of descendant nodes (descendants) to only include nodes that do not have children.
   !d.children evaluates to true if d.children is falsy or an empty array */
 
   const leaves = descendants.filter(d => !d.children);
   
-  console.log ('Loggin the leaves', leaves);
+  // console.log ('Loggin the leaves', leaves);
   /* iterates through each leaf node in the leaves array and assigns an index to each leaf node. */
   leaves.forEach((d, i) => d.index = i);
 
@@ -191,9 +193,9 @@ g.append("defs")
 
 
     const filterLinks = (links, hoveredNode) => {
-      console.log('What is Hovered Node in filterLinks?', hoveredNode);
+      // console.log('What is Hovered Node in filterLinks?', hoveredNode);
       const result = links.filter(link => link.source === hoveredNode || link.target === hoveredNode);
-      console.log (`These are the filtered links from ${hoveredNode}`, result);
+      // console.log (`These are the filtered links from ${hoveredNode}`, result);
       return result;
     };
     
@@ -218,7 +220,7 @@ g.append("defs")
           .attr("class", "link")
           .style("stroke", "yellow") // Set the color of the links to black
           // .style("stroke-dasharray", "5,5") // Define the dashed pattern
-          .style("stroke-width", 6) // Set the width of the lines
+          .style("stroke-width", 2) // Set the width of the lines
           .style("opacity", .6)
           .attr("x1", d => d.target.x) // Set initial positions to target node
           .attr("y1", d => d.target.y) // Set initial positions to target node
@@ -231,7 +233,7 @@ g.append("defs")
           .attr("y2", d => d.source.y) // Transition to source node positions
           svg.selectAll("circle")
     .filter(d => filteredLinks.some(link => link.source === d || link.target === d))
-    .attr("stroke-width", 3) // Set thicker stroke
+    .attr("stroke-width", 2) // Set thicker stroke
     .attr("stroke", "yellow"); // Set highlight color
 
     };
@@ -294,7 +296,7 @@ function dragended(event, d) {
     various attributes (such as fill color, stroke color, etc.) of these circle elements based on the data associated with
      each node (d). */
   node.append("circle")
-    .attr("fill", d => d.children ? "#016e91" : (d.data.color || fill)) //this is changing the color based on the color being passed in on the node data
+    .attr("fill", d => d.children ? "#c7c5b9" : (d.data.color || fill)) //this is changing the color based on the color being passed in on the node data
     .attr("fill-opacity", d => calculateOpacity(d.depth)) // Calculate opacity based on depth
     .attr("stroke", stroke)
     .attr("stroke-width", strokeWidth)
@@ -318,8 +320,8 @@ function dragended(event, d) {
       const centerX = d.x; // Get the x-coordinate of the node
       const centerY = d.y; // Get the y-coordinate of the node
     
-      console.log('d=========>', d)
-      console.log('event=========>', event)
+      // console.log('d=========>', d)
+      // console.log('event=========>', event)
       // Create a new zoom transformation with the desired zoom level and center
       const newTransform = d3.zoomIdentity
         .translate((width / 2 - centerX * zoomLevel),(height / 2 - centerY * zoomLevel))
@@ -416,8 +418,8 @@ const D3 = ({ hierarchyData, popupShowing, setPopupShowing, setClickedNodeData, 
   return (
     <div className="d3">
       <div className='d3-title-container'>
-        <h1>Repository Overview</h1>
-        <Legend /> {/* Include the Legend component */}
+        <h1 className='repo-overview-title'>Repository Overview</h1>
+        {/* <Legend /> Include the Legend component */}
       </div>
       {data && <PackChart data={data} options={options} hoveredMicroservice={hoveredMicroservice} />}
     </div>

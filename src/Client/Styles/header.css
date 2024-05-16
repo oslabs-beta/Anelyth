@@ -47,3 +47,13 @@
 .header-links:hover {
   color: #bdbdbd;
 }
+
+.title-logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo-img {
+  height: 36px;
+  margin-left: 10px;
+}

@@ -56,7 +56,7 @@ function buildHierarchy(filePath, depResult, level = 0) {
     return {
       name: path.basename(filePath),
       value: stat.size,
-      color: isFrontend ? "lightgreen" : "#4169E1", // Purple for frontend, Green for backend
+      color: "#167a23",// color of d3 nodes
       dependencies: dependencies
     };
   }
@@ -65,7 +65,7 @@ function buildHierarchy(filePath, depResult, level = 0) {
 
 function printDirectoryTree(dir, depResult) {
   const hierarchy = buildHierarchy(dir, depResult);
-  console.log('hierarchy.dependencies:=====>',hierarchy)
+  // console.log('hierarchy.dependencies:=====>',hierarchy)
   return hierarchy;
 }
 
