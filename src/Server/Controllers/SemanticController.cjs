@@ -98,67 +98,58 @@ function shouldCombine(elementOne, elementTwo, commonNameThreshold, subStringThr
 // const string1 = 'abcTestingWord2.js';
 // const string2 = 'bdcTestjkWord.js';
 
-const string1 = 'zdzpterWord';
-const string2 = 'ddaptSenteWordnce';
+// const string1 = 'zdzpterWord';
+// const string2 = 'ddaptSenteWordnce';
 
-//while i < firstString.length
-//case 1: letters match
-  //add letter to substring
-  //check if substring.length is big enough and return true if it is
-  //increment i and j
-//case 2: letters don't match
-  //set substring back to ''
-  //increment j
-
-//if you get to the end of j, reset it and increment i
-
-// sliding window
-function hasCommonSubstring(minLength, firstString, secondString) {
+function hasCommonSubstring(minLengthThreshold, firstString, secondString) {
   firstString = firstString.toLowerCase();
   secondString = secondString.toLowerCase();
 
-  let subString = '';
-
   let i = 0;
   let j = 0;
-  let k = 0;
   while (i < firstString.length) {
     while (j < secondString.length) {
       const firstEl = firstString[i];
       const secondEl = secondString[j];
 
-      console.log('\n');
-      console.log('subString: ', subString);
-      console.log('firstEl:', firstEl)
-      console.log('secondEl:', secondEl)
-      console.log('k: ', k);
-      console.log('el at k: ', firstString[k]);
+      // console.log('\n');
+      // console.log('firstEl:', firstEl)
+      // console.log('secondEl:', secondEl)
 
       if (firstEl === secondEl) {
-        console.log('inside match block');
-        subString += firstEl;
-        if (subString.length >= minLength) return true;
-        i++;
-        j++;
-      } else {
-        console.log('inside did NOT match block');
-        subString = '';
-        k = i;
-        j = 0;
-      }
+        // console.log('inside match block');
+        if (checkForMatch(i, j, firstString, secondString, minLengthThreshold)) {
+          return true;
+        } 
+      } 
+      // console.log('did NOT match block');
+      j++;
     }
     i++;
-    k = i;
     j = 0;
   }
-
   return false;
 }
 
-// console.log(hasCommonSubstring(4, string1, string2));
+function checkForMatch(i, j, firstString, secondString, threshold) {
+  let count = 0;
+  while (i < firstString.length && j < secondString.length) {
+    const elOne = firstString[i];
+    const elTwo = secondString[j];
 
-function getSubstring(firstString, secondString) {
-
+    if (elOne === elTwo) {
+      i++;
+      j++;
+      count += 1;
+      if (count >= threshold) {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+  return false;
 }
+// console.log(hasCommonSubstring(4, string1, string2));
 
 module.exports = SemanticController;
