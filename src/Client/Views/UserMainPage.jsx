@@ -15,6 +15,8 @@ function UserMainPage() {
   const [clickedNodeData, setClickedNodeData] = useState(null);
   const [clusterData, setClusterData] = useState(null);
   const [hoveredMicroservice, setHoveredMicroservice] = useState(null);
+  const [isZoomedIn, setIsZoomedIn] = useState(false);
+
 
   const handleHoverMicroservice = (microservice) => {
     setHoveredMicroservice(microservice);
@@ -72,6 +74,9 @@ function UserMainPage() {
               clusterData={clusterData}
               setClusterData={setClusterData}
               hoveredMicroservice={hoveredMicroservice}
+              setIsZoomedIn={setIsZoomedIn}
+              isZoomedIn={isZoomedIn}
+
             />
         <div className='clusters-infopanel'>
           <div className='info-panel'>
