@@ -627,7 +627,7 @@ const D3 = ({
 
     fill: "#ddd",
 
-    stroke: "#bbb",
+    stroke: "#000000",
 
     onNodeClick: handleNodeClick,
   };
