@@ -8,9 +8,18 @@ import "../Styles/docpage.css";
 
 import "../Styles/navigationmodal.css";
 
-import tutorial1 from "../Assets/tutorial1.gif";
+import step1 from "../Assets/step1.gif";
+import step2 from "../Assets/step2.gif";
+import step3 from "../Assets/step3.gif";
+import step4 from "../Assets/step4.gif";
+import step5 from "../Assets/step5.gif";
+import step1s from "../Assets/step1.jpg";
+import step2s from "../Assets/step2.jpg";
+import step3s from "../Assets/step3.jpg";
+import step4s from "../Assets/step4.jpg";
+import step5s from "../Assets/step5.jpg";
 
-import tutorial1static from "../Assets/tutorial1static.jpg";
+
 
 function DocPage() {
   const [isHovering, setIsHovering] = useState(false);
@@ -55,7 +64,7 @@ function DocPage() {
           </ul>
 
           <img
-            src={isHovering ? tutorial1 : tutorial1static}
+            src={isHovering ? step1 : step1s}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
             alt="How to upload folder"
@@ -76,7 +85,7 @@ function DocPage() {
           </ul>
 
           <img
-            src={isHovering ? tutorial1 : tutorial1static}
+            src={isHovering ? step2 : step2s}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
             alt="How to upload folder"
@@ -106,6 +115,20 @@ function DocPage() {
             </li>
           </ul>
 
+          <img
+            src={isHovering ? step3 : step3s}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+            alt="How to upload folder"
+          ></img>
+
+          <img
+            src={isHovering ? step4 : step4s}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+            alt="How to upload folder"
+          ></img>
+
           <h3>Identify Potential Microservices</h3>
 
           <ul>
@@ -131,7 +154,15 @@ function DocPage() {
             </li>
           </ul>
 
-          <h3>Interact with the Visualization</h3>
+          <img
+            src={isHovering ? step5 : step5s}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+            alt="How to upload folder"
+          ></img>
+
+
+          {/* <h3>Interact with the Visualization</h3>
 
           <ul>
             <li>
@@ -144,7 +175,9 @@ function DocPage() {
               organizational structures and gain a deeper understanding of your
               codebase's architecture.
             </li>
-          </ul>
+          </ul> */}
+
+       
         </div>
       </div>
     </div>
