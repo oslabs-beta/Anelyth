@@ -1,0 +1,125 @@
+{
+  "name": "anelyth",
+  "version": "1.0.0",
+  "description": "Greg, Scott, Ross, Christian, Moises OSP",
+  "main": "main.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server --mode development --open --hot",
+    "dev": "nodemon --ignore temp-file-upload/ ./src/Server/server.mjs",
+    "both": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --color\" \"nodemon --ignore temp-file-upload/ ./src/server/server.mjs\"",
+    "style": "npx tailwindcss -i ./src/Client/input.css -o ./src/Client/Styles/output.css --watch",
+    "electron-start": "concurrently \"cross-env NODE_ENV=development webpack serve --open --hot --progress --color\" \"nodemon --ignore temp-file-upload/ ./src/server/server.mjs\" \"wait-on http://localhost:8080 && electron .\"",
+    "dist": "electron-builder"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oslabs-beta/FFSS-OSP.git"
+  },
+  "author": "Greg, Scott, Ross, Christian, Moises",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oslabs-beta/FFSS-OSP/issues"
+  },
+  "homepage": "https://github.com/oslabs-beta/FFSS-OSP#readme",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.525.0",
+    "@babel/cli": "^7.24.1",
+    "@babel/core": "^7.24.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.24.1",
+    "@babel/preset-env": "^7.24.3",
+    "@babel/preset-typescript": "^7.24.1",
+    "@splinetool/react-spline": "^2.2.6",
+    "@splinetool/runtime": "^1.3.5",
+    "@types/react": "^18.2.79",
+    "aws-sdk": "^2.1569.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^9.1.3",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react-app": "^10.0.1",
+    "bcryptjs": "^2.4.3",
+    "chalk": "^5.3.0",
+    "cjs-loader": "^0.1.0",
+    "cookie-parser": "^1.4.6",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.10.0",
+    "d3": "^7.9.0",
+    "d3-zoom": "^3.0.0",
+    "dotenv": "^16.4.5",
+    "electron-is-dev": "^3.0.1",
+    "escomplex": "^2.0.0-alpha",
+    "esprima": "^4.0.1",
+    "esquery": "^1.5.0",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1",
+    "ora": "^8.0.1",
+    "pg": "^8.11.3",
+    "postcss-cli": "^11.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router": "^6.22.2",
+    "react-router-dom": "^6.22.2",
+    "reactflow": "^11.10.4",
+    "style-loader": "^3.3.4",
+    "ts-loader": "^9.5.1",
+    "util": "^0.12.5",
+    "webpack-cli": "^5.1.4"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "autoprefixer": "^10.4.18",
+    "concurrently": "^8.2.2",
+    "dependency-cruiser": "^16.2.1",
+    "electron": "^30.0.3",
+    "electron-builder": "^24.13.3",
+    "eslint-plugin-complexity": "^1.0.2",
+    "eslint-plugin-cyclomatic-complexity": "^2.0.11",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.6.0",
+    "nodemon": "^3.1.0",
+    "postcss": "^8.4.35",
+    "postcss-loader": "^8.1.1",
+    "postcss-preset-env": "^9.5.5",
+    "tailwindcss": "^3.4.1",
+    "wait-on": "^7.2.0",
+    "webpack": "^5.90.3",
+    "webpack-dev-server": "^5.0.2"
+  },
+  "build": {
+    "appId": "com.anelyth",
+    "productName": "Anelyth",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "build/**/*",
+      "main.js",
+      "preload.js",
+      "package.json"
+    ],
+    "mac": {
+      "icon": "icons/mac/icon.icns",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "sign": false
+    },
+    "win": {
+      "icon": "icons/windows/New icon.ico",
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    },
+    "linux": {
+      "icon": "icons/linux/icon_512x512.png",
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm"
+      ]
+    }
+  }
+}
