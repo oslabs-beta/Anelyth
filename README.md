@@ -44,7 +44,7 @@
 
 ###
 
-<p align="left">Anelyth gives insight into potential microservices as well as code structure and file dependancies.<br><br>By simply uploading your repository, Anelyth will analyze your repo and create a detailed visual about your codebase.</p>
+<p align="left">Anelyth gives insight into potential microservices as well as code structure and file dependencies.<br><br>By simply uploading your repository, Anelyth will analyze your repo and create a detailed visual about your codebase.</p>
 
 ###
 
