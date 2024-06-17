@@ -1,0 +1,84 @@
+/* Styles for the doc-page */
+
+.doc-page {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  height: 100vh;
+}
+
+/* Styles for the document content */
+
+.doc-content {
+  position: relative;
+
+  flex-grow: 1;
+
+  overflow-y: auto;
+
+  padding: 35px;
+
+  width: 100%;
+
+  border-radius: 8px; /* Rounded corners for the content box */
+}
+
+.doc-content h1,
+.doc-content h3 {
+  margin-top: 20px; /* More space above headings */
+}
+
+.doc-content p {
+  line-height: 1.6; /* Increased line height for readability */
+
+  font-size: 16px; /* Slightly larger font size */
+
+  margin: 10px 0 20px; /* Increased bottom margin for paragraphs */
+}
+
+.doc-content ul {
+  margin-left: 20px; /* Indent lists for clarity */
+
+  list-style-type: square; /* Square bullets for a modern look */
+}
+
+.doc-content img {
+  width: 50%;
+
+  height: auto; /* Maintain aspect ratio */
+
+  margin-top: 20px; /* Space above images */
+
+  border-radius: 4px; /* Rounded corners for images */
+}
+
+.doc-content li {
+  margin-top: 10px;
+
+  margin-bottom: 10px; /* Space between list items */
+
+  line-height: 1.6; /* Increased line height for readability */
+
+  color: whitesmoke;
+}
+
+/* Responsive design adjustments */
+
+@media (max-width: 768px) {
+  .doc-content {
+    padding: 20px; /* Less padding on smaller screens */
+  }
+
+  .doc-content h1,
+  .doc-content h3 {
+    font-size: 18px; /* Smaller headings on small screens */
+  }
+
+  .doc-content p,
+  .doc-content li {
+    font-size: 14px; /* Smaller text on small screens */
+  }
+}
