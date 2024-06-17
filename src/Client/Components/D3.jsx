@@ -96,7 +96,7 @@ const PackChart = ({ data, options, hoveredMicroservice }) => {
           hoveredMicroservice && hoveredMicroservice.includes(d.data.name)
             ? "rgb(255, 255, 0)"
             : d.children
-            ? "#016e91"
+            ? "#c7c5b9"
             : d.data.color || options.fill
         );
       }
@@ -441,7 +441,7 @@ const Pack = (data, options) => {
     .style("cursor", "pointer") //previously "grab"
 
     .on("mouseover", (event) =>
-      d3.select(event.currentTarget).attr("stroke-width", 5)
+      d3.select(event.currentTarget).attr("stroke-width", 3)
     )
 
     .on("mouseout", (event) =>
@@ -491,7 +491,7 @@ const Pack = (data, options) => {
   function adjustTextSize(zoomLevel) {
     const baseFontSize = 7;
 
-    const minFontSize = 0.9;
+    const minFontSize = 4;
 
     const maxFontSize = 9;
 
@@ -513,7 +513,7 @@ const Pack = (data, options) => {
 
       .attr("font-size", newFontSize)
 
-      .style("visibility", zoomLevel > 1 ? "visible" : "hidden")
+      .style("visibility", zoomLevel > 1 ? "visible" : "visible") //previously hidden
 
       .each(function () {
         const text = d3.select(this);
