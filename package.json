@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server --mode development --open --hot",
-    "dev": "nodemon --ignore temp-file-upload/ ./src/Server/server.mjs",
-    "both": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --color\" \"nodemon --ignore temp-file-upload/ ./src/server/server.mjs\"",
+    "start": "cross-env NODE_ENV=production nodemon ./src/Server/server.mjs",
+    "dev:server": "cross-env NODE_ENV=development nodemon --ignore temp-file-upload/ ./src/Server/server.mjs",
+    "dev:client": "cross-env NODE_ENV=development webpack serve --open",
+    "both": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "style": "npx tailwindcss -i ./src/Client/input.css -o ./src/Client/Styles/output.css --watch"
   },
   "repository": {
@@ -67,7 +68,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.3.1",
     "autoprefixer": "^10.4.18",
-    "dependency-cruiser": "^16.2.1",
+    "dependency-cruiser": "^16.3.3",
     "eslint-plugin-complexity": "^1.0.2",
     "eslint-plugin-cyclomatic-complexity": "^2.0.11",
     "file-loader": "^6.2.0",
@@ -77,6 +78,7 @@
     "postcss-loader": "^8.1.1",
     "postcss-preset-env": "^9.5.5",
     "tailwindcss": "^3.4.1",
+    "typescript": "^5.5.2",
     "webpack": "^5.90.3",
     "webpack-dev-server": "^5.0.2"
   }
