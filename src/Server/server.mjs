@@ -1,28 +1,37 @@
-import express, { application } from 'express';
+import express from 'express';
 import cookieParser from 'cookie-parser';
-
-const app = express();
-const port = 3000;
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // --- Importing Controllers --- //
-import FileController from "./Controllers/FileController.cjs";
-import DCController from "./Controllers/DCController.mjs";
-import S3Controller from "./Controllers/S3Controller.mjs";
-import DBController from "./Controllers/DBController.cjs";
-import ASTParseController from "./Controllers/ASTParseController.mjs";
-import ASTDbQueryController from "./Controllers/ASTDbQueryController.mjs";
+import FileController from './Controllers/FileController.cjs';
+import DCController from './Controllers/DCController.mjs';
+import S3Controller from './Controllers/S3Controller.mjs';
+import DBController from './Controllers/DBController.cjs';
+import ASTParseController from './Controllers/ASTParseController.mjs';
+import ASTDbQueryController from './Controllers/ASTDbQueryController.mjs';
 import ASTApiQueryController from './Controllers/ASTApiQueryController.mjs';
-import SessionController from "./Controllers/SessionController.cjs";
-import DataController from "./Controllers/DataController.mjs";
+import SessionController from './Controllers/SessionController.cjs';
+import DataController from './Controllers/DataController.mjs';
 import CohesionController from './Controllers/CohesionController.cjs';
 import couplingController from './Controllers/CouplingController.mjs';
 import SemanticController from './Controllers/SemanticController.cjs';
 import FinalAnalysisController from './Controllers/FinalAnalysisController.cjs';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+const port = 3000;
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../../build')));
+
+// API Routes
 app.get('/api/checkSession', (req, res) => {
     if (req.cookies['temp-id']) return res.status(200).json({ authenticated: true }); 
     else return res.status(200).json({ authenticated: false });
@@ -57,13 +66,8 @@ app.post('/api/fileupload',
     SemanticController.analyzeSemantics,
     FinalAnalysisController.analyze,
     FileController.deleteDir,
-    
     // S3Controller.upload,
     (req, res) => {
-        // console.log(res.locals.parsedFiles);
-        // const firstObject = res.locals.parsedFiles[3];
-        // const astOfFirsObject = firstObject.ast;
-        // console.log(astOfFirsObject);
         res.status(200).send(res.locals)
     }
 );
@@ -75,10 +79,9 @@ app.get('/api/signout',
     }
 );
 
-
-
-app.get('/', (req, res) => {
-    res.status(200).send('hello');
+// Serve the React app for all other routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../build', 'index.html'));
 });
 
 app.use((err, req, res, next) => {
@@ -88,11 +91,10 @@ app.use((err, req, res, next) => {
     message: { err: 'An error occurred' },
   };
   const errorObj = Object.assign({}, defaultErr, err);
-  console.log('Server error occured: ', errorObj.log);
+  console.log('Server error occurred: ', errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
-  });
+});
