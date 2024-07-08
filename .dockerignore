@@ -1,0 +1,18 @@
+# Ignore node_modules
+node_modules
+
+# Ignore temporary files
+tmp
+*.tmp
+*.swp
+
+# Ignore build files
+build
+dist
+
+# Ignore .env files (if you are using them locally and not passing them as build arguments or secrets)
+.env
+
+# Ignore Docker-related files
+Dockerfile
+docker-compose.yml
