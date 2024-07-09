@@ -142,6 +142,57 @@ function checkForMatch(i, j, firstString, secondString, threshold) {
   }
   return false;
 }
-// console.log(hasCommonSubstring(4, string1, string2));
+
+/*
+Create a firstString.length X secondString.length matrix and fill with 0.
+Create a cache object that will hold all matching substrings and their lengths.
+Iterate through the matrix, and for each matching element: add 1 to number at the coord [-1, -1] from curr el (up and to the left one spot), if undefined curr el is 1.
+Find all substrings with length gte substringThreshold.
+Currently getting longest substrings above threshold, so if the threshold is 3, and 2 valid values are 'abc' and 'abcd', currently only
+returning the longer one, 'abcd'. If 'abcd' is a valid common substring, then obviously, 'abc' is also valid.
+ */
+function getLongestCommonSubstrings(substringThreshold, firstString, secondString) {
+  const cache = {};
+
+  const matrix = initializeMatrix(firstString, secondString);
+
+  //populate cache
+  matrix.forEach(row => {
+    row.forEach((length, idx) => {
+      if (length >= substringThreshold) {
+        //rowIdx is the index of the secondString
+        const substr = secondString.substring(idx + 1 - length, idx + 1);
+        cache[substr] = length;
+      }
+    });
+  });
+
+  return cache;
+
+  function initializeMatrix(firstString, secondString) {
+    let matrix = new Array(firstString.length).fill(0);
+    matrix = matrix.map(el => new Array(secondString.length).fill(0));
+  
+    matrix.forEach((row, rowIdx) => {
+      matrix[rowIdx] = row.map((el, idx) => {
+        if (!isMatchingElement(rowIdx, idx)) {
+          return el;
+        }
+        return (getOffsetValue(rowIdx, idx) || 0) + 1;
+  
+        function isMatchingElement(rowIdx, idx) {
+          const firstStringEl = firstString[rowIdx];
+          const secondStringEl = secondString[idx];
+  
+          return firstStringEl === secondStringEl;
+        }
+        function getOffsetValue(rowIdx, idx) {
+          return matrix[rowIdx - 1]?.[idx - 1];
+        }
+      });
+    });
+    return matrix;
+  }
+}
 
 module.exports = SemanticController;
