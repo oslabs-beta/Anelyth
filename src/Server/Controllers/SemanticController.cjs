@@ -142,6 +142,48 @@ function checkForMatch(i, j, firstString, secondString, threshold) {
   }
   return false;
 }
-// console.log(hasCommonSubstring(4, string1, string2));
+
+/*
+Create a firstString.length X secondString.length matrix and fill with 0
+Create a cache object that will hold all matching substrings and their lengths
+Iterate through the matrix, and for each matching element:
+add 1 to number at the coord [-1, -1] from curr el (up and to the left one spot), if undefined curr el is 1
+find all substrings with length gte substringThreshold
+
+[
+ [0, 0, 0],
+ [0, 0, 0],
+ [0, 0, 0]
+ ]
+ */
+function getCommonSubstrings(substringThreshold, firstString, secondString) {
+  let matrix = new Array(firstString.length).fill(0);
+  matrix = matrix.map(el => new Array(secondString.length).fill(0));
+
+  const cache = {};
+
+  matrix.forEach((row, rowIdx) => {
+    matrix[rowIdx] = row.map((el, idx) => {
+      if (!isMatchingElement(rowIdx, idx)) {
+        return el;
+      }
+      return (getOffsetValue(rowIdx, idx) || 0) + 1;
+
+
+      function isMatchingElement(rowIdx, idx) {
+        const firstStringEl = firstString[rowIdx];
+        const secondStringEl = secondString[idx];
+
+        return firstStringEl === secondStringEl;
+      }
+      
+      function getOffsetValue(rowIdx, idx) {
+        return matrix[rowIdx - 1]?.[idx - 1];
+      }
+    });
+  });
+}
+
+getCommonSubstrings(null, 'aba', 'ab');
 
 module.exports = SemanticController;
